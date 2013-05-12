@@ -77,6 +77,7 @@
     <Compile Include="Source\Game\Base\Interfaces\IClickable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IDraggable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IDrawable.cs" />
+    <Compile Include="Source\Game\Base\Interfaces\IGameObject.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IInitializable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ILevel.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IUpdateable.cs" />
@@ -84,8 +85,13 @@
     <Compile Include="Source\Game\Base\Managers\InputManager.cs" />
     <Compile Include="Source\Game\Base\Managers\LevelManager.cs" />
     <Compile Include="Source\Game\Derived\Button.cs" />
+    <Compile Include="Source\Game\Derived\Wumpus Objects\Room.cs" />
     <Compile Include="Source\Game\Derived\WumpusPlayLevel.cs" />
+    <Compile Include="Source\Main\Inventory.cs" />
+    <Compile Include="Source\Main\Item.cs" />
+    <Compile Include="Source\Main\Items.cs" />
     <Compile Include="Source\Main\MainGame.cs" />
+    <Compile Include="Source\Main\Player.cs" />
     <Compile Include="Source\Main\Program.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +133,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Game\Derived\Wumpus Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

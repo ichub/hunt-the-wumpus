@@ -11,32 +11,22 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class WumpusPlayLevel : ILevel
+    class Room : ILevel
     {
         public MainGame MainGame { get; set; }
         public GameObjectManager GameObjects { get; set; }
-
         public bool Initialized { get; set; }
-
-        public WumpusPlayLevel(MainGame parentGame)
-        {
-            this.GameObjects = new GameObjectManager(parentGame);
-            this.MainGame = parentGame;
-        }
 
         public void Initialize()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this));
         }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {
-            this.GameObjects.FrameUpdate();
         }
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.GameObjects.FrameDraw();
         }
     }
 }

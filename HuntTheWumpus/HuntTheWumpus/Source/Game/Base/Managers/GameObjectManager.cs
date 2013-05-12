@@ -19,6 +19,9 @@ namespace HuntTheWumpus.Source
         private MainGame parentGame;
         private List<object> masterObjectList;
 
+        private Stack<object> objectsToAdd;
+        private Stack<object> objectsToRemove;
+
         /// <summary>
         /// Initializes all instance variables.
         /// </summary>
@@ -26,6 +29,8 @@ namespace HuntTheWumpus.Source
         {
             this.parentGame = parentGame;
             this.masterObjectList = new List<object>();
+            this.objectsToAdd = new Stack<object>();
+            this.objectsToRemove = new Stack<object>();
         }
 
         /// <summary>
@@ -42,15 +47,39 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
-        /// Adds the specified object to each corresponding list. Validity
-        /// is determined by which interfaces the object implements.
+        /// Adds the object to the game at the end of the frame.
         /// </summary>
         /// <param name="gameObject"> Object to add. </param>
         public void Add(object gameObject)
         {
-            this.masterObjectList.Add(gameObject);
+            this.objectsToAdd.Push(gameObject);
         }
-        
+
+        /// <summary>
+        /// Removes the object from the game at the end of the frame.
+        /// </summary>
+        /// <param name="gameObject"> Object to remove. </param>
+        public void Remove(object gameObject)
+        {
+            this.objectsToRemove.Push(gameObject);
+        }
+
+        /// <summary>
+        /// Method that adds and removes objects from the game at the end of the frame.
+        /// </summary>
+        private void AddAndRemoveObjects()
+        {
+            while (objectsToAdd.Any())
+            {
+                this.masterObjectList.Add(objectsToAdd.Pop());
+            }
+
+            while (objectsToRemove.Any())
+            {
+                this.masterObjectList.Remove(objectsToRemove.Pop());
+            }
+        }
+
         /// <summary>
         /// Loads content of every single game object, if it flags itsself for loading.
         /// </summary>
@@ -131,6 +160,7 @@ namespace HuntTheWumpus.Source
             this.HandleDragging();
             this.HandleClicking();
             this.Update();
+            this.AddAndRemoveObjects();
         }
 
         /// <summary>

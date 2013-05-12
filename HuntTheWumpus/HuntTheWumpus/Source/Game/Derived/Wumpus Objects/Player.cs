@@ -10,12 +10,11 @@ namespace HuntTheWumpus.Source.Main
         public int pos = 0;
         public int hp = 0;
         public int arm = 0;
-        public bool Player(int difficulty)
+        public Player(int difficulty)
         {
             pos = 0;
             hp = 20;
             Inventory inv = new Inventory(difficulty);
-            return true;
         }
 
         public int Move(int direction)

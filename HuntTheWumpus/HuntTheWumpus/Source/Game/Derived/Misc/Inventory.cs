@@ -16,16 +16,13 @@ namespace HuntTheWumpus.Source.Main
         public Inventory(int dif)
         {
             //generate items based on difficulty 
-            if (dif != null)
-            {
-                inv[0, 0] = 1;
-                inv[0, 1] = 0;
-                inv[0, 2] = 1;
+            inv[0, 0] = 1;
+            inv[0, 1] = 0;
+            inv[0, 2] = 1;
 
-                inv[1, 0] = 2;
-                inv[1, 1] = 0;
-                inv[1, 2] = 10;
-            }
+            inv[1, 0] = 2;
+            inv[1, 1] = 0;
+            inv[1, 2] = 10;
         }
         /// <summary>
         /// Pick up an item

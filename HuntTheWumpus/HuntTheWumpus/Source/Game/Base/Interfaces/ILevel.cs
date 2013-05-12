@@ -24,7 +24,7 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Instance of a game to which the level belongs.
         /// </summary>
-        MainGame ParentGame { get; set; }
+        MainGame MainGame { get; set; }
 
         /// <summary>
         /// True if initialized; false if not.
