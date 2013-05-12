@@ -44,7 +44,7 @@ namespace HuntTheWumpus.Source
         {
             // TODO: Add your initialization logic here
             this.LevelManager = new LevelManager(this);
-            this.LevelManager.CurrentLevel = new WumpusPlayLevel(this);
+            this.LevelManager.CurrentLevel = new Room(this);
             this.InputManager = new InputManager();
             base.Initialize();
         }

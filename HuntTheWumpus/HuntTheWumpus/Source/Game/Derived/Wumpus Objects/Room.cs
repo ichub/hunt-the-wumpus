@@ -17,16 +17,25 @@ namespace HuntTheWumpus.Source
         public GameObjectManager GameObjects { get; set; }
         public bool Initialized { get; set; }
 
+        public Room(MainGame mainGame)
+        {
+            this.MainGame = mainGame;
+            this.GameObjects = new GameObjectManager(this.MainGame);
+        }
+
         public void Initialize()
         {
+            this.GameObjects.Add(new PlayerAvatar(this.MainGame, this));
         }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {
+            this.GameObjects.FrameUpdate();
         }
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            this.GameObjects.FrameDraw();
         }
     }
 }
