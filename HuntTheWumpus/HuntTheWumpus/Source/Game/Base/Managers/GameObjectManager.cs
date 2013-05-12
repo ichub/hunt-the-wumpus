@@ -147,6 +147,22 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        private bool AreCollided(ICollideable first, ICollideable second)
+        {
+            if (first.BoundingBoxes != null && second.BoundingBoxes != null)
+            for (int i = 0; i < first.BoundingBoxes.Count; i++)
+            {
+                for (int j = 0; j < second.BoundingBoxes.Count; j++)
+                {
+                    if (first.BoundingBoxes[i].Intersects(second.BoundingBoxes[j]))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Handles collisions between all collidable objects in the game.
         /// </summary>
@@ -158,7 +174,7 @@ namespace HuntTheWumpus.Source
             {
                 for (int j = i + 1; j < collidable.Count; j++)
                 {
-                    if (collidable[i].IsCollidingWith(collidable[j]))
+                    if (AreCollided(collidable[i], collidable[j]))
                     {
                         collidable[i].CollideWith(collidable[j]);
                         collidable[j].CollideWith(collidable[i]);
@@ -175,8 +191,8 @@ namespace HuntTheWumpus.Source
             this.LoadContent();
             this.Initialize();
             this.HandleClicking();
-            this.Update();
             this.HandleCollisions();
+            this.Update();
             this.AddAndRemoveObjects();
         }
 

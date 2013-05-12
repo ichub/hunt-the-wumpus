@@ -14,18 +14,20 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Class which represents the player in each individual room.
     /// </summary>
-    class PlayerAvatar : IDrawable, IUpdateable, IInitializable, IGameObject
+    class PlayerAvatar : IDrawable, IUpdateable, IInitializable, ICollideable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
+        public List<BoundingBox> BoundingBoxes { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
 
         private Vector2 velocity;
+        private Vector2 lastPosition;
         private int moveSpeed = 2;
 
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
@@ -33,11 +35,9 @@ namespace HuntTheWumpus.Source
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
 
-            this.Position = new Vector2(0, 0);
-        }
-
-        public void Initialize()
-        {
+            this.Position = new Vector2(100, 100);
+            this.BoundingBoxes = new List<BoundingBox>();
+            this.lastPosition = this.Position;
         }
 
         public void Move()
@@ -62,6 +62,40 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        public void CollideWithWalls()
+        {
+            if (this.Position.X < 0)
+            {
+                this.Position = new Vector2(0, this.Position.Y);
+                this.velocity = Vector2.Zero;
+            }
+            if (this.Position.Y < 0)
+            {
+                this.Position = new Vector2(this.Position.X, 0);
+                this.velocity = Vector2.Zero;
+            }
+            if (this.Position.X > this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X)
+            {
+                this.Position = new Vector2(this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X, this.Position.Y);
+                this.velocity = Vector2.Zero;
+            }
+            if (this.Position.Y > this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y)
+            {
+                this.Position = new Vector2(this.Position.X, this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y);
+                this.velocity = Vector2.Zero;
+            }
+
+        }
+
+        public void CollideWith(ICollideable gameObject)
+        {
+        }
+
+        public void Initialize()
+        {
+            this.BoundingBoxes.Add(Extensions.Box2D(this.Position, this.Position + this.TextureSize));
+        }
+
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("player");
@@ -69,7 +103,10 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
+            this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.lastPosition = this.Position;
             this.Move();
+            this.CollideWithWalls();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

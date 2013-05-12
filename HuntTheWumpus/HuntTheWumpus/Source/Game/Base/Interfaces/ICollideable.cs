@@ -13,8 +13,7 @@ namespace HuntTheWumpus.Source
 {
     interface ICollideable : IGameObject
     {
-        BoundingBox BoundingBox { get; set; }
-        bool IsCollidingWith(ICollideable gameObject);
+        List<BoundingBox> BoundingBoxes { get; set; }
         void CollideWith(ICollideable gameObject);
     }
 }

@@ -38,5 +38,10 @@ namespace HuntTheWumpus.Source
         {
             return new BoundingBox(new Vector3(topLeft, 0), new Vector3(bottomRight, 0));
         }
+
+        public static BoundingBox Box2D(Vector2 topLeft, Vector2 bottomRight)
+        {
+            return new BoundingBox(new Vector3(topLeft, 0), new Vector3(bottomRight, 0));
+        }
     }
 }
