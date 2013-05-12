@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Interface for all game objects that are clickable.
     /// </summary>
-    public interface IClickable
+    public interface IClickable : IGameObject
     {
         /// <summary>
         /// Bounding box where a click registers for the object.

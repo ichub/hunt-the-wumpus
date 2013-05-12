@@ -34,7 +34,6 @@ namespace HuntTheWumpus.Source
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("box");
-            this.TextureSize = new Vector2(this.Texture.Width, this.Texture.Height);
         }
 
         public void Update(GameTime gameTime)

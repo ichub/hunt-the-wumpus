@@ -25,6 +25,9 @@ namespace HuntTheWumpus.Source
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
 
+        private Vector2 velocity;
+        private int moveSpeed = 2;
+
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
         {
             this.MainGame = mainGame;
@@ -37,15 +40,36 @@ namespace HuntTheWumpus.Source
         {
         }
 
+        public void Move()
+        {
+            if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.A))
+                this.velocity += new Vector2(-moveSpeed, 0);
+            if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.W))
+                this.velocity += new Vector2(0, -moveSpeed);
+            if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.D))
+                this.velocity += new Vector2(moveSpeed, 0);
+            if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.S))
+                this.velocity += new Vector2(0, moveSpeed);
+
+            this.Position += velocity;
+            this.velocity /= 1.2f;
+
+            // limits speed vector to a length of 5 pixels per frame.
+            if (this.velocity.LengthSquared() > 5 * 5)
+            {
+                this.velocity /= this.velocity.Length();
+                this.velocity *= 5;
+            }
+        }
+
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("player");
-            this.TextureSize = new Vector2(this.Texture.Width, this.Texture.Height);
         }
 
         public void Update(GameTime gameTime)
         {
-            this.Position += new Vector2(1, 1);
+            this.Move();
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

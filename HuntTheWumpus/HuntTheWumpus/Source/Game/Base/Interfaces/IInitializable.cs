@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Interface for all game objects that can be initialized.
     /// </summary>
-    public interface IInitializable
+    public interface IInitializable : IGameObject
     {
         /// <summary>
         /// Value for determining whether or not the object

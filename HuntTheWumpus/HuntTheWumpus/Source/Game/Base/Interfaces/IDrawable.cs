@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Interface for all game objects that can be drawn on screen.
     /// </summary>
-    public interface IDrawable
+    public interface IDrawable : IGameObject
     {
         /// <summary>
         /// Texture that is used to draw the object.

@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Interface for all game objects that are updateable.
     /// </summary>
-    public interface IUpdateable
+    public interface IUpdateable : IGameObject
     {
         /// <summary>
         /// Called once per frame, before draw.

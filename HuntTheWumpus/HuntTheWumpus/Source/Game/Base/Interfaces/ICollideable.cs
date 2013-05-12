@@ -11,9 +11,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    public interface IGameObject
+    interface ICollideable : IGameObject
     {
-        MainGame MainGame { get; set; }
-        ILevel ParentLevel { get; set; }
+        BoundingBox BoundingBox { get; set; }
+        bool IsCollidingWith(ICollideable gameObject);
+        void CollideWith(ICollideable gameObject);
     }
 }

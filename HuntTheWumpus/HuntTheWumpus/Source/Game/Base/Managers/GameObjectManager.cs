@@ -17,10 +17,10 @@ namespace HuntTheWumpus.Source
     public class GameObjectManager
     {
         private MainGame parentGame;
-        private List<object> masterObjectList;
+        private List<IGameObject> masterObjectList;
 
-        private Stack<object> objectsToAdd;
-        private Stack<object> objectsToRemove;
+        private Stack<IGameObject> objectsToAdd;
+        private Stack<IGameObject> objectsToRemove;
 
         /// <summary>
         /// Initializes all instance variables.
@@ -28,9 +28,9 @@ namespace HuntTheWumpus.Source
         public GameObjectManager(MainGame parentGame)
         {
             this.parentGame = parentGame;
-            this.masterObjectList = new List<object>();
-            this.objectsToAdd = new Stack<object>();
-            this.objectsToRemove = new Stack<object>();
+            this.masterObjectList = new List<IGameObject>();
+            this.objectsToAdd = new Stack<IGameObject>();
+            this.objectsToRemove = new Stack<IGameObject>();
         }
 
         /// <summary>
@@ -38,19 +38,20 @@ namespace HuntTheWumpus.Source
         /// </summary>
         /// <typeparam name="T"> Type of game object to return. </typeparam>
         /// <returns> IEnumerable of type T of all game objects of type T. </returns>
-        public IEnumerable<object> GetObjectsByType<T>() where T : class
+        public List<T> GetObjectsByType<T>() where T : class
         {
-            return from obj 
-                   in masterObjectList 
-                   where obj is T 
-                   select obj;
+            List<T> resultList = new List<T>();
+            foreach (object gameObject in this.masterObjectList)
+                if (gameObject is T)
+                    resultList.Add(gameObject as T);
+            return resultList;
         }
 
         /// <summary>
         /// Adds the object to the game at the end of the frame.
         /// </summary>
         /// <param name="gameObject"> Object to add. </param>
-        public void Add(object gameObject)
+        public void Add(IGameObject gameObject)
         {
             this.objectsToAdd.Push(gameObject);
         }
@@ -59,7 +60,7 @@ namespace HuntTheWumpus.Source
         /// Removes the object from the game at the end of the frame.
         /// </summary>
         /// <param name="gameObject"> Object to remove. </param>
-        public void Remove(object gameObject)
+        public void Remove(IGameObject gameObject)
         {
             this.objectsToRemove.Push(gameObject);
         }
@@ -91,7 +92,11 @@ namespace HuntTheWumpus.Source
                 {
                     obj.LoadContent(this.parentGame.Content);
                     obj.ContentLoaded = true;
-                }
+                    if (obj.Texture != null)
+                        obj.TextureSize = new Vector2(obj.Texture.Width, obj.Texture.Height);
+                    else
+                        obj.TextureSize = Vector2.Zero;
+                } 
             }
         }
 
@@ -122,14 +127,6 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
-        /// Handles dragging for every single draggable game object.
-        /// </summary>
-        private void HandleDragging()
-        {
-                        
-        }
-
-        /// <summary>
         /// Handles clicking for every single clickable game object.
         /// </summary>
         private void HandleClicking()
@@ -151,15 +148,35 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
+        /// Handles collisions between all collidable objects in the game.
+        /// </summary>
+        private void HandleCollisions()
+        {
+            var collidable = GetObjectsByType<ICollideable>();
+
+            for (int i = 0; i < collidable.Count; i++)
+            {
+                for (int j = i + 1; j < collidable.Count; j++)
+                {
+                    if (collidable[i].IsCollidingWith(collidable[j]))
+                    {
+                        collidable[i].CollideWith(collidable[j]);
+                        collidable[j].CollideWith(collidable[i]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Performs updates on every single gameobject. Call once per frame.
         /// </summary>
         public void FrameUpdate()
         {
             this.LoadContent();
             this.Initialize();
-            this.HandleDragging();
             this.HandleClicking();
             this.Update();
+            this.HandleCollisions();
             this.AddAndRemoveObjects();
         }
 
