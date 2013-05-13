@@ -33,6 +33,15 @@ namespace HuntTheWumpus.Source
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {
+            // temporary debug feature begin
+            if (this.MainGame.InputManager.IsClicked(MouseButton.Left))
+            {
+                var newEnemy = new Enemy(this.MainGame, this);
+                newEnemy.Position = this.MainGame.InputManager.MousePosition - new Vector2(50, 50);
+                this.GameObjects.Add(newEnemy);
+            }
+            // temporary debug deature end
+
             this.GameObjects.FrameUpdate();
         }
 

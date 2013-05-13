@@ -84,14 +84,13 @@
     <Compile Include="Source\Game\Base\Managers\InputManager.cs" />
     <Compile Include="Source\Game\Base\Managers\LevelManager.cs" />
     <Compile Include="Source\Game\Base\Managers\TextManager.cs" />
-    <Compile Include="Source\Game\Derived\Button.cs" />
+    <Compile Include="Source\Game\Derived\Misc\Button.cs" />
     <Compile Include="Source\Game\Derived\Misc\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />
     <Compile Include="Source\Game\Derived\Misc\Team.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Enemy.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\FireBall.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Room.cs" />
-    <Compile Include="Source\Game\Derived\WumpusPlayLevel.cs" />
     <Compile Include="Source\Game\Derived\Misc\Inventory.cs" />
     <Compile Include="Source\Game\Derived\Misc\Item.cs" />
     <Compile Include="Source\Game\Derived\Misc\Items.cs" />

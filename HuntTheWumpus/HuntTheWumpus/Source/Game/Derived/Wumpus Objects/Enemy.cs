@@ -59,7 +59,6 @@ namespace HuntTheWumpus.Source
         {
             if (gameObject is Projectile)
             {
-                System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
                 var projectile = gameObject as Projectile;
                 if (projectile.ObjectTeam == Team.Player)
                 {
