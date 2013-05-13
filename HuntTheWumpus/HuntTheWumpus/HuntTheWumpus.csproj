@@ -87,6 +87,7 @@
     <Compile Include="Source\Game\Derived\Misc\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />
     <Compile Include="Source\Game\Derived\Misc\Team.cs" />
+    <Compile Include="Source\Game\Derived\Wumpus Objects\Enemy.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\FireBall.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Room.cs" />
     <Compile Include="Source\Game\Derived\WumpusPlayLevel.cs" />

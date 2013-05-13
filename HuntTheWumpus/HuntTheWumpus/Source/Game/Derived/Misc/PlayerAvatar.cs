@@ -124,7 +124,7 @@ namespace HuntTheWumpus.Source
         {
             if (gameObject is Projectile)
             {
-                System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
+                //System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
             }
         }
 
