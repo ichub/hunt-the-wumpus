@@ -83,6 +83,7 @@
     <Compile Include="Source\Game\Base\Managers\GameObjectManager.cs" />
     <Compile Include="Source\Game\Base\Managers\InputManager.cs" />
     <Compile Include="Source\Game\Base\Managers\LevelManager.cs" />
+    <Compile Include="Source\Game\Base\Managers\TextManager.cs" />
     <Compile Include="Source\Game\Derived\Button.cs" />
     <Compile Include="Source\Game\Derived\Misc\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />

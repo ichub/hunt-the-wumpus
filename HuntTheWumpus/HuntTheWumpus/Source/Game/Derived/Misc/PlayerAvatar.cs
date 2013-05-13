@@ -150,6 +150,7 @@ namespace HuntTheWumpus.Source
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Texture, this.Position, Color.White);
+            this.MainGame.TextManager.DrawText(new Vector2(10, 10), "ASDF");
         }
     }
 }

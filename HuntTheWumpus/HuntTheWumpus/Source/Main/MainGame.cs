@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public GraphicsDeviceManager Graphics { get; set; }
         public LevelManager LevelManager { get; set; }
         public InputManager InputManager { get; set; }
+        public TextManager TextManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
 
@@ -46,6 +47,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager = new LevelManager(this);
             this.LevelManager.CurrentLevel = new Room(this);
             this.InputManager = new InputManager();
+            this.TextManager = new TextManager(this);
             base.Initialize();
         }
 

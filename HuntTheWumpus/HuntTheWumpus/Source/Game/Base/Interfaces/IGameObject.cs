@@ -15,5 +15,6 @@ namespace HuntTheWumpus.Source
     {
         MainGame MainGame { get; set; }
         ILevel ParentLevel { get; set; }
+        Team ObjectTeam { get; set; }
     }
 }

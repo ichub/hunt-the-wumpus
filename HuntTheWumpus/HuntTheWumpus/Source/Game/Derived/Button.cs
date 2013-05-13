@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
+        public Team ObjectTeam { get; set; }
 
         public bool IsClicked { get; set; }
         public bool ContentLoaded { get; set; }
@@ -27,7 +28,7 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
-
+            this.ObjectTeam = Team.None;
             this.Position = new Vector2(0, 0);
         }
 

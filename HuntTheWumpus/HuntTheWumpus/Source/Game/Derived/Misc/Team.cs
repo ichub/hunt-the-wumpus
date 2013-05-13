@@ -5,9 +5,10 @@ using System.Text;
 
 namespace HuntTheWumpus.Source
 {
-    enum Team
+    public enum Team
     {
         Player,
-        Enemy
+        Enemy,
+        None
     }
 }
