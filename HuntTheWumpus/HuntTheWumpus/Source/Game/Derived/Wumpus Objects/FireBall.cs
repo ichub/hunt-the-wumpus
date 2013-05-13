@@ -34,11 +34,13 @@ namespace HuntTheWumpus.Source
             this.Position = new Vector2(100, 100);
             this.BoundingBoxes = new List<BoundingBox>();
             this.Velocity = new Vector2(0, 1);
+
+           
         }
 
         public void CollideWith(ICollideable gameObject)
         {
-
+            
         }
 
         public void Initialize()

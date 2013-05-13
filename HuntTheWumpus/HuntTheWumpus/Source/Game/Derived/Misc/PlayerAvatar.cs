@@ -120,7 +120,10 @@ namespace HuntTheWumpus.Source
 
         public void CollideWith(ICollideable gameObject)
         {
-
+            if (gameObject is FireBall)
+            {
+                System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
+            }
         }
 
         public void Initialize()
