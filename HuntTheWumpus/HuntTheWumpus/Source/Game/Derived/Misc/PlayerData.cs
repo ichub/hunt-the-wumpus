@@ -9,11 +9,13 @@ namespace HuntTheWumpus.Source
     {
         public int HP { get; set; }
         public int Stamina { get; set; }
+        public int Score { get; set; }
 
         public PlayerData()
         {
             this.HP = 3;
             this.Stamina = 1;
+            this.Score = 0;
         }
     }
 }

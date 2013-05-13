@@ -24,12 +24,17 @@ namespace HuntTheWumpus.Source
         public bool IsClicked { get; set; }
         public bool ContentLoaded { get; set; }
 
-        public Button(MainGame mainGame, ILevel parentLevel)
+        public Action OnClick { get; set; }
+        public string Text { get; set; }
+
+        public Button(MainGame mainGame, ILevel parentLevel, Action onClick, string text)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
             this.ObjectTeam = Team.None;
-            this.Position = new Vector2(0, 0);
+            this.Position = new Vector2(100, 100);
+            this.Text = text;
+            this.OnClick = onClick;
         }
 
         public void LoadContent(ContentManager content)
@@ -39,22 +44,22 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
-            this.Position += new Vector2(1, 1);
             this.ClickBox = this.ClickBox.Set2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Texture, this.Position, Color.White);
+            this.MainGame.TextManager.DrawText(this.Position + new Vector2(15, 15), this.Text, Color.White, false);
         }
 
         public void OnClickBegin(Vector2 clickPosition)
         {
-            this.ParentLevel.GameObjects.Remove(this);
         }
 
         public void OnClickRelease()
         {
+            OnClick();
         }
     }
 }

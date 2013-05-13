@@ -46,9 +46,9 @@ namespace HuntTheWumpus.Source
         {
             // TODO: Add your initialization logic here
             this.LevelManager = new LevelManager(this);
-            this.LevelManager.CurrentLevel = new Room(this);
+            this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
-            this.TextManager = new TextManager(this);
+
             this.PlayerData = new PlayerData();
 
             base.Initialize();
@@ -62,7 +62,7 @@ namespace HuntTheWumpus.Source
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-
+            this.TextManager = new TextManager(this);
             // TODO: use this.Content to load your game content here
         }
 
@@ -99,8 +99,9 @@ namespace HuntTheWumpus.Source
             this.SpriteBatch.Begin();                      // begins drawing
             this.LevelManager.FrameDraw();                 // draws the level
             this.SpriteBatch.End();                        // stops drawing
-            this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString());
-            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.PlayerData.HP);
+            this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
+            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.PlayerData.HP, true);
+            this.TextManager.DrawText(new Vector2(0, 40), "score : " + this.PlayerData.Score, true);
             base.Draw(gameTime);
         }
     }

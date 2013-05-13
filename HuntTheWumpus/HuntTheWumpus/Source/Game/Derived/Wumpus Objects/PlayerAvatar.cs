@@ -132,6 +132,12 @@ namespace HuntTheWumpus.Source
                 if (!collidedWithEnemyLastFrame)
                 {
                     this.MainGame.PlayerData.HP--;
+                    if (this.MainGame.PlayerData.HP <= 0)
+                    {
+                        this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
+                        this.MainGame.PlayerData.HP = 3;
+                        this.MainGame.PlayerData.Score = 0;
+                    }
                 }
             }
 

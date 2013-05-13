@@ -22,14 +22,25 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = mainGame;
             this.CourierNew = mainGame.Content.Load<SpriteFont>("Courier New");
-            this.textBatch = new SpriteBatch(mainGame.GraphicsDevice);
+            this.textBatch = mainGame.SpriteBatch;
         }
 
-        public void DrawText(Vector2 position, string text)
+        public void DrawText(Vector2 position, string text, bool openBatch)
         {
-            textBatch.Begin();
+            if (openBatch)
+                textBatch.Begin();
             textBatch.DrawString(CourierNew, text, position, Color.Black);
-            textBatch.End();
+            if (openBatch)
+                textBatch.End();
+        }
+
+        public void DrawText(Vector2 position, string text, Color color, bool openBatch)
+        {
+            if (openBatch)
+                textBatch.Begin();
+            textBatch.DrawString(CourierNew, text, position, color);
+            if (openBatch)
+                textBatch.End();
         }
     }
 }
