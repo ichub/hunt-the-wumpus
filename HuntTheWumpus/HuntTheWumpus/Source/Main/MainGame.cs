@@ -96,7 +96,7 @@ namespace HuntTheWumpus.Source
             this.SpriteBatch.Begin();                      // begins drawing
             this.LevelManager.FrameDraw();                 // draws the level
             this.SpriteBatch.End();                        // stops drawing
-
+            this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString());
             base.Draw(gameTime);
         }
     }
