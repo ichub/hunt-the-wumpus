@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HuntTheWumpus.Source.Main
+namespace HuntTheWumpus.Source
 {
     class Player
     {

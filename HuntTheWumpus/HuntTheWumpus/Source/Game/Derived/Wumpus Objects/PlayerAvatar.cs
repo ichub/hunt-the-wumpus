@@ -31,6 +31,9 @@ namespace HuntTheWumpus.Source
         private Vector2 lastPosition;
         private int moveSpeed = 2;
 
+        bool collidedThisFrame = false;
+        private bool collidedWithEnemyLastFrame = false;
+
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
         {
             this.MainGame = mainGame;
@@ -120,12 +123,18 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void CollideWith(ICollideable gameObject)
+        public void CollideWith(ICollideable gameObject, bool isColliding)
         {
-            if (gameObject is Projectile)
+            collidedThisFrame = isColliding | collidedThisFrame;
+
+            if (gameObject is Enemy && isColliding)
             {
-                //System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
+                if (!collidedWithEnemyLastFrame)
+                {
+                    this.MainGame.PlayerData.HP--;
+                }
             }
+
         }
 
         public void Initialize()
@@ -145,6 +154,9 @@ namespace HuntTheWumpus.Source
             FireProjectile();
             this.Move();
             this.CollideWithWalls();
+
+            collidedWithEnemyLastFrame = collidedThisFrame;
+            collidedThisFrame = false;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

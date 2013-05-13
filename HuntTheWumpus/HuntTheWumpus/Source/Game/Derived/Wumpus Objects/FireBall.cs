@@ -41,7 +41,7 @@ namespace HuntTheWumpus.Source
             this.imageName = picture;           
         }
 
-        public void CollideWith(ICollideable gameObject)
+        public void CollideWith(ICollideable gameObject, bool isCollided)
         {
             
         }

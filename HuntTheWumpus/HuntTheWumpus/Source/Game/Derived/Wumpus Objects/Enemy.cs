@@ -29,8 +29,8 @@ namespace HuntTheWumpus.Source
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
 
-            this.ObjectTeam = Team.Player;
-            this.Position = new Vector2(100, 100);
+            this.ObjectTeam = Team.Enemy;
+            this.Position = new Vector2(300, 300);
             this.BoundingBoxes = new List<BoundingBox>();
         }
 
@@ -55,9 +55,9 @@ namespace HuntTheWumpus.Source
 
         }
 
-        public void CollideWith(ICollideable gameObject)
+        public void CollideWith(ICollideable gameObject, bool isCollided)
         {
-            if (gameObject is Projectile)
+            if (gameObject is Projectile && isCollided)
             {
                 var projectile = gameObject as Projectile;
                 if (projectile.ObjectTeam == Team.Player)

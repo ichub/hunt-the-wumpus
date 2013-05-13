@@ -85,8 +85,9 @@
     <Compile Include="Source\Game\Base\Managers\LevelManager.cs" />
     <Compile Include="Source\Game\Base\Managers\TextManager.cs" />
     <Compile Include="Source\Game\Derived\Misc\Button.cs" />
-    <Compile Include="Source\Game\Derived\Misc\PlayerAvatar.cs" />
+    <Compile Include="Source\Game\Derived\Wumpus Objects\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />
+    <Compile Include="Source\Game\Derived\Misc\PlayerData.cs" />
     <Compile Include="Source\Game\Derived\Misc\Team.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Enemy.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\FireBall.cs" />

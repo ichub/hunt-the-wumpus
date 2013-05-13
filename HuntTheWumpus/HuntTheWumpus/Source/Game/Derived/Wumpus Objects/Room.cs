@@ -25,9 +25,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            var a = new Enemy(this.MainGame, this);
-            a.Position = new Vector2(200, 200);
-            this.GameObjects.Add(a);
+            this.GameObjects.Add(new Enemy(this.MainGame, this));
             this.GameObjects.Add(new PlayerAvatar(this.MainGame, this));
         }
 

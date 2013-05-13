@@ -22,6 +22,7 @@ namespace HuntTheWumpus.Source
         public TextManager TextManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
+        public PlayerData PlayerData { get; set; }
 
         public MainGame()
         {
@@ -48,6 +49,8 @@ namespace HuntTheWumpus.Source
             this.LevelManager.CurrentLevel = new Room(this);
             this.InputManager = new InputManager();
             this.TextManager = new TextManager(this);
+            this.PlayerData = new PlayerData();
+
             base.Initialize();
         }
 
@@ -97,6 +100,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager.FrameDraw();                 // draws the level
             this.SpriteBatch.End();                        // stops drawing
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString());
+            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.PlayerData.HP);
             base.Draw(gameTime);
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace HuntTheWumpus.Source.Main
+namespace HuntTheWumpus.Source
 {
     class Inventory
     {

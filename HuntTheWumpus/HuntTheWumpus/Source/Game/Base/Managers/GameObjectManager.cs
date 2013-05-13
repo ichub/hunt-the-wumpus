@@ -174,11 +174,8 @@ namespace HuntTheWumpus.Source
             {
                 for (int j = i + 1; j < collidable.Count; j++)
                 {
-                    if (AreCollided(collidable[i], collidable[j]))
-                    {
-                        collidable[i].CollideWith(collidable[j]);
-                        collidable[j].CollideWith(collidable[i]);
-                    }
+                    collidable[i].CollideWith(collidable[j], AreCollided(collidable[i], collidable[j]));
+                    collidable[j].CollideWith(collidable[i], AreCollided(collidable[i], collidable[j]));
                 }
             }
         }
