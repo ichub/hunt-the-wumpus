@@ -29,5 +29,29 @@ namespace HuntTheWumpus.Source
 
             this.MousePosition = new Vector2(this.MouseState.X, this.MouseState.Y);
         }
+
+        public bool IsClicked(Keys key)
+        {
+            return KeyboardState.IsKeyDown(key) && !LastKeyboardState.IsKeyDown(key);
+        }
+
+        public bool IsClicked(MouseButton button)
+        {
+            if (button == MouseButton.Left)
+                return MouseState.LeftButton == ButtonState.Pressed && LastMouseState.LeftButton != ButtonState.Pressed;
+            else if (button == MouseButton.Middle)
+                return MouseState.MiddleButton == ButtonState.Pressed && LastMouseState.MiddleButton != ButtonState.Pressed;
+            else if (button == MouseButton.Right)
+                return MouseState.RightButton == ButtonState.Pressed && LastMouseState.RightButton != ButtonState.Pressed;
+            else return false;
+            
+        }
+    }
+
+    public enum MouseButton
+    {
+        Left,
+        Middle,
+        Right,
     }
 }

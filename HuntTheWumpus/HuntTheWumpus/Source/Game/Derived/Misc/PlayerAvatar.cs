@@ -87,8 +87,40 @@ namespace HuntTheWumpus.Source
 
         }
 
+        public void FireProjectile()
+        {
+            var projectile = new FireBall(this.MainGame, this.ParentLevel);
+            projectile.Position = this.Position;
+
+            if (MainGame.InputManager.IsClicked(Keys.Up))
+            {
+                projectile.Velocity = new Vector2(0, -4);
+                this.ParentLevel.GameObjects.Add(projectile);
+                projectile.rotation = 4.71238898;
+            }
+            if (MainGame.InputManager.IsClicked(Keys.Down))
+            {
+                projectile.Velocity = new Vector2(0, 4);
+                this.ParentLevel.GameObjects.Add(projectile);
+                projectile.rotation = 1.57079633;
+            }
+            if (MainGame.InputManager.IsClicked(Keys.Left))
+            {
+                projectile.Velocity = new Vector2(-4, 0);
+                this.ParentLevel.GameObjects.Add(projectile);
+                projectile.rotation = 3.14159265;
+            }
+            if (MainGame.InputManager.IsClicked(Keys.Right))
+            {
+                projectile.Velocity = new Vector2(4, 0);
+                this.ParentLevel.GameObjects.Add(projectile);
+                projectile.rotation = 0;
+            }
+        }
+
         public void CollideWith(ICollideable gameObject)
         {
+
         }
 
         public void Initialize()
@@ -105,6 +137,7 @@ namespace HuntTheWumpus.Source
         {
             this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
             this.lastPosition = this.Position;
+            FireProjectile();
             this.Move();
             this.CollideWithWalls();
         }
