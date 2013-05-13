@@ -22,6 +22,7 @@ namespace HuntTheWumpus.Source
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
         public List<BoundingBox> BoundingBoxes { get; set; }
+        public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
@@ -35,6 +36,7 @@ namespace HuntTheWumpus.Source
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
 
+            this.ObjectTeam = Team.Player;
             this.Position = new Vector2(100, 100);
             this.BoundingBoxes = new List<BoundingBox>();
             this.lastPosition = this.Position;
@@ -89,7 +91,7 @@ namespace HuntTheWumpus.Source
 
         public void FireProjectile()
         {
-            var projectile = new FireBall(this.MainGame, this.ParentLevel);
+            var projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball");
             projectile.Position = this.Position;
 
             if (MainGame.InputManager.IsClicked(Keys.Up))
@@ -120,7 +122,7 @@ namespace HuntTheWumpus.Source
 
         public void CollideWith(ICollideable gameObject)
         {
-            if (gameObject is FireBall)
+            if (gameObject is Projectile)
             {
                 System.Diagnostics.Debug.Print(DateTime.Now.Second.ToString());
             }

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class FireBall : IUpdateable, IDrawable, IInitializable, ICollideable
+    class Projectile : IUpdateable, IDrawable, IInitializable, ICollideable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
         public List<BoundingBox> BoundingBoxes { get; set; }
+        public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
@@ -26,16 +27,18 @@ namespace HuntTheWumpus.Source
 
         public Vector2 Velocity;
 
-        public FireBall(MainGame mainGame, ILevel parentLevel)
+        private string imageName;
+
+        public Projectile(MainGame mainGame, ILevel parentLevel, Team team, string picture)
         {
+            this.ObjectTeam = team;
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
 
             this.Position = new Vector2(100, 100);
             this.BoundingBoxes = new List<BoundingBox>();
             this.Velocity = new Vector2(0, 1);
-
-           
+            this.imageName = picture;           
         }
 
         public void CollideWith(ICollideable gameObject)
@@ -50,7 +53,7 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("fireball");
+            this.Texture = content.Load<Texture2D>(this.imageName);
         }
 
         public void Update(GameTime gameTime)
