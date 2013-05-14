@@ -24,7 +24,7 @@ namespace HuntTheWumpus.Source
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
         public double rotation = 0;
-
+        public bool HasCollided = false;
         public Vector2 Velocity;
 
         private AnimatedTexture animatedTexture;
@@ -44,7 +44,9 @@ namespace HuntTheWumpus.Source
 
         public void CollideWith(ICollideable gameObject, bool isCollided)
         {
-            
+            if (isCollided)
+                if (gameObject is Enemy)
+                    this.HasCollided = true;
         }
 
         public void Initialize()
@@ -56,12 +58,14 @@ namespace HuntTheWumpus.Source
         {
             this.Texture = content.Load<Texture2D>("Textures\\" + this.imageName);
             this.animatedTexture = new AnimatedTexture(this.Texture, 5, 20, 20, 10);
+            this.TextureSize = new Vector2(this.animatedTexture.Size.X, this.animatedTexture.Size.Y);
         }
 
         public void Update(GameTime gameTime)
         {
-            this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
-            this.Position += Velocity;
+            if (this.BoundingBoxes.Any())
+                this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.Position += Velocity * 3;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

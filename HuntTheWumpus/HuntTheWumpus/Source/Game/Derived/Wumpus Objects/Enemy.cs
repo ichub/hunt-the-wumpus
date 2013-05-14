@@ -60,6 +60,7 @@ namespace HuntTheWumpus.Source
             if (gameObject is Projectile && isCollided)
             {
                 var projectile = gameObject as Projectile;
+                if (!projectile.HasCollided)
                 if (projectile.ObjectTeam == Team.Player)
                 {
                     this.MainGame.PlayerData.Score += 10;
@@ -77,6 +78,7 @@ namespace HuntTheWumpus.Source
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("Textures\\enemy");
+            this.TextureSize = new Vector2(this.Texture.Width, this.Texture.Height);
         }
 
         public void Update(GameTime gameTime)

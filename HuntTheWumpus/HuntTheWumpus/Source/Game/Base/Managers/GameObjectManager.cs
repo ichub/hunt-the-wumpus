@@ -92,10 +92,6 @@ namespace HuntTheWumpus.Source
                 {
                     obj.LoadContent(this.parentGame.Content);
                     obj.ContentLoaded = true;
-                    if (obj.Texture != null)
-                        obj.TextureSize = new Vector2(obj.Texture.Width, obj.Texture.Height);
-                    else
-                        obj.TextureSize = Vector2.Zero;
                 } 
             }
         }
