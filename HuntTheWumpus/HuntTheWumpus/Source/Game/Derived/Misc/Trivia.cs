@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace WumpusTest
+namespace HuntTheWumpus.Source.Game.Derived.Misc
 {
     public class Trivia
     {
