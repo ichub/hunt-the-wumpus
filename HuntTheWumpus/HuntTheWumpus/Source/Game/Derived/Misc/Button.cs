@@ -39,7 +39,7 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("box");
+            this.Texture = content.Load<Texture2D>("Textures\\box");
         }
 
         public void Update(GameTime gameTime)
@@ -60,6 +60,7 @@ namespace HuntTheWumpus.Source
         public void OnClickRelease()
         {
             OnClick();
+            this.MainGame.SoundManager.PlaySound("buttonclick");
         }
     }
 }

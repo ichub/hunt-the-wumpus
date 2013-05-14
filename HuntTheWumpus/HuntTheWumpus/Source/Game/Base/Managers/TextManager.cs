@@ -21,7 +21,7 @@ namespace HuntTheWumpus.Source
         public TextManager(MainGame mainGame)
         {
             this.MainGame = mainGame;
-            this.CourierNew = mainGame.Content.Load<SpriteFont>("Courier New");
+            this.CourierNew = mainGame.Content.Load<SpriteFont>("Fonts\\Courier New");
             this.textBatch = mainGame.SpriteBatch;
         }
 

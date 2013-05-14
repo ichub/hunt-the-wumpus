@@ -150,7 +150,7 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("player");
+            this.Texture = content.Load<Texture2D>("Textures\\player");
         }
 
         public void Update(GameTime gameTime)

@@ -1,5 +1,8 @@
-Content\box.xnb
-Content\player.xnb
-Content\fireball.xnb
-Content\enemy.xnb
-Content\Courier New.xnb
+Content\Textures\box.xnb
+Content\Textures\fireball.xnb
+Content\Textures\enemy.xnb
+Content\Textures\player.xnb
+Content\Fonts\Courier New.xnb
+Content\Sounds\button.xnb
+Content\Sounds\item pickup.xnb
+Content\Sounds\menu change.xnb

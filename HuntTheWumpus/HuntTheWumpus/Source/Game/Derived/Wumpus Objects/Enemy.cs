@@ -76,7 +76,7 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("enemy");
+            this.Texture = content.Load<Texture2D>("Textures\\enemy");
         }
 
         public void Update(GameTime gameTime)

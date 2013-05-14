@@ -20,6 +20,7 @@ namespace HuntTheWumpus.Source
         public LevelManager LevelManager { get; set; }
         public InputManager InputManager { get; set; }
         public TextManager TextManager { get; set; }
+        public SoundManager SoundManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
         public PlayerData PlayerData { get; set; }
@@ -48,7 +49,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager = new LevelManager(this);
             this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
-
+            this.SoundManager = new SoundManager();
             this.PlayerData = new PlayerData();
 
             base.Initialize();
@@ -63,6 +64,7 @@ namespace HuntTheWumpus.Source
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             this.TextManager = new TextManager(this);
+            this.SoundManager.LoadSounds(this.Content);
             // TODO: use this.Content to load your game content here
         }
 
