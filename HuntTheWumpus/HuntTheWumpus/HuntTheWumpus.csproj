@@ -87,6 +87,7 @@
     <Compile Include="Source\Game\Base\Managers\TextManager.cs" />
     <Compile Include="Source\Game\Derived\Levels\GameOverLevel.cs" />
     <Compile Include="Source\Game\Derived\Levels\StartLevel.cs" />
+    <Compile Include="Source\Game\Derived\Misc\AnimatedTexture.cs" />
     <Compile Include="Source\Game\Derived\Misc\Button.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />

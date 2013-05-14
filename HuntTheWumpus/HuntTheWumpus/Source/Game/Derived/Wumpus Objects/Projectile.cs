@@ -27,6 +27,7 @@ namespace HuntTheWumpus.Source
 
         public Vector2 Velocity;
 
+        private AnimatedTexture animatedTexture;
         private string imageName;
 
         public Projectile(MainGame mainGame, ILevel parentLevel, Team team, string picture)
@@ -54,6 +55,7 @@ namespace HuntTheWumpus.Source
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("Textures\\" + this.imageName);
+            this.animatedTexture = new AnimatedTexture(this.Texture, 5, 20, 20, 10);
         }
 
         public void Update(GameTime gameTime)
@@ -64,7 +66,8 @@ namespace HuntTheWumpus.Source
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.Texture, this.Position, null, Color.White, (float)this.rotation, this.TextureSize / 2, new Vector2(1, 1), SpriteEffects.None, 0);
+            //spriteBatch.Draw(this.Texture, this.Position, null, Color.White, (float)this.rotation, this.TextureSize / 2, new Vector2(1, 1), SpriteEffects.None, 0);
+            this.animatedTexture.Draw(spriteBatch, this.Position, this.MainGame.GameTime);
         }
     }
 }

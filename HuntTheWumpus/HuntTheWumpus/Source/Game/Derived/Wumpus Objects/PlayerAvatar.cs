@@ -94,7 +94,7 @@ namespace HuntTheWumpus.Source
 
         public void FireProjectile()
         {
-            var projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball");
+            var projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball_spritesheet");
             projectile.Position = this.Position + this.TextureSize / 2;
 
             if (MainGame.InputManager.IsClicked(Keys.Up))
