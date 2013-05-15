@@ -177,9 +177,14 @@ namespace HuntTheWumpus.Source.Game.Derived.Misc
         public bool correctAnswer;
         public bool passedChallenge;
         public bool failedChallenge;
-        public override string ToString()
+        public override bool[] ToString()
         {
-            return "Correct Answer = " + correctAnswer + " Passed Challenge = " + passedChallenge + " Failed Challenge = " + failedChallenge;
+            bool[] stats = new bool[3];
+            stats[0] = correctAnswer;
+            stats[1] = passedChallenge;
+            stats[2] = failedChallenge;
+            return stats;
+            //return "Correct Answer = " + correctAnswer + " Passed Challenge = " + passedChallenge + " Failed Challenge = " + failedChallenge;
         }
     }
 
