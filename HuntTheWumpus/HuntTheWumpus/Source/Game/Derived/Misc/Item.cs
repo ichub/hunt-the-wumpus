@@ -5,26 +5,37 @@ using System.Text;
 
 namespace HuntTheWumpus.Source
 {
-    class Item
+    class Item : Items
     {
-        private List<Items> thing = new List<Items>();
+        protected List<Items> thing = new List<Items>(); //list of items
+        
+        /// <summary>
+        /// Constructs default ingame items
+        /// </summary>
         public Item()
         {
-            this.AddItem(1, "Bow", "Holder", true);
-            this.AddItem(2, "Arrow", "Holder", true);
-            this.AddItem(3, "Map", "Holder", false);
-            this.AddItem(4, "Standard Helmet", "Holder", true);
-            this.AddItem(5, "Standard Chest", "Holder", true);
-            this.AddItem(6, "Standard legs", "Holder", true);
-            this.AddItem(7, "Refined Helmet", "Holder", true); 
-            this.AddItem(8, "Refined Chest", "Holder", true);
-            this.AddItem(9, "Refined Legs", "Holder", true); 
+            this.AddItem("Bow", "Holder", true, 0);
+            this.AddItem("Arrow", "Holder", true, 10);
+            this.AddItem("Map", "Holder", false, 100);
+            this.AddItem("Standard Helmet", "Holder", true, 100);
+            this.AddItem("Standard Chest", "Holder", true, 330);
+            this.AddItem("Standard legs", "Holder", true, 250);
+            this.AddItem("Refined Helmet", "Holder", true, 1000); 
+            this.AddItem("Refined Chest", "Holder", true, 2000);
+            this.AddItem("Refined Legs", "Holder", true, 1500); 
         }
 
-        public void AddItem(int decID, String decName, String decImage, bool decDamageAllowed)
+        /// <summary>
+        /// Allows to add items outside vanilla items
+        /// </summary>
+        /// <param name="decName">Name</param>
+        /// <param name="decImage">Image Path</param>
+        /// <param name="decDamageAllowed">Damage allowed?</param>
+        /// <param name="itemPrice">Price of an item in the shop</param>
+        public void AddItem(String decName, String decImage, bool decDamageAllowed, int itemPrice)
         {
             Items it = new Items(); 
-            it.id= decID;
+            //it.id= decID;
             it.name= decName;
             it.image= decImage;
             it.damageAllowed = decDamageAllowed;
