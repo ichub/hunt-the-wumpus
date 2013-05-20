@@ -22,7 +22,16 @@ namespace HuntTheWumpus.Source
             this.AddItem("Standard legs", "Holder", true, 250);
             this.AddItem("Refined Helmet", "Holder", true, 1000); 
             this.AddItem("Refined Chest", "Holder", true, 2000);
-            this.AddItem("Refined Legs", "Holder", true, 1500); 
+            this.AddItem("Refined Legs", "Holder", true, 1500);
+            this.AddItem("Speed Ring", "Holder", false, 1000);
+            this.AddItem("Haste Ring", "Holder", false, 1500);
+            this.AddItem("Instilled Ring", "Holder", false, 2000);
+            this.AddItem("Upgraded Speed Ring", "Holder", false, 1000);
+            this.AddItem("Upgraded Haste Ring", "Holder", false, 1500);
+            this.AddItem("UpgradedInstilled Ring", "Holder", false, 2000);
+            this.AddItem("Ultimate Speed Ring", "Holder", false, 1000);
+            this.AddItem("Ultimate Haste Ring", "Holder", false, 1500);
+            this.AddItem("Ultimate Instilled Ring", "Holder", false, 2000);
         }
 
         /// <summary>
