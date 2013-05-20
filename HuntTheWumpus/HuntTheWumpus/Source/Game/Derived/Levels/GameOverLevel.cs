@@ -26,11 +26,20 @@ namespace HuntTheWumpus.Source
         public void Initialize()
         {
             this.GameObjects.Add(new Button(this.MainGame, this, () =>
-                { 
-                    this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame);
-                    this.MainGame.SoundManager.PlaySound("menuchange");
-                }, 
+                    this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame),
                 "main menu"));
+        }
+
+        public void OnLoad()
+        {
+        }
+
+        public void OnUnLoad()
+        {
+        }
+
+        public void Reset()
+        {
         }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)

@@ -61,7 +61,7 @@ namespace HuntTheWumpus.Source
         public void OnClickRelease()
         {
             OnClick();
-            this.MainGame.SoundManager.PlaySound("buttonclick");
+            this.MainGame.SoundManager.PlaySound("menuchange");
         }
     }
 }

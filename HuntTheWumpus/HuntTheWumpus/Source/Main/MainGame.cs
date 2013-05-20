@@ -104,6 +104,7 @@ namespace HuntTheWumpus.Source
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.PlayerData.HP, true);
             this.TextManager.DrawText(new Vector2(0, 40), "score : " + this.PlayerData.Score, true);
+            this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);
             base.Draw(gameTime);
         }
     }

@@ -49,5 +49,11 @@ namespace HuntTheWumpus.Source
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>
         void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch);
+
+        void OnLoad();
+
+        void OnUnLoad();
+
+        void Reset();
     }
 }

@@ -14,12 +14,36 @@ namespace HuntTheWumpus.Source
     public class LevelManager
     {
         public MainGame ParentGame { get; private set; }
-        public ILevel CurrentLevel { get; set; }
+        public ILevel CurrentLevel 
+        {
+            get 
+            { 
+                return this.currentLevel; 
+            } 
+            set
+            {
+                if (this.currentLevel != null)
+                {
+                    this.currentLevel.OnUnLoad();
+                    this.currentLevel.GameObjects.AddAndRemoveObjects();
+                }
+                this.currentLevel = value;
+                if (value != null)
+                {
+                    this.currentLevel.OnLoad();
+                }
+            } 
+        }
+
+        public Cave GameCave { get; set; }
+
+        private ILevel currentLevel;
 
         public LevelManager(MainGame parentGame)
         {
             this.ParentGame = parentGame;
             this.CurrentLevel = null;
+            this.GameCave = new Cave(this.ParentGame);
         }
 
         public void FrameUpdate()

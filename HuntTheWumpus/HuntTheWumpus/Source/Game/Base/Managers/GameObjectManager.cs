@@ -68,7 +68,7 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Method that adds and removes objects from the game at the end of the frame.
         /// </summary>
-        private void AddAndRemoveObjects()
+        public void AddAndRemoveObjects()
         {
             while (objectsToAdd.Any())
             {

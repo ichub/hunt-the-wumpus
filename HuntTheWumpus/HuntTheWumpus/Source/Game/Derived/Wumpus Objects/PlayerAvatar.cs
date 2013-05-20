@@ -40,7 +40,7 @@ namespace HuntTheWumpus.Source
             this.ParentLevel = parentLevel;
 
             this.ObjectTeam = Team.Player;
-            this.Position = new Vector2(100, 100);
+            this.Position = new Vector2(400, 400);
             this.BoundingBoxes = new List<BoundingBox>();
             this.lastPosition = this.Position;
         }
