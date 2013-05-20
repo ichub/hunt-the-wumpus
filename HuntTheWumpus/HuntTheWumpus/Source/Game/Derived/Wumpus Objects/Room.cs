@@ -14,16 +14,22 @@ namespace HuntTheWumpus.Source
     public class Room : ILevel
     {
         public MainGame MainGame { get; set; }
+        public Cave MainCave { get; set; }
         public GameObjectManager GameObjects { get; set; }
         public Room[] AdjacentRooms { get; set; }
+
         public int RoomIndex { get; set; }
         public bool Initialized { get; set; }
 
-        public Room(MainGame mainGame, int index)
+        private Texture2D background;
+
+        public Room(MainGame mainGame, Cave gameCave, int index)
         {
             this.MainGame = mainGame;
+            this.MainCave = gameCave;
             this.GameObjects = new GameObjectManager(this.MainGame);
             this.RoomIndex = index;
+            this.background = mainGame.Content.Load<Texture2D>("Textures\\Cave\\normal");
         }
 
         public void Initialize()
@@ -74,6 +80,7 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(this.background, new Vector2(this.MainCave.CaveBounds.X, this.MainCave.CaveBounds.Y), Color.White);
             this.GameObjects.FrameDraw();
         }
     }

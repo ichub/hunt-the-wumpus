@@ -13,6 +13,11 @@ namespace HuntTheWumpus.Source
 
         public PlayerData()
         {
+            this.Reset();
+        }
+
+        public void Reset()
+        {
             this.HP = 3;
             this.Stamina = 1;
             this.Score = 0;

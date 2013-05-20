@@ -43,7 +43,7 @@ namespace HuntTheWumpus.Source
         {
             this.ParentGame = parentGame;
             this.CurrentLevel = null;
-            this.GameCave = new Cave(this.ParentGame);
+            this.GameCave = new Cave(this.ParentGame, new Vector2(this.ParentGame.Graphics.PreferredBackBufferWidth, this.ParentGame.Graphics.PreferredBackBufferHeight));
         }
 
         public void FrameUpdate()

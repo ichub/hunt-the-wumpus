@@ -32,10 +32,11 @@ namespace HuntTheWumpus.Source
             Content.RootDirectory = "Content";
 
             // Game Options:
-            this.Graphics.PreferredBackBufferWidth = 800;  // sets the width of the window to 800 pixels
-            this.Graphics.PreferredBackBufferHeight = 600; // sets the height of the window to 600 pixels
+            this.Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
+            this.Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // sets the height of the window to the screen height
             this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
             this.IsMouseVisible = true;                    // lets mouse to be drawn on the window
+            //this.Graphics.IsFullScreen = true;
         }
 
         /// <summary>
