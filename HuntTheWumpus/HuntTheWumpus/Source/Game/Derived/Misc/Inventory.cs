@@ -8,7 +8,7 @@ namespace HuntTheWumpus.Source
 {
     class Inventory
     {
-        public int[,] inv = new int[5, 2];
+        public int[,] inv = new int[5, 3];
         /// <summary>
         /// Creates a new inventory 
         /// </summary>

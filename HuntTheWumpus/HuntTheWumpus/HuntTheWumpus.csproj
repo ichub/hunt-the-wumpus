@@ -105,7 +105,7 @@
     <Compile Include="Source\Game\Derived\Misc\Item.cs" />
     <Compile Include="Source\Game\Derived\Misc\Items.cs" />
     <Compile Include="Source\Main\MainGame.cs" />
-    <Compile Include="Source\Game\Derived\Wumpus Objects\Player.cs" />
+    <Compile Include="Source\Game\Derived\Misc\Player.cs" />
     <Compile Include="Source\Main\Program.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -132,6 +132,8 @@ namespace HuntTheWumpus.Source
                 if (!collidedWithEnemyLastFrame)
                 {
                     this.MainGame.PlayerData.HP--;
+                    this.MainGame.Player.hp--;
+                    this.MainGame.Player.score -= 50;
                     if (this.MainGame.PlayerData.HP <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
