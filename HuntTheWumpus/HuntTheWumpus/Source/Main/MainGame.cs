@@ -103,6 +103,8 @@ namespace HuntTheWumpus.Source
             this.InputManager.Update();
             this.LevelManager.FrameUpdate();
             base.Update(gameTime);
+            Player.inv.checkSpecial((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0));
+
         }
 
         /// <summary>

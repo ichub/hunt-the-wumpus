@@ -49,13 +49,25 @@ namespace HuntTheWumpus.Source
         public void Move()
         {
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.A))
+            {
                 this.velocity += new Vector2(-moveSpeed, 0);
+                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 3);
+            }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.W))
+            {
                 this.velocity += new Vector2(0, -moveSpeed);
+                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 0);
+            }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.D))
+            {
                 this.velocity += new Vector2(moveSpeed, 0);
+                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 1);
+            }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.S))
+            {
                 this.velocity += new Vector2(0, moveSpeed);
+                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 2);
+            }
 
             this.Position += velocity;
             this.velocity /= 1.2f;

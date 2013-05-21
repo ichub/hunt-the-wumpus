@@ -14,24 +14,24 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public Item()
         {
-            this.AddItem("Bow", "Holder", true, 0);
-            this.AddItem("Arrow", "Holder", true, 10);
-            this.AddItem("Map", "Holder", false, 100);
-            this.AddItem("Standard Helmet", "Holder", true, 100);
-            this.AddItem("Standard Chest", "Holder", true, 330);
-            this.AddItem("Standard legs", "Holder", true, 250);
-            this.AddItem("Refined Helmet", "Holder", true, 1000); 
-            this.AddItem("Refined Chest", "Holder", true, 2000);
-            this.AddItem("Refined Legs", "Holder", true, 1500);
-            this.AddItem("Speed Ring", "Holder", false, 1000);
-            this.AddItem("Haste Ring", "Holder", false, 1500);
-            this.AddItem("Instilled Ring", "Holder", false, 2000);
-            this.AddItem("Upgraded Speed Ring", "Holder", false, 1000);
-            this.AddItem("Upgraded Haste Ring", "Holder", false, 1500);
-            this.AddItem("UpgradedInstilled Ring", "Holder", false, 2000);
-            this.AddItem("Ultimate Speed Ring", "Holder", false, 1000);
-            this.AddItem("Ultimate Haste Ring", "Holder", false, 1500);
-            this.AddItem("Ultimate Instilled Ring", "Holder", false, 2000);
+            this.AddItem("Bow", "Holder", true, 0); //hopefully the purpose is clear enough
+            this.AddItem("Arrow", "Holder", true, 10); //charges for bow
+            this.AddItem("Map", "Holder", false, 100); //Map to show location of various items
+            this.AddItem("Standard Helmet", "Holder", true, 100); //armor
+            this.AddItem("Standard Chest", "Holder", true, 330); //armor
+            this.AddItem("Standard legs", "Holder", true, 250); //armor
+            this.AddItem("Refined Helmet", "Holder", true, 1000); //armor
+            this.AddItem("Refined Chest", "Holder", true, 2000); //armor
+            this.AddItem("Refined Legs", "Holder", true, 1500); //amor
+            this.AddItem("Speed Ring", "Holder", false, 1000); //lets player move faster
+            this.AddItem("Haste Ring", "Holder", false, 1500); //allows to deal more damage
+            this.AddItem("Instilled Ring", "Holder", false, 2000); //when mobs hurt you, have a chance to not take damage
+            this.AddItem("Upgraded Speed Ring", "Holder", false, 1000); //upgraded
+            this.AddItem("Upgraded Haste Ring", "Holder", false, 1500); //upgraded
+            this.AddItem("UpgradedInstilled Ring", "Holder", false, 2000); //upgraded
+            this.AddItem("Ultimate Speed Ring", "Holder", false, 1000); //upgraded
+            this.AddItem("Ultimate Haste Ring", "Holder", false, 1500); //upgraded
+            this.AddItem("Ultimate Instilled Ring", "Holder", false, 2000); //upgraded
         }
 
         /// <summary>

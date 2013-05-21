@@ -7,11 +7,12 @@ namespace HuntTheWumpus.Source
 {
     public class Player
     {
-        public int pos = 0; //Player position
+        public int pos = 0; //Player room number
         public int hp = 0; //Player health 
         public int arm = 0; //Player armor value
         public int money = 0; //Player money ammount
         public int score = 0;
+        public Inventory inv;
 
         /// <summary>
         /// Sets up a new player
@@ -23,7 +24,7 @@ namespace HuntTheWumpus.Source
             hp = 20;
             money = 100;
             score = 0;
-            Inventory inv = new Inventory(difficulty);
+            inv = new Inventory(difficulty);
         }
 
         /// <summary>
@@ -44,6 +45,7 @@ namespace HuntTheWumpus.Source
         {
             money -= sum;
         }
+
     }
 }
 

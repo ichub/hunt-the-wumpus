@@ -6,9 +6,11 @@ using System.Collections;
 
 namespace HuntTheWumpus.Source
 {
-    class Inventory
+    public class Inventory
     {
         public int[,] inv = new int[5, 3];
+        public List<Map> maps = new List<Map>();
+        public int numRoom;
         /// <summary>
         /// Creates a new inventory 
         /// </summary>
@@ -58,6 +60,35 @@ namespace HuntTheWumpus.Source
             if (inv[invSpot, 0] != 0)
             {
                 inv[invSpot, 1] += damageValue;
+            }
+        }
+        public void checkSpecial(int roomNum)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (inv[i, 0] == 2 && inv[i, 2] == 0)
+                {
+                    maps.Add(new Map(roomNum));
+                    numRoom = roomNum;
+                    inv[i, 2] = maps.Count - 1;
+                }
+            }
+        }
+
+        public void updateMap(int newRoom, int direction)
+        {
+            if(newRoom != numRoom)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (inv[i, 0] == 2 && inv[i, 2] != 0)
+                    {
+                        foreach (Map activeMap in maps)
+                        {
+                            activeMap.UpdateMap(direction, newRoom);
+                        }
+                    }
+                }
             }
         }
     }
