@@ -49,6 +49,26 @@ namespace HuntTheWumpus.Source
                     this.HasCollided = true;
         }
 
+        private void Remove()
+        {
+            if (this.Position.X < 0)
+            {
+                this.ParentLevel.GameObjects.Remove(this);
+            }
+            else if (this.Position.Y < 0)
+            {
+                this.ParentLevel.GameObjects.Remove(this);
+            }
+            else if (this.Position.X > this.MainGame.LevelManager.GameCave.CaveBounds.Width - this.TextureSize.X)
+            {
+                this.ParentLevel.GameObjects.Remove(this);
+            }
+            else if (this.Position.Y > this.MainGame.LevelManager.GameCave.CaveBounds.Height - this.TextureSize.Y)
+            {
+                this.ParentLevel.GameObjects.Remove(this);
+            }
+        }
+
         public void Initialize()
         {
             this.BoundingBoxes.Add(Extensions.Box2D(this.Position, this.Position + this.TextureSize));
@@ -63,6 +83,7 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
+            this.Remove();
             if (this.BoundingBoxes.Any())
                 this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
             this.Position += Velocity * 3;
