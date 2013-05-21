@@ -29,16 +29,17 @@ namespace HuntTheWumpus.Source
 
         private Vector2 velocity;
         private Vector2 lastPosition;
-        private int moveSpeed = 2;
+        private Room parentRoom;
 
-        bool collidedThisFrame = false;
+        private int moveSpeed = 2;
+        private bool collidedThisFrame = false;
         private bool collidedWithEnemyLastFrame = false;
 
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
-
+            this.parentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(400, 400);
             this.BoundingBoxes = new List<BoundingBox>();
@@ -79,17 +80,16 @@ namespace HuntTheWumpus.Source
                 this.Position = new Vector2(this.Position.X, 0);
                 this.velocity = Vector2.Zero;
             }
-            if (this.Position.X > this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X)
+            if (this.Position.X > this.parentRoom.MainCave.CaveBounds.Width - this.TextureSize.X)
             {
-                this.Position = new Vector2(this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X, this.Position.Y);
+                this.Position = new Vector2(this.parentRoom.MainCave.CaveBounds.Width - this.TextureSize.X, this.Position.Y);
                 this.velocity = Vector2.Zero;
             }
-            if (this.Position.Y > this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y)
+            if (this.Position.Y > this.parentRoom.MainCave.CaveBounds.Height - this.TextureSize.Y)
             {
-                this.Position = new Vector2(this.Position.X, this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y);
+                this.Position = new Vector2(this.Position.X, this.parentRoom.MainCave.CaveBounds.Height - this.TextureSize.Y);
                 this.velocity = Vector2.Zero;
             }
-
         }
 
         public void FireProjectile()

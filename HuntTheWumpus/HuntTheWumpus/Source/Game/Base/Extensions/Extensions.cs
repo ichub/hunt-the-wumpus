@@ -43,5 +43,15 @@ namespace HuntTheWumpus.Source
         {
             return new BoundingBox(new Vector3(topLeft, 0), new Vector3(bottomRight, 0));
         }
+
+        public static void FillTexture(Texture2D texture, Color color)
+        {
+            Color[] colors = new Color[texture.Width * texture.Height];
+            for (int i = 0; i < colors.Length; i++)
+            {
+                colors[i] = color;
+            }
+            texture.SetData<Color>(colors);
+        }
     }
 }

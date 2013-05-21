@@ -24,11 +24,13 @@ namespace HuntTheWumpus.Source
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
 
+        private Room parentRoom;
+
         public Enemy(MainGame mainGame, ILevel parentLevel)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
-
+            this.parentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Enemy;
             this.Position = new Vector2(300, 300);
             this.BoundingBoxes = new List<BoundingBox>();
@@ -44,13 +46,13 @@ namespace HuntTheWumpus.Source
             {
                 this.Position = new Vector2(this.Position.X, 0);
             }
-            if (this.Position.X > this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X)
+            if (this.Position.X > this.parentRoom.MainCave.CaveBounds.Width - this.TextureSize.X)
             {
-                this.Position = new Vector2(this.MainGame.Graphics.PreferredBackBufferWidth - this.TextureSize.X, this.Position.Y);
+                this.Position = new Vector2(this.parentRoom.MainCave.CaveBounds.Width - this.TextureSize.X, this.Position.Y);
             }
-            if (this.Position.Y > this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y)
+            if (this.Position.Y > this.parentRoom.MainCave.CaveBounds.Height - this.TextureSize.Y)
             {
-                this.Position = new Vector2(this.Position.X, this.MainGame.Graphics.PreferredBackBufferHeight - this.TextureSize.Y);
+                this.Position = new Vector2(this.Position.X, this.parentRoom.MainCave.CaveBounds.Height - this.TextureSize.Y);
             }
 
         }

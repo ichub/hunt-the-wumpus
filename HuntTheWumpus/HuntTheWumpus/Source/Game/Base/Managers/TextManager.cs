@@ -29,7 +29,7 @@ namespace HuntTheWumpus.Source
         {
             if (openBatch)
                 textBatch.Begin();
-            textBatch.DrawString(CourierNew, text, position, Color.Black);
+            textBatch.DrawString(CourierNew, text, position, Color.White);
             if (openBatch)
                 textBatch.End();
         }

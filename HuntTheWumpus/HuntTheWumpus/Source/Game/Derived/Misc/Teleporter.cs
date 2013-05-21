@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Teleporter : IDrawable, ICollideable, IInitializable
+    class Teleporter : IDrawable, ICollideable, IInitializable, IUpdateable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
@@ -25,6 +25,9 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         public Room RoomToTeleportTo { get; set; }
+
+        private bool collidedThisFrame = false;
+        private bool collidedLastFrame = false;
 
         public Teleporter(MainGame mainGame, ILevel parentLevel, Room toTeleportTo)
         {
@@ -44,8 +47,17 @@ namespace HuntTheWumpus.Source
             if (isColliding)
                 if (gameObject is PlayerAvatar)
                 {
-                    MainGame.LevelManager.CurrentLevel = RoomToTeleportTo;
+                    collidedThisFrame = isColliding | collidedThisFrame;
+                    if (!collidedLastFrame)
+                        MainGame.LevelManager.CurrentLevel = RoomToTeleportTo;
                 }
+
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            this.collidedLastFrame = this.collidedThisFrame;
+            this.collidedThisFrame = false;
         }
 
         public void Initialize()

@@ -16,12 +16,14 @@ namespace HuntTheWumpus.Source
         public Room[] Rooms { get; set; }
         public MainGame MainGame { get; set; }
         public Rectangle CaveBounds { get; set; }
+        public Vector2 CaveOffset { get; set; }
 
         public Cave(MainGame mainGame, Vector2 windowSize)
         {
             this.MainGame = mainGame;
             this.Rooms = new Room[5 * 6];
             this.CaveBounds = new Rectangle(((int)windowSize.X - 960) / 2, ((int)windowSize.Y - 960) / 2, 960, 960);
+            this.CaveOffset = new Vector2(this.CaveBounds.X, this.CaveBounds.Y);
 
             for (int i = 0; i < this.Rooms.Length; i++)
             {

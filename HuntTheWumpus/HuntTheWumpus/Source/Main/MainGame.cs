@@ -26,10 +26,18 @@ namespace HuntTheWumpus.Source
         public PlayerData PlayerData { get; set; }
         public Player Player;
 
+        public int ScreenWidth { get; private set; }
+        public int ScreenHeight { get; private set; }
+        public int WindowWidth { get; private set; }
+        public int WindowHeight { get; private set; }
+
         public MainGame()
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            this.ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
 
             // Game Options:
             this.Graphics.PreferredBackBufferWidth = 960;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
@@ -37,6 +45,9 @@ namespace HuntTheWumpus.Source
             this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
             this.IsMouseVisible = true;                    // lets mouse to be drawn on the window
             //this.Graphics.IsFullScreen = true;
+
+            this.WindowWidth = this.Graphics.PreferredBackBufferWidth;
+            this.WindowHeight = this.Graphics.PreferredBackBufferHeight;
         }
 
         /// <summary>
