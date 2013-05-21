@@ -19,8 +19,6 @@ namespace HuntTheWumpus.Source
 
         private Texture2D levelFade;
         private float fadeCount;
-        private bool fadingIn;
-        private bool fadingOut;
         private int fadeSpeed;
 
         private Timer timer;
