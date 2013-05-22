@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Class responsible for drawing text.
+    /// </summary>
     public class TextManager
     {
         public MainGame MainGame { get; set; }
@@ -18,6 +21,10 @@ namespace HuntTheWumpus.Source
 
         private SpriteBatch textBatch;
 
+        /// <summary>
+        /// Creates a new text manager.
+        /// </summary>
+        /// <param name="mainGame"> Game to which this manager belongs to. </param>
         public TextManager(MainGame mainGame)
         {
             this.MainGame = mainGame;
@@ -25,15 +32,34 @@ namespace HuntTheWumpus.Source
             this.textBatch = mainGame.SpriteBatch;
         }
 
+        /// <summary>
+        /// Draws the given string at the given position.
+        /// </summary>
+        /// <param name="position"> Top left corner of the string to draw. </param>
+        /// <param name="text"> String to draw. </param>
+        /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
         public void DrawText(Vector2 position, string text, bool openBatch)
         {
-            if (openBatch)
-                textBatch.Begin();
-            textBatch.DrawString(CourierNew, text, position, Color.White);
-            if (openBatch)
-                textBatch.End();
+            this.DrawText(position, text, Color.White, openBatch);
         }
 
+        /// <summary>
+        /// Draws the text without opening the spritebatch.
+        /// </summary>
+        /// <param name="position"> Tope left corner of the string to draw. </param>
+        /// <param name="text"> String to draw. </param>
+        public void DrawText(Vector2 position, string text)
+        {
+            this.DrawText(position, text, false);
+        }
+
+        /// <summary>
+        /// Draws the given string at the given position.
+        /// </summary>
+        /// <param name="position"> Top left corner of the string to draw. </param>
+        /// <param name="text">String to draw. </param>
+        /// <param name="color"> Color of the string to draw. </param>
+        /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
         public void DrawText(Vector2 position, string text, Color color, bool openBatch)
         {
             if (openBatch)

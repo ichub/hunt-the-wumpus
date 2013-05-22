@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Main menu.
+    /// </summary>
     class StartLevel : ILevel
     {
         public MainGame MainGame { get; set; }

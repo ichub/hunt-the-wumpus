@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Class for handling input.
+    /// </summary>
     public class InputManager
     {
         public MouseState MouseState { get; private set; }
@@ -19,6 +22,10 @@ namespace HuntTheWumpus.Source
         public KeyboardState LastKeyboardState { get; private set; }
         public Vector2 MousePosition { get; private set; }
 
+        /// <summary>
+        /// Updates all the instance variables to reflect the state of input
+        /// devices during the current frame.
+        /// </summary>
         public void Update()
         {
             this.LastMouseState = this.MouseState;
@@ -30,11 +37,23 @@ namespace HuntTheWumpus.Source
             this.MousePosition = new Vector2(this.MouseState.X, this.MouseState.Y);
         }
 
+        /// <summary>
+        /// Checks whether or not the state of the given key changed
+        /// from not pressed to pressed during this frame.
+        /// </summary>
+        /// <param name="key"> Key to check. </param>
+        /// <returns> True if it was clicked, false otherwise. </returns>
         public bool IsClicked(Keys key)
         {
             return KeyboardState.IsKeyDown(key) && !LastKeyboardState.IsKeyDown(key);
         }
 
+        /// <summary>
+        /// Checks whether the state of the given mouse button changed
+        /// from not pressed to pressed during this frame.
+        /// </summary>
+        /// <param name="button"> The mouse button to check. </param>
+        /// <returns> True if it was clicked, false otherwise. </returns>
         public bool IsClicked(MouseButton button)
         {
             if (button == MouseButton.Left)
@@ -48,6 +67,9 @@ namespace HuntTheWumpus.Source
         }
     }
 
+    /// <summary>
+    /// Enum for chosing mouse buttons.
+    /// </summary>
     public enum MouseButton
     {
         Left,

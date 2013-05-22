@@ -50,10 +50,19 @@ namespace HuntTheWumpus.Source
         /// <param name="spriteBatch"></param>
         void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch);
 
+        /// <summary>
+        /// Method called on level load. A level is loaded if it becomes the current level.
+        /// </summary>
         void OnLoad();
 
+        /// <summary>
+        /// Method called when the level stops bein the current level.
+        /// </summary>
         void OnUnLoad();
 
+        /// <summary>
+        /// Resets the level.
+        /// </summary>
         void Reset();
     }
 }

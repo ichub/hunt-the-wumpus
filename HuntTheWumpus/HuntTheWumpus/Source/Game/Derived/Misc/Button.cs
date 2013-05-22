@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// A button.
+    /// </summary>
     class Button : IClickable, IUpdateable, IDrawable, IGameObject
     {
         public MainGame MainGame { get; set; }
@@ -27,6 +30,13 @@ namespace HuntTheWumpus.Source
         public Action OnClick { get; set; }
         public string Text { get; set; }
 
+        /// <summary>
+        /// Creates a new button.
+        /// </summary>
+        /// <param name="mainGame"> The game to which this button belongs. </param>
+        /// <param name="parentLevel"> The level to which this button belongs. </param>
+        /// <param name="onClick"> The action to take when this button is clicked on. </param>
+        /// <param name="text"> The text to display on the button. </param>
         public Button(MainGame mainGame, ILevel parentLevel, Action onClick, string text)
         {
             this.MainGame = mainGame;

@@ -11,21 +11,35 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Class responsible for loading and playing sounds.
+    /// </summary>
     public class SoundManager
     {
         public Dictionary<String, SoundEffect> Sounds { get; set; }
 
+        /// <summary>
+        /// Creates a new sound manager.
+        /// </summary>
         public SoundManager()
         {
             this.Sounds = new Dictionary<String, SoundEffect>();
         }
 
+        /// <summary>
+        /// Loads all the sounds needed for the game.
+        /// </summary>
+        /// <param name="content"> Content manager with which to load in sounds. </param>
         public void LoadSounds(ContentManager content)
         {
             this.Sounds.Add("buttonclick", content.Load<SoundEffect>("Sounds\\button"));
             this.Sounds.Add("menuchange", content.Load<SoundEffect>("Sounds\\menu change"));
         }
 
+        /// <summary>
+        /// Plays  the given sound.
+        /// </summary>
+        /// <param name="name"> Name of the sound to play. </param>
         public void PlaySound(string name)
         {
             if (this.Sounds.ContainsKey(name))

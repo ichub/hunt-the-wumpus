@@ -11,17 +11,43 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Class for drawing animated sprites given a spritesheet.
+    /// </summary>
     class AnimatedTexture
     {
+        /// <summary>
+        /// Size of one frame of the texture.
+        /// </summary>
         public Vector2 Size { get; private set; }
+
+        /// <summary>
+        /// The spritesheet for this texture.
+        /// </summary>
         public Texture2D SpriteSheet { get; private set; }
+
+        /// <summary>
+        /// The amount of frames in this texture.
+        /// </summary>
         public int AmountOfFrames { get; private set; }
+
+        /// <summary>
+        /// How many times per second the frame is updated.
+        /// </summary>
         public int FPS { get; private set; }
 
         private int milisecondsSinceLastUpdate;
         private readonly int maxFrame;
         private int currentFrame;
 
+        /// <summary>
+        /// Creates a new animated texture.
+        /// </summary>
+        /// <param name="spriteSheet"> The spritesheet for this texture. </param>
+        /// <param name="amountOfFrames"> The amount of frames this texture will have. </param>
+        /// <param name="spriteWidth"> The width of each frame of this texture. </param>
+        /// <param name="spriteHeight"> The height of each frame of this texture. </param>
+        /// <param name="fps"> The amount of times per second the frame is updated.</param>
         public AnimatedTexture(Texture2D spriteSheet, int amountOfFrames, int spriteWidth, int spriteHeight, int fps)
         {
             this.Size = new Vector2(spriteWidth, spriteHeight);
@@ -32,6 +58,12 @@ namespace HuntTheWumpus.Source
             this.milisecondsSinceLastUpdate = 0;
         }
 
+        /// <summary>
+        /// Draws the texture.
+        /// </summary>
+        /// <param name="spriteBatch"> Spritebatch to draw it with. </param>
+        /// <param name="position"> The position to draw it at. </param>
+        /// <param name="gameTime"> The game time. </param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime)
         {
             this.milisecondsSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;

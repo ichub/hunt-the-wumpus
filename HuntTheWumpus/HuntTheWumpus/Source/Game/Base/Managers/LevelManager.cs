@@ -12,6 +12,9 @@ using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Class responsible for updating, drawing, and changing levels.
+    /// </summary>
     public class LevelManager
     {
         public MainGame ParentGame { get; private set; }
@@ -32,15 +35,9 @@ namespace HuntTheWumpus.Source
             set
             {
                 if (this.currentLevel != null)
-                {
-                    
-                    this.currentLevel.GameObjects.AddAndRemoveObjects();
                     this.StartFade(value);
-                }
                 else
-                {
-                    this.currentLevel = value;
-                }                
+                    this.currentLevel = value;            
             } 
         }
 
@@ -49,6 +46,10 @@ namespace HuntTheWumpus.Source
         private ILevel currentLevel;
         private ILevel nextLevel;
 
+        /// <summary>
+        /// Creates a new level manager.
+        /// </summary>
+        /// <param name="parentGame"> Game to which this level manager belongs. </param>
         public LevelManager(MainGame parentGame)
         {
             this.Paused = false;

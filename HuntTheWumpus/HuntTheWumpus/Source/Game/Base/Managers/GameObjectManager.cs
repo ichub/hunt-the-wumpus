@@ -18,7 +18,6 @@ namespace HuntTheWumpus.Source
     {
         private MainGame parentGame;
         private List<IGameObject> masterObjectList;
-
         private Stack<IGameObject> objectsToAdd;
         private Stack<IGameObject> objectsToRemove;
 
@@ -143,6 +142,12 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Checks whether two objects are collided.
+        /// </summary>
+        /// <param name="first"> The first object to check. </param>
+        /// <param name="second"> The second object to check. </param>
+        /// <returns> True if they are collided, false otherwise. </returns>
         private bool AreCollided(ICollideable first, ICollideable second)
         {
             if (first.BoundingBoxes != null && second.BoundingBoxes != null)
