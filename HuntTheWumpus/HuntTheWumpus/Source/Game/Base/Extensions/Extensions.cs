@@ -39,11 +39,22 @@ namespace HuntTheWumpus.Source
             return new BoundingBox(new Vector3(topLeft, 0), new Vector3(bottomRight, 0));
         }
 
+        /// <summary>
+        /// Creates a new bounding box attached to the z-plane.
+        /// </summary>
+        /// <param name="topLeft"> The top left of the box. </param>
+        /// <param name="bottomRight"> The bottom right of the box. </param>
+        /// <returns> A new bounding box. </returns>
         public static BoundingBox Box2D(Vector2 topLeft, Vector2 bottomRight)
         {
             return new BoundingBox(new Vector3(topLeft, 0), new Vector3(bottomRight, 0));
         }
 
+        /// <summary>
+        /// Fills the given texture completely with the given color.
+        /// </summary>
+        /// <param name="texture"> Texture to fill. </param>
+        /// <param name="color"> Color to fill it with. </param>
         public static void FillTexture(Texture2D texture, Color color)
         {
             Color[] colors = new Color[texture.Width * texture.Height];

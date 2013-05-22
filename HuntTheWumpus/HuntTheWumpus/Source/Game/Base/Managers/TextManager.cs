@@ -16,8 +16,8 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class TextManager
     {
-        public MainGame MainGame { get; set; }
-        public SpriteFont CourierNew { get; set; }
+        public MainGame MainGame { get; private set; }
+        public SpriteFont CourierNew { get; private set; }
 
         private SpriteBatch textBatch;
 

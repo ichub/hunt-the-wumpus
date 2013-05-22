@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Game over screen.
+    /// </summary>
     class GameOverLevel : ILevel
     {
         public MainGame MainGame { get; set; }

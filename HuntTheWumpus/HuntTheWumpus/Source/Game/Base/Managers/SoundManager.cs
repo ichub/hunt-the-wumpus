@@ -16,7 +16,7 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class SoundManager
     {
-        public Dictionary<String, SoundEffect> Sounds { get; set; }
+        public Dictionary<String, SoundEffect> Sounds { get; private set; }
 
         /// <summary>
         /// Creates a new sound manager.

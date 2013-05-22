@@ -61,6 +61,9 @@ namespace HuntTheWumpus.Source
             this.fadeSpeed = 10;
         }
 
+        /// <summary>
+        /// Updates the current level.
+        /// </summary>
         public void FrameUpdate()
         {
             if (!this.Paused)
@@ -76,6 +79,10 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Starts fading from one level to the given level.
+        /// </summary>
+        /// <param name="toFadeInto"> Level to fade into. </param>
         public void StartFade(ILevel toFadeInto)
         {
             if (this.timer != null)
@@ -90,6 +97,10 @@ namespace HuntTheWumpus.Source
             this.nextLevel = toFadeInto;
         }
 
+        /// <summary>
+        /// Called when the current level has been faded out of. Changes the current
+        /// level and starts fading into it.
+        /// </summary>
         public void OnFadeOutEnd()
         {
             this.currentLevel.OnUnLoad();
@@ -103,13 +114,20 @@ namespace HuntTheWumpus.Source
             this.nextLevel = null;
         }
 
-
+        /// <summary>
+        /// Called when the current level has been completely faded in.
+        /// </summary>
         public void OnFadeInEnd()
         {
             this.timer.Stop();
             this.timer = null;
         }
 
+        /// <summary>
+        /// Method that fades into the current level.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void FadeIn(object sender, ElapsedEventArgs e)
         {
             this.fadeCount -= this.fadeSpeed;
@@ -120,6 +138,11 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Method that fades out of the current level.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void FadeOut(object sender, ElapsedEventArgs e)
         {
             this.fadeCount += this.fadeSpeed;
@@ -130,6 +153,9 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Draws the current level.
+        /// </summary>
         public void FrameDraw()
         {
             if (this.CurrentLevel != null)

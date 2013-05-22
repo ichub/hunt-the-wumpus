@@ -23,8 +23,7 @@ namespace HuntTheWumpus.Source
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
-        public double rotation = 0;
-        public bool HasCollided = false;
+        public bool HasCollided { get; private set; }
         public Vector2 Velocity;
 
         private AnimatedTexture animatedTexture;
