@@ -55,6 +55,12 @@ namespace HuntTheWumpus.Source
             inv[invSpot, 1] = 0;
             inv[invSpot, 2] = 0;
         }
+
+        /// <summary>
+        /// Damage and item
+        /// </summary>
+        /// <param name="invSpot">spot in the invetory</param>
+        /// <param name="damageValue">Applied damage value</param>
         public void damage(int invSpot, int damageValue)
         {
             if (inv[invSpot, 0] != 0)
@@ -62,6 +68,11 @@ namespace HuntTheWumpus.Source
                 inv[invSpot, 1] += damageValue;
             }
         }
+
+        /// <summary>
+        /// Check the inventory for special items needed to be initialized
+        /// </summary>
+        /// <param name="roomNum">Current room number (used to initialize a map)</param>
         public void checkSpecial(int roomNum)
         {
             for (int i = 0; i < 5; i++)
@@ -75,6 +86,11 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Updates a map when moved to an unexplored room
+        /// </summary>
+        /// <param name="newRoom">new room number</param>
+        /// <param name="direction">direction in which it moved </param> //TODO: fix the map not recording in the right place
         public void updateMap(int newRoom, int direction)
         {
             if(newRoom != numRoom)
