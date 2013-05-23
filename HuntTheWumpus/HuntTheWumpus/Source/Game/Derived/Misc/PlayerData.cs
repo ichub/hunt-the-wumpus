@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
 
         public void Reset()
         {
-            this.HP = 3;
+            this.HP = 10;
             this.Stamina = 1;
             this.Score = 0;
         }

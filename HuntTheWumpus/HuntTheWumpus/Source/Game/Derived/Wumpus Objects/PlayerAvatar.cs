@@ -73,10 +73,11 @@ namespace HuntTheWumpus.Source
             this.velocity /= 1.2f;
 
             // limits speed vector to a length of 5 pixels per frame.
-            if (this.velocity.LengthSquared() > 5 * 5)
+            int speed = MainGame.Player.inv.playerSpeed; //checks whether a speed ring is used
+            if (this.velocity.LengthSquared() > speed * speed)
             {
                 this.velocity /= this.velocity.Length();
-                this.velocity *= 5;
+                this.velocity *= speed;
             }
         }
 
@@ -143,13 +144,14 @@ namespace HuntTheWumpus.Source
             {
                 if (!collidedWithEnemyLastFrame)
                 {
-                    this.MainGame.PlayerData.HP--;
+                    //this.MainGame.PlayerData.HP--;
+                    this.MainGame.Player.inv.takeDamage(3);
                     this.MainGame.Player.hp--;
                     this.MainGame.Player.score -= 50;
                     if (this.MainGame.PlayerData.HP <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
-                        this.MainGame.PlayerData.HP = 3;
+                        this.MainGame.PlayerData.HP = 10;
                         this.MainGame.PlayerData.Score = 0;
                     }
                 }
