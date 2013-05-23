@@ -9,6 +9,7 @@ namespace HuntTheWumpus.Source
     public class Inventory
     {
         public int[,] inv = new int[5, 3];
+        public int[,] armor = new int[3, 3];
         public List<Map> maps = new List<Map>();
         public int numRoom;
         /// <summary>
@@ -24,7 +25,7 @@ namespace HuntTheWumpus.Source
 
             inv[1, 0] = 2;
             inv[1, 1] = 0;
-            inv[1, 2] = 10;
+            inv[1, 2] = 0;
         }
         /// <summary>
         /// Pick up an item
@@ -84,6 +85,7 @@ namespace HuntTheWumpus.Source
                     inv[i, 2] = maps.Count - 1;
                 }
             }
+
         }
 
         /// <summary>
@@ -93,19 +95,26 @@ namespace HuntTheWumpus.Source
         /// <param name="direction">direction in which it moved </param> //TODO: fix the map not recording in the right place
         public void updateMap(int newRoom, int direction)
         {
-            if(newRoom != numRoom)
+            if (newRoom != numRoom)
             {
-                for (int i = 0; i < 5; i++)
+                foreach (Map activeMap in maps)
                 {
-                    if (inv[i, 0] == 2 && inv[i, 2] != 0)
-                    {
-                        foreach (Map activeMap in maps)
-                        {
-                            activeMap.UpdateMap(direction, newRoom);
-                        }
-                    }
+                    activeMap.UpdateMap(direction, newRoom);
                 }
+                numRoom = newRoom;
             }
         }
+
+        public double takeDamage(int damage)
+        {
+            double protectPoints = 0;
+            for (int i = 0; i <= 3; i++)
+            {
+                protectPoints += new Armor(armor[i, 0]).takeDamage(damage);
+            }
+            protectPoints /= 3;
+            return damage / protectPoints;
+        }
+        }
     }
-}
+

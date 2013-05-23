@@ -46,7 +46,13 @@ namespace HuntTheWumpus
             {
                 y--;
             }
-            mapper[x, y] = currentlevel;
+            try
+            {
+                mapper[x, y] = currentlevel;
+            }
+            finally { }
+
+
         }
     }
 }
