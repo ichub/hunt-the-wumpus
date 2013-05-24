@@ -20,7 +20,7 @@ namespace HuntTheWumpus.Source
         public List<Map> maps = new List<Map>();
         public int numRoom;
         public int playerSpeed = 5;
-        public List<Instilled> instilledRing = new List<Instilled>();
+        //public List<Instilled> instilledRing = new List<Instilled>();
         public bool InstilledActive = false;
         /// <summary>
         /// Creates a new inventory 
@@ -101,8 +101,8 @@ namespace HuntTheWumpus.Source
                 if (inv[i, 0] == 11 && inv[i, 2] == 0)
                 {
                     InstilledActive = true;
-                    instilledRing.Add(new Instilled(RingType.Standard));
-                    inv[i, 2] = instilledRing.Count - 1;
+                    //instilledRing.Add(new Instilled(RingType.Standard));
+                    //inv[i, 2] = instilledRing.Count - 1;
                 }
                 if (inv[i, 0] == 11) InstilledActive = true;
                 else InstilledActive = false;
@@ -136,7 +136,7 @@ namespace HuntTheWumpus.Source
                 protectPoints += new Armor(armor[i, 0]).takeDamage(damage);
             }
             protectPoints /= 3;
-            if (InstilledActive && new Random().Next(100) > instilledRing[0].chance) return 0;
+            //if (InstilledActive && new Random().Next(100) > instilledRing[0].chance) return 0;
             return damage / protectPoints;
         }
         }

@@ -114,25 +114,21 @@ namespace HuntTheWumpus.Source
             {
                 projectile.Velocity = new Vector2(0, -4);
                 this.ParentLevel.GameObjects.Add(projectile);
-                projectile.rotation = 4.71238898;
             }
             if (MainGame.InputManager.IsClicked(Keys.Down))
             {
                 projectile.Velocity = new Vector2(0, 4);
                 this.ParentLevel.GameObjects.Add(projectile);
-                projectile.rotation = 1.57079633;
             }
             if (MainGame.InputManager.IsClicked(Keys.Left))
             {
                 projectile.Velocity = new Vector2(-4, 0);
                 this.ParentLevel.GameObjects.Add(projectile);
-                projectile.rotation = 3.14159265;
             }
             if (MainGame.InputManager.IsClicked(Keys.Right))
             {
                 projectile.Velocity = new Vector2(4, 0);
                 this.ParentLevel.GameObjects.Add(projectile);
-                projectile.rotation = 0;
             }
         }
 
