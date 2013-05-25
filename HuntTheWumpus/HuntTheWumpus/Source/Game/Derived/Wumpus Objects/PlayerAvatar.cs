@@ -74,7 +74,7 @@ namespace HuntTheWumpus.Source
 
             // limits speed vector to a length of 5 pixels per frame.
             int speed = MainGame.Player.inv.playerSpeed; //checks whether a speed ring is used
-            if (this.velocity.LengthSquared() > speed * speed)
+            if (this.velocity.LengthSquared() > speed * 5)
             {
                 this.velocity /= this.velocity.Length();
                 this.velocity *= speed;
@@ -110,7 +110,7 @@ namespace HuntTheWumpus.Source
             var projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball_spritesheet");
             projectile.Position = this.Position + this.TextureSize / 2;
 
-            if (MainGame.InputManager.IsClicked(Keys.Up))
+            /* if (MainGame.InputManager.IsClicked(Keys.Up))
             {
                 projectile.Velocity = new Vector2(0, -4);
                 this.ParentLevel.GameObjects.Add(projectile);
@@ -130,6 +130,7 @@ namespace HuntTheWumpus.Source
                 projectile.Velocity = new Vector2(4, 0);
                 this.ParentLevel.GameObjects.Add(projectile);
             }
+             */
         }
 
         public void CollideWith(ICollideable gameObject, bool isColliding)

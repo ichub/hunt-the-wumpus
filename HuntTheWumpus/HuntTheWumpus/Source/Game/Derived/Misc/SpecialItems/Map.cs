@@ -50,7 +50,10 @@ namespace HuntTheWumpus
             {
                 mapper[x, y] = currentlevel;
             }
-            finally { }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
         }

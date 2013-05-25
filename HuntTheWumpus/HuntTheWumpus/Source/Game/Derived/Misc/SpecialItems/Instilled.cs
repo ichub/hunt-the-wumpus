@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HuntTheWumpus.Source
 {
-    class Instilled 
+    public class Instilled 
     {
         public int chance;
         public Instilled(RingType type)

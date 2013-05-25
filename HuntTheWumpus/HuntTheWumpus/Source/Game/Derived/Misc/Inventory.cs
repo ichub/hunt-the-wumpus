@@ -86,8 +86,12 @@ namespace HuntTheWumpus.Source
         /// <param name="roomNum">Current room number (used to initialize a map)</param>
         public void checkSpecial(int roomNum)
         {
+            //playerSpeed = 5;
+            //InstilledActive = false;
             for (int i = 0; i < 5; i++)
             {
+                playerSpeed = 5;
+                InstilledActive = false;
                 if (inv[i, 0] == 2 && inv[i, 2] == 0)
                 {
                     maps.Add(new Map(roomNum));
@@ -96,16 +100,18 @@ namespace HuntTheWumpus.Source
                 }
 
                 if (inv[i, 0] == 9) playerSpeed = 7;
-                else playerSpeed = 5;
 
-                if (inv[i, 0] == 11 && inv[i, 2] == 0)
+                if (inv[i, 0] == 11 && inv[i, 2] == -1)
                 {
                     InstilledActive = true;
                     //instilledRing.Add(new Instilled(RingType.Standard));
                     //inv[i, 2] = instilledRing.Count - 1;
                 }
-                if (inv[i, 0] == 11) InstilledActive = true;
-                else InstilledActive = false;
+                if (inv[i, 0] == 11)
+                {
+                    InstilledActive = true;
+                    playerSpeed = 10;
+                }
                     
             }
 
@@ -131,7 +137,7 @@ namespace HuntTheWumpus.Source
         public double takeDamage(int damage)
         {
             double protectPoints = 0;
-            for (int i = 0; i <= 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 protectPoints += new Armor(armor[i, 0]).takeDamage(damage);
             }

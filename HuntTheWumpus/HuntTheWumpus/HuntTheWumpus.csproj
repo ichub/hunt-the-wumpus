@@ -93,6 +93,7 @@
     <Compile Include="Source\Game\Derived\Misc\AnimatedTexture.cs" />
     <Compile Include="Source\Game\Derived\Misc\Button.cs" />
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Armor.cs" />
+    <Compile Include="Source\Game\Derived\Misc\SpecialItems\Instilled.cs" />
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Map.cs" />
     <Compile Include="Source\Game\Derived\Misc\Teleporter.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Cave.cs" />
