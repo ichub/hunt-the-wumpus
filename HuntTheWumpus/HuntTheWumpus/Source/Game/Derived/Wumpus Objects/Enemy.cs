@@ -25,6 +25,7 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Room parentRoom;
+        private bool isColliding = false;
 
         public Enemy(MainGame mainGame, ILevel parentLevel)
         {
@@ -65,11 +66,15 @@ namespace HuntTheWumpus.Source
                 if (!projectile.HasCollided)
                 if (projectile.ObjectTeam == Team.Player)
                 {
-                    //this.MainGame.PlayerData.Score += 10;
-                    this.MainGame.Player.Score += 10;
-                    this.ParentLevel.GameObjects.Remove(this);
-                    this.ParentLevel.GameObjects.Remove(gameObject);
+                    if (!this.isColliding)
+                    {
+                        this.MainGame.Player.Score += 10;
+                        this.ParentLevel.GameObjects.Remove(this);
+                        this.ParentLevel.GameObjects.Remove(gameObject);
+                        this.ParentLevel.GameObjects.Add(new PhysicalItem(this.MainGame, this.ParentLevel, "Gold") { Position = this.Position });
+                    }
                 }
+                this.isColliding = true;
             }
         }
 
@@ -88,6 +93,7 @@ namespace HuntTheWumpus.Source
         {
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
             this.CollideWithWalls();
+            this.isColliding = false;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

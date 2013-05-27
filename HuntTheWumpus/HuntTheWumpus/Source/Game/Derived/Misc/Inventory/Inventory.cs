@@ -22,6 +22,7 @@ namespace HuntTheWumpus.Source
         public Inventory(int size)
         {
             this.Slots = new List<InventorySlot>();
+            this.Slots.Add(new InventorySlot() { Amount = 0, HeldItem = ItemList.GetItem("Gold") });
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace HuntTheWumpus.Source
         /// <param name="item"> Item to pick up. </param>
         public void PickUp(Item item)
         {
-            int index = this.ItemIndex(item);
+            int index = this.ItemIndex(item.Name);
 
             if (index != -1)
             {
@@ -42,16 +43,26 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        private int ItemIndex(Item item)
+        /// <summary>
+        /// Gets the index of the item corresponding to the given item in Slots.
+        /// </summary>
+        /// <param name="item"> Item to find. </param>
+        /// <returns> Index if the item exists, -1 otherwise. </returns>
+        private int ItemIndex(string name)
         {
             for (int i = 0; i < this.Slots.Count; i++)
             {
-                if (this.Slots[i].HeldItem.Name == item.Name)
+                if (this.Slots[i].HeldItem.Name == name)
                 {
                     return i;
                 }
             }
             return -1;
+        }
+
+        public int AmountOfGold()
+        {
+            return this.Slots[ItemIndex("Gold")].Amount;
         }
     }
 }
