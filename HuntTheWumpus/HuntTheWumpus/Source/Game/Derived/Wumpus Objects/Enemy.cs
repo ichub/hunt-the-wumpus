@@ -66,7 +66,7 @@ namespace HuntTheWumpus.Source
                 if (projectile.ObjectTeam == Team.Player)
                 {
                     //this.MainGame.PlayerData.Score += 10;
-                    this.MainGame.Player.score += 10;
+                    this.MainGame.Player.Score += 10;
                     this.ParentLevel.GameObjects.Remove(this);
                     this.ParentLevel.GameObjects.Remove(gameObject);
                 }

@@ -103,7 +103,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager.FrameUpdate();
             base.Update(gameTime);
             this.MiniMap.Update();
-            Player.inv.checkSpecial((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0));
+            Player.Inventory.checkSpecial((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0));
 
         }
 
@@ -119,9 +119,9 @@ namespace HuntTheWumpus.Source
             this.MiniMap.Draw(this.SpriteBatch, this.Content);
             this.SpriteBatch.End();                        // stops drawing
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
-            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.hp, true);
+            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.HP, true);
             //this.TextManager.DrawText(new Vector2(0, 40), "score : " + this.PlayerData.Score, true);
-            this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.score, true); 
+            this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.Score, true); 
             this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);
             base.Draw(gameTime);
         }

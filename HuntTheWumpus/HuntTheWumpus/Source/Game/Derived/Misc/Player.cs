@@ -7,45 +7,26 @@ namespace HuntTheWumpus.Source
 {
     public class Player
     {
-        public int pos = 0; //Player room number
-        public int hp = 0; //Player health 
-        public int arm = 0; //Player armor value
-        public int money = 0; //Player money ammount
-        public int score = 0;
-        public Inventory inv;
+        public int CurrentRoom { get; set; }
+        public int HP { get; set; }
+        public int Armor { get; set; }
+        public int Money { get; set; }
+        public int Score { get; set; }
+        public Inventory Inventory { get; set; }
 
-        /// <summary>
-        /// Sets up a new player
-        /// </summary>
-        /// <param name="difficulty">1-3 difficulty value</param>
         public Player(int difficulty)
         {
-            pos = 0;
-            hp = 20;
-            money = 100;
-            score = 0;
-            inv = new Inventory(difficulty);
-        }
-
-        /// <summary>
-        /// Moves a player if able to 
-        /// </summary>
-        /// <param name="direction">direction in which the player should move</param>
-        /// <returns>Players new position</returns>
-        public int Move(int direction)
-        {
-            if (/*MAP VERIFICATION*/ true)
-            {
-                pos = 0;//move up on map;
-            }
-            return pos;
+            this.CurrentRoom = 0;
+            this.HP = 20;
+            this.Money = 100;
+            this.Score = 0;
+            this.Inventory = new Inventory(difficulty);
         }
 
         public void pay(int sum)
         {
-            money -= sum;
+            Money -= sum;
         }
-
     }
 }
 

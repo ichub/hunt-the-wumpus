@@ -51,29 +51,29 @@ namespace HuntTheWumpus.Source
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.A))
             {
                 this.velocity += new Vector2(-moveSpeed, 0);
-                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 3);
+                MainGame.Player.Inventory.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 3);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.W))
             {
                 this.velocity += new Vector2(0, -moveSpeed);
-                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 0);
+                MainGame.Player.Inventory.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 0);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.D))
             {
                 this.velocity += new Vector2(moveSpeed, 0);
-                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 1);
+                MainGame.Player.Inventory.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 1);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.S))
             {
                 this.velocity += new Vector2(0, moveSpeed);
-                MainGame.Player.inv.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 2);
+                MainGame.Player.Inventory.updateMap((MainGame.LevelManager.CurrentLevel is Room ? (MainGame.LevelManager.CurrentLevel as Room).RoomIndex : 0), 2);
             }
 
             this.Position += velocity;
             this.velocity /= 1.2f;
 
             // limits speed vector to a length of 5 pixels per frame.
-            int speed = MainGame.Player.inv.playerSpeed; //checks whether a speed ring is used
+            int speed = MainGame.Player.Inventory.playerSpeed; //checks whether a speed ring is used
             if (this.velocity.LengthSquared() > speed * 5)
             {
                 this.velocity /= this.velocity.Length();
@@ -142,14 +142,14 @@ namespace HuntTheWumpus.Source
                 if (!collidedWithEnemyLastFrame)
                 {
                     //this.MainGame.PlayerData.HP--;
-                    this.MainGame.Player.inv.takeDamage(3);
-                    this.MainGame.Player.hp--;
-                    this.MainGame.Player.score -= 50;
-                    if (this.MainGame.Player.hp <= 0)
+                    this.MainGame.Player.Inventory.takeDamage(3);
+                    this.MainGame.Player.HP--;
+                    this.MainGame.Player.Score -= 50;
+                    if (this.MainGame.Player.HP <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
-                        this.MainGame.Player.hp = 10;
-                        this.MainGame.Player.score = 0;
+                        this.MainGame.Player.HP = 10;
+                        this.MainGame.Player.Score = 0;
                     }
                 }
             }
