@@ -59,6 +59,21 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
+        /// Creates a static texture.
+        /// </summary>
+        /// <param name="texture"> Texture to display. </param>
+        public AnimatedTexture(Texture2D texture)
+        {
+            this.SpriteSheet = texture;
+            this.Size = new Vector2(texture.Width, texture.Height);
+            this.AmountOfFrames = 1;
+            this.FPS = 0;
+            this.currentFrame = 0;
+            this.maxFrame = 0;
+            this.milisecondsSinceLastUpdate = 0;
+        }
+
+        /// <summary>
         /// Draws the texture.
         /// </summary>
         /// <param name="spriteBatch"> Spritebatch to draw it with. </param>
@@ -67,6 +82,7 @@ namespace HuntTheWumpus.Source
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime)
         {
             this.milisecondsSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
+            if (this.FPS != 0)
             if (this.milisecondsSinceLastUpdate > 1000.0 / this.FPS)
             {
                 this.currentFrame++;
