@@ -7,9 +7,9 @@ Content\Textures\teleporter.xnb
 Content\Textures\Cave\normal.xnb
 Content\Textures\Cave\pit.xnb
 Content\Textures\Cave\flooded.xnb
+Content\Textures\MiniMap\minimapempty.xnb
+Content\Textures\MiniMap\MiniMapBackground.xnb
 Content\Fonts\Courier New.xnb
 Content\Sounds\button.xnb
 Content\Sounds\item pickup.xnb
 Content\Sounds\menu change.xnb
-Content\Textures\MiniMap\minimapempty.xnb
-Content\Textures\MiniMap\MiniMapBackground.xnb

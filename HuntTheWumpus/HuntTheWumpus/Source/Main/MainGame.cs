@@ -23,7 +23,6 @@ namespace HuntTheWumpus.Source
         public SoundManager SoundManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
-        public PlayerData PlayerData { get; set; }
         public Player Player;
         public MiniMap MiniMap { get; set; }
 
@@ -64,7 +63,6 @@ namespace HuntTheWumpus.Source
             this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
-            this.PlayerData = new PlayerData();
             this.Player = new Player(2);
             this.MiniMap = new MiniMap(this);
             base.Initialize();
@@ -121,7 +119,7 @@ namespace HuntTheWumpus.Source
             this.MiniMap.Draw(this.SpriteBatch, this.Content);
             this.SpriteBatch.End();                        // stops drawing
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
-            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.PlayerData.HP, true);
+            this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.hp, true);
             //this.TextManager.DrawText(new Vector2(0, 40), "score : " + this.PlayerData.Score, true);
             this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.score, true); 
             this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);

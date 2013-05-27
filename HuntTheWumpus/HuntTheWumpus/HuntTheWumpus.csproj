@@ -100,7 +100,6 @@
     <Compile Include="Source\Game\Derived\Wumpus Objects\MiniMap.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\PlayerAvatar.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ICollideable.cs" />
-    <Compile Include="Source\Game\Derived\Misc\PlayerData.cs" />
     <Compile Include="Source\Game\Derived\Misc\Team.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Enemy.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Projectile.cs" />

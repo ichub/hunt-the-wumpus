@@ -110,7 +110,7 @@ namespace HuntTheWumpus.Source
             var projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball_spritesheet");
             projectile.Position = this.Position + this.TextureSize / 2;
 
-            /* if (MainGame.InputManager.IsClicked(Keys.Up))
+            if (MainGame.InputManager.IsClicked(Keys.Up))
             {
                 projectile.Velocity = new Vector2(0, -4);
                 this.ParentLevel.GameObjects.Add(projectile);
@@ -130,7 +130,7 @@ namespace HuntTheWumpus.Source
                 projectile.Velocity = new Vector2(4, 0);
                 this.ParentLevel.GameObjects.Add(projectile);
             }
-             */
+             //*/
         }
 
         public void CollideWith(ICollideable gameObject, bool isColliding)
@@ -145,11 +145,11 @@ namespace HuntTheWumpus.Source
                     this.MainGame.Player.inv.takeDamage(3);
                     this.MainGame.Player.hp--;
                     this.MainGame.Player.score -= 50;
-                    if (this.MainGame.PlayerData.HP <= 0)
+                    if (this.MainGame.Player.hp <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
-                        this.MainGame.PlayerData.HP = 10;
-                        this.MainGame.PlayerData.Score = 0;
+                        this.MainGame.Player.hp = 10;
+                        this.MainGame.Player.score = 0;
                     }
                 }
             }
