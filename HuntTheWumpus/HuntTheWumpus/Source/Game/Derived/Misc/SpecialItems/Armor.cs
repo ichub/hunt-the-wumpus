@@ -7,35 +7,36 @@ namespace HuntTheWumpus
 {
     class Armor
     {
-        public int armorPiece;
+        public int ArmorID;
+
         public Armor(int itemID)
         {
-            armorPiece = itemID;
+            this.ArmorID = itemID;
         }
 
-        private int protectRatio()
+        private int ProtectionStrength()
         {
-            if (armorPiece == 3)
+            if (this.ArmorID == 3)
             {
                 return 2;
             }
-            else if (armorPiece == 4)
+            else if (this.ArmorID == 4)
             {
                 return 4;
             }
-            else if (armorPiece == 5)
+            else if (this.ArmorID == 5)
             {
                 return 3;
             }
-            else if (armorPiece == 6)
+            else if (this.ArmorID == 6)
             {
                 return 3;
             }
-            else if (armorPiece == 7)
+            else if (this.ArmorID == 7)
             {
                 return 5;
             }
-            else if (armorPiece == 8)
+            else if (this.ArmorID == 8)
             {
                 return 4;
             }
@@ -45,11 +46,9 @@ namespace HuntTheWumpus
             }
         }
 
-        public double takeDamage(int damage)
+        public double CalculateDamage(int damage)
         {
-            return damage/this.protectRatio();
+            return damage / this.ProtectionStrength();
         }
-
-
     }
 }

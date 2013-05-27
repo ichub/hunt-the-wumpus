@@ -5,14 +5,18 @@ using System.Text;
 
 namespace HuntTheWumpus.Source
 {
-    public class Instilled 
+    public class InstilledRing 
     {
-        public int chance;
-        public Instilled(RingType type)
+        public int Chance { get; set; }
+
+        public InstilledRing(RingType type)
         {
-            if (type == RingType.Standard) chance = 20;
-            else if (type == RingType.Upgraded) chance = 30;
-            else if (type == RingType.Ultimate) chance = 50;
+            if (type == RingType.Standard) 
+                this.Chance = 20;
+            else if (type == RingType.Upgraded) 
+                this.Chance = 30;
+            else if (type == RingType.Ultimate) 
+                this.Chance = 50;
         }
     }
 }

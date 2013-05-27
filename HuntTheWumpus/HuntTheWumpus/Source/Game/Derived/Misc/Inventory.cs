@@ -17,7 +17,6 @@ namespace HuntTheWumpus.Source
     {
         public int[,] inv = new int[5, 3];
         public int[,] armor = new int[3, 3];
-        public List<Map> maps = new List<Map>();
         public int numRoom;
         public int playerSpeed = 5;
         //public List<Instilled> instilledRing = new List<Instilled>();
@@ -92,12 +91,6 @@ namespace HuntTheWumpus.Source
             {
                 playerSpeed = 5;
                 InstilledActive = false;
-                if (inv[i, 0] == 2 && inv[i, 2] == 0)
-                {
-                    maps.Add(new Map(roomNum));
-                    numRoom = roomNum;
-                    inv[i, 2] = maps.Count - 1;
-                }
 
                 if (inv[i, 0] == 9) playerSpeed = 7;
 
@@ -117,29 +110,12 @@ namespace HuntTheWumpus.Source
 
         }
 
-        /// <summary>
-        /// Updates a map when moved to an unexplored room
-        /// </summary>
-        /// <param name="newRoom">new room number</param>
-        /// <param name="direction">direction in which it moved </param> //TODO: fix the map not recording in the right place
-        public void updateMap(int newRoom, int direction)
-        {
-            if (newRoom != numRoom)
-            {
-                foreach (Map activeMap in maps)
-                {
-                    activeMap.UpdateMap(direction, newRoom);
-                }
-                numRoom = newRoom;
-            }
-        }
-
         public double takeDamage(int damage)
         {
             double protectPoints = 0;
             for (int i = 0; i < 3; i++)
             {
-                protectPoints += new Armor(armor[i, 0]).takeDamage(damage);
+                protectPoints += new Armor(armor[i, 0]).CalculateDamage(damage);
             }
             protectPoints /= 3;
             //if (InstilledActive && new Random().Next(100) > instilledRing[0].chance) return 0;
