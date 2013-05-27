@@ -1,13 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
     class ItemList
     {
-        protected List<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
         
         /// <summary>
         /// Constructs default ingame items
@@ -15,6 +21,7 @@ namespace HuntTheWumpus.Source
         public ItemList()
         {
             this.Items = new List<Item>();
+
             this.AddItem("Bow", 0); //hopefully the purpose is clear enough
             this.AddItem("Arrow", 10); //charges for bow
             this.AddItem("Standard Helmet", 100); //armor
@@ -35,19 +42,13 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
-        /// Allows to add items outside vanilla items
+        /// Adds the item to the item list.
         /// </summary>
-        /// <param name="decName">Name</param>
-        /// <param name="decImage">Image Path</param>
-        /// <param name="decDamageAllowed">Damage allowed?</param>
-        /// <param name="itemPrice">Price of an item in the shop</param>
+        /// <param name="name"> Name of the item. </param>
+        /// <param name="price"> Price of the item. </param>
         public void AddItem(String name, int price)
         {
-            Item it = new Item(name, price); 
-            //it.id= decID;
-            it.Name= name;
-            it.Price = price;
-            this.Items.Add(it);  
+            this.Items.Add(new Item(name, price));  
         }
     }
 }

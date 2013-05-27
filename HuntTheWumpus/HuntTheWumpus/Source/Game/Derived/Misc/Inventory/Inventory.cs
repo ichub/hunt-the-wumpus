@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
@@ -23,7 +28,7 @@ namespace HuntTheWumpus.Source
         /// Adds the given item to the inventory
         /// </summary>
         /// <param name="item"> Item to pick up. </param>
-        public void pickUp(Item item)
+        public void PickUp(Item item)
         {
             int index = this.ItemIndex(item);
 

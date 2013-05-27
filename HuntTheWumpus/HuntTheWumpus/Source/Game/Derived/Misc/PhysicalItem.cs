@@ -11,9 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    public class InventorySlot
+    class PhysicalItem
     {
-        public Item HeldItem { get; set; }
-        public int Amount { get; set; }
     }
 }
