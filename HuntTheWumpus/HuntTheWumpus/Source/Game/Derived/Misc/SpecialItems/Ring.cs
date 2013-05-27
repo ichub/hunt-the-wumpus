@@ -5,11 +5,18 @@ using System.Text;
 
 namespace HuntTheWumpus.Source
 {
-    public class InstilledRing 
+    public enum RingType
+    {
+        Standard,
+        Upgraded,
+        Ultimate,
+    }
+
+    public class Ring 
     {
         public int Chance { get; set; }
 
-        public InstilledRing(RingType type)
+        public Ring(RingType type)
         {
             if (type == RingType.Standard) 
                 this.Chance = 20;
