@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
-        public List<BoundingBox> BoundingBoxes { get; set; }
+        public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
@@ -39,7 +39,7 @@ namespace HuntTheWumpus.Source
             this.parentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(400, 400);
-            this.BoundingBoxes = new List<BoundingBox>();
+            this.BoundingBox = new BoundingBox();
             this.lastPosition = this.Position;
         }
 
@@ -147,7 +147,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBoxes.Add(Extensions.Box2D(this.Position, this.Position + this.TextureSize));
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void LoadContent(ContentManager content)

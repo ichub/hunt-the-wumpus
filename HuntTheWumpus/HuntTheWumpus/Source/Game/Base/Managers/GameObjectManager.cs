@@ -150,16 +150,9 @@ namespace HuntTheWumpus.Source
         /// <returns> True if they are collided, false otherwise. </returns>
         private bool AreCollided(ICollideable first, ICollideable second)
         {
-            if (first.BoundingBoxes != null && second.BoundingBoxes != null)
-            for (int i = 0; i < first.BoundingBoxes.Count; i++)
+            if (first.BoundingBox != null && second.BoundingBox != null)
             {
-                for (int j = 0; j < second.BoundingBoxes.Count; j++)
-                {
-                    if (first.BoundingBoxes[i].Intersects(second.BoundingBoxes[j]))
-                    {
-                        return true;
-                    }
-                }
+                return first.BoundingBox.Intersects(second.BoundingBox);
             }
             return false;
         }
@@ -175,6 +168,10 @@ namespace HuntTheWumpus.Source
             {
                 for (int j = i + 1; j < collidable.Count; j++)
                 {
+                    if (AreCollided(collidable[i], collidable[j]))
+                    {
+                        Console.Write('a');
+                    }
                     collidable[i].CollideWith(collidable[j], AreCollided(collidable[i], collidable[j]));
                     collidable[j].CollideWith(collidable[i], AreCollided(collidable[i], collidable[j]));
                 }

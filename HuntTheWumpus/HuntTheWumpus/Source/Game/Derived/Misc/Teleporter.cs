@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
-        public List<BoundingBox> BoundingBoxes { get; set; }
+        public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
@@ -36,7 +36,7 @@ namespace HuntTheWumpus.Source
 
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(100, 100);
-            this.BoundingBoxes = new List<BoundingBox>();
+            this.BoundingBox = new BoundingBox();
             this.ObjectTeam = Team.None;
 
             this.RoomToTeleportTo = toTeleportTo;
@@ -62,14 +62,14 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBoxes.Add(Extensions.Box2D(this.Position, this.Position + this.TextureSize));
-            this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void LoadContent(ContentManager content)
         {
             this.Texture = content.Load<Texture2D>("Textures\\teleporter");
             this.TextureSize = new Vector2(this.Texture.Width, this.Texture.Height);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

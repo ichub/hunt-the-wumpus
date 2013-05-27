@@ -19,7 +19,7 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// A list of bounding boxes with which other objects can collide.
         /// </summary>
-        List<BoundingBox> BoundingBoxes { get; set; }
+        BoundingBox BoundingBox { get; set; }
 
         /// <summary>
         /// Method for handling collisions between objects.

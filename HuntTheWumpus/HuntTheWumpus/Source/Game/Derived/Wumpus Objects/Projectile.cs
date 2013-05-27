@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 TextureSize { get; set; }
-        public List<BoundingBox> BoundingBoxes { get; set; }
+        public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
@@ -36,7 +36,7 @@ namespace HuntTheWumpus.Source
             this.ParentLevel = parentLevel;
 
             this.Position = new Vector2(100, 100);
-            this.BoundingBoxes = new List<BoundingBox>();
+            this.BoundingBox = new BoundingBox();
             this.Velocity = new Vector2(0, 1);
             this.imageName = picture;           
         }
@@ -70,7 +70,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBoxes.Add(Extensions.Box2D(this.Position, this.Position + this.TextureSize));
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void LoadContent(ContentManager content)
@@ -78,14 +78,14 @@ namespace HuntTheWumpus.Source
             this.Texture = content.Load<Texture2D>("Textures\\" + this.imageName);
             this.animatedTexture = new AnimatedTexture(this.Texture, 5, 20, 20, 10);
             this.TextureSize = new Vector2(this.animatedTexture.Size.X, this.animatedTexture.Size.Y);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void Update(GameTime gameTime)
         {
             this.Remove();
-            if (this.BoundingBoxes.Any())
-                this.BoundingBoxes[0] = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
             this.Position += Velocity * 3;
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
