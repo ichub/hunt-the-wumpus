@@ -34,6 +34,7 @@ namespace HuntTheWumpus.Source
         {
             this.Sounds.Add("buttonclick", content.Load<SoundEffect>("Sounds\\button"));
             this.Sounds.Add("menuchange", content.Load<SoundEffect>("Sounds\\menu change"));
+            this.Sounds.Add("grunt", content.Load<SoundEffect>("Sounds\\grunt"));
         }
 
         /// <summary>

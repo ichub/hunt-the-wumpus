@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
@@ -24,6 +25,10 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Room parentRoom;
+        private Vector2 velocity;
+        private Timer hurtTimer;
+        private Color tint;
+        private int hp = 3;
         private bool isColliding = false;
 
         public Enemy(MainGame mainGame, ILevel parentLevel)
@@ -34,6 +39,8 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Enemy;
             this.Position = new Vector2(300, 300);
             this.BoundingBox = new BoundingBox();
+            this.velocity = Vector2.Zero;
+            this.tint = Color.White;
         }
 
         public void CollideWithWalls()
@@ -67,13 +74,33 @@ namespace HuntTheWumpus.Source
                 {
                     if (!this.isColliding)
                     {
-                        this.MainGame.Player.Score += 10;
-                        this.ParentLevel.GameObjects.Remove(this);
-                        OnDeath();
+                        this.hp--;
+                        this.tint = Color.Red;
+
+                        this.hurtTimer = new Timer(125);
+                        this.hurtTimer.Elapsed += this.ResetTint;
+                        this.hurtTimer.Start();
+
+                        this.MainGame.SoundManager.PlaySound("grunt");
+                        if (this.hp < 0)
+                        {
+                            this.MainGame.Player.Score += 10;
+                            this.ParentLevel.GameObjects.Remove(this);
+                            OnDeath();
+                        }
+                        this.ParentLevel.GameObjects.Remove(gameObject);
+                        this.velocity += projectile.Velocity;
                     }
                 }
                 this.isColliding = true;
             }
+        }
+
+        private void ResetTint(object sender, EventArgs e)
+        {
+            this.tint = Color.White;
+            this.hurtTimer.Stop();
+            this.hurtTimer = null;
         }
 
         private void SpawnGold(int amount)
@@ -111,11 +138,13 @@ namespace HuntTheWumpus.Source
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
             this.CollideWithWalls();
             this.isColliding = false;
+            this.Position += this.velocity;
+            this.velocity /= 1.1f;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.Texture.Draw(spriteBatch, this.Position, gameTime);
+            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.tint);
         }
     }
 }

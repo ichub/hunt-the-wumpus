@@ -81,15 +81,20 @@ namespace HuntTheWumpus.Source
         /// <param name="gameTime"> The game time. </param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime)
         {
+            this.Draw(spriteBatch, position, gameTime, Color.White);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, Color tint)
+        {
             this.milisecondsSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
             if (this.FPS != 0)
-            if (this.milisecondsSinceLastUpdate > 1000.0 / this.FPS)
-            {
-                this.currentFrame++;
-                this.currentFrame %= this.maxFrame;
-                this.milisecondsSinceLastUpdate = 0;
-            }
-            spriteBatch.Draw(this.SpriteSheet, position, new Rectangle(currentFrame * (int)this.Size.X, 0, (int)this.Size.X, (int)this.Size.Y), Color.White);
+                if (this.milisecondsSinceLastUpdate > 1000.0 / this.FPS)
+                {
+                    this.currentFrame++;
+                    this.currentFrame %= this.maxFrame;
+                    this.milisecondsSinceLastUpdate = 0;
+                }
+            spriteBatch.Draw(this.SpriteSheet, position, new Rectangle(currentFrame * (int)this.Size.X, 0, (int)this.Size.X, (int)this.Size.Y), tint);
         }
     }
 }
