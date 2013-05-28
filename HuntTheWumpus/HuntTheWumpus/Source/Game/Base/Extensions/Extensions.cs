@@ -88,8 +88,22 @@ namespace HuntTheWumpus.Source
 
             Vector2 randomVector = new Vector2((float)x, (float)y);
             return randomVector / randomVector.Length() * length;
+        }
 
+        public static Vector2 RandomVector(float minLength, float maxLength)
+        {
+            double randomLength = mainGame.Random.NextDouble() * (maxLength - minLength) + minLength;
+            return RandomVector((float)randomLength);
+        }
 
+        /// <summary>
+        /// Returns a boolean that is true a given percent of the time.
+        /// </summary>
+        /// <param name="probability"> The percentage amount that this returns true. </param>
+        /// <returns> A random boolean. </returns>
+        public static bool RandomBool(double probability)
+        {
+            return mainGame.Random.NextDouble() < probability;
         }
     }
 }

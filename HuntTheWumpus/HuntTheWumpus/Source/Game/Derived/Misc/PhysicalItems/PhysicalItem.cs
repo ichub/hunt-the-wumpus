@@ -33,7 +33,7 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(40, 40);
             this.RepresentedItem = ItemList.GetItem(item);
-            this.velocity = Extensions.RandomVector(3);
+            this.velocity = Extensions.RandomVector(1, 4);
         }
 
         public virtual void CollideWith(ICollideable gameObject, bool isColliding)

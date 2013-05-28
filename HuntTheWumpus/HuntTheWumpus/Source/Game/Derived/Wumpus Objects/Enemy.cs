@@ -69,13 +69,31 @@ namespace HuntTheWumpus.Source
                     {
                         this.MainGame.Player.Score += 10;
                         this.ParentLevel.GameObjects.Remove(this);
-                        this.ParentLevel.GameObjects.Remove(gameObject);
-                        this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
-                        this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+                        OnDeath();
                     }
                 }
                 this.isColliding = true;
             }
+        }
+
+        private void SpawnGold(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+            }
+        }
+
+        private void SpawnSpecial()
+        {
+            if (Extensions.RandomBool(1.0 / 2))
+                this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+        }
+
+        private void OnDeath()
+        {
+            this.SpawnSpecial();
+            this.SpawnGold(5);
         }
 
         public void Initialize()
