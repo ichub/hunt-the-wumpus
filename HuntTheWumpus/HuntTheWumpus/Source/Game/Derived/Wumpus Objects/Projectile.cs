@@ -15,9 +15,8 @@ namespace HuntTheWumpus.Source
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
-        public Texture2D Texture { get; set; }
+        public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
-        public Vector2 TextureSize { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
@@ -26,7 +25,6 @@ namespace HuntTheWumpus.Source
         public bool HasCollided { get; private set; }
         public Vector2 Velocity;
 
-        private AnimatedTexture animatedTexture;
         private string imageName;
 
         public Projectile(MainGame mainGame, ILevel parentLevel, Team team, string picture)
@@ -58,11 +56,11 @@ namespace HuntTheWumpus.Source
             {
                 this.ParentLevel.GameObjects.Remove(this);
             }
-            else if (this.Position.X > this.MainGame.LevelManager.GameCave.CaveBounds.Width - this.TextureSize.X)
+            else if (this.Position.X > this.MainGame.LevelManager.GameCave.CaveBounds.Width - this.Texture.Size.X)
             {
                 this.ParentLevel.GameObjects.Remove(this);
             }
-            else if (this.Position.Y > this.MainGame.LevelManager.GameCave.CaveBounds.Height - this.TextureSize.Y)
+            else if (this.Position.Y > this.MainGame.LevelManager.GameCave.CaveBounds.Height - this.Texture.Size.Y)
             {
                 this.ParentLevel.GameObjects.Remove(this);
             }
@@ -70,28 +68,25 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("Textures\\" + this.imageName);
-            this.animatedTexture = new AnimatedTexture(this.Texture, 5, 20, 20, 10);
-            this.TextureSize = new Vector2(this.animatedTexture.Size.X, this.animatedTexture.Size.Y);
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\" + this.imageName), 5, 20, 20, 60);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Update(GameTime gameTime)
         {
             this.Remove();
             this.Position += Velocity * 3;
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(this.Texture, this.Position, null, Color.White, (float)this.rotation, this.TextureSize / 2, new Vector2(1, 1), SpriteEffects.None, 0);
-            this.animatedTexture.Draw(spriteBatch, this.Position, this.MainGame.GameTime);
+            this.Texture.Draw(spriteBatch, this.Position, this.MainGame.GameTime);
         }
     }
 }

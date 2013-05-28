@@ -15,15 +15,16 @@ namespace HuntTheWumpus.Source
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
-        public Texture2D Texture { get; set; }
+        public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
-        public Vector2 TextureSize { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
         public Item RepresentedItem { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+
+        private Vector2 velocity;
 
         public PhysicalItem(MainGame mainGame, ILevel parentLevel, string item)
         {
@@ -32,6 +33,7 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(40, 40);
             this.RepresentedItem = ItemList.GetItem(item);
+            this.velocity = Extensions.RandomVector(3);
         }
 
         public void CollideWith(ICollideable gameObject, bool isColliding)
@@ -46,23 +48,24 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name);
-            this.TextureSize = new Vector2(this.Texture.Width, this.Texture.Height);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name));
         }
 
         public void Update(GameTime gameTime)
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.TextureSize);
+            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.Position += this.velocity;
+            this.velocity /= 1.1f;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.Texture, this.Position, Color.White);
+            this.Texture.Draw(spriteBatch, this.Position, gameTime);
         }
     }
 }

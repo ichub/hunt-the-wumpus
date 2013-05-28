@@ -19,17 +19,12 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Texture that is used to draw the object.
         /// </summary>
-        Texture2D Texture { get; set; }
+        AnimatedTexture Texture { get; set; }
 
         /// <summary>
         /// Position of the object.
         /// </summary>
         Vector2 Position { get; set; }
-
-        /// <summary>
-        /// Size of the texture in pixels, X is width and Y is height.
-        /// </summary>
-        Vector2 TextureSize { get; set; }
 
         /// <summary>
         /// Value that is used to determine whether or not the content for

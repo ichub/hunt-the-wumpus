@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Class for drawing animated sprites given a spritesheet.
     /// </summary>
-    class AnimatedTexture
+    public class AnimatedTexture
     {
         /// <summary>
         /// Size of one frame of the texture.

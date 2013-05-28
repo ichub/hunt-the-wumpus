@@ -20,13 +20,13 @@ namespace HuntTheWumpus.Source
         public int Score { get; set; }
         public Inventory Inventory { get; set; }
 
-        public Player(int difficulty)
+        public Player()
         {
             this.CurrentRoom = 0;
             this.HP = 20;
             this.Money = 100;
             this.Score = 0;
-            this.Inventory = new Inventory(difficulty);
+            this.Inventory = new Inventory(20);
         }
 
         public void pay(int sum)

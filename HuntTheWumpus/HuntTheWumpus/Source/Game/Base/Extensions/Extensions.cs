@@ -16,6 +16,17 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public static class Extensions
     {
+        private static MainGame mainGame;
+
+        /// <summary>
+        /// Initializes the extensions.
+        /// </summary>
+        /// <param name="mainGame"> The game to which this class belongs to. </param>
+        public static void Init(MainGame game)
+        {
+            mainGame = game;
+        }
+
         /// <summary>
         /// Tells whether or not the bounding box contains the 2D point alligned on the x-y plane.
         /// </summary>
@@ -63,6 +74,17 @@ namespace HuntTheWumpus.Source
                 colors[i] = color;
             }
             texture.SetData<Color>(colors);
+        }
+
+        public static Vector2 RandomVector(float length)
+        {
+            double x = mainGame.Random.NextDouble() * 100 - 50;
+            double y = mainGame.Random.NextDouble() * 100 - 50;
+
+            Vector2 randomVector = new Vector2((float)x, (float)y);
+            return randomVector / randomVector.Length() * length;
+
+
         }
     }
 }

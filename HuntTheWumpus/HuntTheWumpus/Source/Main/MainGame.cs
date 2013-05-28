@@ -23,8 +23,9 @@ namespace HuntTheWumpus.Source
         public SoundManager SoundManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
-        public Player Player;
+        public Player Player { get; set; }
         public MiniMap MiniMap { get; set; }
+        public Random Random { get; set; }
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
@@ -43,7 +44,7 @@ namespace HuntTheWumpus.Source
             this.Graphics.PreferredBackBufferWidth = 960;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
             this.Graphics.PreferredBackBufferHeight = 960;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // sets the height of the window to the screen height
             this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
-            this.IsMouseVisible = true;                    // lets mouse to be drawn on the window
+            this.IsMouseVisible = true;                    // allows to be drawn on the window
             //this.Graphics.IsFullScreen = true;
 
             this.WindowWidth = this.Graphics.PreferredBackBufferWidth;
@@ -59,12 +60,14 @@ namespace HuntTheWumpus.Source
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.Random = new Random();
+            this.MiniMap = new MiniMap(this);
             this.LevelManager = new LevelManager(this);
-            this.LevelManager.CurrentLevel = new StartLevel(this);
+            Extensions.Init(this);
+            this.LevelManager.CurrentLevel = new StartLevel(this); 
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
-            this.Player = new Player(2);
-            this.MiniMap = new MiniMap(this);
+            this.Player = new Player();
             base.Initialize();
         }
 
