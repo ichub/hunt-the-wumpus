@@ -76,6 +76,11 @@ namespace HuntTheWumpus.Source
             texture.SetData<Color>(colors);
         }
 
+        /// <summary>
+        /// Creates a random vector with the given length
+        /// </summary>
+        /// <param name="length"> The length of the vector. </param>
+        /// <returns> A random vector. </returns>
         public static Vector2 RandomVector(float length)
         {
             double x = mainGame.Random.NextDouble() * 100 - 50;

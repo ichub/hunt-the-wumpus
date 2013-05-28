@@ -70,7 +70,7 @@ namespace HuntTheWumpus.Source
                         this.MainGame.Player.Score += 10;
                         this.ParentLevel.GameObjects.Remove(this);
                         this.ParentLevel.GameObjects.Remove(gameObject);
-                        this.ParentLevel.GameObjects.Add(new PhysicalItem(this.MainGame, this.ParentLevel, "Gold") { Position = this.Position });
+                        this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
                     }
                 }
                 this.isColliding = true;

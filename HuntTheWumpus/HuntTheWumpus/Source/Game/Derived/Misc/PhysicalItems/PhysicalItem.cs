@@ -36,7 +36,7 @@ namespace HuntTheWumpus.Source
             this.velocity = Extensions.RandomVector(3);
         }
 
-        public void CollideWith(ICollideable gameObject, bool isColliding)
+        public virtual void CollideWith(ICollideable gameObject, bool isColliding)
         {
             if (isColliding)
             if (gameObject is PlayerAvatar)
