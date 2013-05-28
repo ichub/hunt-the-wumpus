@@ -95,6 +95,7 @@
     <Compile Include="Source\Game\Derived\Misc\Inventory\InventorySlot.cs" />
     <Compile Include="Source\Game\Derived\Misc\PhysicalItems\Gold.cs" />
     <Compile Include="Source\Game\Derived\Misc\PhysicalItems\PhysicalItem.cs" />
+    <Compile Include="Source\Game\Derived\Misc\PhysicalItems\RingOfSpeed.cs" />
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Armor.cs" />
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Ring.cs" />
     <Compile Include="Source\Game\Derived\Misc\Teleporter.cs" />

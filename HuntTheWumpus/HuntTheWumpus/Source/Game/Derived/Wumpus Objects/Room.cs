@@ -29,7 +29,7 @@ namespace HuntTheWumpus.Source
             this.MainCave = gameCave;
             this.GameObjects = new GameObjectManager(this.MainGame);
             this.RoomIndex = index;
-            this.background = mainGame.Content.Load<Texture2D>("Textures\\Cave\\normal");
+            this.background = mainGame.Content.Load<Texture2D>("Textures\\Cave\\flooded");
         }
 
         public void Initialize()

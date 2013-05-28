@@ -71,6 +71,7 @@ namespace HuntTheWumpus.Source
                         this.ParentLevel.GameObjects.Remove(this);
                         this.ParentLevel.GameObjects.Remove(gameObject);
                         this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+                        this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
                     }
                 }
                 this.isColliding = true;

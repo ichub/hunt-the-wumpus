@@ -67,10 +67,10 @@ namespace HuntTheWumpus.Source
             this.Position += velocity;
             this.velocity /= 1.2f;
 
-            if (this.velocity.LengthSquared() > 5 * 5)
+            if (this.velocity.LengthSquared() > this.MainGame.Player.MaxSpeed * this.MainGame.Player.MaxSpeed)
             {
                 this.velocity /= this.velocity.Length();
-                this.velocity *= 5;
+                this.velocity *= this.MainGame.Player.MaxSpeed;
             }
         }
 
@@ -138,7 +138,7 @@ namespace HuntTheWumpus.Source
                     if (this.MainGame.Player.HP <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
-                        this.MainGame.Player.HP = 10;
+                        this.MainGame.Player.HP = 3;
                         this.MainGame.Player.Score = 0;
                     }
                 }

@@ -18,14 +18,16 @@ namespace HuntTheWumpus.Source
         public int Armor { get; set; }
         public int Money { get; set; }
         public int Score { get; set; }
+        public float MaxSpeed { get; set; }
         public Inventory Inventory { get; set; }
 
         public Player()
         {
             this.CurrentRoom = 0;
-            this.HP = 20;
+            this.HP = 3;
             this.Money = 100;
             this.Score = 0;
+            this.MaxSpeed = 5;
             this.Inventory = new Inventory(20);
         }
 
