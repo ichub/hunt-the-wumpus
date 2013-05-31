@@ -41,8 +41,8 @@ namespace HuntTheWumpus.Source
 
 
             // Game Options:
-            this.Graphics.PreferredBackBufferWidth = 960;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
-            this.Graphics.PreferredBackBufferHeight = 960;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // sets the height of the window to the screen height
+            this.Graphics.PreferredBackBufferWidth = 1024;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
+            this.Graphics.PreferredBackBufferHeight = 768;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // sets the height of the window to the screen height
             this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
             this.IsMouseVisible = true;                    // allows to be drawn on the window
             //this.Graphics.IsFullScreen = true;
@@ -115,7 +115,7 @@ namespace HuntTheWumpus.Source
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);    // clears the screen
-            this.SpriteBatch.Begin();                      // begins drawing
+            this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);                  // begins drawing
             this.LevelManager.FrameDraw();                 // draws the level
             this.MiniMap.Draw(this.SpriteBatch, this.Content);
             this.SpriteBatch.End();                        // stops drawing

@@ -1,7 +1,5 @@
 Content\Textures\box.xnb
 Content\Textures\player.xnb
-Content\Textures\fireball.xnb
-Content\Textures\enemy.xnb
 Content\Textures\fireball_spritesheet.xnb
 Content\Textures\teleporter.xnb
 Content\Textures\Cave\normal.xnb
@@ -14,6 +12,9 @@ Content\Sounds\button.xnb
 Content\Sounds\item pickup.xnb
 Content\Sounds\menu change.xnb
 Content\Textures\Items\gold.xnb
-Content\Textures\Items\SpeedRing.xnb
 Content\Textures\Enemies\bat_spritesheet.xnb
 Content\Sounds\grunt.xnb
+Content\Textures\Cave\rockslide.xnb
+Content\Textures\menu.xnb
+Content\Textures\Cave\shop.xnb
+Content\Textures\Items\SpeedRing.xnb

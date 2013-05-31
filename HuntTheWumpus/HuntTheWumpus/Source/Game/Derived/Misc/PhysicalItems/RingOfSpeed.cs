@@ -24,5 +24,10 @@ namespace HuntTheWumpus.Source
                 this.MainGame.Player.MaxSpeed = 10;
             }
         }
+
+        public override void LoadContent(ContentManager content)
+        {
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\SpeedRing"), 7, 56, 60, 20);
+        }
     }
 }

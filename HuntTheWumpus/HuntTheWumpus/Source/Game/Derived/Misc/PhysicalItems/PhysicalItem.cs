@@ -46,24 +46,24 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
-        public void LoadContent(ContentManager content)
+        public virtual void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name));
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
             this.Position += this.velocity;
             this.velocity /= 1.1f;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
         }

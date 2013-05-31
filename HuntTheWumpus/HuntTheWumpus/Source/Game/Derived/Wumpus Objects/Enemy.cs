@@ -75,7 +75,7 @@ namespace HuntTheWumpus.Source
                     if (!this.isColliding)
                     {
                         this.hp--;
-                        this.tint = Color.Red;
+                        this.tint = new Color(1.0f, 0f, 0f);
 
                         this.hurtTimer = new Timer(125);
                         this.hurtTimer.Elapsed += this.ResetTint;
@@ -99,7 +99,7 @@ namespace HuntTheWumpus.Source
         private void ResetTint(object sender, EventArgs e)
         {
             this.tint = Color.White;
-            this.hurtTimer.Stop();
+            //this.hurtTimer.Stop();
             this.hurtTimer = null;
         }
 
@@ -130,7 +130,7 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\bat_spritesheet"), 3, 199, 84, 10);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\bat_spritesheet"), 3, 199, 100, 10);
         }
 
         public void Update(GameTime gameTime)

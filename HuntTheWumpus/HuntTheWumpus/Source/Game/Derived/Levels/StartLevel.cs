@@ -20,6 +20,8 @@ namespace HuntTheWumpus.Source
         public GameObjectManager GameObjects { get; set; }
         public bool Initialized { get; set; }
 
+        private Texture2D background;
+
         public StartLevel(MainGame mainGame)
         {
             this.MainGame = mainGame;
@@ -29,6 +31,7 @@ namespace HuntTheWumpus.Source
         public void Initialize()
         {
             this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[0], "start"));
+            this.background = MainGame.Content.Load<Texture2D>("Textures\\menu");
         }
 
         public void OnLoad()
@@ -50,7 +53,7 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.MainGame.TextManager.DrawText(new Vector2(400, 400), "START SCREEN", false);
+            spriteBatch.Draw(this.background, this.MainGame.LevelManager.GameCave.CaveOffset, Color.White);
             this.GameObjects.FrameDraw();
         }
     }

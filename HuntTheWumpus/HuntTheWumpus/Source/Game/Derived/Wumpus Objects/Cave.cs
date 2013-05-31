@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = mainGame;
             this.Rooms = new Room[5 * 6];
-            this.CaveBounds = new Rectangle(((int)windowSize.X - 960) / 2, ((int)windowSize.Y - 960) / 2, 960, 960);
+            this.CaveBounds = new Rectangle(((int)windowSize.X - 1024) / 2, ((int)windowSize.Y - 768) / 2, 1024, 768);
             this.CaveOffset = new Vector2(this.CaveBounds.X, this.CaveBounds.Y);
 
             for (int i = 0; i < this.Rooms.Length; i++)
