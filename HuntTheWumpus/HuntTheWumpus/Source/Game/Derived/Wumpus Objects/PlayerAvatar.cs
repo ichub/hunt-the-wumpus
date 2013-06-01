@@ -73,7 +73,16 @@ namespace HuntTheWumpus.Source
                 this.velocity *= this.MainGame.Player.MaxSpeed;
             }
         }
-
+        /// <summary>
+        /// Bounces opposite was
+        /// was just a simple implementation of collide
+        /// you can change it later
+        /// </summary>
+        /// <param name="position"></param>
+        public void CollideWithOppositeVector()
+        {
+            this.velocity = -this.velocity * 3;
+        }
         public void CollideWithWalls()
         {
             if (this.Position.X < 0)

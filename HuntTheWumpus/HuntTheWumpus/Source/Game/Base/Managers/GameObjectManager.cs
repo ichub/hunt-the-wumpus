@@ -33,46 +33,94 @@ namespace HuntTheWumpus.Source
             this.objectsToRemove = new Stack<IGameObject>();
         }
 
+        /// <summary>
+        /// Checks and handles collisions with the border of the room
+        /// </summary>
         public void HandleBounds()
         {
             foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
             {
-                Vector2 first = new Vector2(item.BoundingBox.Min.X, item.BoundingBox.Min.Y);
-                Vector2 second = new Vector2(item.BoundingBox.Max.X, item.BoundingBox.Max.Y);
-
-                for (int i = 1; i < Room.RoomBounds.Count; i++)
+                if (!(item is Teleporter))
                 {
-                    if (DoLinesIntersect(
-                        first,
-                        second,
-                        Room.RoomBounds[i - 1],
-                        Room.RoomBounds[i]))
+                    List<Vector2> corners = this.CreateCorners(item.BoundingBox);
+                    for (int j = 1; j < corners.Count; j++)
                     {
-                        Debug.WriteLine("Collide");
-                    }
+                        Vector2 first = corners[j - 1];
+                        Vector2 second = corners[j];
+                        for (int i = 1; i < Room.RoomBounds.Count; i++)
+                        {
+                            if (DoLinesIntersect(first, second, Room.RoomBounds[i - 1], Room.RoomBounds[i]))
+                            {
+                                if (item is PlayerAvatar)
+                                {
+                                    PlayerAvatar current = item as PlayerAvatar;
+                                    current.CollideWithOppositeVector();
+                                }
+                            }
 
+                        }
+                    }
                 }
             }
         }
+        /// <summary>
+        /// Checks if two lines interect
+        /// </summary>
+        /// <param name="first1">first point of first line</param>
+        /// <param name="first2">second point of first line</param>
+        /// <param name="second1">first point of second line</param>
+        /// <param name="second2">second point of second line</param>
+        /// <returns> true if intersect, other wise false</returns>
         private bool DoLinesIntersect(Vector2 first1, Vector2 first2, Vector2 second1, Vector2 second2)
         {
-            //Initialize all the deltas
-            float DeltaXFirst = first2.X - first1.X;
-            float DeltaYFirst = first2.Y - first1.Y;
+            float firstSlope = this.GetSlope(first1, first2);
+            float secondSlope = this.GetSlope(second1, second2);
 
-            float DeltaXSecond = second2.X - second1.X;
-            float DeltaYSecond = second2.Y - second1.Y;
+            float firstIntercept = this.GetIntercept(first1, firstSlope);
+            float secondIntercept = this.GetIntercept(second1, secondSlope);
 
-            //Find Denominator
-            float denominator = (DeltaYFirst * DeltaXSecond - DeltaXFirst * DeltaYSecond);
+            float x = (secondIntercept - firstIntercept) / (firstSlope - secondSlope);
+            float y = x * secondSlope + secondIntercept;
 
-            //Solve system of equations for our to lines
-            float t1 = ((first1.X - second1.X) * DeltaYSecond + (second1.Y - first1.Y) * DeltaXSecond) / denominator;
-            float t2 = ((second1.X - first1.X) * DeltaYFirst + (first1.Y - second1.Y) * DeltaXFirst) / -denominator;
-
-            return ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
+            return (x < Math.Max(first1.X, first2.X)
+                && x > Math.Min(first1.X, first2.X)
+                && x < Math.Max(second1.X, second2.X)
+                && x > Math.Min(second1.X, second2.X));
         }
-
+        /// <summary>
+        /// Calculate the slope given 2 vectors.
+        /// </summary>
+        /// <param name="First Vector"></param>
+        /// <param name="Second Vector"></param>
+        /// <returns>Slope</returns>
+        private float GetSlope(Vector2 first, Vector2 second)
+        {
+            return (second.Y - first.Y) / (second.X - first.X);
+        }
+        /// <summary>
+        /// Get the y intercept of a line.
+        /// </summary>
+        /// <param name="The point of which the line passes through"></param>
+        /// <param name="Slope of the line"></param>
+        /// <returns>The y-intercept</returns>
+        private float GetIntercept(Vector2 vect, float slope)
+        {
+            return (vect.Y) - (vect.X * slope);
+        }
+        /// <summary>
+        /// Gets the corners of the bounding box.
+        /// </summary>
+        /// <param name="box"> Bounding Box of item</param>
+        /// <returns>List of Vector2</returns>
+        private List<Vector2> CreateCorners(BoundingBox box)
+        {
+            List<Vector2> vectors = new List<Vector2>(4);
+            vectors.Add(new Vector2(box.Min.X, box.Min.Y));
+            vectors.Add(new Vector2(box.Max.X, box.Min.Y));
+            vectors.Add(new Vector2(box.Max.X, box.Max.Y));
+            vectors.Add(new Vector2(box.Min.X, box.Max.Y));
+            return vectors;
+        }
         /// <summary>
         /// Gets all game objects of type T.
         /// </summary>
