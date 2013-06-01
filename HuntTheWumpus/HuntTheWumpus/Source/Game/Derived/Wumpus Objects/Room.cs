@@ -24,6 +24,7 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Texture2D background;
+        private bool isLocked;
 
         /// <summary>
         /// Actually initialize the correct bounds.
@@ -95,8 +96,19 @@ namespace HuntTheWumpus.Source
 
         public void OnLoad()
         {
+            this.isLocked = true;
             this.GameObjects.Add(new PlayerAvatar(this.MainGame, this) { Position = new Vector2(400, 300) });
+            this.SpawnEnemies();
             this.PlaceTeleporters();
+        }
+
+        private void SpawnEnemies()
+        {
+            int amount = 2;
+            for (int i = 0; i < amount; i++)
+            {
+                this.GameObjects.Add(new Enemy(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
+            }
         }
 
         public void OnUnLoad()
