@@ -32,25 +32,40 @@ namespace HuntTheWumpus.Source
         {
             RoomBounds = new List<Vector2>()
             {
-                new Vector2(20f,20f),
-                new Vector2(30f,800f),
-                new Vector2(13f,312f),
-                new Vector2(440f,5f),
-                new Vector2(440f,5f),
-                new Vector2(543f,5f),
-                new Vector2(944f,272f),
-                new Vector2(1018f,398f),
-                new Vector2(1009f,441f),
-                new Vector2(909f,553f),
-                new Vector2(865f,563f),
-                new Vector2(846f,621f),
-                new Vector2(801f,659f),
-                new Vector2(648f,763f),
-                new Vector2(391f,765f),
-                new Vector2(202f,590f),
-                new Vector2(156f,509f),
-                new Vector2(9f,439f),
-                new Vector2(13f,312f),
+                new Vector2(432, 0),
+                new Vector2(542, 0),
+                new Vector2(583, 62),
+                new Vector2(646, 104),
+                new Vector2(721, 169),
+                new Vector2(789, 182),
+                new Vector2(834, 136),
+                new Vector2(936, 133),
+                new Vector2(940, 144),
+                new Vector2(990, 211),
+                new Vector2(900, 250),
+                new Vector2(853, 296),
+                new Vector2(924, 336),
+                new Vector2(948, 410),
+                new Vector2(915, 496),
+                new Vector2(826, 533),
+                new Vector2(904, 595),
+                new Vector2(930, 678),
+                new Vector2(873, 736),
+                new Vector2(772, 703),
+                new Vector2(760, 645),
+                new Vector2(578, 764),
+                new Vector2(456, 768),
+                new Vector2(310, 639),
+                new Vector2(223, 710),
+                new Vector2(113, 689),
+                new Vector2(123, 592),
+                new Vector2(223, 519),
+                new Vector2(100, 363),
+                new Vector2(298, 199),
+                new Vector2(157, 121),
+                new Vector2(272, 22),
+                new Vector2(365, 101),
+                new Vector2(427, 5),
             };
         }
 
@@ -70,7 +85,7 @@ namespace HuntTheWumpus.Source
 
         public void PlaceTeleporters()
         {
-            this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[0]) { Position = new Vector2(420, 0) });
+            this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[0]) { Position = new Vector2(420, -90) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[1]) { Position = new Vector2(833, 170) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[2]) { Position = new Vector2(815, 687) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[3]) { Position = new Vector2(450, 763) });
