@@ -26,19 +26,23 @@ namespace HuntTheWumpus.Source
 
         private Timer timer;
 
-        public ILevel CurrentLevel 
+        public ILevel CurrentLevel
         {
-            get 
-            { 
-                return this.currentLevel; 
-            } 
+            get
+            {
+                return this.currentLevel;
+            }
             set
             {
                 if (this.currentLevel != null)
+                {
                     this.StartFade(value);
+                }
                 else
-                    this.currentLevel = value;            
-            } 
+                {
+                    this.currentLevel = value;
+                }
+            }
         }
 
         public Cave GameCave { get; set; }
@@ -67,16 +71,16 @@ namespace HuntTheWumpus.Source
         public void FrameUpdate()
         {
             if (!this.Paused)
-            if (this.CurrentLevel != null)
-            {
-                if (!this.CurrentLevel.Initialized)
+                if (this.CurrentLevel != null)
                 {
-                    this.CurrentLevel.Initialize();
-                    this.CurrentLevel.Initialized = true;
-                }
+                    if (!this.CurrentLevel.Initialized)
+                    {
+                        this.CurrentLevel.Initialize();
+                        this.CurrentLevel.Initialized = true;
+                    }
 
-                this.CurrentLevel.FrameUpdate(this.ParentGame.GameTime, this.ParentGame.Content);
-            }
+                    this.CurrentLevel.FrameUpdate(this.ParentGame.GameTime, this.ParentGame.Content);
+                }
         }
 
         /// <summary>
@@ -90,7 +94,7 @@ namespace HuntTheWumpus.Source
                 this.timer.Stop();
                 this.fadeCount = 0;
             }
-      
+
             this.timer = new Timer(30);
             this.timer.Elapsed += this.FadeOut;
             this.timer.Start();

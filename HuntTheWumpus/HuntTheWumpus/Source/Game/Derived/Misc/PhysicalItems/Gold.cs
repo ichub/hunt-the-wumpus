@@ -25,6 +25,6 @@ namespace HuntTheWumpus.Source
                 this.MainGame.Player.Score += 50;
                 this.MainGame.SoundManager.PlaySound("gold");
             }
-        } 
+        }
     }
 }

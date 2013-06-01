@@ -36,14 +36,18 @@ namespace HuntTheWumpus.Source
             this.Position = new Vector2(100, 100);
             this.BoundingBox = new BoundingBox();
             this.Velocity = new Vector2(0, 1);
-            this.imageName = picture;           
+            this.imageName = picture;
         }
 
         public void CollideWith(ICollideable gameObject, bool isCollided)
         {
             if (isCollided)
+            {
                 if (gameObject is Enemy)
+                {
                     this.HasCollided = true;
+                }
+            }
         }
 
         private void Remove()

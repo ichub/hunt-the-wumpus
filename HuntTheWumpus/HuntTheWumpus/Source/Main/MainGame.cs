@@ -61,7 +61,7 @@ namespace HuntTheWumpus.Source
         {
             // TODO: Add your initialization logic here
             this.Random = new Random();
-            this.MiniMap = new MiniMap(this);
+            this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
             this.LevelManager.CurrentLevel = new StartLevel(this);
@@ -106,7 +106,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager.FrameUpdate();
             base.Update(gameTime);
             this.MiniMap.Update();
-            this.MiniMap.ShowRoom((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0));
+            this.MiniMap.ShowRoom((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room) : null));
         }
 
         /// <summary>

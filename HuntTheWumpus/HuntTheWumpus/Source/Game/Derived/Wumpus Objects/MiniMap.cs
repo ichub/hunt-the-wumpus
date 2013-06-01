@@ -8,51 +8,86 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace HuntTheWumpus.Source
 {
     public class MiniMap
     {
+        public const int DefaultRoomNumber = 30;
         public List<Vector2> TopLeftPoints { get; private set; }
         public MainGame MainGame { get; set; }
+
         public readonly float xSize = 44;
         public readonly float ySize = 36.5f;
+
+        public readonly Texture2D Texture;
+
+        public Vector2 Shift { get; set; }
 
         private List<Vector2> CenterPoints;
 
         private bool[] IndexesToShow;
         private bool Showing = false;
-        private int CurrentRoomIndex;
+        private Room CurrentRoom;
 
-        public MiniMap(MainGame parentGame)
+        /// <summary>
+        /// Initialize.
+        /// </summary>
+        private MiniMap(Vector2 initialShift)
         {
-            this.MainGame = parentGame;
-            this.CenterPoints = new List<Vector2>(30);
-            this.TopLeftPoints = new List<Vector2>(30);
-            this.IndexesToShow = new bool[30];
+            this.CenterPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
+            this.TopLeftPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
+            this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
+            this.Shift = initialShift;
+
             this.InitCenterPoints();
             this.InitTopLeftPoints();
         }
 
-        public MiniMap(int width, int height)
+        public MiniMap(MainGame parentGame, Vector2 initialShift)
+            : this(initialShift)
         {
+            if (null == parentGame)
+            {
+                throw new ArgumentNullException("parentGame");
+            }
+
+            this.MainGame = parentGame;
+        }
+
+        public MiniMap(int width, int height, Vector2 initialShift)
+            : this(initialShift)
+        {
+            if (width <= 0)
+            {
+                throw new ArgumentException("width");
+            }
+
+            if (height <= 0)
+            {
+                throw new ArgumentException("height");
+            }
+
             this.xSize = width;
             this.ySize = height;
-
-
-            this.CenterPoints = new List<Vector2>(30);
-            this.TopLeftPoints = new List<Vector2>(30);
-            this.InitCenterPoints();
-            this.InitTopLeftPoints();
         }
+
         /// <summary>
         /// Show Room In Cave
         /// </summary>
         /// <param name="index"></param>
-        public void ShowRoom(int index)
+        public void ShowRoom(Room room)
         {
-            this.IndexesToShow[index] = true;
-            this.CurrentRoomIndex = index;
+            if (null != room)
+            {
+                this.IndexesToShow[room.RoomIndex] = true;
+                this.CurrentRoom = room;
+            }
+            else
+            {
+                Debug.WriteLine("Room is null");
+            }
         }
         /// <summary>
         /// Hide Room In Cave
@@ -105,6 +140,7 @@ namespace HuntTheWumpus.Source
             }
         }
 
+
         public void Draw(SpriteBatch spriteBatch, ContentManager content)
         {
             if (this.Showing)
@@ -114,20 +150,20 @@ namespace HuntTheWumpus.Source
                 {
                     if (this.IndexesToShow[index])
                     {
-                        if (index == this.CurrentRoomIndex)
-                        {
-                            spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Blue);
-                        }
-                        else
-                        {
-                            spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Red);
-                        }
+                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + this.Shift, Color.Red);
                     }
                     else
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.White);
+                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + this.Shift, Color.White);
                     }
                     index++;
+                }
+                //Draw Current room
+                spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, Color.Blue);
+                //Draw connections of the current room
+                foreach (var item in this.CurrentRoom.AdjacentRooms)
+                {
+                    spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[item.RoomIndex] + this.Shift, Color.Green);
                 }
             }
         }
