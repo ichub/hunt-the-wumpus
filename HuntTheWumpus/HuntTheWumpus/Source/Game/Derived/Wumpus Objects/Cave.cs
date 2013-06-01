@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using HuntTheWumpus.Source.Game.Derived.Wumpus_Objects;
 
 namespace HuntTheWumpus.Source
 {
@@ -27,7 +28,7 @@ namespace HuntTheWumpus.Source
 
             for (int i = 0; i < this.Rooms.Length; i++)
             {
-                this.Rooms[i] = new Room(this.MainGame, this, i);
+                this.Rooms[i] = RoomFactory.Create(this.MainGame, this, i);//new Room(this.MainGame, this, i);
             }
 
             for (int i = 0; i < this.Rooms.Length; i++)

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using HuntTheWumpus.Source.Game.Derived.Wumpus_Objects;
 
 namespace HuntTheWumpus.Source
 {
@@ -60,6 +61,7 @@ namespace HuntTheWumpus.Source
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            RoomFactory.InitFactory(this.Content);
             this.Random = new Random();
             this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
             this.LevelManager = new LevelManager(this);

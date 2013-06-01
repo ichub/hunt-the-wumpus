@@ -8,12 +8,14 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using HuntTheWumpus.Source.Game.Derived.Wumpus_Objects;
 
 namespace HuntTheWumpus.Source
 {
     public class Room : ILevel
     {
-        public static List<Vector2> RoomBounds { get; set; }
+        public List<Vector2> RoomBounds { get; set; }
+        public RoomType RoomType { get; set; }
 
         public MainGame MainGame { get; set; }
         public Cave MainCave { get; set; }
@@ -26,57 +28,16 @@ namespace HuntTheWumpus.Source
         private Texture2D background;
         private bool isLocked;
 
-        /// <summary>
-        /// Actually initialize the correct bounds.
-        /// </summary>
-        static Room()
-        {
-            RoomBounds = new List<Vector2>()
-            {
-                new Vector2(432, 0),
-                new Vector2(542, 0),
-                new Vector2(583, 62),
-                new Vector2(646, 104),
-                new Vector2(721, 169),
-                new Vector2(789, 182),
-                new Vector2(834, 136),
-                new Vector2(936, 133),
-                new Vector2(940, 144),
-                new Vector2(990, 211),
-                new Vector2(900, 250),
-                new Vector2(853, 296),
-                new Vector2(924, 336),
-                new Vector2(948, 410),
-                new Vector2(915, 496),
-                new Vector2(826, 533),
-                new Vector2(904, 595),
-                new Vector2(930, 678),
-                new Vector2(873, 736),
-                new Vector2(772, 703),
-                new Vector2(760, 645),
-                new Vector2(578, 764),
-                new Vector2(456, 768),
-                new Vector2(310, 639),
-                new Vector2(223, 710),
-                new Vector2(113, 689),
-                new Vector2(123, 592),
-                new Vector2(223, 519),
-                new Vector2(100, 363),
-                new Vector2(298, 199),
-                new Vector2(157, 121),
-                new Vector2(272, 22),
-                new Vector2(365, 101),
-                new Vector2(427, 5),
-            };
-        }
 
-        public Room(MainGame mainGame, Cave gameCave, int index)
+        public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type)
         {
             this.MainGame = mainGame;
             this.MainCave = gameCave;
             this.GameObjects = new GameObjectManager(this.MainGame);
             this.RoomIndex = index;
-            this.background = mainGame.Content.Load<Texture2D>("Textures\\Cave\\normal");
+            this.background = background;
+            this.RoomBounds = bounds;
+            this.RoomType = type;
         }
 
         public void Initialize()
@@ -97,7 +58,7 @@ namespace HuntTheWumpus.Source
         public void OnLoad()
         {
             this.isLocked = true;
-            this.GameObjects.Add(new PlayerAvatar(this.MainGame, this) { Position = new Vector2(400, 300) });
+            this.GameObjects.Add(new PlayerAvatar(this.MainGame, this) { Position = new Vector2(500, 200) });
             this.SpawnEnemies();
             this.PlaceTeleporters();
         }

@@ -110,6 +110,7 @@
     <Compile Include="Source\Game\Derived\Misc\Inventory\Inventory.cs" />
     <Compile Include="Source\Game\Derived\Misc\ItemList.cs" />
     <Compile Include="Source\Game\Derived\Misc\Item.cs" />
+    <Compile Include="Source\Game\Derived\Wumpus Objects\RoomFactory.cs" />
     <Compile Include="Source\Main\MainGame.cs" />
     <Compile Include="Source\Game\Derived\Misc\Player.cs" />
     <Compile Include="Source\Main\Program.cs" />
