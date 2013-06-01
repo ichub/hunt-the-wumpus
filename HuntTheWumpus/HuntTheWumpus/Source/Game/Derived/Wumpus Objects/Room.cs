@@ -33,7 +33,24 @@ namespace HuntTheWumpus.Source
             RoomBounds = new List<Vector2>()
             {
                 new Vector2(20f,20f),
-                new Vector2(30f,800f)
+                new Vector2(30f,800f),
+                new Vector2(13f,312f),
+                new Vector2(440f,5f),
+                new Vector2(440f,5f),
+                new Vector2(543f,5f),
+                new Vector2(944f,272f),
+                new Vector2(1018f,398f),
+                new Vector2(1009f,441f),
+                new Vector2(909f,553f),
+                new Vector2(865f,563f),
+                new Vector2(846f,621f),
+                new Vector2(801f,659f),
+                new Vector2(648f,763f),
+                new Vector2(391f,765f),
+                new Vector2(202f,590f),
+                new Vector2(156f,509f),
+                new Vector2(9f,439f),
+                new Vector2(13f,312f),
             };
         }
 
