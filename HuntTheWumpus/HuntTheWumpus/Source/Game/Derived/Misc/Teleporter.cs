@@ -72,7 +72,7 @@ namespace HuntTheWumpus.Source
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.Texture.Draw(spriteBatch, this.Position, this.MainGame.GameTime);
+            //this.Texture.Draw(spriteBatch, this.Position, this.MainGame.GameTime);
         }
     }
 }
