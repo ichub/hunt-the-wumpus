@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace HuntTheWumpus.Source
 {
@@ -32,6 +33,46 @@ namespace HuntTheWumpus.Source
             this.objectsToRemove = new Stack<IGameObject>();
         }
 
+        public void HandleBounds()
+        {
+            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            {
+                Vector2 first = new Vector2(item.BoundingBox.Min.X, item.BoundingBox.Min.Y);
+                Vector2 second = new Vector2(item.BoundingBox.Max.X, item.BoundingBox.Max.Y);
+
+                for (int i = 1; i < Room.RoomBounds.Count; i++)
+                {
+                    if (DoLinesIntersect(
+                        first,
+                        second,
+                        Room.RoomBounds[i - 1],
+                        Room.RoomBounds[i]))
+                    {
+                        Debug.WriteLine("Collide");
+                    }
+
+                }
+            }
+        }
+        private bool DoLinesIntersect(Vector2 first1, Vector2 first2, Vector2 second1, Vector2 second2)
+        {
+            //Initialize all the deltas
+            float DeltaXFirst = first2.X - first1.X;
+            float DeltaYFirst = first2.Y - first1.Y;
+
+            float DeltaXSecond = second2.X - second1.X;
+            float DeltaYSecond = second2.Y - second1.Y;
+
+            //Find Denominator
+            float denominator = (DeltaYFirst * DeltaXSecond - DeltaXFirst * DeltaYSecond);
+
+            //Solve system of equations for our to lines
+            float t1 = ((first1.X - second1.X) * DeltaYSecond + (second1.Y - first1.Y) * DeltaXSecond) / denominator;
+            float t2 = ((second1.X - first1.X) * DeltaYFirst + (first1.Y - second1.Y) * DeltaXFirst) / -denominator;
+
+            return ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
+        }
+
         /// <summary>
         /// Gets all game objects of type T.
         /// </summary>
@@ -41,8 +82,12 @@ namespace HuntTheWumpus.Source
         {
             List<T> resultList = new List<T>();
             foreach (object gameObject in this.masterObjectList)
+            {
                 if (gameObject is T)
+                {
                     resultList.Add(gameObject as T);
+                }
+            }
             return resultList;
         }
 
@@ -91,7 +136,7 @@ namespace HuntTheWumpus.Source
                 {
                     obj.LoadContent(this.parentGame.Content);
                     obj.ContentLoaded = true;
-                } 
+                }
             }
         }
 
@@ -128,7 +173,7 @@ namespace HuntTheWumpus.Source
         {
             foreach (IClickable obj in this.GetObjectsByType<IClickable>())
             {
-                if (obj.ClickBox.Contains2D(this.parentGame.InputManager.MousePosition) && 
+                if (obj.ClickBox.Contains2D(this.parentGame.InputManager.MousePosition) &&
                     this.parentGame.InputManager.MouseState.LeftButton == ButtonState.Pressed)
                 {
                     obj.OnClickBegin(this.parentGame.InputManager.MousePosition);
@@ -168,10 +213,6 @@ namespace HuntTheWumpus.Source
             {
                 for (int j = i + 1; j < collidable.Count; j++)
                 {
-                    if (AreCollided(collidable[i], collidable[j]))
-                    {
-                        Console.Write('a');
-                    }
                     collidable[i].CollideWith(collidable[j], AreCollided(collidable[i], collidable[j]));
                     collidable[j].CollideWith(collidable[i], AreCollided(collidable[i], collidable[j]));
                 }
@@ -211,6 +252,7 @@ namespace HuntTheWumpus.Source
         public void FrameDraw()
         {
             this.Draw();
+            this.HandleBounds();
         }
     }
 }

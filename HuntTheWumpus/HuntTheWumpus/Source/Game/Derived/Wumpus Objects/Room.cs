@@ -13,6 +13,8 @@ namespace HuntTheWumpus.Source
 {
     public class Room : ILevel
     {
+        public static List<Vector2> RoomBounds { get; set; }
+
         public MainGame MainGame { get; set; }
         public Cave MainCave { get; set; }
         public GameObjectManager GameObjects { get; set; }
@@ -22,6 +24,18 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Texture2D background;
+
+        /// <summary>
+        /// Actually initialize the correct bounds.
+        /// </summary>
+        static Room()
+        {
+            RoomBounds = new List<Vector2>()
+            {
+                new Vector2(20f,20f),
+                new Vector2(30f,800f)
+            };
+        }
 
         public Room(MainGame mainGame, Cave gameCave, int index)
         {
@@ -39,7 +53,7 @@ namespace HuntTheWumpus.Source
 
         public void PlaceTeleporters()
         {
-            this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[0]) { Position = new Vector2(420, 0)});
+            this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[0]) { Position = new Vector2(420, 0) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[1]) { Position = new Vector2(833, 170) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[2]) { Position = new Vector2(815, 687) });
             this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[3]) { Position = new Vector2(450, 763) });
