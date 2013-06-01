@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
 
         private bool[] IndexesToShow;
         private bool Showing = false;
-
+        private int CurrentRoomIndex;
 
         public MiniMap(MainGame parentGame)
         {
@@ -52,6 +52,7 @@ namespace HuntTheWumpus.Source
         public void ShowRoom(int index)
         {
             this.IndexesToShow[index] = true;
+            this.CurrentRoomIndex = index;
         }
         /// <summary>
         /// Hide Room In Cave
@@ -113,7 +114,14 @@ namespace HuntTheWumpus.Source
                 {
                     if (this.IndexesToShow[index])
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Red);
+                        if (index == this.CurrentRoomIndex)
+                        {
+                            spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Blue);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Red);
+                        }
                     }
                     else
                     {
