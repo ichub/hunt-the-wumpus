@@ -21,8 +21,6 @@ namespace HuntTheWumpus.Source
         public readonly float xSize = 44;
         public readonly float ySize = 36.5f;
 
-        public readonly Texture2D Texture;
-
         public Vector2 Shift { get; set; }
 
         private List<Vector2> CenterPoints;
@@ -40,7 +38,6 @@ namespace HuntTheWumpus.Source
             this.TopLeftPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
             this.Shift = initialShift;
-
             this.InitCenterPoints();
             this.InitTopLeftPoints();
         }
