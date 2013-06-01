@@ -81,7 +81,7 @@ namespace HuntTheWumpus.Source
         /// <param name="position"></param>
         public void CollideWithOppositeVector()
         {
-            //this.velocity = -this.velocity * 2;
+            this.velocity = -this.velocity * 2;
             this.velocity = Vector2.Zero;
             this.Position = this.lastPosition;
         }

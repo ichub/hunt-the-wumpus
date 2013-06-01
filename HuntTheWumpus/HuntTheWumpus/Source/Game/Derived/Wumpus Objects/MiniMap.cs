@@ -15,10 +15,13 @@ namespace HuntTheWumpus.Source
     {
         public List<Vector2> TopLeftPoints { get; private set; }
         public MainGame MainGame { get; set; }
+        public readonly float xSize = 44;
+        public readonly float ySize = 36.5f;
+
         private List<Vector2> CenterPoints;
-        readonly float xSize = 44;
-        readonly float ySize = 36.5f;
-        private bool showing = false;
+
+        private bool[] IndexesToShow;
+        private bool Showing = false;
 
 
         public MiniMap(MainGame parentGame)
@@ -26,6 +29,7 @@ namespace HuntTheWumpus.Source
             this.MainGame = parentGame;
             this.CenterPoints = new List<Vector2>(30);
             this.TopLeftPoints = new List<Vector2>(30);
+            this.IndexesToShow = new bool[30];
             this.InitCenterPoints();
             this.InitTopLeftPoints();
         }
@@ -47,7 +51,15 @@ namespace HuntTheWumpus.Source
         /// <param name="index"></param>
         public void ShowRoom(int index)
         {
-
+            this.IndexesToShow[index] = true;
+        }
+        /// <summary>
+        /// Hide Room In Cave
+        /// </summary>
+        /// <param name="index"></param>
+        public void HideRoom(int index)
+        {
+            this.IndexesToShow[index] = false;
         }
         /// <summary>
         /// Initialize points
@@ -94,10 +106,21 @@ namespace HuntTheWumpus.Source
 
         public void Draw(SpriteBatch spriteBatch, ContentManager content)
         {
-            if (this.showing)
-            foreach (var point in this.TopLeftPoints)
+            if (this.Showing)
             {
-                spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.White);
+                int index = 0;
+                foreach (var point in this.TopLeftPoints)
+                {
+                    if (this.IndexesToShow[index])
+                    {
+                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.Red);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + new Vector2(200, 200), Color.White);
+                    }
+                    index++;
+                }
             }
         }
 
@@ -105,7 +128,7 @@ namespace HuntTheWumpus.Source
         {
             if (this.MainGame.InputManager.IsClicked(Keys.M))
             {
-                this.showing = !this.showing;
+                this.Showing = !this.Showing;
             }
         }
     }

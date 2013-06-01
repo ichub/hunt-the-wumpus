@@ -64,7 +64,7 @@ namespace HuntTheWumpus.Source
             this.MiniMap = new MiniMap(this);
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
-            this.LevelManager.CurrentLevel = new StartLevel(this); 
+            this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
             this.Player = new Player();
@@ -106,6 +106,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager.FrameUpdate();
             base.Update(gameTime);
             this.MiniMap.Update();
+            this.MiniMap.ShowRoom((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0));
         }
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace HuntTheWumpus.Source
             this.SpriteBatch.End();                        // stops drawing
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.HP, true);
-            this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.Score, true); 
+            this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.Score, true);
             this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);
             this.TextManager.DrawText(new Vector2(0, 80), "gold : " + this.Player.Inventory.AmountOfGold().ToString(), true);
             base.Draw(gameTime);
