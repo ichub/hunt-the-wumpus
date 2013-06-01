@@ -26,10 +26,12 @@ namespace HuntTheWumpus.Source
 
         private Room parentRoom;
         private Vector2 velocity;
+        private Vector2 lastPosition;
         private Timer hurtTimer;
         private Color tint;
         private int hp = 3;
         private bool isColliding = false;
+        private Timer randomMovement;
 
         public Enemy(MainGame mainGame, ILevel parentLevel)
         {
@@ -41,6 +43,12 @@ namespace HuntTheWumpus.Source
             this.BoundingBox = new BoundingBox();
             this.velocity = Vector2.Zero;
             this.tint = Color.White;
+            this.randomMovement = new Timer(100);
+            this.randomMovement.Elapsed += (a, b) => 
+                {
+                    this.velocity += Extensions.RandomVector(2);
+                };
+            this.randomMovement.Start();
         }
 
         public void CollideWithWalls()
@@ -64,34 +72,48 @@ namespace HuntTheWumpus.Source
 
         }
 
+        public void CollideWithOppositeVector()
+        {
+            this.velocity = Vector2.Zero;
+            this.Position += (this.lastPosition - this.Position) * 2;
+        }
+
+        private void GoToPlayer()
+        {
+            PlayerAvatar player = this.ParentLevel.GameObjects.GetObjectsByType<PlayerAvatar>()[0];
+            Vector2 direction = player.Position - this.Position;
+            direction.Normalize();
+            this.velocity += direction / 50;
+        }
+
         public void CollideWith(ICollideable gameObject, bool isCollided)
         {
             if (gameObject is Projectile && isCollided)
             {
                 var projectile = gameObject as Projectile;
                 if (!projectile.HasCollided)
-                if (projectile.ObjectTeam == Team.Player)
-                {
-                    if (!this.isColliding)
+                    if (projectile.ObjectTeam == Team.Player)
                     {
-                        this.hp--;
-                        this.tint = new Color(1.0f, 0f, 0f);
-
-                        this.hurtTimer = new Timer(125);
-                        this.hurtTimer.Elapsed += this.ResetTint;
-                        this.hurtTimer.Start();
-
-                        this.MainGame.SoundManager.PlaySound("grunt");
-                        if (this.hp < 0)
+                        if (!this.isColliding)
                         {
-                            this.MainGame.Player.Score += 10;
-                            this.ParentLevel.GameObjects.Remove(this);
-                            OnDeath();
+                            this.hp--;
+                            this.tint = new Color(1.0f, 0f, 0f);
+
+                            this.hurtTimer = new Timer(125);
+                            this.hurtTimer.Elapsed += this.ResetTint;
+                            this.hurtTimer.Start();
+
+                            this.MainGame.SoundManager.PlaySound("grunt");
+                            if (this.hp < 0)
+                            {
+                                this.MainGame.Player.Score += 10;
+                                this.ParentLevel.GameObjects.Remove(this);
+                                OnDeath();
+                            }
+                            this.ParentLevel.GameObjects.Remove(gameObject);
+                            this.velocity += projectile.Velocity;
                         }
-                        this.ParentLevel.GameObjects.Remove(gameObject);
-                        this.velocity += projectile.Velocity;
                     }
-                }
                 this.isColliding = true;
             }
         }
@@ -99,7 +121,6 @@ namespace HuntTheWumpus.Source
         private void ResetTint(object sender, EventArgs e)
         {
             this.tint = Color.White;
-            //this.hurtTimer.Stop();
             this.hurtTimer = null;
         }
 
@@ -135,9 +156,11 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
+            this.lastPosition = this.Position;
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
             this.CollideWithWalls();
             this.isColliding = false;
+            this.GoToPlayer();
             this.Position += this.velocity;
             this.velocity /= 1.1f;
         }

@@ -56,6 +56,8 @@ namespace HuntTheWumpus.Source
                                     PlayerAvatar current = item as PlayerAvatar;
                                     current.CollideWithOppositeVector();
                                 }
+                                if (item is Enemy)
+                                    (item as Enemy).CollideWithOppositeVector();
                             }
 
                         }

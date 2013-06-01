@@ -85,6 +85,7 @@ namespace HuntTheWumpus.Source
             this.velocity = Vector2.Zero;
             this.Position = this.lastPosition;
         }
+
         public void CollideWithWalls()
         {
             if (this.Position.X < 0)
