@@ -22,6 +22,7 @@ namespace HuntTheWumpus.Source
         private Stack<IGameObject> objectsToAdd;
         private Stack<IGameObject> objectsToRemove;
 
+        private readonly Vector2 SkipBoundaryCheck = new Vector2(-1, -1);
         /// <summary>
         /// Initializes all instance variables.
         /// </summary>
@@ -38,28 +39,34 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void HandleBounds()
         {
-            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            if (this.parentGame.LevelManager.CurrentLevel is Room)
             {
-                if (!(item is Teleporter))
+                Room currentRoom = this.parentGame.LevelManager.CurrentLevel as Room;
+                foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
                 {
-                    List<Vector2> corners = this.CreateCorners(item.BoundingBox);
-                    for (int j = 1; j < corners.Count; j++)
+                    if (!(item is Teleporter))
                     {
-                        Vector2 first = corners[j - 1];
-                        Vector2 second = corners[j];
-                        for (int i = 1; i < Room.RoomBounds.Count; i++)
+                        List<Vector2> corners = this.CreateCorners(item.BoundingBox);
+                        for (int j = 1; j < corners.Count; j++)
                         {
-                            if (DoLinesIntersect(first, second, Room.RoomBounds[i - 1], Room.RoomBounds[i]))
+                            Vector2 first = corners[j - 1];
+                            Vector2 second = corners[j];
+                            for (int i = 1; i < currentRoom.RoomBounds.Count; i++)
                             {
-                                if (item is PlayerAvatar)
+                                if (currentRoom.RoomBounds[i - 1] == SkipBoundaryCheck)
+                                    continue;
+                                if (DoLinesIntersect(first, second, currentRoom.RoomBounds[i - 1], currentRoom.RoomBounds[i]))
                                 {
-                                    PlayerAvatar current = item as PlayerAvatar;
-                                    current.CollideWithOppositeVector();
+                                    if (item is PlayerAvatar)
+                                    {
+                                        PlayerAvatar current = item as PlayerAvatar;
+                                        current.CollideWithOppositeVector();
+                                    }
+                                    if (item is Enemy)
+                                        (item as Enemy).CollideWithOppositeVector();
                                 }
-                                if (item is Enemy)
-                                    (item as Enemy).CollideWithOppositeVector();
-                            }
 
+                            }
                         }
                     }
                 }
