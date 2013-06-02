@@ -18,11 +18,14 @@ namespace HuntTheWumpus.Source
         public MainGame MainGame { get; set; }
         public Rectangle CaveBounds { get; set; }
         public Vector2 CaveOffset { get; set; }
+        public List<SuperBat> SuperBats { get; set; }
+
+        public const int NumberOfRooms = 30;
 
         public Cave(MainGame mainGame, Vector2 windowSize)
         {
             this.MainGame = mainGame;
-            this.Rooms = new Room[5 * 6];
+            this.Rooms = new Room[NumberOfRooms];
             this.CaveBounds = new Rectangle(((int)windowSize.X - 1024) / 2, ((int)windowSize.Y - 768) / 2, 1024, 768);
             this.CaveOffset = new Vector2(this.CaveBounds.X, this.CaveBounds.Y);
 
@@ -37,9 +40,33 @@ namespace HuntTheWumpus.Source
                 this.Rooms[i].AdjacentRooms = rooms;
             }
 
+            //Initalize Super Bats
+            this.SuperBats = new List<SuperBat>(3);
+            Random rand = new Random();
+            for (int i = 0; i < 3; i++)
+            {
+                int randomRoom = rand.Next(Cave.NumberOfRooms);
+                if (this.SuperBats.Where((x) => x.ParentRoomIndex == randomRoom).Count() == 0)
+                {
+                    this.SuperBats.Add(new SuperBat(this.MainGame, randomRoom));
+                }
+                else
+                {
+                    i--;
+                    continue;
+                }
+            }
+            //Finished------------------------------------------------------------>
             this.DumpState();
         }
 
+        public void UpdateSuperBats()
+        {
+            foreach (SuperBat bat in this.SuperBats)
+            {
+                bat.Update();
+            }
+        }
         public Room[] SetUpAdjacentRooms(int roomIndex)
         {
             int[] adjacentRoomIndecies = new int[6];

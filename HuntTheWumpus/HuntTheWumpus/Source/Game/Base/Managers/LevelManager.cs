@@ -71,6 +71,7 @@ namespace HuntTheWumpus.Source
         public void FrameUpdate()
         {
             if (!this.Paused)
+            {
                 if (this.CurrentLevel != null)
                 {
                     if (!this.CurrentLevel.Initialized)
@@ -78,9 +79,11 @@ namespace HuntTheWumpus.Source
                         this.CurrentLevel.Initialize();
                         this.CurrentLevel.Initialized = true;
                     }
-
                     this.CurrentLevel.FrameUpdate(this.ParentGame.GameTime, this.ParentGame.Content);
+                    this.GameCave.UpdateSuperBats();
+
                 }
+            }
         }
 
         /// <summary>

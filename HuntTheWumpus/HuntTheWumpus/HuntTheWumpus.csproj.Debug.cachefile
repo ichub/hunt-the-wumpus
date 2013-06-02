@@ -13,11 +13,11 @@ Content\Textures\Enemies\bat_spritesheet.xnb
 Content\Textures\menu.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
+Content\Textures\StartButton\button_default.xnb
+Content\Textures\StartButton\button_mouseclicked.xnb
+Content\Textures\StartButton\button_mouseover.xnb
 Content\Fonts\Courier New.xnb
 Content\Sounds\button.xnb
 Content\Sounds\item pickup.xnb
 Content\Sounds\menu change.xnb
 Content\Sounds\grunt.xnb
-Content\Textures\StartButton\button_default.xnb
-Content\Textures\StartButton\button_mouseclicked.xnb
-Content\Textures\StartButton\button_mouseover.xnb
