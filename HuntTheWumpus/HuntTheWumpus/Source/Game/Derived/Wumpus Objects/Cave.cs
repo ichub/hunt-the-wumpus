@@ -43,7 +43,8 @@ namespace HuntTheWumpus.Source
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
             Random rand = new Random();
-            for (int i = 0; i < 3; i++)
+            //Spec says 2 SuperBats
+            for (int i = 0; i < 2; i++)
             {
                 int randomRoom = rand.Next(Cave.NumberOfRooms);
                 if (this.SuperBats.Where((x) => x.ParentRoomIndex == randomRoom).Count() == 0)

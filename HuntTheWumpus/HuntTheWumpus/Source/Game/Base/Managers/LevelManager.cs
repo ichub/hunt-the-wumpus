@@ -81,7 +81,6 @@ namespace HuntTheWumpus.Source
                     }
                     this.CurrentLevel.FrameUpdate(this.ParentGame.GameTime, this.ParentGame.Content);
                     this.GameCave.UpdateSuperBats();
-
                 }
             }
         }
