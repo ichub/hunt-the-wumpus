@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Gold : PhysicalItem
+    class Gold : ItemObject
     {
         public Gold(MainGame parentGame, ILevel parentLevel)
             : base(parentGame, parentLevel, "Gold") { }
@@ -25,6 +25,11 @@ namespace HuntTheWumpus.Source
                 this.MainGame.Player.Score += 50;
                 this.MainGame.SoundManager.PlaySound("gold");
             }
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gold"));
         }
     }
 }

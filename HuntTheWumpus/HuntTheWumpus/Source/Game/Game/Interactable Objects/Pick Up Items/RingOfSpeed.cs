@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class RingOfSpeed : PhysicalItem
+    class RingOfSpeed : ItemObject
     {
         public RingOfSpeed(MainGame mainGame, ILevel parentLevel)
             : base(mainGame, parentLevel, "SpeedRing") { }

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class PhysicalItem : IEntity
+    class ItemObject : IEntity
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
@@ -29,7 +29,7 @@ namespace HuntTheWumpus.Source
 
         private Vector2 velocity;
 
-        public PhysicalItem(MainGame mainGame, ILevel parentLevel, string item)
+        public ItemObject(MainGame mainGame, ILevel parentLevel, string item)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
