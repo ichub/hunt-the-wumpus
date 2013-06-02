@@ -185,5 +185,12 @@ namespace HuntTheWumpus.Source
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
         }
+
+        public void MoveRoom(int newRoom)
+        {
+            if (newRoom >= Cave.NumberOfRooms)
+                return;
+            this.parentRoom = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
+        }
     }
 }
