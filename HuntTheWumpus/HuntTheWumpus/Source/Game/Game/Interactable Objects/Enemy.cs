@@ -12,56 +12,25 @@ using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
-    class Enemy : IEntity, IDamagable
+    class Enemy : BaseGameObject
     {
-        public MainGame MainGame { get; set; }
-        public ILevel ParentLevel { get; set; }
-        public AnimatedTexture Texture { get; set; }
-        public Vector2 LastPosition { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Velocity { get; set; }
-        public BoundingBox BoundingBox { get; set; }
-        public Team ObjectTeam { get; set; }
-        public Timer DamageTimer { get; set; }
-        public Color DamageTint { get; set; }
-        public Color CurrentTint { get; set; }
-
-        public bool ContentLoaded { get; set; }
-        public bool Initialized { get; set; }
-        public bool IsDamaged { get; set; }
-        public int DamageLength { get; set; }
-        public float SpeedDampening { get; set; }
-
-        private Room parentRoom;
         private int hp = 3;
         private bool isColliding = false;
         private Timer randomMovement;
 
         public Enemy(MainGame mainGame, ILevel parentLevel)
+            : base(mainGame, parentLevel)
         {
-            this.MainGame = mainGame;
-            this.ParentLevel = parentLevel;
-            this.parentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Enemy;
             this.Position = new Vector2(300, 300);
-            this.BoundingBox = new BoundingBox();
-            this.CurrentTint = Color.White;
-            this.DamageLength = 500;
-            this.DamageTint = Color.Red;
-
 
             this.randomMovement = new Timer(100);
-            this.randomMovement.Elapsed += (a, b) => 
+            this.randomMovement.Elapsed += (a, b) =>
                 {
                     this.Velocity += Extensions.RandomVector(2);
                 };
-            this.randomMovement.Start();
-        }
 
-        public void CollideWithLevelBounds()
-        {
-            this.Velocity = Vector2.Zero;
-            this.Position += (this.LastPosition - this.Position) * 2;
+            this.randomMovement.Start();
         }
 
         private void GoToPlayer()
@@ -75,7 +44,7 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void CollideWith(ICollideable gameObject, bool isCollided)
+        public override void CollideWith(ICollideable gameObject, bool isCollided)
         {
             if (gameObject is Projectile && isCollided)
             {
@@ -123,27 +92,17 @@ namespace HuntTheWumpus.Source
             this.SpawnGold(5);
         }
 
-        public void Initialize()
-        {
-
-        }
-
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\bat_spritesheet"), 3, 199, 100, 10);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             this.isColliding = false;
             this.GoToPlayer();
             this.Position += this.Velocity;
-            this.Velocity /= 1.1f;
-        }
-
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.CurrentTint);
+            this.Velocity /= this.SpeedDampening;
         }
     }
 }
