@@ -12,7 +12,7 @@ using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
-    class Enemy : IEntity
+    class Enemy : IEntity, IDamagable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
@@ -21,14 +21,17 @@ namespace HuntTheWumpus.Source
         public Vector2 Position { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
+        public Timer DamageTimer { get; set; }
+        public Color DamageTint { get; set; }
+        public Color CurrentTint { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+        public bool IsDamaged { get; set; }
+        public int DamageLength { get; set; }
 
         private Room parentRoom;
         private Vector2 velocity;
-        private Timer hurtTimer;
-        private Color tint;
         private int hp = 3;
         private bool isColliding = false;
         private Timer randomMovement;
@@ -41,8 +44,12 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Enemy;
             this.Position = new Vector2(300, 300);
             this.BoundingBox = new BoundingBox();
+            this.CurrentTint = Color.White;
             this.velocity = Vector2.Zero;
-            this.tint = Color.White;
+            this.DamageLength = 500;
+            this.DamageTint = Color.Red;
+
+
             this.randomMovement = new Timer(100);
             this.randomMovement.Elapsed += (a, b) => 
                 {
@@ -99,11 +106,7 @@ namespace HuntTheWumpus.Source
                         if (!this.isColliding)
                         {
                             this.hp--;
-                            this.tint = new Color(1.0f, 0f, 0f);
-
-                            this.hurtTimer = new Timer(125);
-                            this.hurtTimer.Elapsed += this.ResetTint;
-                            this.hurtTimer.Start();
+                            this.ParentLevel.GameObjects.Damage(this);
 
                             this.MainGame.SoundManager.PlaySound("grunt");
                             if (this.hp < 0)
@@ -118,12 +121,6 @@ namespace HuntTheWumpus.Source
                     }
                 this.isColliding = true;
             }
-        }
-
-        private void ResetTint(object sender, EventArgs e)
-        {
-            this.tint = Color.White;
-            this.hurtTimer = null;
         }
 
         private void SpawnGold(int amount)
@@ -168,7 +165,7 @@ namespace HuntTheWumpus.Source
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.tint);
+            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.CurrentTint);
         }
     }
 }

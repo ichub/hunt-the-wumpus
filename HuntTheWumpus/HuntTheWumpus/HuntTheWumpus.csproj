@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Game\Base\Extensions\Extensions.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IClickable.cs" />
+    <Compile Include="Source\Game\Base\Interfaces\IDamagable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IDrawable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IEntity.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IGameObject.cs" />

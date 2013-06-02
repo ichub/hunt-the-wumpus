@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
+using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
@@ -251,6 +252,21 @@ namespace HuntTheWumpus.Source
                     obj.IsClicked = false;
                 }
             }
+        }
+
+        public void Damage(IDamagable objectToDamage)
+        {
+            objectToDamage.IsDamaged = true;
+            objectToDamage.DamageTimer = new Timer(objectToDamage.DamageLength);
+            objectToDamage.CurrentTint = objectToDamage.DamageTint;
+
+            objectToDamage.DamageTimer.Elapsed += (a, b) =>
+                {
+                    objectToDamage.IsDamaged = false;
+                    objectToDamage.DamageTimer = null;
+                    objectToDamage.CurrentTint = Color.White;
+                };
+            objectToDamage.DamageTimer.Start();
         }
 
         /// <summary>

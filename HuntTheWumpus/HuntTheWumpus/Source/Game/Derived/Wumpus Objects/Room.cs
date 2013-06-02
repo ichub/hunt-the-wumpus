@@ -26,8 +26,6 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Texture2D background;
-        private bool isLocked;
-
 
         public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type)
         {
@@ -57,7 +55,6 @@ namespace HuntTheWumpus.Source
 
         public void OnLoad()
         {
-            this.isLocked = true;
             this.GameObjects.Add(new PlayerAvatar(this.MainGame, this) { Position = new Vector2(500, 200) });
             this.SpawnEnemies();
             this.PlaceTeleporters();

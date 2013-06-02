@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Interface for handling collisions between objects.
     /// </summary>
-    interface ICollideable : IGameObject
+    public interface ICollideable : IGameObject
     {
         /// <summary>
         /// Current position of the object.
