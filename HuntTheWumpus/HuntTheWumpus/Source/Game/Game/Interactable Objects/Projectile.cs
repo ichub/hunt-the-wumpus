@@ -51,6 +51,7 @@ namespace HuntTheWumpus.Source
                 if (gameObject is Enemy)
                 {
                     this.HasCollided = true;
+                    this.Remove();
                 }
             }
         }
@@ -70,7 +71,7 @@ namespace HuntTheWumpus.Source
             base.Update(gameTime);
 
             if (this.IsOutOfViewport())
-                this.ParentLevel.GameObjects.Remove(this);
+                this.Remove();
         }
     }
 }

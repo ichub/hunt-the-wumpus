@@ -61,10 +61,9 @@ namespace HuntTheWumpus.Source
                             if (this.hp < 0)
                             {
                                 this.MainGame.Player.Score += 10;
-                                this.ParentLevel.GameObjects.Remove(this);
+                                this.Remove();
                                 OnDeath();
                             }
-                            this.ParentLevel.GameObjects.Remove(gameObject);
                             this.Velocity += projectile.Velocity;
                         }
                     }

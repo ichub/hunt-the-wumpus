@@ -59,6 +59,11 @@ namespace HuntTheWumpus.Source
                 this.Position.Y + this.Texture.Size.Y > this.MainGame.WindowHeight;
         }
 
+        public void Remove()
+        {
+            this.ParentLevel.GameObjects.Remove(this);
+        }
+
         public virtual void CollideWithLevelBounds()
         {
             this.Velocity = Vector2.Zero;
