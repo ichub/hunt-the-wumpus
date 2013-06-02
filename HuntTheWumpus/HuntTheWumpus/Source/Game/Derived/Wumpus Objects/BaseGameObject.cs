@@ -8,70 +8,75 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
-    class PhysicalItem : IEntity
+    class BaseGameObject : IEntity, IDamagable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public AnimatedTexture Texture { get; set; }
-        public Vector2 Position { get; set; }
         public Vector2 LastPosition { get; set; }
+        public Vector2 Position { get; set; }
         public Vector2 Velocity { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
-        public Item RepresentedItem { get; set; }
+        public Timer DamageTimer { get; set; }
+        public Color DamageTint { get; set; }
+        public Color CurrentTint { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+        public bool IsDamaged { get; set; }
         public float SpeedDampening { get; set; }
+        public int DamageLength { get; set; }
 
-        private Vector2 velocity;
+        protected Room ParentRoom { get; set; }
 
-        public PhysicalItem(MainGame mainGame, ILevel parentLevel, string item)
+        public BaseGameObject(MainGame mainGame, ILevel parentLevel)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
-            this.ObjectTeam = Team.Player;
-            this.Position = new Vector2(40, 40);
-            this.RepresentedItem = ItemList.GetItem(item);
-            this.velocity = Extensions.RandomVector(1, 4);
+            this.ParentRoom = parentLevel as Room;
+            this.ObjectTeam = Team.Enemy;
+            this.Position = new Vector2(300, 300);
+            this.BoundingBox = new BoundingBox();
+            this.CurrentTint = Color.White;
+            this.DamageLength = 259;
+            this.DamageTint = Color.Red;
+            this.SpeedDampening = 1.1f;
         }
 
-        public virtual void CollideWith(ICollideable gameObject, bool isColliding)
+        public virtual void CollideWithLevelBounds()
         {
-            if (isColliding)
-            if (gameObject is PlayerAvatar)
-            {
-                this.MainGame.Player.Inventory.PickUp(this.RepresentedItem);
-                this.ParentLevel.GameObjects.Remove(this);
-            }
+            this.Velocity = Vector2.Zero;
+            this.Position += (this.LastPosition - this.Position) * 2;
         }
 
-        public void CollideWithLevelBounds()
+        public virtual void CollideWith(ICollideable gameObject, bool isCollided)
         {
+            
         }
 
         public virtual void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+
         }
 
         public virtual void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name));
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            this.Position += this.velocity;
-            this.velocity /= 1.1f;
+            this.Position += this.Velocity;
+            this.Velocity /= this.SpeedDampening;
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.Texture.Draw(spriteBatch, this.Position, gameTime);
+            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.CurrentTint);
         }
     }
 }

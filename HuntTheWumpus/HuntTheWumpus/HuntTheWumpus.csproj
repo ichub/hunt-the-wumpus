@@ -102,6 +102,7 @@
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Armor.cs" />
     <Compile Include="Source\Game\Derived\Misc\SpecialItems\Ring.cs" />
     <Compile Include="Source\Game\Derived\Misc\Teleporter.cs" />
+    <Compile Include="Source\Game\Derived\Wumpus Objects\BaseGameObject.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\Cave.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\MiniMap.cs" />
     <Compile Include="Source\Game\Derived\Wumpus Objects\PlayerAvatar.cs" />

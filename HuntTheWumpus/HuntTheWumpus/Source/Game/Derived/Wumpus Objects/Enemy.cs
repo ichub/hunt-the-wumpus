@@ -30,6 +30,7 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
         public bool IsDamaged { get; set; }
         public int DamageLength { get; set; }
+        public float SpeedDampening { get; set; }
 
         private Room parentRoom;
         private int hp = 3;

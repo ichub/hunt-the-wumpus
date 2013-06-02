@@ -25,6 +25,7 @@ namespace HuntTheWumpus.Source
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
         public bool HasCollided { get; private set; }
+        public float SpeedDampening { get; set; }
 
         private string imageName;
 

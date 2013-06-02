@@ -15,5 +15,7 @@ namespace HuntTheWumpus.Source
     {
         Vector2 Position { get; set; }
         Vector2 Velocity { get; set; }
+
+        float SpeedDampening { get; set; }
     }
 }

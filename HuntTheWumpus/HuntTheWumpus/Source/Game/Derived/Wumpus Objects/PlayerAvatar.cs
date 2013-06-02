@@ -27,6 +27,7 @@ namespace HuntTheWumpus.Source
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+        public float SpeedDampening { get; set; }
 
         private Room parentRoom;
 
