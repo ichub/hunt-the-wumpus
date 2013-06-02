@@ -121,5 +121,33 @@ namespace HuntTheWumpus.Source
         {
             return new Vector2((int)vector.X, (int)vector.Y);
         }
+
+        /// <summary>
+        /// Returns the direction that the given vector is most pointing to.
+        /// </summary>
+        /// <param name="vector"> The vector to check. </param>
+        /// <returns> The direction. </returns>
+        public static Direction GetDirection(Vector2 vector)
+        {
+            if (vector == Vector2.Zero)
+                return Direction.Down;
+
+            bool horizontalMove = Math.Abs(vector.X) > Math.Abs(vector.Y);
+
+            if (horizontalMove)
+            {
+                if (vector.X < 0)
+                    return Direction.Left;
+                else
+                    return Direction.Right;
+            }
+            else
+            {
+                if (vector.Y < 0)
+                    return Direction.Up;
+                else
+                    return Direction.Down;
+            }
+        }
     }
 }
