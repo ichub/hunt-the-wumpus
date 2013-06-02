@@ -12,7 +12,7 @@ using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
-    class BaseGameObject : IEntity, IDamagable
+    public abstract class BaseGameObject : IEntity, IDamagable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }

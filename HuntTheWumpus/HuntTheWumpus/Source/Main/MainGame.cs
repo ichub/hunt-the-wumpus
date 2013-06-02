@@ -24,7 +24,7 @@ namespace HuntTheWumpus.Source
         public SoundManager SoundManager { get; set; }
         public SpriteBatch SpriteBatch { get; set; }
         public GameTime GameTime { get; set; }
-        public Player Player { get; set; }
+        public PlayerStats Player { get; set; }
         public MiniMap MiniMap { get; set; }
         public Random Random { get; set; }
 
@@ -69,7 +69,7 @@ namespace HuntTheWumpus.Source
             this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
-            this.Player = new Player();
+            this.Player = new PlayerStats();
             base.Initialize();
         }
 

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    public class Player
+    public class PlayerStats
     {
         public int CurrentRoom { get; set; }
         public int HP { get; set; }
@@ -21,7 +21,7 @@ namespace HuntTheWumpus.Source
         public float MaxSpeed { get; set; }
         public Inventory Inventory { get; set; }
 
-        public Player()
+        public PlayerStats()
         {
             this.CurrentRoom = 0;
             this.HP = 3;
