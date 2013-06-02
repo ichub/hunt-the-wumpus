@@ -12,7 +12,7 @@ using System.Timers;
 
 namespace HuntTheWumpus.Source
 {
-    class Enemy : BaseGameObject
+    public abstract class Enemy : BaseGameObject
     {
         private int hp = 3;
         private bool isColliding = false;
@@ -89,11 +89,6 @@ namespace HuntTheWumpus.Source
         {
             this.SpawnSpecial();
             this.SpawnGold(5);
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Bat\\bat_spritesheet"), 3, 199, 100, 10);
         }
 
         public override void Update(GameTime gameTime)

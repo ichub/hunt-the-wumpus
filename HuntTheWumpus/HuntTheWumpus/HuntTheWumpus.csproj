@@ -91,6 +91,7 @@
     <Compile Include="Source\Game\Base\Managers\LevelManager.cs" />
     <Compile Include="Source\Game\Base\Managers\SoundManager.cs" />
     <Compile Include="Source\Game\Base\Managers\TextManager.cs" />
+    <Compile Include="Source\Game\Game\Interactable Objects\Bat.cs" />
     <Compile Include="Source\Game\Game\Levels\GameOverLevel.cs" />
     <Compile Include="Source\Game\Game\Levels\StartLevel.cs" />
     <Compile Include="Source\Game\Game\Misc\AnimatedTexture.cs" />

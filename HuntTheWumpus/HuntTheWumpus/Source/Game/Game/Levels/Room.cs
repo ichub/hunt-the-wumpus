@@ -64,7 +64,7 @@ namespace HuntTheWumpus.Source
             int amount = 2;
             for (int i = 0; i < amount; i++)
             {
-                this.GameObjects.Add(new Enemy(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
+                this.GameObjects.Add(new Bat(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
             }
         }
 
@@ -83,7 +83,7 @@ namespace HuntTheWumpus.Source
             // temporary debug feature begin
             if (this.MainGame.InputManager.IsClicked(MouseButton.Left))
             {
-                Enemy newEnemy = new Enemy(this.MainGame, this);
+                Enemy newEnemy = new Bat(this.MainGame, this);
                 newEnemy.Position = this.MainGame.InputManager.MousePosition - new Vector2(50, 50);
                 this.GameObjects.Add(newEnemy);
             }

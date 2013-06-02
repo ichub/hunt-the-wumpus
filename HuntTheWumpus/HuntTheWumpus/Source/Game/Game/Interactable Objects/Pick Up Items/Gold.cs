@@ -23,7 +23,7 @@ namespace HuntTheWumpus.Source
             if (gameObject is PlayerAvatar && isColliding)
             {
                 this.MainGame.Player.Score += 50;
-                this.MainGame.SoundManager.PlaySound("gold");
+                this.MainGame.SoundManager.PlaySound("item pickup");
             }
         }
 
