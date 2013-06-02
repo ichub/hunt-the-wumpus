@@ -29,6 +29,9 @@ namespace HuntTheWumpus.Source
         public Action OnClick { get; set; }
         public string Text { get; set; }
 
+        private AnimatedTexture clickedTexture;
+        private AnimatedTexture notClickedTexture;
+
         /// <summary>
         /// Creates a new button.
         /// </summary>
@@ -41,14 +44,18 @@ namespace HuntTheWumpus.Source
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
             this.ObjectTeam = Team.None;
-            this.Position = new Vector2(100, 100);
             this.Text = text;
             this.OnClick = onClick;
         }
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\box"));
+            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_default"));
+            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_mouseclicked"));
+            this.Texture = this.notClickedTexture;
+            this.Position = new Vector2(1024, 768) - this.Texture.Size;
+            this.Position /= 2;
+            this.Position = Extensions.RoundVector(this.Position);
         }
 
         public void Update(GameTime gameTime)
@@ -59,16 +66,17 @@ namespace HuntTheWumpus.Source
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
-            this.MainGame.TextManager.DrawText(this.Position + new Vector2(15, 15), this.Text, Color.White, false);
         }
 
         public void OnClickBegin(Vector2 clickPosition)
         {
+            this.Texture = this.clickedTexture;
         }
 
         public void OnClickRelease()
         {
             OnClick();
+            this.Texture = this.notClickedTexture;
             this.MainGame.SoundManager.PlaySound("menuchange");
         }
     }

@@ -105,5 +105,10 @@ namespace HuntTheWumpus.Source
         {
             return mainGame.Random.NextDouble() < probability;
         }
+
+        public static Vector2 RoundVector(Vector2 vector)
+        {
+            return new Vector2((int)vector.X, (int)vector.Y);
+        }
     }
 }
