@@ -16,6 +16,9 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
         ShopRoom
     }
 
+    /// <summary>
+    /// Provides a factory for creating rooms and there specific bounds
+    /// </summary>
     static class RoomFactory
     {
         private static Texture2D FloodedRoom;
@@ -30,6 +33,9 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
 
         private static Random Random;
 
+        /// <summary>
+        /// Initiates the boundaries 
+        /// </summary>
         static RoomFactory()
         {
 
@@ -219,6 +225,10 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
             RoomFactory.Random = new Random();
         }
 
+        /// <summary>
+        /// Downloades the specific images
+        /// </summary>
+        /// <param name="manager"></param>
         public static void InitFactory(ContentManager manager)
         {
             RoomFactory.FloodedRoom = manager.Load<Texture2D>("Textures\\Cave\\flooded");
@@ -227,28 +237,11 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
         }
 
-        public static Tuple<Texture2D, List<Vector2>> GetRoomAndBound(RoomType type)
-        {
-            switch (type)
-            {
-                case RoomType.Flooded:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.FloodedRoomBounds);
-                case RoomType.Normal:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.NormalRoom, RoomFactory.NormalRoomBounds);
-                case RoomType.RockSlide:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.RockSlideRoom, RoomFactory.RockSlideRoomBounds);
-                case RoomType.ShopRoom:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.ShopRoom, RoomFactory.ShopRoomBounds);
-                default:
-                    return null;
-            }
-        }
-
         /// <summary>
         /// Creates a random type of room with its specific bounds
         /// </summary>
         /// <returns></returns>
-        internal static Room Create(MainGame mainGame, Cave cave, int i)
+        public static Room Create(MainGame mainGame, Cave cave, int index)
         {
             double random = RoomFactory.Random.NextDouble();
 
@@ -275,8 +268,30 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
                 tuple = GetRoomAndBound(RoomType.ShopRoom);
                 type = RoomType.ShopRoom;
             }
-            Room room = new Room(mainGame, cave, i, tuple.Item1, tuple.Item2, type);
+            Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type);
             return room;
+        }
+
+        /// <summary>
+        /// Return the needed pair.
+        /// </summary>
+        /// <param name="type">Type of room: ENUM</param>
+        /// <returns></returns>
+        private static Tuple<Texture2D, List<Vector2>> GetRoomAndBound(RoomType type)
+        {
+            switch (type)
+            {
+                case RoomType.Flooded:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.FloodedRoomBounds);
+                case RoomType.Normal:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.NormalRoom, RoomFactory.NormalRoomBounds);
+                case RoomType.RockSlide:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.RockSlideRoom, RoomFactory.RockSlideRoomBounds);
+                case RoomType.ShopRoom:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.ShopRoom, RoomFactory.ShopRoomBounds);
+                default:
+                    return null;
+            }
         }
     }
 }
