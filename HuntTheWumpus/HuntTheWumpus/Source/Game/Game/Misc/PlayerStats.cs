@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public int Money { get; set; }
         public int Score { get; set; }
         public float MaxSpeed { get; set; }
+        public float SpeedDelta { get; set; }
         public Inventory Inventory { get; set; }
 
         public PlayerStats()
@@ -28,6 +29,7 @@ namespace HuntTheWumpus.Source
             this.Money = 100;
             this.Score = 0;
             this.MaxSpeed = 5;
+            this.SpeedDelta = 2;
             this.Inventory = new Inventory(20);
         }
 

@@ -14,54 +14,35 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Class which represents the player in each individual room.
     /// </summary>
-    class PlayerAvatar : IEntity
+    class PlayerAvatar : BaseGameObject
     {
-        public MainGame MainGame { get; set; }
-        public ILevel ParentLevel { get; set; }
-        public AnimatedTexture Texture { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 LastPosition { get; set; }
-        public Vector2 Velocity { get; set; }
-        public BoundingBox BoundingBox { get; set; }
-        public Team ObjectTeam { get; set; }
-
-        public bool ContentLoaded { get; set; }
-        public bool Initialized { get; set; }
-        public float SpeedDampening { get; set; }
-
-        private Room parentRoom;
-
-        private int moveSpeed = 2;
         private bool collidedThisFrame = false;
         private bool collidedWithEnemyLastFrame = false;
 
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
+            : base(mainGame, parentLevel)
         {
-            this.MainGame = mainGame;
-            this.ParentLevel = parentLevel;
-            this.parentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(400, 400);
-            this.BoundingBox = new BoundingBox();
         }
 
         public void Move()
         {
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.A))
             {
-                this.Velocity += new Vector2(-moveSpeed, 0);
+                this.Velocity += new Vector2(-this.MainGame.Player.SpeedDelta, 0);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.W))
             {
-                this.Velocity += new Vector2(0, -moveSpeed);
+                this.Velocity += new Vector2(0, -this.MainGame.Player.SpeedDelta);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.D))
             {
-                this.Velocity += new Vector2(moveSpeed, 0);
+                this.Velocity += new Vector2(this.MainGame.Player.SpeedDelta, 0);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.S))
             {
-                this.Velocity += new Vector2(0, moveSpeed);
+                this.Velocity += new Vector2(0, this.MainGame.Player.SpeedDelta);
             }
 
             this.Position += this.Velocity;
@@ -74,7 +55,7 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void CollideWithLevelBounds()
+        public override void CollideWithLevelBounds()
         {
             this.Velocity = -this.Velocity * 2;
             this.Velocity = Vector2.Zero;
@@ -108,7 +89,7 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void CollideWith(ICollideable gameObject, bool isColliding)
+        public override void CollideWith(ICollideable gameObject, bool isColliding)
         {
             collidedThisFrame = isColliding | collidedThisFrame;
 
@@ -129,17 +110,17 @@ namespace HuntTheWumpus.Source
 
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\player"));
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             this.FireProjectile();
             this.Move();
@@ -149,16 +130,9 @@ namespace HuntTheWumpus.Source
             collidedThisFrame = false;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
-        }
-
-        public void MoveRoom(int newRoom)
-        {
-            if (newRoom >= Cave.NumberOfRooms)
-                return;
-            this.parentRoom = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
         }
     }
 }

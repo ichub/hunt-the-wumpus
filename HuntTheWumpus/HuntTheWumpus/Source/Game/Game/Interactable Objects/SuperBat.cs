@@ -46,7 +46,6 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
                         return;
 
                     PlayerAvatar player = avatars[0];
-                    player.MoveRoom(newRoom);
 
                     this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
                     this.MainGame.MiniMap.ShowRoom(this.MainGame.LevelManager.GameCave.Rooms[newRoom]);
