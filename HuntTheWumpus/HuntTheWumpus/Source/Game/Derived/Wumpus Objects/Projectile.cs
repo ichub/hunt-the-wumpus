@@ -18,13 +18,13 @@ namespace HuntTheWumpus.Source
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 LastPosition { get; set; }
+        public Vector2 Velocity { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
         public bool HasCollided { get; private set; }
-        public Vector2 Velocity;
 
         private string imageName;
 
@@ -64,7 +64,6 @@ namespace HuntTheWumpus.Source
         public void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\" + this.imageName), 5, 20, 20, 60);
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Update(GameTime gameTime)

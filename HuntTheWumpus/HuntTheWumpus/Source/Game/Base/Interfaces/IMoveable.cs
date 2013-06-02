@@ -11,7 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    public interface IEntity : ICollideable, IInitializable, IUpdateable, IDrawable, IMoveable
+    public interface IMoveable
     {
+        Vector2 Position { get; set; }
+        Vector2 Velocity { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public AnimatedTexture Texture { get; set; }
         public Vector2 LastPosition { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 Velocity { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
         public Timer DamageTimer { get; set; }
@@ -31,7 +32,6 @@ namespace HuntTheWumpus.Source
         public int DamageLength { get; set; }
 
         private Room parentRoom;
-        private Vector2 velocity;
         private int hp = 3;
         private bool isColliding = false;
         private Timer randomMovement;
@@ -45,7 +45,6 @@ namespace HuntTheWumpus.Source
             this.Position = new Vector2(300, 300);
             this.BoundingBox = new BoundingBox();
             this.CurrentTint = Color.White;
-            this.velocity = Vector2.Zero;
             this.DamageLength = 500;
             this.DamageTint = Color.Red;
 
@@ -53,34 +52,14 @@ namespace HuntTheWumpus.Source
             this.randomMovement = new Timer(100);
             this.randomMovement.Elapsed += (a, b) => 
                 {
-                    this.velocity += Extensions.RandomVector(2);
+                    this.Velocity += Extensions.RandomVector(2);
                 };
             this.randomMovement.Start();
         }
 
-        public void CollideWithWalls()
-        {
-            if (this.Position.X < 0)
-            {
-                this.Position = new Vector2(0, this.Position.Y);
-            }
-            if (this.Position.Y < 0)
-            {
-                this.Position = new Vector2(this.Position.X, 0);
-            }
-            if (this.Position.X > this.parentRoom.MainCave.CaveBounds.Width - this.Texture.Size.X)
-            {
-                this.Position = new Vector2(this.parentRoom.MainCave.CaveBounds.Width - this.Texture.Size.X, this.Position.Y);
-            }
-            if (this.Position.Y > this.parentRoom.MainCave.CaveBounds.Height - this.Texture.Size.Y)
-            {
-                this.Position = new Vector2(this.Position.X, this.parentRoom.MainCave.CaveBounds.Height - this.Texture.Size.Y);
-            }
-        }
-
         public void CollideWithLevelBounds()
         {
-            this.velocity = Vector2.Zero;
+            this.Velocity = Vector2.Zero;
             this.Position += (this.LastPosition - this.Position) * 2;
         }
 
@@ -91,7 +70,7 @@ namespace HuntTheWumpus.Source
             {
                 Vector2 direction = L[0].Position - this.Position;
                 direction.Normalize();
-                this.velocity += direction / 50;
+                this.Velocity += direction / 50;
             }
         }
 
@@ -116,7 +95,7 @@ namespace HuntTheWumpus.Source
                                 OnDeath();
                             }
                             this.ParentLevel.GameObjects.Remove(gameObject);
-                            this.velocity += projectile.Velocity;
+                            this.Velocity += projectile.Velocity;
                         }
                     }
                 this.isColliding = true;
@@ -145,7 +124,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+
         }
 
         public void LoadContent(ContentManager content)
@@ -155,12 +134,10 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
-            this.CollideWithWalls();
             this.isColliding = false;
             this.GoToPlayer();
-            this.Position += this.velocity;
-            this.velocity /= 1.1f;
+            this.Position += this.Velocity;
+            this.Velocity /= 1.1f;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

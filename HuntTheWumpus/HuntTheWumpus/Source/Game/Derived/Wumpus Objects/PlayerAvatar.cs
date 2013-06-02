@@ -21,13 +21,13 @@ namespace HuntTheWumpus.Source
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 LastPosition { get; set; }
+        public Vector2 Velocity { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
 
-        private Vector2 velocity;
         private Room parentRoom;
 
         private int moveSpeed = 2;
@@ -48,60 +48,36 @@ namespace HuntTheWumpus.Source
         {
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.A))
             {
-                this.velocity += new Vector2(-moveSpeed, 0);
+                this.Velocity += new Vector2(-moveSpeed, 0);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.W))
             {
-                this.velocity += new Vector2(0, -moveSpeed);
+                this.Velocity += new Vector2(0, -moveSpeed);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.D))
             {
-                this.velocity += new Vector2(moveSpeed, 0);
+                this.Velocity += new Vector2(moveSpeed, 0);
             }
             if (MainGame.InputManager.KeyboardState.IsKeyDown(Keys.S))
             {
-                this.velocity += new Vector2(0, moveSpeed);
+                this.Velocity += new Vector2(0, moveSpeed);
             }
 
-            this.Position += velocity;
-            this.velocity /= 1.2f;
+            this.Position += this.Velocity;
+            this.Velocity /= 1.2f;
 
-            if (this.velocity.LengthSquared() > this.MainGame.Player.MaxSpeed * this.MainGame.Player.MaxSpeed)
+            if (this.Velocity.LengthSquared() > this.MainGame.Player.MaxSpeed * this.MainGame.Player.MaxSpeed)
             {
-                this.velocity /= this.velocity.Length();
-                this.velocity *= this.MainGame.Player.MaxSpeed;
+                this.Velocity /= this.Velocity.Length();
+                this.Velocity *= this.MainGame.Player.MaxSpeed;
             }
         }
 
         public void CollideWithLevelBounds()
         {
-            this.velocity = -this.velocity * 2;
-            this.velocity = Vector2.Zero;
+            this.Velocity = -this.Velocity * 2;
+            this.Velocity = Vector2.Zero;
             this.Position = this.LastPosition;
-        }
-
-        public void CollideWithWalls()
-        {
-            if (this.Position.X < 0)
-            {
-                this.Position = new Vector2(0, this.Position.Y);
-                this.velocity = Vector2.Zero;
-            }
-            if (this.Position.Y < 0)
-            {
-                this.Position = new Vector2(this.Position.X, 0);
-                this.velocity = Vector2.Zero;
-            }
-            if (this.Position.X > this.parentRoom.MainCave.CaveBounds.Width - this.Texture.Size.X)
-            {
-                this.Position = new Vector2(this.parentRoom.MainCave.CaveBounds.Width - this.Texture.Size.X, this.Position.Y);
-                this.velocity = Vector2.Zero;
-            }
-            if (this.Position.Y > this.parentRoom.MainCave.CaveBounds.Height - this.Texture.Size.Y)
-            {
-                this.Position = new Vector2(this.Position.X, this.parentRoom.MainCave.CaveBounds.Height - this.Texture.Size.Y);
-                this.velocity = Vector2.Zero;
-            }
         }
 
         public void FireProjectile()
@@ -160,14 +136,12 @@ namespace HuntTheWumpus.Source
         public void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\player"));
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Update(GameTime gameTime)
         {
             this.FireProjectile();
             this.Move();
-            this.CollideWithWalls();
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
 
             collidedWithEnemyLastFrame = collidedThisFrame;

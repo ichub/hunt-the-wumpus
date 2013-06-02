@@ -84,6 +84,7 @@
     <Compile Include="Source\Game\Base\Interfaces\IGameObject.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IInitializable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ILevel.cs" />
+    <Compile Include="Source\Game\Base\Interfaces\IMoveable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IUpdateable.cs" />
     <Compile Include="Source\Game\Base\Managers\GameObjectManager.cs" />
     <Compile Include="Source\Game\Base\Managers\InputManager.cs" />

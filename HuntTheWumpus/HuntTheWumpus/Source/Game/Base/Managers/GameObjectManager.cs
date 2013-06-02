@@ -116,6 +116,7 @@ namespace HuntTheWumpus.Source
         {
             return (second.Y - first.Y) / (second.X - first.X);
         }
+
         /// <summary>
         /// Get the y intercept of a line.
         /// </summary>
@@ -126,6 +127,7 @@ namespace HuntTheWumpus.Source
         {
             return (vect.Y) - (vect.X * slope);
         }
+
         /// <summary>
         /// Gets the corners of the bounding box.
         /// </summary>
@@ -140,6 +142,7 @@ namespace HuntTheWumpus.Source
             vectors.Add(new Vector2(box.Min.X, box.Max.Y));
             return vectors;
         }
+
         /// <summary>
         /// Gets all game objects of type T.
         /// </summary>
@@ -156,6 +159,22 @@ namespace HuntTheWumpus.Source
                 }
             }
             return resultList;
+        }
+
+        /// <summary>
+        /// Updates the bounding box of each drawable collideable object to cover its 
+        /// image sprite thing.
+        /// </summary>
+        public void UpdateBoundingBox()
+        {
+            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            {
+                if (item is IDrawable)
+                {
+                    IDrawable drawableItem = item as IDrawable;
+                    item.BoundingBox = Extensions.Box2D(item.Position, item.Position + drawableItem.Texture.Size);
+                }
+            }
         }
 
         /// <summary>
@@ -312,6 +331,7 @@ namespace HuntTheWumpus.Source
             this.HandleClicking();
             this.HandleCollisions();
             this.Update();
+            this.UpdateBoundingBox();
             this.AddAndRemoveObjects();
         }
 

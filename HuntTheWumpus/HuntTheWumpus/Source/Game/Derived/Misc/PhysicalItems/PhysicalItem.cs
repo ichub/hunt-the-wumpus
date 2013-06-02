@@ -18,6 +18,7 @@ namespace HuntTheWumpus.Source
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 LastPosition { get; set; }
+        public Vector2 Velocity { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
         public Item RepresentedItem { get; set; }
@@ -63,7 +64,6 @@ namespace HuntTheWumpus.Source
 
         public virtual void Update(GameTime gameTime)
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
             this.Position += this.velocity;
             this.velocity /= 1.1f;
         }
