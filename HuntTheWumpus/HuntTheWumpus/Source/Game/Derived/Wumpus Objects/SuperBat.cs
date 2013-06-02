@@ -7,12 +7,14 @@ using System.Diagnostics;
 
 namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
 {
+    /// <summary>
+    /// Provides a class that represents the superbat of the game
+    /// </summary>
     public class SuperBat
     {
         public MainGame MainGame { get; set; }
         public int ParentRoomIndex { get; set; }
         public Random RandomGenerator { get; set; }
-
 
         public SuperBat(MainGame game, int room)
         {
@@ -21,6 +23,11 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
             this.RandomGenerator = new Random();
         }
 
+        /// <summary>
+        /// Checks if player is in the room
+        /// if yes then moves it to a random room
+        /// and also updates the minimap
+        /// </summary>
         public void Update()
         {
             Room currentRoom = this.MainGame.LevelManager.CurrentLevel as Room;

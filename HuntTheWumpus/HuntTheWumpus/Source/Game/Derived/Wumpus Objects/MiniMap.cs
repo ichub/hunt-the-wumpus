@@ -81,10 +81,6 @@ namespace HuntTheWumpus.Source
                 this.IndexesToShow[room.RoomIndex] = true;
                 this.CurrentRoom = room;
             }
-            else
-            {
-                Debug.WriteLine("Room is null");
-            }
         }
         /// <summary>
         /// Hide Room In Cave
