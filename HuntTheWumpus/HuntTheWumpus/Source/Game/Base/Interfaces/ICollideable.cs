@@ -17,6 +17,16 @@ namespace HuntTheWumpus.Source
     interface ICollideable : IGameObject
     {
         /// <summary>
+        /// Current position of the object.
+        /// </summary>
+        Vector2 Position { get; set; }
+
+        /// <summary>
+        /// Position of the object during the last frame.
+        /// </summary>
+        Vector2 LastPosition { get; set; }
+
+        /// <summary>
         /// A list of bounding boxes with which other objects can collide.
         /// </summary>
         BoundingBox BoundingBox { get; set; }
@@ -27,5 +37,10 @@ namespace HuntTheWumpus.Source
         /// <param name="gameObject"> Another collideable object. </param>
         /// <param name="isColliding"> Whether or not this object is colliding witht the other one. </param>
         void CollideWith(ICollideable gameObject, bool isColliding);
+
+        /// <summary>
+        /// Method for handling collisions between the object and the level.
+        /// </summary>
+        void CollideWithLevelBounds();
     }
 }

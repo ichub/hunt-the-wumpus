@@ -79,6 +79,7 @@
     <Compile Include="Source\Game\Base\Extensions\Extensions.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IClickable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IDrawable.cs" />
+    <Compile Include="Source\Game\Base\Interfaces\IEntity.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IGameObject.cs" />
     <Compile Include="Source\Game\Base\Interfaces\IInitializable.cs" />
     <Compile Include="Source\Game\Base\Interfaces\ILevel.cs" />

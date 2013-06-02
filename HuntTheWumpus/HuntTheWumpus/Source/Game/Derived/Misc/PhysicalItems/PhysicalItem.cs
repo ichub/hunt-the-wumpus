@@ -11,12 +11,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class PhysicalItem : IDrawable, IUpdateable, IInitializable, ICollideable
+    class PhysicalItem : IEntity
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 LastPosition { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
         public Item RepresentedItem { get; set; }
@@ -44,6 +45,10 @@ namespace HuntTheWumpus.Source
                 this.MainGame.Player.Inventory.PickUp(this.RepresentedItem);
                 this.ParentLevel.GameObjects.Remove(this);
             }
+        }
+
+        public void CollideWithLevelBounds()
+        {
         }
 
         public virtual void Initialize()

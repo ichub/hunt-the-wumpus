@@ -17,6 +17,7 @@ namespace HuntTheWumpus.Source
         public ILevel ParentLevel { get; set; }
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 LastPosition { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
@@ -51,6 +52,10 @@ namespace HuntTheWumpus.Source
                         MainGame.LevelManager.CurrentLevel = RoomToTeleportTo;
                 }
 
+        }
+
+        public void CollideWithLevelBounds()
+        {
         }
 
         public void Update(GameTime gameTime)

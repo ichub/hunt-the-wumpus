@@ -14,12 +14,13 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Class which represents the player in each individual room.
     /// </summary>
-    class PlayerAvatar : IDrawable, IUpdateable, IInitializable, ICollideable
+    class PlayerAvatar : IEntity
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 LastPosition { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
@@ -27,7 +28,6 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Vector2 velocity;
-        private Vector2 lastPosition;
         private Room parentRoom;
 
         private int moveSpeed = 2;
@@ -42,7 +42,6 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(400, 400);
             this.BoundingBox = new BoundingBox();
-            this.lastPosition = this.Position;
         }
 
         public void Move()
@@ -73,17 +72,12 @@ namespace HuntTheWumpus.Source
                 this.velocity *= this.MainGame.Player.MaxSpeed;
             }
         }
-        /// <summary>
-        /// Bounces opposite was
-        /// was just a simple implementation of collide
-        /// you can change it later
-        /// </summary>
-        /// <param name="position"></param>
-        public void CollideWithOppositeVector()
+
+        public void CollideWithLevelBounds()
         {
             this.velocity = -this.velocity * 2;
             this.velocity = Vector2.Zero;
-            this.Position = this.lastPosition;
+            this.Position = this.LastPosition;
         }
 
         public void CollideWithWalls()
@@ -171,7 +165,6 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
-            this.lastPosition = this.Position;
             this.FireProjectile();
             this.Move();
             this.CollideWithWalls();

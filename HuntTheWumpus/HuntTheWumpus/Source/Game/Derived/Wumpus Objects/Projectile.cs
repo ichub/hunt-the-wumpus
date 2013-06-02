@@ -11,12 +11,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Projectile : IUpdateable, IDrawable, IInitializable, ICollideable
+    class Projectile : IEntity
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 LastPosition { get; set; }
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
@@ -50,24 +51,9 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        private void Remove()
+        public void CollideWithLevelBounds()
         {
-            if (this.Position.X < 0)
-            {
-                this.ParentLevel.GameObjects.Remove(this);
-            }
-            else if (this.Position.Y < 0)
-            {
-                this.ParentLevel.GameObjects.Remove(this);
-            }
-            else if (this.Position.X > this.MainGame.LevelManager.GameCave.CaveBounds.Width - this.Texture.Size.X)
-            {
-                this.ParentLevel.GameObjects.Remove(this);
-            }
-            else if (this.Position.Y > this.MainGame.LevelManager.GameCave.CaveBounds.Height - this.Texture.Size.Y)
-            {
-                this.ParentLevel.GameObjects.Remove(this);
-            }
+            this.ParentLevel.GameObjects.Remove(this);
         }
 
         public void Initialize()
@@ -83,7 +69,6 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
-            this.Remove();
             this.Position += Velocity * 3;
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
         }

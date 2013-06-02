@@ -35,6 +35,17 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
+        /// Updates the last position of each collideable object to the current position.
+        /// To be called before this.Update().
+        /// </summary>
+        public void UpdateLastPositions()
+        {
+            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            {
+                item.LastPosition = item.Position;
+            }
+        }
+        /// <summary>
         /// Checks and handles collisions with the border of the room
         /// </summary>
         public void HandleBounds()
@@ -45,13 +56,8 @@ namespace HuntTheWumpus.Source
                 return;
             }
 
-            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            foreach (IEntity item in this.GetObjectsByType<IEntity>())
             {
-                if (item is Teleporter)
-                {
-                    continue;
-                }
-
                 List<Vector2> corners = this.CreateCorners(item.BoundingBox);
 
                 for (int j = 1; j < corners.Count; j++)
@@ -68,17 +74,7 @@ namespace HuntTheWumpus.Source
 
                         if (this.DoLinesIntersect(first, second, currentRoom.RoomBounds[i - 1], currentRoom.RoomBounds[i]))
                         {
-                            PlayerAvatar player = item as PlayerAvatar;
-                            if (null != player)
-                            {
-                                player.CollideWithOppositeVector();
-                            }
-
-                            Enemy enemy = item as Enemy;
-                            if (null != enemy)
-                            {
-                                enemy.CollideWithOppositeVector();
-                            }
+                            item.CollideWithLevelBounds();
                         }
                     }
                 }
@@ -294,6 +290,7 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void FrameUpdate()
         {
+            this.UpdateLastPositions();
             this.LoadContent();
             this.Initialize();
             this.HandleClicking();
