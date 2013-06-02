@@ -80,10 +80,13 @@ namespace HuntTheWumpus.Source
 
         private void GoToPlayer()
         {
-            PlayerAvatar player = this.ParentLevel.GameObjects.GetObjectsByType<PlayerAvatar>()[0];
-            Vector2 direction = player.Position - this.Position;
-            direction.Normalize();
-            this.velocity += direction / 50;
+            List<PlayerAvatar> L = this.ParentLevel.GameObjects.GetObjectsByType<PlayerAvatar>();
+            if (L.Any())
+            {
+                Vector2 direction = L[0].Position - this.Position;
+                direction.Normalize();
+                this.velocity += direction / 50;
+            }
         }
 
         public void CollideWith(ICollideable gameObject, bool isCollided)
