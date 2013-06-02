@@ -99,6 +99,7 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\Gold.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\PhysicalItem.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\RingOfSpeed.cs" />
+    <Compile Include="Source\Game\Game\Misc\Direction.cs" />
     <Compile Include="Source\Game\Game\Misc\Teleporter.cs" />
     <Compile Include="Source\Game\Base\Misc\BaseGameObject.cs" />
     <Compile Include="Source\Game\Game\Levels\Cave.cs" />

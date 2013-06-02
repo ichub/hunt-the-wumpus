@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
         public Projectile(MainGame mainGame, ILevel parentLevel, Direction direction)
             : base(mainGame, parentLevel)
         {
-            this.SpeedModifier = 7;
+            this.SpeedModifier = 10;
             this.ObjectTeam = Team.Player;
             this.SpeedDampening = 1;
             this.Position = new Vector2(100, 100);
@@ -63,6 +63,14 @@ namespace HuntTheWumpus.Source
         public override void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\fireball_spritesheet"), 5, 20, 20, 60);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (this.IsOutOfViewport())
+                this.ParentLevel.GameObjects.Remove(this);
         }
     }
 }

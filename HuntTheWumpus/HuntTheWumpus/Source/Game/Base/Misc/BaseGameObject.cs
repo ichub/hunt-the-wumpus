@@ -30,6 +30,7 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
         public bool IsDamaged { get; set; }
         public float SpeedDampening { get; set; }
+        public float SpeedModifier { get; set; }
         public int DamageLength { get; set; }
 
         protected Room ParentRoom { get; set; }
@@ -46,6 +47,16 @@ namespace HuntTheWumpus.Source
             this.DamageLength = 259;
             this.DamageTint = Color.Red;
             this.SpeedDampening = 1.1f;
+            this.SpeedModifier = 1;
+        }
+
+        protected bool IsOutOfViewport()
+        {
+            return
+                this.Position.X < 0 ||
+                this.Position.X + this.Texture.Size.X > this.MainGame.WindowWidth ||
+                this.Position.Y < 0 ||
+                this.Position.Y + this.Texture.Size.Y > this.MainGame.WindowHeight;
         }
 
         public virtual void CollideWithLevelBounds()
@@ -70,7 +81,7 @@ namespace HuntTheWumpus.Source
 
         public virtual void Update(GameTime gameTime)
         {
-            this.Position += this.Velocity;
+            this.Position += this.Velocity * this.SpeedModifier;
             this.Velocity /= this.SpeedDampening;
         }
 
