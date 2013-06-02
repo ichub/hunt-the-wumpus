@@ -64,29 +64,19 @@ namespace HuntTheWumpus.Source
 
         public void FireProjectile()
         {
-            Projectile projectile = new Projectile(this.MainGame, this.ParentLevel, Team.Player, "fireball_spritesheet");
-            projectile.Position = this.Position + this.Texture.Size / 2;
+            Vector2 position = this.Position + this.Texture.Size / 2;
 
             if (MainGame.InputManager.IsClicked(Keys.Up))
-            {
-                projectile.Velocity = new Vector2(0, -4);
-                this.ParentLevel.GameObjects.Add(projectile);
-            }
-            if (MainGame.InputManager.IsClicked(Keys.Down))
-            {
-                projectile.Velocity = new Vector2(0, 4);
-                this.ParentLevel.GameObjects.Add(projectile);
-            }
-            if (MainGame.InputManager.IsClicked(Keys.Left))
-            {
-                projectile.Velocity = new Vector2(-4, 0);
-                this.ParentLevel.GameObjects.Add(projectile);
-            }
-            if (MainGame.InputManager.IsClicked(Keys.Right))
-            {
-                projectile.Velocity = new Vector2(4, 0);
-                this.ParentLevel.GameObjects.Add(projectile);
-            }
+                this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Up) { Position = position });
+            
+            else if (MainGame.InputManager.IsClicked(Keys.Down))
+                this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Down) { Position = position });
+
+            else if (MainGame.InputManager.IsClicked(Keys.Left))
+                this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Left) { Position = position });
+
+            else if (MainGame.InputManager.IsClicked(Keys.Right))
+                this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Right) { Position = position });
         }
 
         public override void CollideWith(ICollideable gameObject, bool isColliding)
