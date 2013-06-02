@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 namespace HuntTheWumpus.Source
 {
     /// <summary>
-    /// Class for extension methods.
+    /// Class for extension methods and helper methods.
     /// </summary>
     public static class Extensions
     {
@@ -90,6 +90,12 @@ namespace HuntTheWumpus.Source
             return randomVector / randomVector.Length() * length;
         }
 
+        /// <summary>
+        /// Creates a random vector with a randome length in the given range.
+        /// </summary>
+        /// <param name="minLength"> Minimum vector length. </param>
+        /// <param name="maxLength"> Maximum vector length. </param>
+        /// <returns></returns>
         public static Vector2 RandomVector(float minLength, float maxLength)
         {
             double randomLength = mainGame.Random.NextDouble() * (maxLength - minLength) + minLength;
@@ -106,6 +112,11 @@ namespace HuntTheWumpus.Source
             return mainGame.Random.NextDouble() < probability;
         }
 
+        /// <summary>
+        /// Rounds the vector to integer coordinates.
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public static Vector2 RoundVector(Vector2 vector)
         {
             return new Vector2((int)vector.X, (int)vector.Y);

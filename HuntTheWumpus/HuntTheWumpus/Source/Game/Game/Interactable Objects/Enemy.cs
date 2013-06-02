@@ -93,7 +93,7 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\bat_spritesheet"), 3, 199, 100, 10);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Bat\\bat_spritesheet"), 3, 199, 100, 10);
         }
 
         public override void Update(GameTime gameTime)

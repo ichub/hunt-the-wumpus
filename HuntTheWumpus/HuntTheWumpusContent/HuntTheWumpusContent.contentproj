@@ -138,7 +138,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Enemies\bat_spritesheet.png">
+    <Compile Include="Textures\Enemies\Bat\bat_spritesheet.png">
       <Name>bat_spritesheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -178,6 +178,41 @@
     </Compile>
     <Compile Include="Textures\StartButton\button_mouseover.png">
       <Name>button_mouseover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Enemies\Wumpus\wumpus_backspritesheet.png">
+      <Name>wumpus_backspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Enemies\Wumpus\wumpus_frontspritesheet.png">
+      <Name>wumpus_frontspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Enemies\Wumpus\wumpus_leftspritesheet.png">
+      <Name>wumpus_leftspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Enemies\Wumpus\wumpus_rightspritesheet.png">
+      <Name>wumpus_rightspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Enemies\Bat\superbat_spritesheet.png">
+      <Name>superbat_spritesheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

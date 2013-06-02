@@ -9,13 +9,18 @@ Content\Textures\Cave\normal.xnb
 Content\Textures\Cave\flooded.xnb
 Content\Textures\Cave\pit.xnb
 Content\Textures\Cave\rockslide.xnb
-Content\Textures\Enemies\bat_spritesheet.xnb
+Content\Textures\Enemies\Bat\bat_spritesheet.xnb
 Content\Textures\menu.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
 Content\Textures\StartButton\button_default.xnb
 Content\Textures\StartButton\button_mouseclicked.xnb
 Content\Textures\StartButton\button_mouseover.xnb
+Content\Textures\Enemies\Wumpus\wumpus_backspritesheet.xnb
+Content\Textures\Enemies\Wumpus\wumpus_frontspritesheet.xnb
+Content\Textures\Enemies\Wumpus\wumpus_leftspritesheet.xnb
+Content\Textures\Enemies\Wumpus\wumpus_rightspritesheet.xnb
+Content\Textures\Enemies\Bat\superbat_spritesheet.xnb
 Content\Fonts\Courier New.xnb
 Content\Sounds\button.xnb
 Content\Sounds\item pickup.xnb
