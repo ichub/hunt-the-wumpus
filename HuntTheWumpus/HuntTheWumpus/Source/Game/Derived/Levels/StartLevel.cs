@@ -36,14 +36,17 @@ namespace HuntTheWumpus.Source
 
         public void OnLoad()
         {
+            return;
         }
 
         public void OnUnLoad()
         {
+            return;
         }
 
         public void Reset()
         {
+            return;
         }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)

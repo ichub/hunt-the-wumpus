@@ -14,13 +14,13 @@ namespace HuntTheWumpus.Source
     class ItemList
     {
         public static List<Item> Items { get; set; }
-        
+
         /// <summary>
         /// Constructs default ingame items
         /// </summary>
         static ItemList()
         {
-            Items = new List<Item>();
+            ItemList.Items = new List<Item>();
 
             AddItem("Gold", 0);
             AddItem("Bow", 0); //hopefully the purpose is clear enough
@@ -49,12 +49,12 @@ namespace HuntTheWumpus.Source
         /// <param name="price"> Price of the item. </param>
         public static void AddItem(String name, int price)
         {
-            Items.Add(new Item(name, price));  
+            ItemList.Items.Add(new Item(name, price));
         }
 
         public static Item GetItem(string name)
         {
-            foreach (var item in Items)
+            foreach (var item in ItemList.Items)
             {
                 if (item.Name == name)
                     return item;

@@ -39,39 +39,52 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void HandleBounds()
         {
-            if (this.parentGame.LevelManager.CurrentLevel is Room)
+            Room currentRoom = this.parentGame.LevelManager.CurrentLevel as Room;
+            if (null == currentRoom)
             {
-                Room currentRoom = this.parentGame.LevelManager.CurrentLevel as Room;
-                foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
-                {
-                    if (!(item is Teleporter))
-                    {
-                        List<Vector2> corners = this.CreateCorners(item.BoundingBox);
-                        for (int j = 1; j < corners.Count; j++)
-                        {
-                            Vector2 first = corners[j - 1];
-                            Vector2 second = corners[j];
-                            for (int i = 1; i < currentRoom.RoomBounds.Count; i++)
-                            {
-                                if (currentRoom.RoomBounds[i - 1] == SkipBoundaryCheck)
-                                    continue;
-                                if (DoLinesIntersect(first, second, currentRoom.RoomBounds[i - 1], currentRoom.RoomBounds[i]))
-                                {
-                                    if (item is PlayerAvatar)
-                                    {
-                                        PlayerAvatar current = item as PlayerAvatar;
-                                        current.CollideWithOppositeVector();
-                                    }
-                                    if (item is Enemy)
-                                        (item as Enemy).CollideWithOppositeVector();
-                                }
+                return;
+            }
 
+            foreach (ICollideable item in this.GetObjectsByType<ICollideable>())
+            {
+                if (item is Teleporter)
+                {
+                    continue;
+                }
+
+                List<Vector2> corners = this.CreateCorners(item.BoundingBox);
+
+                for (int j = 1; j < corners.Count; j++)
+                {
+                    Vector2 first = corners[j - 1];
+                    Vector2 second = corners[j];
+
+                    for (int i = 1; i < currentRoom.RoomBounds.Count; i++)
+                    {
+                        if (currentRoom.RoomBounds[i - 1] == SkipBoundaryCheck)
+                        {
+                            continue;
+                        }
+
+                        if (this.DoLinesIntersect(first, second, currentRoom.RoomBounds[i - 1], currentRoom.RoomBounds[i]))
+                        {
+                            PlayerAvatar player = item as PlayerAvatar;
+                            if (null != player)
+                            {
+                                player.CollideWithOppositeVector();
+                            }
+
+                            Enemy enemy = item as Enemy;
+                            if (null != enemy)
+                            {
+                                enemy.CollideWithOppositeVector();
                             }
                         }
                     }
                 }
             }
         }
+
         /// <summary>
         /// Checks if two lines interect
         /// </summary>
@@ -264,7 +277,7 @@ namespace HuntTheWumpus.Source
         /// </summary>
         private void HandleCollisions()
         {
-            var collidable = GetObjectsByType<ICollideable>();
+            List<ICollideable> collidable = GetObjectsByType<ICollideable>();
 
             for (int i = 0; i < collidable.Count; i++)
             {

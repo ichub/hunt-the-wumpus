@@ -87,7 +87,7 @@ namespace HuntTheWumpus.Source
             // temporary debug feature begin
             if (this.MainGame.InputManager.IsClicked(MouseButton.Left))
             {
-                var newEnemy = new Enemy(this.MainGame, this);
+                Enemy newEnemy = new Enemy(this.MainGame, this);
                 newEnemy.Position = this.MainGame.InputManager.MousePosition - new Vector2(50, 50);
                 this.GameObjects.Add(newEnemy);
             }

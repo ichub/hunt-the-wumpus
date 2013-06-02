@@ -18,18 +18,24 @@ namespace HuntTheWumpus.Source
         Ultimate,
     }
 
-    public class Ring 
+    public class Ring
     {
         public int Chance { get; set; }
 
         public Ring(RingType type)
         {
-            if (type == RingType.Standard) 
-                this.Chance = 20;
-            else if (type == RingType.Upgraded) 
-                this.Chance = 30;
-            else if (type == RingType.Ultimate) 
-                this.Chance = 50;
+            switch (type)
+            {
+                case RingType.Standard:
+                    this.Chance = 20;
+                    break;
+                case RingType.Upgraded:
+                    this.Chance = 30;
+                    break;
+                case RingType.Ultimate:
+                    this.Chance = 50;
+                    break;
+            }
         }
     }
 }

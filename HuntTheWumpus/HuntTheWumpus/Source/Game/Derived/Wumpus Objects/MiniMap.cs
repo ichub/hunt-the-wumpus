@@ -143,7 +143,7 @@ namespace HuntTheWumpus.Source
             if (this.Showing)
             {
                 int index = 0;
-                foreach (var point in this.TopLeftPoints)
+                foreach (Vector2 point in this.TopLeftPoints)
                 {
                     if (this.IndexesToShow[index])
                     {
@@ -158,9 +158,9 @@ namespace HuntTheWumpus.Source
                 //Draw Current room
                 spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, Color.Blue);
                 //Draw connections of the current room
-                foreach (var item in this.CurrentRoom.AdjacentRooms)
+                foreach (Room adjRoom in this.CurrentRoom.AdjacentRooms)
                 {
-                    spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[item.RoomIndex] + this.Shift, Color.Green);
+                    spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift, Color.Green);
                 }
             }
         }
@@ -170,6 +170,10 @@ namespace HuntTheWumpus.Source
             if (this.MainGame.InputManager.IsClicked(Keys.M))
             {
                 this.Showing = !this.Showing;
+            }
+            if (this.MainGame.LevelManager.CurrentLevel is GameOverLevel)
+            {
+                this.Showing = false;
             }
         }
     }

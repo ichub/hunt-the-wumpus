@@ -28,13 +28,13 @@ namespace HuntTheWumpus.Source
 
             for (int i = 0; i < this.Rooms.Length; i++)
             {
-                this.Rooms[i] = RoomFactory.Create(this.MainGame, this, i);//new Room(this.MainGame, this, i);
+                this.Rooms[i] = RoomFactory.Create(this.MainGame, this, i);
             }
 
             for (int i = 0; i < this.Rooms.Length; i++)
             {
-                var a = SetUpAdjacentRooms(i);
-                this.Rooms[i].AdjacentRooms = a;
+                Room[] rooms = SetUpAdjacentRooms(i);
+                this.Rooms[i].AdjacentRooms = rooms;
             }
 
             this.DumpState();
@@ -81,9 +81,13 @@ namespace HuntTheWumpus.Source
             }
 
             return ConvertIndeciesToRooms(adjacentRoomIndecies);
-
         }
 
+        /// <summary>
+        /// Converts given indecies to rooms
+        /// </summary>
+        /// <param name="roomIndecies"></param>
+        /// <returns></returns>
         public Room[] ConvertIndeciesToRooms(int[] roomIndecies)
         {
             Room[] rooms = new Room[roomIndecies.Length];
@@ -94,15 +98,18 @@ namespace HuntTheWumpus.Source
             return rooms;
         }
 
+        /// <summary>
+        /// Prints out to Debug
+        /// </summary>
         public void DumpState()
         {
-            foreach (var item in this.Rooms)
+            foreach (Room currentRoom in this.Rooms)
             {
-                Console.Write(item.RoomIndex + " : ");
+                Console.Write(currentRoom.RoomIndex + " : ");
 
-                foreach (var adj in item.AdjacentRooms)
+                foreach (Room adjRoom in currentRoom.AdjacentRooms)
                 {
-                    Console.Write(adj.RoomIndex + " , ");
+                    Console.Write(adjRoom.RoomIndex + " , ");
                 }
                 Console.Write("\n");
             }
