@@ -29,15 +29,16 @@ namespace HuntTheWumpus.Source
         private void CheckQuestion(int answer)
         {
             if (this.currentQuestion == null)
-            {
-                this.MainGame.LevelManager.CurrentLevel = this.cameFrom;
                 return;
-            }
+
             if (this.currentQuestion.Answer == answer)
             {
                 this.MainGame.Player.Score += 100;
             }
+            
             this.currentQuestion = this.MainGame.TriviaManager.RandomQuestion();
+            if (this.currentQuestion == null)
+                this.MainGame.LevelManager.CurrentLevel = this.cameFrom;
             
         }
 

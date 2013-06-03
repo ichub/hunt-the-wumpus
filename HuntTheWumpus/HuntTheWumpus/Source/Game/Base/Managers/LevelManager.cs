@@ -23,6 +23,7 @@ namespace HuntTheWumpus.Source
         private Texture2D levelFade;
         private float fadeCount;
         private int fadeSpeed;
+        private bool isLevelChanging;
 
         private Timer timer;
 
@@ -34,14 +35,18 @@ namespace HuntTheWumpus.Source
             }
             set
             {
-                if (this.currentLevel != null)
+                if (!this.isLevelChanging)
                 {
-                    this.StartFade(value);
-                }
-                else
-                {
-                    this.currentLevel = value;
-                    this.currentLevel.OnLoad();
+                    if (this.currentLevel != null)
+                    {
+                        this.StartFade(value);
+                        this.isLevelChanging = true;
+                    }
+                    else
+                    {
+                        this.currentLevel = value;
+                        this.currentLevel.OnLoad();
+                    }
                 }
             }
         }
@@ -127,6 +132,7 @@ namespace HuntTheWumpus.Source
         {
             this.timer.Stop();
             this.timer = null;
+            this.isLevelChanging = false;
         }
 
         /// <summary>
