@@ -13,7 +13,6 @@ namespace HuntTheWumpus.Source
 {
     class Wumpus : Enemy
     {
-
         private AnimatedTexture facingLeft;
         private AnimatedTexture facingRight;
         private AnimatedTexture facingUp;
