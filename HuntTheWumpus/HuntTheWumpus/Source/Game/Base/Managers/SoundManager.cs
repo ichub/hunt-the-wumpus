@@ -18,6 +18,8 @@ namespace HuntTheWumpus.Source
     {
         public Dictionary<String, SoundEffect> Sounds { get; private set; }
 
+        private SoundEffectInstance ambience;
+        
         /// <summary>
         /// Creates a new sound manager.
         /// </summary>
@@ -36,6 +38,10 @@ namespace HuntTheWumpus.Source
             this.Sounds.Add("menuchange", content.Load<SoundEffect>("Sounds\\menu change"));
             this.Sounds.Add("grunt", content.Load<SoundEffect>("Sounds\\grunt"));
             this.Sounds.Add("item pickup", content.Load<SoundEffect>("Sounds\\item pickup"));
+            this.Sounds.Add("caveambience", content.Load<SoundEffect>("Sounds\\caveambience"));
+            this.ambience = this.Sounds["caveambience"].CreateInstance();
+            this.ambience.IsLooped = true;
+            this.ambience.Play();
         }
 
         /// <summary>
