@@ -41,6 +41,7 @@ namespace HuntTheWumpus.Source
                 else
                 {
                     this.currentLevel = value;
+                    this.currentLevel.OnLoad();
                 }
             }
         }
@@ -58,11 +59,10 @@ namespace HuntTheWumpus.Source
         {
             this.Paused = false;
             this.ParentGame = parentGame;
-            this.CurrentLevel = null;
             this.levelFade = new Texture2D(parentGame.GraphicsDevice, parentGame.WindowWidth, parentGame.WindowHeight);
             Extensions.FillTexture(levelFade, Color.Black);
             this.GameCave = new Cave(this.ParentGame, new Vector2(this.ParentGame.Graphics.PreferredBackBufferWidth, this.ParentGame.Graphics.PreferredBackBufferHeight));
-            this.fadeSpeed = 10;
+            this.fadeSpeed = 20;
         }
 
         /// <summary>

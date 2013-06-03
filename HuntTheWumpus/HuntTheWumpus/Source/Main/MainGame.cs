@@ -26,6 +26,7 @@ namespace HuntTheWumpus.Source
         public GameTime GameTime { get; set; }
         public PlayerStats Player { get; set; }
         public MiniMap MiniMap { get; set; }
+        public Trivia TriviaManager { get; set; }
         public Random Random { get; set; }
 
         public int ScreenWidth { get; private set; }
@@ -62,11 +63,12 @@ namespace HuntTheWumpus.Source
         {
             // TODO: Add your initialization logic here
             RoomFactory.InitFactory(this.Content);
+            this.TriviaManager = new Trivia(this);
             this.Random = new Random();
             this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
-            this.LevelManager.CurrentLevel = new StartLevel(this);
+            this.LevelManager.CurrentLevel = new TriviaMenu(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
             this.Player = new PlayerStats();

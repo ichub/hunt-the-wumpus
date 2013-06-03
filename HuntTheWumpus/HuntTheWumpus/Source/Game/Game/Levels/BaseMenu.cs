@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Main menu.
     /// </summary>
-    class Store : ILevel
+    class BaseMenu : ILevel
     {
         public MainGame MainGame { get; set; }
         public GameObjectManager GameObjects { get; set; }
@@ -23,22 +23,22 @@ namespace HuntTheWumpus.Source
         private Texture2D background;
         private ILevel cameFrom;
 
-        public Store(MainGame mainGame, ILevel cameFrom)
+        public BaseMenu(MainGame mainGame, ILevel cameFrom)
         {
             this.MainGame = mainGame;
             this.GameObjects = new GameObjectManager(mainGame);
             this.cameFrom = cameFrom;
         }
 
-        public Store(MainGame mainGame)
+        public BaseMenu(MainGame mainGame)
             : this(mainGame, mainGame.LevelManager.GameCave.Rooms[0]) { }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             this.background = MainGame.Content.Load<Texture2D>("Textures\\menu");
         }
 
-        public void OnLoad()
+        public virtual void OnLoad()
         {
             this.GameObjects.Add(new Button(this.MainGame, 
                 this, 
@@ -46,20 +46,20 @@ namespace HuntTheWumpus.Source
                 { Position = new Vector2(512 - 100, 570) });
         }
 
-        public void OnUnLoad()
+        public virtual void OnUnLoad()
         {
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
         }
 
-        public void FrameUpdate(GameTime gameTime, ContentManager content)
+        public virtual void FrameUpdate(GameTime gameTime, ContentManager content)
         {
             this.GameObjects.FrameUpdate();
         }
 
-        public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.background, this.MainGame.LevelManager.GameCave.CaveOffset, Color.White);
             this.GameObjects.FrameDraw();

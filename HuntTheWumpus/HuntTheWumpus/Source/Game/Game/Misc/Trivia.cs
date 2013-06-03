@@ -1,199 +1,91 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.IO;
 
-namespace HuntTheWumpus.Source.Game.Derived.Misc
+namespace HuntTheWumpus.Source
 {
     public class Trivia
     {
-        String fileName;
-        List<QuestionAndAnswer> unaskedQuestions;
-        List<QuestionAndAnswer> askedQuestions;
-        List<QuestionAndAnswer> triviaNotGiven;
-        List<QuestionAndAnswer> triviaGiven; 
-        QuestionAndAnswer lastQuestionAsked;
-        Statistics stats;
-       
-        public Trivia(String fileName)
+        private MainGame mainGame;
+        private List<Question> questions;
+        private List<Question> unaskedQuestions;
+        private Stack<Question> askedQuestions;
+
+        public Trivia(MainGame mainGame)
         {
-            stats = new Statistics();
-            askedQuestions = new List<QuestionAndAnswer>();
-            triviaGiven = new List<QuestionAndAnswer>();
-            this.fileName = fileName;
-            readFromFile();
+            this.mainGame = mainGame;
+            this.questions = new List<Question>();
+            this.unaskedQuestions = new List<Question>();
+            this.askedQuestions = new Stack<Question>();
+            this.PopulateQuestions();
         }
 
-        private void readFromFile()
+        public void PopulateQuestions()
         {
-            unaskedQuestions = new List<QuestionAndAnswer>();
-            triviaNotGiven = new List<QuestionAndAnswer>();
-            using (StreamReader reader =  new StreamReader(fileName))
+            this.questions.Add(new Question("What is 2 * 2", 0));
+            this.questions.Add(new Question("What is 3 * 3", 0));
+            this.questions.Add(new Question("What is love", 0));
+            this.questions.Add(new Question("baby don't hurt me", 0));
+            this.questions.Add(new Question("don't hurt me", 0));
+            this.questions.Add(new Question("no more", 0));
+            this.questions.Add(new Question("What is 3 * 3", 0));
+            this.questions.Add(new Question("What is 3 * 3", 0));
+
+            foreach (Question item in this.questions)
             {
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] list = line.Split('|');
-                    if (list.Length == 3)
-                    {
-                        string question = list[0].Trim();
-                        string answer = list[1].Trim();
-                        string trivia = list[2].Trim();
-                        QuestionAndAnswer q = new QuestionAndAnswer(question, answer, trivia);
-                        unaskedQuestions.Add(q);
-                        triviaNotGiven.Add(q);
-                    }
-                }
+                this.unaskedQuestions.Add(item);
             }
         }
 
-        /// <summary> 
-        /// Gives a random piece of trivia that has not been given before
-        /// </summary>
-        /// <returns> a piece of trivia </returns>
-        public String getTrivia()
+        public void Reset()
         {
-            Random generator = new Random();
-            if (triviaNotGiven.Count == 0)
+            while (askedQuestions.Any())
             {
-                throw new InvalidOperationException("No more trivia to give.");
-            }
-            int index = generator.Next(triviaNotGiven.Count);
-            QuestionAndAnswer t = triviaNotGiven[index];
-            triviaNotGiven.RemoveAt(index);
-            triviaGiven.Add(t);
-            return t.getTrivia();
-        }
-
-        /// <summary>
-        /// Starts a trivia challenge with a given number of questions
-        /// </summary>
-        /// <param name="questions"> the number of questions to be asked (depending on game situation) </param>
-        /// <param name="correct"> the number of questions that need to be answered correctly to win </param>
-        public void startTriviaChallenge(int questions, int correct)
-        {
-            if (questions < correct)
-            {
-                throw new ArgumentException("Number of questions should be greater than or equal to the number needed to win.");
-            }
-            stats = new Statistics();
-            stats.totalQuestions = questions;
-            stats.numNeededToWin = correct;
-        }
-
-        /// <summary>
-        /// Gets a trivia question that has not been asked before. Can only be called after startTriviaChalenge().
-        /// </summary>
-        /// <returns> a new trivia question </returns>
-        public String getQuestion()
-        {
-            Random generator = new Random();
-            if (unaskedQuestions.Count == 0)
-            {
-                throw new InvalidOperationException("No more questions to ask.");
-            }
-            int index = generator.Next(unaskedQuestions.Count);
-            lastQuestionAsked = unaskedQuestions[index];
-            unaskedQuestions.RemoveAt(index);
-            askedQuestions.Add(lastQuestionAsked);
-            stats.numAsked++;
-            return lastQuestionAsked.getQuestion();
-        }
-        /// <summary>
-        /// Checks if the user's answer to the question returned by the previous call to getQuestion() is correct. 
-        /// This method should only be called after getQuestion()  
-        /// </summary>
-        /// <param name="answer"> the user's answer </param>
-        /// <returns> whether or not the answer to the question is correct, and if the user has passed or failed the trivia challenge </returns>
-        public TriviaResult checkAnswer(String answer)
-        {
-            if(answer.Equals(lastQuestionAsked.getAnswer()))
-            {
-                TriviaResult t = new TriviaResult();
-                t.correctAnswer = true;
-                stats.numCorrect++;
-                if (stats.numCorrect >= stats.numNeededToWin)
-                {
-                    t.passedChallenge = true;
-                }
-                return t;
-            }
-            else
-            {
-                TriviaResult t = new TriviaResult();
-                t.correctAnswer = false;
-                if (stats.numAsked - stats.numCorrect > stats.totalQuestions - stats.numNeededToWin)
-                {
-                    t.failedChallenge = true;
-                }
-                return t;
+                this.unaskedQuestions.Add(this.askedQuestions.Pop());
             }
         }
-        /// <summary>
-        /// Gets all statistics about the current challenge
-        /// </summary>
-        /// <returns> the number of questions asked, the number the user has answered correctly,
-        /// and the total number of questions for this trivia challenge </returns>
-        public Statistics getCurrentChallengeStatistics()
+
+        private void UpdateQuestionState(int index)
         {
-            return stats;
+            this.askedQuestions.Push(this.unaskedQuestions[index]);
+            this.unaskedQuestions.RemoveAt(index);
         }
 
-    }
-    public class QuestionAndAnswer
-    {
-        string question;
-        string answer;
-        string trivia;
-
-        public QuestionAndAnswer(string question, string answer, string trivia)
+        public Question RandomQuestion()
         {
-            this.question = question;
-            this.answer = answer;
-            this.trivia = trivia;
-        }
-
-        public string getQuestion()
-        {
+            if (this.unaskedQuestions.Count == 0)
+            {
+                return null;
+            }
+            int index = this.mainGame.Random.Next(this.unaskedQuestions.Count - 1);
+            Question question = this.unaskedQuestions.ElementAt(index);
+            this.UpdateQuestionState(index);
             return question;
         }
-
-        public string getAnswer()
-        {
-            return answer;
-        }
-
-        public string getTrivia()
-        {
-            return trivia;
-        }
-
     }
 
-    public class TriviaResult
+    public class Question
     {
-        public bool correctAnswer;
-        public bool passedChallenge;
-        public bool failedChallenge;
-        public override bool[] ToString()
+        public string QuestionString { get; private set; }
+        public int Answer { get; private set; }
+
+        public Question(string question, int answer)
         {
-            bool[] stats = new bool[3];
-            stats[0] = correctAnswer;
-            stats[1] = passedChallenge;
-            stats[2] = failedChallenge;
-            return stats;
-            //return "Correct Answer = " + correctAnswer + " Passed Challenge = " + passedChallenge + " Failed Challenge = " + failedChallenge;
+            this.QuestionString = question;
+            this.Answer = answer;
+        }
+
+        public bool IsCorrect(int answer)
+        {
+            return answer == this.Answer;
         }
     }
-
-    public class Statistics
-    {
-        public int numAsked;
-        public int numCorrect;
-        public int totalQuestions;
-        public int numNeededToWin;
-    }
-
 }

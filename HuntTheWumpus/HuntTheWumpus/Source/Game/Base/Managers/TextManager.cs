@@ -62,6 +62,8 @@ namespace HuntTheWumpus.Source
         /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
         public void DrawText(Vector2 position, string text, Color color, bool openBatch)
         {
+            if (text == null)
+                return;
             if (openBatch)
                 textBatch.Begin();
             textBatch.DrawString(CourierNew, text, position, color);
