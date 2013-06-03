@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using HuntTheWumpus.Source.Game.Derived.Wumpus_Objects;
 
 namespace HuntTheWumpus.Source
 {
@@ -17,17 +16,18 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class MainGame : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager Graphics { get; set; }
-        public LevelManager LevelManager { get; set; }
-        public InputManager InputManager { get; set; }
-        public TextManager TextManager { get; set; }
-        public SoundManager SoundManager { get; set; }
-        public SpriteBatch SpriteBatch { get; set; }
-        public GameTime GameTime { get; set; }
-        public PlayerStats Player { get; set; }
-        public MiniMap MiniMap { get; set; }
-        public Trivia TriviaManager { get; set; }
-        public Random Random { get; set; }
+        public GraphicsDeviceManager Graphics { get; private set; }
+        public LevelManager LevelManager { get; private set; }
+        public InputManager InputManager { get; private set; }
+        public TextManager TextManager { get; private set; }
+        public SoundManager SoundManager { get; private set; }
+        public SpriteBatch SpriteBatch { get; private set; }
+        public DoGooder DoGooder { get; private set; }
+        public GameTime GameTime { get; private set; }
+        public PlayerStats Player { get; private set; }
+        public MiniMap MiniMap { get; private set; }
+        public Trivia TriviaManager { get; private set; }
+        public Random Random { get; private set; }
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
@@ -64,11 +64,12 @@ namespace HuntTheWumpus.Source
             // TODO: Add your initialization logic here
             RoomFactory.InitFactory(this.Content);
             this.TriviaManager = new Trivia(this);
+            this.DoGooder = new DoGooder(this);
             this.Random = new Random();
             this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
-            this.LevelManager.CurrentLevel = new TriviaMenu(this);
+            this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
             this.Player = new PlayerStats();
@@ -109,6 +110,7 @@ namespace HuntTheWumpus.Source
             this.InputManager.Update();
             this.LevelManager.FrameUpdate();
             base.Update(gameTime);
+            this.DoGooder.Update();
             this.MiniMap.Update();
             this.MiniMap.ShowRoom((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room) : null));
         }

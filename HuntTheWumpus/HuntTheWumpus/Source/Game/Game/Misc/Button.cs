@@ -80,7 +80,7 @@ namespace HuntTheWumpus.Source
 
         public void OnClickRelease()
         {
-            OnClick();
+            this.OnClick.Invoke();
             this.Texture = this.notClickedTexture;
             this.MainGame.SoundManager.PlaySound("menuchange");
         }
