@@ -14,11 +14,11 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// A button.
     /// </summary>
-    class Button : IClickable, IUpdateable, IDrawable, IGameObject
+    class Button : IClickable, IUpdateable, IDrawable, IGameObject, IHoverable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
-        public BoundingBox ClickBox { get; set; }
+        public BoundingBox BoundingBox { get; set; }
         public AnimatedTexture Texture { get; set; }
         public Vector2 Position { get; set; }
         public Team ObjectTeam { get; set; }
@@ -26,11 +26,13 @@ namespace HuntTheWumpus.Source
         public bool IsClicked { get; set; }
         public bool ContentLoaded { get; set; }
         public bool IsHidden { get; set; }
+        public bool IsMouseOver { get; set; }
 
         public Action OnClick { get; set; }
 
         private AnimatedTexture clickedTexture;
         private AnimatedTexture notClickedTexture;
+        private AnimatedTexture mousedOverTexture;
 
         /// <summary>
         /// Creates a new button.
@@ -50,6 +52,7 @@ namespace HuntTheWumpus.Source
         {
             this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_default"));
             this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_mouseclicked"));
+            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_mouseover"));
             this.Texture = this.notClickedTexture;
         }
 
@@ -62,7 +65,7 @@ namespace HuntTheWumpus.Source
 
         public void Update(GameTime gameTime)
         {
-            this.ClickBox = this.ClickBox.Set2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = this.BoundingBox.Set2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -80,6 +83,16 @@ namespace HuntTheWumpus.Source
             OnClick();
             this.Texture = this.notClickedTexture;
             this.MainGame.SoundManager.PlaySound("menuchange");
+        }
+
+        public void OnHoverBegin()
+        {
+            this.Texture = this.mousedOverTexture;
+        }
+
+        public void OnHoverEnd()
+        {
+            this.Texture = this.notClickedTexture;
         }
     }
 }

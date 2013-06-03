@@ -19,7 +19,7 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Bounding box where a click registers for the object.
         /// </summary>
-        BoundingBox ClickBox { get; set; }
+        BoundingBox BoundingBox { get; set; }
 
         /// <summary>
         /// True if mouse was clicked on the object, but not yet released.

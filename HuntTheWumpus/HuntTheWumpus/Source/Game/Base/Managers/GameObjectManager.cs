@@ -177,6 +177,26 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        public void UpdateHoverable()
+        {
+            foreach (IHoverable item in this.GetObjectsByType<IHoverable>())
+            {
+                if (item.BoundingBox.Contains2D(this.parentGame.InputManager.MousePosition))
+                {
+                    if (!item.IsMouseOver)
+                    {
+                        item.IsMouseOver = true;                 
+                        item.OnHoverBegin();
+                    }
+                }
+                else
+                {
+                    item.IsMouseOver = false;              
+                    item.OnHoverEnd();
+                }
+            }
+        }
+
         /// <summary>
         /// Adds the object to the game at the end of the frame.
         /// </summary>
@@ -259,7 +279,7 @@ namespace HuntTheWumpus.Source
         {
             foreach (IClickable obj in this.GetObjectsByType<IClickable>())
             {
-                if (obj.ClickBox.Contains2D(this.parentGame.InputManager.MousePosition) &&
+                if (obj.BoundingBox.Contains2D(this.parentGame.InputManager.MousePosition) &&
                     this.parentGame.InputManager.MouseState.LeftButton == ButtonState.Pressed)
                 {
                     obj.OnClickBegin(this.parentGame.InputManager.MousePosition);
@@ -329,6 +349,7 @@ namespace HuntTheWumpus.Source
             this.LoadContent();
             this.Initialize();
             this.HandleClicking();
+            this.UpdateHoverable();
             this.HandleCollisions();
             this.Update();
             this.UpdateBoundingBox();
