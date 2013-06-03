@@ -32,6 +32,8 @@ namespace HuntTheWumpus.Source
         /// </summary>
         bool ContentLoaded { get; set; }
 
+        bool IsHidden { get; set; }
+
         /// <summary>
         /// Called at object creation to load content.
         /// </summary>

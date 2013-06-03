@@ -145,8 +145,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\menu.png">
-      <Name>menu</Name>
+    <Compile Include="Textures\titlescreen.png">
+      <Name>titlescreen</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -213,6 +213,13 @@
   <ItemGroup>
     <Compile Include="Textures\Enemies\Bat\superbat_spritesheet.png">
       <Name>superbat_spritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\menu.png">
+      <Name>menu</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

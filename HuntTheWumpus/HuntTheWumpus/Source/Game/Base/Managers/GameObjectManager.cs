@@ -342,7 +342,7 @@ namespace HuntTheWumpus.Source
         {
             foreach (IDrawable obj in this.GetObjectsByType<IDrawable>())
             {
-                if (obj.ContentLoaded)
+                if (obj.ContentLoaded && !obj.IsHidden)
                 {
                     obj.Draw(this.parentGame.GameTime, this.parentGame.SpriteBatch);
                 }

@@ -14,41 +14,44 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Main menu.
     /// </summary>
-    class StartLevel : ILevel
+    class Store : ILevel
     {
         public MainGame MainGame { get; set; }
         public GameObjectManager GameObjects { get; set; }
         public bool Initialized { get; set; }
 
         private Texture2D background;
+        private ILevel cameFrom;
 
-        public StartLevel(MainGame mainGame)
+        public Store(MainGame mainGame, ILevel cameFrom)
         {
             this.MainGame = mainGame;
             this.GameObjects = new GameObjectManager(mainGame);
+            this.cameFrom = cameFrom;
         }
+
+        public Store(MainGame mainGame)
+            : this(mainGame, mainGame.LevelManager.GameCave.Rooms[0]) { }
 
         public void Initialize()
         {
-            Button startButton = new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[0]);
-            startButton.CenterOnScreen();
-            this.GameObjects.Add(startButton);
-            this.background = MainGame.Content.Load<Texture2D>("Textures\\titlescreen");
+            this.background = MainGame.Content.Load<Texture2D>("Textures\\menu");
         }
 
         public void OnLoad()
         {
-            return;
+            this.GameObjects.Add(new Button(this.MainGame, 
+                this, 
+                () => { this.MainGame.LevelManager.CurrentLevel = cameFrom; }) 
+                { Position = new Vector2(512 - 100, 570) });
         }
 
         public void OnUnLoad()
         {
-            return;
         }
 
         public void Reset()
         {
-            return;
         }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)

@@ -28,6 +28,7 @@ namespace HuntTheWumpus.Source
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+        public bool IsHidden { get; set; }
         public bool IsDamaged { get; set; }
         public float SpeedDampening { get; set; }
         public float SpeedModifier { get; set; }
@@ -54,9 +55,9 @@ namespace HuntTheWumpus.Source
         {
             return
                 this.Position.X < 0 ||
-                this.Position.X + this.Texture.Size.X > this.MainGame.WindowWidth ||
+                this.Position.X - this.Texture.Size.X > this.MainGame.WindowWidth ||
                 this.Position.Y < 0 ||
-                this.Position.Y + this.Texture.Size.Y > this.MainGame.WindowHeight;
+                this.Position.Y - this.Texture.Size.Y > this.MainGame.WindowHeight;
         }
 
         public void Remove()

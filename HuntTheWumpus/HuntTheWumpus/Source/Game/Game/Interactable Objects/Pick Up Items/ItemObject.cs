@@ -25,6 +25,7 @@ namespace HuntTheWumpus.Source
 
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
+        public bool IsHidden { get; set; }
         public float SpeedDampening { get; set; }
 
         private Vector2 velocity;

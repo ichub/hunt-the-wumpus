@@ -10,7 +10,6 @@ Content\Textures\Cave\flooded.xnb
 Content\Textures\Cave\pit.xnb
 Content\Textures\Cave\rockslide.xnb
 Content\Textures\Enemies\Bat\bat_spritesheet.xnb
-Content\Textures\menu.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
 Content\Textures\StartButton\button_default.xnb
@@ -26,3 +25,5 @@ Content\Sounds\button.xnb
 Content\Sounds\item pickup.xnb
 Content\Sounds\menu change.xnb
 Content\Sounds\grunt.xnb
+Content\Textures\titlescreen.xnb
+Content\Textures\menu.xnb

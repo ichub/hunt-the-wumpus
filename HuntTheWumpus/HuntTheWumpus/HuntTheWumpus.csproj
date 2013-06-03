@@ -95,6 +95,7 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Wumpus.cs" />
     <Compile Include="Source\Game\Game\Levels\GameOverLevel.cs" />
     <Compile Include="Source\Game\Game\Levels\StartLevel.cs" />
+    <Compile Include="Source\Game\Game\Levels\Store.cs" />
     <Compile Include="Source\Game\Game\Misc\AnimatedTexture.cs" />
     <Compile Include="Source\Game\Game\Misc\Button.cs" />
     <Compile Include="Source\Game\Game\Inventory\InventorySlot.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\ItemObject.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\RingOfSpeed.cs" />
     <Compile Include="Source\Game\Game\Misc\Direction.cs" />
+    <Compile Include="Source\Game\Game\Misc\Menu.cs" />
     <Compile Include="Source\Game\Game\Misc\Teleporter.cs" />
     <Compile Include="Source\Game\Base\Misc\BaseGameObject.cs" />
     <Compile Include="Source\Game\Game\Levels\Cave.cs" />
