@@ -33,26 +33,29 @@ namespace HuntTheWumpus.Source
         private AnimatedTexture clickedTexture;
         private AnimatedTexture notClickedTexture;
         private AnimatedTexture mousedOverTexture;
-
+        
+        private string buttonName;
+        
         /// <summary>
         /// Creates a new button.
         /// </summary>
         /// <param name="mainGame"> The game to which this button belongs. </param>
         /// <param name="parentLevel"> The level to which this button belongs. </param>
         /// <param name="onClick"> The action to take when this button is clicked on. </param>
-        public Button(MainGame mainGame, ILevel parentLevel, Action onClick)
+        public Button(MainGame mainGame, ILevel parentLevel, Action onClick, string buttonName)
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
             this.ObjectTeam = Team.None;
             this.OnClick = onClick;
+            this.buttonName = buttonName;
         }
 
         public void LoadContent(ContentManager content)
         {
-            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_default"));
-            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_mouseclicked"));
-            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\StartButton\\button_mouseover"));
+            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_default"));
+            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_mouseclicked"));
+            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_mouseover"));
             this.Texture = this.notClickedTexture;
         }
 

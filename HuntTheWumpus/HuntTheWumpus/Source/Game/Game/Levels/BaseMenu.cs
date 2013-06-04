@@ -42,7 +42,8 @@ namespace HuntTheWumpus.Source
         {
             this.GameObjects.Add(new Button(this.MainGame, 
                 this, 
-                () => { this.MainGame.LevelManager.CurrentLevel = cameFrom; }) 
+                () => { this.MainGame.LevelManager.CurrentLevel = cameFrom; },
+                "quit") 
                 { Position = new Vector2(512 - 100, 570) });
         }
 

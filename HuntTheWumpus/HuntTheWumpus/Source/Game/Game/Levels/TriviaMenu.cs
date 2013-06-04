@@ -44,10 +44,10 @@ namespace HuntTheWumpus.Source
 
         public override void OnLoad()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(0); }) { Position = new Vector2(290, 100 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(1); }) { Position = new Vector2(520, 100 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(2); }) { Position = new Vector2(290, 225 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(3); }) { Position = new Vector2(520, 225 + 200) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(0); }, "1button") { Position = new Vector2(290, 100 + 200) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(1); }, "2button") { Position = new Vector2(520, 100 + 200) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(2); }, "3button") { Position = new Vector2(290, 225 + 200) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(3); }, "4button") { Position = new Vector2(520, 225 + 200) });
             base.OnLoad();
         }
 

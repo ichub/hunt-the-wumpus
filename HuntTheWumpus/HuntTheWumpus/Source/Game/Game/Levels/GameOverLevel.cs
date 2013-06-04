@@ -28,7 +28,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame)));
+            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "startbutton"));
         }
 
         public void OnLoad()
