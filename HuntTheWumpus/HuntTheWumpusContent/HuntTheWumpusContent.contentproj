@@ -314,15 +314,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\3button_default.png">
-      <Name>3button_default</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Buttons\3button_mouseover.png">
+      <Name>3button_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Buttons\3button_mouseover.png">
-      <Name>3button_mouseover</Name>
+    <Compile Include="Textures\Buttons\3button_default.png">
+      <Name>3button_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
