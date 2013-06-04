@@ -23,6 +23,7 @@ namespace HuntTheWumpus.Source
             ItemList.Items = new List<Item>();
 
             AddItem("Gold", 0);
+            AddItem("Gem", 0);
             AddItem("Bow", 0); //hopefully the purpose is clear enough
             AddItem("Arrow", 10); //charges for bow
             AddItem("StandardHelmet", 100); //armor

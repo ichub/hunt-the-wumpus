@@ -71,11 +71,11 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        private void SpawnGold(int amount)
+        private void SpawnGems(int amount)
         {
             for (int i = 0; i < amount; i++)
             {
-                this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale/ 2 });
+                this.ParentLevel.GameObjects.Add(new Gem(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale/ 2 });
             }
         }
 
@@ -88,7 +88,7 @@ namespace HuntTheWumpus.Source
         private void OnDeath()
         {
             this.SpawnSpecial();
-            this.SpawnGold(5);
+            this.SpawnGems(5);
         }
 
         public override void Update(GameTime gameTime)

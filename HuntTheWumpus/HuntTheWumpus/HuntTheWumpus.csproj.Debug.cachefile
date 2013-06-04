@@ -46,3 +46,7 @@ Content\Textures\Buttons\quit_mouseclicked.xnb
 Content\Textures\Buttons\quit_mouseover.xnb
 Content\Textures\Buttons\3button_mouseover.xnb
 Content\Textures\Buttons\3button_default.xnb
+Content\Textures\Buttons\menubutton_default.xnb
+Content\Textures\Buttons\menubutton_mouseclicked.xnb
+Content\Textures\Buttons\menubutton_mouseover.xnb
+Content\Textures\Items\Gem.xnb

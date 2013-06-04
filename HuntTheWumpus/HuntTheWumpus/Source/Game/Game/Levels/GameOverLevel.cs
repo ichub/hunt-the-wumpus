@@ -28,7 +28,7 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "startbutton"));
+            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") { Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) });
         }
 
         public void OnLoad()
@@ -53,7 +53,6 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.MainGame.TextManager.DrawText(new Vector2(400, 400), "GAME OVER", false);
             this.GameObjects.FrameDraw();
         }
     }

@@ -45,13 +45,20 @@ namespace HuntTheWumpus.Source
             if (isColliding)
             if (gameObject is PlayerAvatar)
             {
-                this.MainGame.Player.Inventory.PickUp(this.RepresentedItem);
-                this.ParentLevel.GameObjects.Remove(this);
+                this.CollideWithPlayer(gameObject as PlayerAvatar);
             }
         }
 
         public void CollideWithLevelBounds()
         {
+            this.Velocity = Vector2.Zero;
+            this.Position += (this.LastPosition - this.Position) * 2;
+        }
+
+        public virtual void CollideWithPlayer(PlayerAvatar player)
+        {
+            this.MainGame.Player.Inventory.PickUp(this.RepresentedItem);
+            this.ParentLevel.GameObjects.Remove(this);
         }
 
         public virtual void Initialize()

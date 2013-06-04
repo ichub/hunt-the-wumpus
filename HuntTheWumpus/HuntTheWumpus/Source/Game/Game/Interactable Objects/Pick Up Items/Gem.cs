@@ -11,23 +11,21 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Gold : ItemObject
+    class Gem : ItemObject
     {
-        public Gold(MainGame parentGame, ILevel parentLevel)
-            : base(parentGame, parentLevel, "Gold") { }
-
+        public Gem(MainGame mainGame, ILevel parentObject)
+            : base(mainGame, parentObject, "Gem") { }
 
         public override void CollideWithPlayer(PlayerAvatar player)
         {
             base.CollideWithPlayer(player);
             this.MainGame.Player.Score += 50;
             this.MainGame.SoundManager.PlaySound("item pickup");
-
         }
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gold"));
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gem"), 9, 60, 10, 0.5f);
         }
     }
 }
