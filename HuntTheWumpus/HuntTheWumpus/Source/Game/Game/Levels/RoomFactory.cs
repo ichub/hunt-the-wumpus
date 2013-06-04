@@ -208,17 +208,6 @@ namespace HuntTheWumpus.Source
                 new Vector2(272, 22),
                 new Vector2(365, 101),
                 new Vector2(427, 5),
-                //Break from outisde bondaries and start on shop
-                new Vector2(-1,-1),
-                new Vector2(418,271),
-                new Vector2(622,272),
-                new Vector2(629,341),
-                new Vector2(658,346),
-                new Vector2(661,401),
-                new Vector2(642,417),
-                new Vector2(620,402),
-                new Vector2(424,400),
-                new Vector2(418,271),
             };
             #endregion
 

@@ -21,6 +21,10 @@ namespace HuntTheWumpus.Source
         public List<SuperBat> SuperBats { get; set; }
 
         public const int NumberOfRooms = 30;
+        public const int NumberOfConnections = 3;
+
+        private Random Random;
+        private bool[] TakenRooms;
 
         public Cave(MainGame mainGame, Vector2 windowSize)
         {
@@ -28,18 +32,23 @@ namespace HuntTheWumpus.Source
             this.Rooms = new Room[NumberOfRooms];
             this.CaveBounds = new Rectangle(((int)windowSize.X - 1024) / 2, ((int)windowSize.Y - 768) / 2, 1024, 768);
             this.CaveOffset = new Vector2(this.CaveBounds.X, this.CaveBounds.Y);
-
+            this.Random = new Random(DateTime.Now.Millisecond);
+            this.TakenRooms = new bool[Cave.NumberOfRooms];
             for (int i = 0; i < this.Rooms.Length; i++)
             {
                 this.Rooms[i] = RoomFactory.Create(this.MainGame, this, i);
             }
 
-            for (int i = 0; i < this.Rooms.Length; i++)
+            while (!Cave.AreAllRoomsAccessible(this.Rooms))
             {
-                Room[] rooms = SetUpAdjacentRooms(i);
-                this.Rooms[i].AdjacentRooms = rooms;
-            }
+                this.TakenRooms = new bool[Cave.NumberOfRooms];
 
+                for (int i = 0; i < this.Rooms.Length; i++)
+                {
+                    Room[] rooms = SetUpAdjacentRooms(i);
+                    this.Rooms[i].AdjacentRooms = rooms;
+                }
+            }
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
             Random rand = new Random();
@@ -58,7 +67,6 @@ namespace HuntTheWumpus.Source
                 }
             }
             //Finished------------------------------------------------------------>
-            this.DumpState();
         }
 
         public void UpdateSuperBats()
@@ -68,6 +76,11 @@ namespace HuntTheWumpus.Source
                 bat.Update();
             }
         }
+        /// <summary>
+        /// Sets up the adjacnt rooms for one room:
+        /// </summary>
+        /// <param name="roomIndex">the index of the room in this.Rooms</param>
+        /// <returns>Array of rooms that represent its connections</returns>
         public Room[] SetUpAdjacentRooms(int roomIndex)
         {
             int[] adjacentRoomIndecies = new int[6];
@@ -108,9 +121,13 @@ namespace HuntTheWumpus.Source
                 }
             }
 
-            return ConvertIndeciesToRooms(adjacentRoomIndecies);
+            int[] randomlyChosenConnections = Cave.GetRelevantIndexes(this.TakenRooms, adjacentRoomIndecies);
+            foreach (int item in randomlyChosenConnections)
+            {
+                this.TakenRooms[item] = true;
+            }
+            return ConvertIndeciesToRooms(randomlyChosenConnections);
         }
-
         /// <summary>
         /// Converts given indecies to rooms
         /// </summary>
@@ -127,20 +144,61 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
-        /// Prints out to Debug
+        /// Checks if all rooms are accessible.
         /// </summary>
-        public void DumpState()
+        /// <param name="rooms">The array of all rooms</param>
+        /// <returns>True if all rooms are accessible and false if otherwise</returns>
+        public static bool AreAllRoomsAccessible(Room[] rooms)
         {
-            foreach (Room currentRoom in this.Rooms)
+            if (rooms.Length < Cave.NumberOfRooms)
+                return false;
+            bool[] accessRooms = new bool[Cave.NumberOfRooms];
+            foreach (Room item in rooms)
             {
-                Console.Write(currentRoom.RoomIndex + " : ");
-
-                foreach (Room adjRoom in currentRoom.AdjacentRooms)
+                if (item.AdjacentRooms != null)
                 {
-                    Console.Write(adjRoom.RoomIndex + " , ");
+                    foreach (Room adjRoom in item.AdjacentRooms)
+                    {
+                        accessRooms[adjRoom.RoomIndex] = true;
+                    }
                 }
-                Console.Write("\n");
             }
+            return (!accessRooms.Any((x) => x == false));
+        }
+        /// <summary>
+        /// Get Rooms that havent yet had a connection
+        /// </summary>
+        /// <param name="takenRooms"></param>
+        /// <param name="possibleRooms"></param>
+        /// <returns></returns>
+        public static int[] GetRelevantIndexes(bool[] takenRooms, int[] possibleRooms)
+        {
+            int[] rooms = Extensions.ChangeIndecesToNumber(possibleRooms.Length, -1);
+            Random rand = new Random(DateTime.Now.Millisecond);
+
+            int index = 0;
+            foreach (int item in possibleRooms)
+            {
+                if (index >= Cave.NumberOfConnections)
+                    continue;
+
+                if (!takenRooms[item])
+                {
+                    rooms[possibleRooms.index] = item;
+                    index++;
+                }
+            }
+            while (index < Cave.NumberOfConnections)
+            {
+                int toAdd = possibleRooms[rand.Next(6)];
+                while (rooms.Any((x) => x == toAdd))
+                {
+                    toAdd = possibleRooms[rand.Next(6)];
+                }
+                rooms[index] = toAdd;
+                index++;
+            }
+            return rooms;
         }
     }
 }

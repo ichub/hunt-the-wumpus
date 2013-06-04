@@ -149,5 +149,16 @@ namespace HuntTheWumpus.Source
                     return Direction.Down;
             }
         }
+
+        public static int[] ChangeIndecesToNumber(int size, int number)
+        {
+            int[] array = new int[size];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = number;
+            }
+            return array;
+        }
+        public static int IndexOf(s)
     }
 }
