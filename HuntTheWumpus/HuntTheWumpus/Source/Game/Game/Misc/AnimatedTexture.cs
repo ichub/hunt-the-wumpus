@@ -50,9 +50,9 @@ namespace HuntTheWumpus.Source
         /// <param name="spriteWidth"> The width of each frame of this texture. </param>
         /// <param name="spriteHeight"> The height of each frame of this texture. </param>
         /// <param name="fps"> The amount of times per second the frame is updated.</param>
-        public AnimatedTexture(Texture2D spriteSheet, int amountOfFrames, int spriteWidth, int spriteHeight, int fps, float scale = 1)
+        public AnimatedTexture(Texture2D spriteSheet, int amountOfFrames, int spriteWidth, int fps, float scale = 1)
         {
-            this.Size = new Vector2(spriteWidth, spriteHeight);
+            this.Size = new Vector2(spriteWidth, spriteSheet.Height);
             this.Scale = scale;
             this.SpriteSheet = spriteSheet;
             this.FPS = fps;
@@ -66,7 +66,7 @@ namespace HuntTheWumpus.Source
         /// </summary>
         /// <param name="texture"> Texture to display. </param>
         public AnimatedTexture(Texture2D texture)
-            : this(texture, 1, texture.Width, texture.Height, 0, 1) { }
+            : this(texture, 1, texture.Width, 0, 1) { }
 
         /// <summary>
         /// Draws the texture.

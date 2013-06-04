@@ -172,7 +172,7 @@ namespace HuntTheWumpus.Source
                 if (item is IDrawable)
                 {
                     IDrawable drawableItem = item as IDrawable;
-                    item.BoundingBox = Extensions.Box2D(item.Position, item.Position + drawableItem.Texture.Size);
+                    item.BoundingBox = Extensions.Box2D(item.Position, item.Position + drawableItem.Texture.Size * drawableItem.Texture.Scale);
                 }
             }
         }
