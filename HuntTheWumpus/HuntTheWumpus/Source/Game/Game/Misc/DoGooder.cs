@@ -24,7 +24,12 @@ namespace HuntTheWumpus.Source
         {
             if (this.mainGame.InputManager.IsClicked(Keys.Q))
             {
-                this.mainGame.LevelManager.CurrentLevel = new TriviaMenu(this.mainGame);
+                this.mainGame.LevelManager.CurrentLevel = new TriviaMenu(this.mainGame, this.mainGame.LevelManager.CurrentLevel);
+            }
+
+            if (this.mainGame.InputManager.IsClicked(Keys.E))
+            {
+                this.mainGame.LevelManager.CurrentLevel = new ArrowMenu(this.mainGame, this.mainGame.LevelManager.CurrentLevel);
             }
         }
     }
