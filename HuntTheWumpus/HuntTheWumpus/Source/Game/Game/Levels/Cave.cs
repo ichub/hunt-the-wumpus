@@ -120,13 +120,17 @@ namespace HuntTheWumpus.Source
                     adjacentRoomIndecies[2] = (roomIndex + 1) % 30;
                 }
             }
-
+            // BALDKSLDKSLFKOFHLFDJHFLDKH
+            /*
             int[] randomlyChosenConnections = Cave.GetRelevantIndexes(this.TakenRooms, adjacentRoomIndecies);
             foreach (int item in randomlyChosenConnections)
             {
                 this.TakenRooms[item] = true;
             }
             return ConvertIndeciesToRooms(randomlyChosenConnections);
+             */
+
+            return ConvertIndeciesToRooms(adjacentRoomIndecies);
         }
         /// <summary>
         /// Converts given indecies to rooms
@@ -184,7 +188,8 @@ namespace HuntTheWumpus.Source
 
                 if (!takenRooms[item])
                 {
-                    rooms[possibleRooms.index] = item;
+                    // BLALKDLKGGHKJDHFKDFLDFHJ
+                    //rooms[possibleRooms.index] = item;
                     index++;
                 }
             }
