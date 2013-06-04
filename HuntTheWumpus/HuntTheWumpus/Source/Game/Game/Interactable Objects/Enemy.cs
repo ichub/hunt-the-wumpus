@@ -75,14 +75,14 @@ namespace HuntTheWumpus.Source
         {
             for (int i = 0; i < amount; i++)
             {
-                this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+                this.ParentLevel.GameObjects.Add(new Gold(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale/ 2 });
             }
         }
 
         private void SpawnSpecial()
         {
             if (Extensions.RandomBool(1.0 / 2))
-                this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size / 2 });
+                this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale / 2 });
         }
 
         private void OnDeath()
