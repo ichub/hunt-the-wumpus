@@ -164,7 +164,6 @@ namespace HuntTheWumpus.Source
             }
             return rooms;
         }
-
         /// <summary>
         /// Checks if all rooms are accessible.
         /// </summary>

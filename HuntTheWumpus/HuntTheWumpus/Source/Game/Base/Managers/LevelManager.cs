@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
+using HuntTheWumpus.Source.Game.Derived.Wumpus_Objects;
 
 namespace HuntTheWumpus.Source
 {
@@ -221,10 +222,40 @@ namespace HuntTheWumpus.Source
             if (this.CurrentLevel != null)
             {
                 this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
-                this.Hud.Draw();
+                this.HandleAnyWarnings();
+                this.Hud.DrawHud();
+                this.Hud.SwitchWarning(Warnings.Bat);
             }
 
             this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
+        }
+
+        public void HandleAnyWarnings()
+        {
+            Room currentRoom = this.currentLevel as Room;
+            if (null == currentRoom)
+                return;
+
+            //Have to add the wumpus: but since right now
+            //the wumpus is random i did not add it
+
+            foreach (Room item in currentRoom.AdjacentRooms.Where((x) => x != null))
+            {
+                if (item.RoomType == RoomType.Pit)
+                {
+                    this.Hud.SwitchWarning(Warnings.Pit);
+                    return;
+                }
+                foreach (SuperBat bat in this.GameCave.SuperBats)
+                {
+                    if (item.RoomIndex == bat.ParentRoomIndex)
+                    {
+                        this.Hud.SwitchWarning(Warnings.Bat);
+                        return;
+                    }
+                }
+            }
+            this.Hud.SwitchWarning(Warnings.None);
         }
     }
 }
