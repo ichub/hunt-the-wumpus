@@ -16,8 +16,6 @@ namespace HuntTheWumpus.Source
     {
         public Room[] Rooms { get; set; }
         public MainGame MainGame { get; set; }
-        public Rectangle CaveBounds { get; set; }
-        public Vector2 CaveOffset { get; set; }
         public List<SuperBat> SuperBats { get; set; }
 
         public const int NumberOfRooms = 30;
@@ -26,12 +24,10 @@ namespace HuntTheWumpus.Source
         private Random Random;
         private bool[] TakenRooms;
 
-        public Cave(MainGame mainGame, Vector2 windowSize)
+        public Cave(MainGame mainGame)
         {
             this.MainGame = mainGame;
             this.Rooms = new Room[NumberOfRooms];
-            this.CaveBounds = new Rectangle(((int)windowSize.X - 1024) / 2, ((int)windowSize.Y - 768) / 2, 1024, 768);
-            this.CaveOffset = new Vector2(this.CaveBounds.X, this.CaveBounds.Y);
             this.Random = new Random(DateTime.Now.Millisecond);
             this.TakenRooms = new bool[Cave.NumberOfRooms];
             for (int i = 0; i < this.Rooms.Length; i++)

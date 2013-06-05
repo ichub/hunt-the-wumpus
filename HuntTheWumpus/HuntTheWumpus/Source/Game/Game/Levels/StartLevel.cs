@@ -58,7 +58,7 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.background, this.MainGame.LevelManager.GameCave.CaveOffset, Color.White);
+            spriteBatch.Draw(this.background, new Vector2(0), Color.White);
             this.GameObjects.FrameDraw();
         }
     }

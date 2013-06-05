@@ -115,7 +115,7 @@ namespace HuntTheWumpus.Source
             Extensions.FillTexture(levelFade, Color.Black);
 
             // initializes the game cave.
-            this.GameCave = new Cave(this.MainGame, new Vector2(this.MainGame.Graphics.PreferredBackBufferWidth, this.MainGame.Graphics.PreferredBackBufferHeight));
+            this.GameCave = new Cave(this.MainGame);
         }
 
         /// <summary>
