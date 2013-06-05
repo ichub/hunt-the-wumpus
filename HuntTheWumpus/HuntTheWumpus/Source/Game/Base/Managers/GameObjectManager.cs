@@ -18,17 +18,40 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class GameObjectManager
     {
+        /// <summary>
+        /// The game to which this object belongs to.
+        /// </summary>
         private MainGame parentGame;
+
+        /// <summary>
+        /// A list of all the objects that belong to this manager.
+        /// </summary>
         private List<IGameObject> masterObjectList;
+
+        /// <summary>
+        /// A list of objects to be added at the end of the frame. Cleared 
+        /// at the end of every frame. Can be added to by using the Add method.
+        /// </summary>
         private Stack<IGameObject> objectsToAdd;
+
+        /// <summary>
+        /// A list of objcets to be removed from the game at the end of the frame. Cleared
+        /// at the end of every frame. Can be added to by using the Remove method.
+        /// </summary>
         private Stack<IGameObject> objectsToRemove;
 
-        private readonly Vector2 SkipBoundaryCheck = new Vector2(-1, -1);
         /// <summary>
-        /// Initializes all instance variables.
+        /// A vector that indicates that the next boundary check should be skipped.
         /// </summary>
+        private readonly Vector2 SkipBoundaryCheck = new Vector2(-1, -1);
+
+        /// <summary>
+        /// Creates a new game object manager.
+        /// </summary>
+        /// <param name="parentGame"> The game to which the object manager belongs. </param>
         public GameObjectManager(MainGame parentGame)
         {
+            // initializes all the instance variables to their default values
             this.parentGame = parentGame;
             this.masterObjectList = new List<IGameObject>();
             this.objectsToAdd = new Stack<IGameObject>();
@@ -85,11 +108,11 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Checks if two lines interect
         /// </summary>
-        /// <param name="first1">first point of first line</param>
-        /// <param name="first2">second point of first line</param>
-        /// <param name="second1">first point of second line</param>
-        /// <param name="second2">second point of second line</param>
-        /// <returns> true if intersect, other wise false</returns>
+        /// <param name="first1"> First point of first line. </param>
+        /// <param name="first2"> Second point of first line. </param>
+        /// <param name="second1"> First point of second line. </param>
+        /// <param name="second2"> Second point of second line. </param>
+        /// <returns> True if the lines intersect, false otherwise. </returns>
         private bool DoLinesIntersect(Vector2 first1, Vector2 first2, Vector2 second1, Vector2 second2)
         {
             float firstSlope = this.GetSlope(first1, first2);
@@ -106,23 +129,24 @@ namespace HuntTheWumpus.Source
                 && x < Math.Max(second1.X, second2.X)
                 && x > Math.Min(second1.X, second2.X));
         }
+
         /// <summary>
-        /// Calculate the slope given 2 vectors.
+        /// Calculates the slope given two points.
         /// </summary>
-        /// <param name="First Vector"></param>
-        /// <param name="Second Vector"></param>
-        /// <returns>Slope</returns>
+        /// <param name="first"> The first point. </param>
+        /// <param name="second"> The second point. </param>
+        /// <returns> The slope. </returns>
         private float GetSlope(Vector2 first, Vector2 second)
         {
             return (second.Y - first.Y) / (second.X - first.X);
         }
 
         /// <summary>
-        /// Get the y intercept of a line.
+        /// Gets the y-intercept given a point and a slope.
         /// </summary>
-        /// <param name="The point of which the line passes through"></param>
-        /// <param name="Slope of the line"></param>
-        /// <returns>The y-intercept</returns>
+        /// <param name="vect"> A point on the line. </param>
+        /// <param name="slope"> The slope of the line. </param>
+        /// <returns></returns>
         private float GetIntercept(Vector2 vect, float slope)
         {
             return (vect.Y) - (vect.X * slope);
