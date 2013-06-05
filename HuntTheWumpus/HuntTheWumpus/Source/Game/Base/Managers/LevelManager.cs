@@ -228,7 +228,12 @@ namespace HuntTheWumpus.Source
 
             this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
         }
-
+        /// <summary>
+        /// Handles the warnings: such as 
+        /// The Wumpus
+        /// The Pit
+        /// The SuperBats
+        /// </summary>
         public void HandleAnyWarnings()
         {
             Room currentRoom = this.currentLevel as Room;

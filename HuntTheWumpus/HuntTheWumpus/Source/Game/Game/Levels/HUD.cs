@@ -15,6 +15,9 @@ namespace HuntTheWumpus.Source
         Pit,
         None
     }
+    /// <summary>
+    /// A class the represents the Hud at the bottom of the screen
+    /// </summary>
     public class HUD
     {
         public MainGame ParentGame { get; set; }
@@ -36,6 +39,10 @@ namespace HuntTheWumpus.Source
 
         private Warnings Warning;
 
+        /// <summary>
+        /// Constructor that demands the MainGame
+        /// </summary>
+        /// <param name="parent"></param>
         public HUD(MainGame parent)
         {
             this.ParentGame = parent;
@@ -46,6 +53,10 @@ namespace HuntTheWumpus.Source
             this.BatTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.PitTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
         }
+        /// <summary>
+        /// Draws the complete HUD
+        /// Including the messages
+        /// </summary>
         public void DrawHud()
         {
             if (this.ParentGame.InputManager.IsClicked(Keys.H))
@@ -61,10 +72,19 @@ namespace HuntTheWumpus.Source
             }
 
         }
+        /// <summary>
+        /// Swith the current type of Warning
+        /// </summary>
+        /// <param name="warning">Type of warning</param>
         public void SwitchWarning(Warnings warning)
         {
             this.Warning = warning;
         }
+
+        /// <summary>
+        /// Draws the specified Warning
+        /// </summary>
+        /// <param name="warning">Type of warning</param>
         private void DrawWarning(Warnings warning)
         {
             this.SpriteFont = this.ParentGame.TextManager.Font;
