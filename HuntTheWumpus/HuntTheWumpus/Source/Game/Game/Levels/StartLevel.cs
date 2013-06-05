@@ -30,8 +30,9 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            Button startButton = new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[0],"startbutton") { Position = new Vector2(1024 - 200, 768 - 100) / 2 };
-            this.GameObjects.Add(startButton);
+            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[0],"startbutton") { Position = new Vector2(1024 - 200, 768 - 100) / 2 });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new HighScoreMenu(this.MainGame, this), "highscore") { Position = new Vector2(1024 - 200, 768 - 100) / 2 + new Vector2(0, 150)});
+
             this.background = MainGame.Content.Load<Texture2D>("Textures\\titlescreen");
         }
 

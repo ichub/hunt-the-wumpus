@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using HuntTheWumpus.Source.Game.Game.Misc;
 
 namespace HuntTheWumpus.Source
 {
@@ -71,11 +70,11 @@ namespace HuntTheWumpus.Source
             this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
-            this.LevelManager.CurrentLevel = new StartLevel(this);
+            this.LevelManager.CurrentLevel = new HighScoreMenu(this, new StartLevel(this));
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
             this.Player = new PlayerStats("Sexy Beast");
-            this.HighScore = new HighScore();
+            this.HighScore = new HighScore(this);
             base.Initialize();
         }
 

@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
-namespace HuntTheWumpus.Source.Game.Game.Misc
+namespace HuntTheWumpus.Source
 {
     public struct SingleScore : IComparable<SingleScore>
     {
@@ -32,13 +38,25 @@ namespace HuntTheWumpus.Source.Game.Game.Misc
         //100 is the worst score possible
         public static SingleScore Empty = new SingleScore(string.Empty, 100);
     }
+
     public class HighScore
     {
         private List<SingleScore> Scores;
+        private MainGame mainGame;
 
-        public HighScore()
+        public HighScore(MainGame mainGame)
         {
             this.Scores = new List<SingleScore>();
+            this.mainGame = mainGame;
+
+            //TEMP DEBUG
+
+            for (int i = 0; i < 10; i++)
+            {
+                this.Add(new SingleScore("DERP",this.mainGame.Random.Next(100, 500)));
+            }
+
+            //TEMP DEBUG END
         }
 
         public void Add(SingleScore score)
