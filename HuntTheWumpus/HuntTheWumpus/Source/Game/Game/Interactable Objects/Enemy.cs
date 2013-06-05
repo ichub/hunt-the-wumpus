@@ -57,7 +57,7 @@ namespace HuntTheWumpus.Source
                             this.hp--;
                             this.ParentLevel.GameObjects.Damage(this);
 
-                            this.MainGame.SoundManager.PlaySound("grunt");
+                            this.MainGame.SoundManager.PlaySound(Sound.Grunt);
                             if (this.hp < 0)
                             {
                                 this.MainGame.Player.Score += 10;

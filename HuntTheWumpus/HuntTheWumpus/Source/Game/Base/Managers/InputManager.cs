@@ -16,10 +16,29 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class InputManager
     {
+        /// <summary>
+        /// The state of the mouse at this frame.
+        /// </summary>
         public MouseState MouseState { get; private set; }
+
+        /// <summary>
+        /// The state of the mouse during the last frame.
+        /// </summary>
         public MouseState LastMouseState { get; private set; }
+
+        /// <summary>
+        /// The state of the keyboard during the frame.
+        /// </summary>
         public KeyboardState KeyboardState { get; private set; }
+
+        /// <summary>
+        /// The state of the keyboard during the last frame.
+        /// </summary>
         public KeyboardState LastKeyboardState { get; private set; }
+
+        /// <summary>
+        /// The mouse position at this frame.
+        /// </summary>
         public Vector2 MousePosition { get; private set; }
 
         /// <summary>

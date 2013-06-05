@@ -155,8 +155,8 @@ namespace HuntTheWumpus.Source
         /// <summary>
         /// Gets the corners of the bounding box.
         /// </summary>
-        /// <param name="box"> Bounding Box of item</param>
-        /// <returns>List of Vector2</returns>
+        /// <param name="box"> Bounding Box of item. </param>
+        /// <returns> List of Vector2. </returns>
         private List<Vector2> CreateCorners(BoundingBox box)
         {
             List<Vector2> vectors = new List<Vector2>(4);
@@ -171,7 +171,7 @@ namespace HuntTheWumpus.Source
         /// Gets all game objects of type T.
         /// </summary>
         /// <typeparam name="T"> Type of game object to return. </typeparam>
-        /// <returns> IEnumerable of type T of all game objects of type T. </returns>
+        /// <returns> List of type T of all game objects of type T. </returns>
         public List<T> GetObjectsByType<T>() where T : class
         {
             List<T> resultList = new List<T>();
@@ -201,6 +201,10 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Updates each hovorable object to reflect the its real state.
+        /// Fires the OnHoverBegin and OnHoverEnd methods when needed.
+        /// </summary>
         public void UpdateHoverable()
         {
             foreach (IHoverable item in this.GetObjectsByType<IHoverable>())
@@ -317,6 +321,10 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Damages a damageable item.
+        /// </summary>
+        /// <param name="objectToDamage"></param>
         public void Damage(IDamagable objectToDamage)
         {
             objectToDamage.IsDamaged = true;

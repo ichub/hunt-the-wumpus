@@ -16,8 +16,14 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class SoundManager
     {
-        public Dictionary<String, SoundEffect> Sounds { get; private set; }
+        /// <summary>
+        /// All the avaliable sounds.
+        /// </summary>
+        public Dictionary<Sound, SoundEffect> Sounds { get; private set; }
 
+        /// <summary>
+        /// The ambience of the cave.
+        /// </summary>
         private SoundEffectInstance ambience;
         
         /// <summary>
@@ -25,7 +31,7 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public SoundManager()
         {
-            this.Sounds = new Dictionary<String, SoundEffect>();
+            this.Sounds = new Dictionary<Sound, SoundEffect>();
         }
 
         /// <summary>
@@ -34,24 +40,36 @@ namespace HuntTheWumpus.Source
         /// <param name="content"> Content manager with which to load in sounds. </param>
         public void LoadSounds(ContentManager content)
         {
-            this.Sounds.Add("buttonclick", content.Load<SoundEffect>("Sounds\\button"));
-            this.Sounds.Add("menuchange", content.Load<SoundEffect>("Sounds\\menu change"));
-            this.Sounds.Add("grunt", content.Load<SoundEffect>("Sounds\\grunt"));
-            this.Sounds.Add("item pickup", content.Load<SoundEffect>("Sounds\\item pickup"));
-            this.Sounds.Add("caveambience", content.Load<SoundEffect>("Sounds\\caveambience"));
-            this.ambience = this.Sounds["caveambience"].CreateInstance();
+            // initializes the sounds
+            this.Sounds.Add(Sound.ButtonClick, content.Load<SoundEffect>("Sounds\\button"));
+            this.Sounds.Add(Sound.MenuChange, content.Load<SoundEffect>("Sounds\\menu change"));
+            this.Sounds.Add(Sound.Grunt, content.Load<SoundEffect>("Sounds\\grunt"));
+            this.Sounds.Add(Sound.ItemPickup, content.Load<SoundEffect>("Sounds\\item pickup"));
+            this.Sounds.Add(Sound.CaveAmbience, content.Load<SoundEffect>("Sounds\\caveambience"));
+
+            // playes the cave ambience
+            this.ambience = this.Sounds[Sound.CaveAmbience].CreateInstance();
             this.ambience.IsLooped = true;
             this.ambience.Play();
         }
 
         /// <summary>
-        /// Plays  the given sound.
+        /// Plays the given sound.
         /// </summary>
         /// <param name="name"> Name of the sound to play. </param>
-        public void PlaySound(string name)
+        public void PlaySound(Sound name)
         {
             if (this.Sounds.ContainsKey(name))
                 this.Sounds[name].Play();
         }
+    }
+
+    public enum Sound
+    {
+        ButtonClick,
+        MenuChange,
+        Grunt,
+        ItemPickup,
+        CaveAmbience,
     }
 }

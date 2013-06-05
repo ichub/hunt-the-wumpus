@@ -21,7 +21,7 @@ namespace HuntTheWumpus.Source
         {
             base.CollideWithPlayer(player);
             this.MainGame.Player.Score += 50;
-            this.MainGame.SoundManager.PlaySound("item pickup");
+            this.MainGame.SoundManager.PlaySound(Sound.ItemPickup);
 
         }
 

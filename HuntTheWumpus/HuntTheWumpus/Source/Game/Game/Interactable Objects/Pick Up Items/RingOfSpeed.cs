@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
             if (gameObject is PlayerAvatar && isColliding)
             {
                 this.MainGame.Player.MaxSpeed = 10;
-                this.MainGame.SoundManager.PlaySound("item pickup");
+                this.MainGame.SoundManager.PlaySound(Sound.ItemPickup);
             }
         }
 

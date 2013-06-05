@@ -17,16 +17,63 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class LevelManager
     {
-        public MainGame ParentGame { get; private set; }
-        public bool Paused { get; set; }
+        /// <summary>
+        /// The game to which this level manager belongs.
+        /// </summary>
+        public MainGame MainGame { get; private set; }
 
+        /// <summary>
+        /// A black texture which covers the whole screen. Used to fade in 
+        /// and out of levels.
+        /// </summary>
         private Texture2D levelFade;
+
+        /// <summary>
+        /// A value changed every frame if a level fade is in progress. Used to 
+        /// determine the alpha value of the levelFade texture so that it fades
+        /// out smoothly.
+        /// </summary>
         private float fadeCount;
+
+        /// <summary>
+        /// The amount fadeCount is changed by ever time interval.
+        /// </summary>
         private int fadeSpeed;
+
+        /// <summary>
+        /// Used to determine if a fade is in progress at the current frame.
+        /// </summary>
         private bool isLevelChanging;
 
-        private Timer timer;
+        /// <summary>
+        /// A timer which is called every time interval to fade in or out.
+        /// </summary>
+        private Timer fadeTimer;
 
+        /// <summary>
+        /// The game cave used for generating and storing rooms.
+        /// </summary>
+        public Cave GameCave { get; set; }
+
+        /// <summary>
+        /// The current level.
+        /// </summary>
+        private ILevel currentLevel;
+
+        /// <summary>
+        /// The level to load when the current level is completely faded out.
+        /// </summary>
+        private ILevel nextLevel;
+
+        /// <summary>
+        /// Amount of miliseconds that pass until the fade value is updated.
+        /// </summary>
+        private const int fadeInterval = 30;
+
+        /// <summary>
+        /// Gets or sets the current level, if the level is not changing at the
+        /// current frame. Starts the fading process if the level is not changing.
+        /// </summary>
         public ILevel CurrentLevel
         {
             get
@@ -51,23 +98,21 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public Cave GameCave { get; set; }
-
-        private ILevel currentLevel;
-        private ILevel nextLevel;
-
         /// <summary>
         /// Creates a new level manager.
         /// </summary>
         /// <param name="parentGame"> Game to which this level manager belongs. </param>
         public LevelManager(MainGame parentGame)
         {
-            this.Paused = false;
-            this.ParentGame = parentGame;
+            this.MainGame = parentGame;
+            this.fadeSpeed = 20;
+
+            // initializes the big black fade box.
             this.levelFade = new Texture2D(parentGame.GraphicsDevice, parentGame.WindowWidth, parentGame.WindowHeight);
             Extensions.FillTexture(levelFade, Color.Black);
-            this.GameCave = new Cave(this.ParentGame, new Vector2(this.ParentGame.Graphics.PreferredBackBufferWidth, this.ParentGame.Graphics.PreferredBackBufferHeight));
-            this.fadeSpeed = 20;
+
+            // initializes the game cave.
+            this.GameCave = new Cave(this.MainGame, new Vector2(this.MainGame.Graphics.PreferredBackBufferWidth, this.MainGame.Graphics.PreferredBackBufferHeight));
         }
 
         /// <summary>
@@ -75,18 +120,15 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void FrameUpdate()
         {
-            if (!this.Paused)
+            if (this.CurrentLevel != null)
             {
-                if (this.CurrentLevel != null)
+                if (!this.CurrentLevel.Initialized)
                 {
-                    if (!this.CurrentLevel.Initialized)
-                    {
-                        this.CurrentLevel.Initialize();
-                        this.CurrentLevel.Initialized = true;
-                    }
-                    this.CurrentLevel.FrameUpdate(this.ParentGame.GameTime, this.ParentGame.Content);
-                    this.GameCave.UpdateSuperBats();
+                    this.CurrentLevel.Initialize();
+                    this.CurrentLevel.Initialized = true;
                 }
+                this.CurrentLevel.FrameUpdate(this.MainGame.GameTime, this.MainGame.Content);
+                this.GameCave.UpdateSuperBats();
             }
         }
 
@@ -96,15 +138,15 @@ namespace HuntTheWumpus.Source
         /// <param name="toFadeInto"> Level to fade into. </param>
         public void StartFade(ILevel toFadeInto)
         {
-            if (this.timer != null)
+            if (this.fadeTimer != null)
             {
-                this.timer.Stop();
+                this.fadeTimer.Stop();
                 this.fadeCount = 0;
             }
 
-            this.timer = new Timer(30);
-            this.timer.Elapsed += this.FadeOut;
-            this.timer.Start();
+            this.fadeTimer = new Timer(LevelManager.fadeInterval);
+            this.fadeTimer.Elapsed += this.FadeOut;
+            this.fadeTimer.Start();
             this.nextLevel = toFadeInto;
         }
 
@@ -118,10 +160,10 @@ namespace HuntTheWumpus.Source
             this.currentLevel = this.nextLevel;
             this.currentLevel.OnLoad();
 
-            this.timer.Stop();
-            this.timer = new Timer(30);
-            this.timer.Elapsed += this.FadeIn;
-            this.timer.Start();
+            this.fadeTimer.Stop();
+            this.fadeTimer = new Timer(LevelManager.fadeInterval);
+            this.fadeTimer.Elapsed += this.FadeIn;
+            this.fadeTimer.Start();
             this.nextLevel = null;
         }
 
@@ -130,8 +172,8 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void OnFadeInEnd()
         {
-            this.timer.Stop();
-            this.timer = null;
+            this.fadeTimer.Stop();
+            this.fadeTimer = null;
             this.isLevelChanging = false;
         }
 
@@ -172,10 +214,10 @@ namespace HuntTheWumpus.Source
         {
             if (this.CurrentLevel != null)
             {
-                this.CurrentLevel.FrameDraw(this.ParentGame.GameTime, this.ParentGame.SpriteBatch);
+                this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
             }
 
-            this.ParentGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
+            this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
         }
     }
 }
