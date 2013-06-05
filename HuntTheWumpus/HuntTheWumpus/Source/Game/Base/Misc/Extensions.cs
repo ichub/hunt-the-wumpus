@@ -159,7 +159,17 @@ namespace HuntTheWumpus.Source
             }
             return array;
         }
-        //BLARGHLASDLAKDSLAKSD
-        //public static int IndexOf(s)
+
+        public static int IndexOf<T>(this T[] array, T toFind)
+        {
+            int index = 0;
+            foreach (T item in array)
+            {
+                if (item.Equals(toFind))
+                    return index;
+                index++;
+            }
+            return -1;
+        }
     }
 }

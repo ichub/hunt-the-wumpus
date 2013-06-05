@@ -120,17 +120,15 @@ namespace HuntTheWumpus.Source
                     adjacentRoomIndecies[2] = (roomIndex + 1) % 30;
                 }
             }
-            // BALDKSLDKSLFKOFHLFDJHFLDKH
-            /*
+
             int[] randomlyChosenConnections = Cave.GetRelevantIndexes(this.TakenRooms, adjacentRoomIndecies);
             foreach (int item in randomlyChosenConnections)
             {
+                if (item == -1)
+                    continue;
                 this.TakenRooms[item] = true;
             }
             return ConvertIndeciesToRooms(randomlyChosenConnections);
-             */
-
-            return ConvertIndeciesToRooms(adjacentRoomIndecies);
         }
         /// <summary>
         /// Converts given indecies to rooms
@@ -142,6 +140,8 @@ namespace HuntTheWumpus.Source
             Room[] rooms = new Room[roomIndecies.Length];
             for (int i = 0; i < roomIndecies.Length; i++)
             {
+                if (roomIndecies[i] == -1)
+                    continue;
                 rooms[i] = this.Rooms[roomIndecies[i]];
             }
             return rooms;
@@ -163,6 +163,10 @@ namespace HuntTheWumpus.Source
                 {
                     foreach (Room adjRoom in item.AdjacentRooms)
                     {
+                        if (adjRoom == null)
+                            continue;
+                        if (adjRoom.RoomIndex == -1)
+                            continue;
                         accessRooms[adjRoom.RoomIndex] = true;
                     }
                 }
@@ -188,8 +192,7 @@ namespace HuntTheWumpus.Source
 
                 if (!takenRooms[item])
                 {
-                    // BLALKDLKGGHKJDHFKDFLDFHJ
-                    //rooms[possibleRooms.index] = item;
+                    rooms[possibleRooms.IndexOf(item)] = item;
                     index++;
                 }
             }
@@ -200,7 +203,7 @@ namespace HuntTheWumpus.Source
                 {
                     toAdd = possibleRooms[rand.Next(6)];
                 }
-                rooms[index] = toAdd;
+                rooms[possibleRooms.IndexOf(toAdd)] = toAdd;
                 index++;
             }
             return rooms;

@@ -156,6 +156,8 @@ namespace HuntTheWumpus.Source
                 //Draw connections of the current room
                 foreach (Room adjRoom in this.CurrentRoom.AdjacentRooms)
                 {
+                    if (adjRoom == null)
+                        continue;
                     spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift, Color.Green);
                 }
             }
