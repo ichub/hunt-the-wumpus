@@ -71,8 +71,23 @@ namespace HuntTheWumpus.Source
             //Finished------------------------------------------------------------>
             #endregion
             #region Pit Room Stuff
+            //Pick Random Pit Room
             int pitRoom = this.Random.Next(Cave.NumberOfRooms);
             this.Rooms[pitRoom] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
+
+            foreach (var item in this.Rooms)
+            {
+                if (item.AdjacentRooms == null)
+                    continue;
+                //Make sure all the connection to the pit are there
+                for (int j = 0; j < item.AdjacentRooms.Length; j++)
+                {
+                    if (item.AdjacentRooms[j] != null && item.AdjacentRooms[j].RoomIndex == pitRoom)
+                    {
+                        item.AdjacentRooms[j] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
+                    }
+                }
+            }
             #endregion
         }
 
