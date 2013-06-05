@@ -68,7 +68,7 @@ namespace HuntTheWumpus.Source
         {
             if (FirstSpawn && this.RoomType == RoomType.Pit)
             {
-                this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[Math.Abs(30 - this.RoomIndex + 5)];
+                this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[Math.Min(Math.Abs(30 - this.RoomIndex + 5), Math.Abs(30 - this.RoomIndex - 5))];
                 FirstSpawn = false;
                 return;
             }

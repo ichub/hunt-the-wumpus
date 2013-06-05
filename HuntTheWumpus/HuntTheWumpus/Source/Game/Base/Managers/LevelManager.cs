@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
+using HuntTheWumpus.Source.Game.Game.Levels;
 
 namespace HuntTheWumpus.Source
 {
@@ -18,6 +19,7 @@ namespace HuntTheWumpus.Source
     public class LevelManager
     {
         public MainGame ParentGame { get; private set; }
+        public HUD Hud { get; private set; }
         public bool Paused { get; set; }
 
         private Texture2D levelFade;
@@ -68,6 +70,7 @@ namespace HuntTheWumpus.Source
             Extensions.FillTexture(levelFade, Color.Black);
             this.GameCave = new Cave(this.ParentGame, new Vector2(this.ParentGame.Graphics.PreferredBackBufferWidth, this.ParentGame.Graphics.PreferredBackBufferHeight));
             this.fadeSpeed = 20;
+            this.Hud = new HUD(this.ParentGame);
         }
 
         /// <summary>
@@ -173,6 +176,7 @@ namespace HuntTheWumpus.Source
             if (this.CurrentLevel != null)
             {
                 this.CurrentLevel.FrameDraw(this.ParentGame.GameTime, this.ParentGame.SpriteBatch);
+                this.Hud.Draw();
             }
 
             this.ParentGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
