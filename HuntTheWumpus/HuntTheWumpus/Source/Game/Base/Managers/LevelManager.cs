@@ -224,7 +224,6 @@ namespace HuntTheWumpus.Source
                 this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
                 this.HandleAnyWarnings();
                 this.Hud.DrawHud();
-                this.Hud.SwitchWarning(Warnings.Bat);
             }
 
             this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));

@@ -67,7 +67,7 @@ namespace HuntTheWumpus.Source
         }
         private void DrawWarning(Warnings warning)
         {
-            this.SpriteFont = this.ParentGame.TextManager.CourierNew;
+            this.SpriteFont = this.ParentGame.TextManager.Font;
             switch (warning)
             {
                 case Warnings.Wumpus:
