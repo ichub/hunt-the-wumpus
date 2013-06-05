@@ -31,7 +31,7 @@ namespace HuntTheWumpus.Source
             if (this.currentQuestion == null)
                 return;
 
-            if (this.currentQuestion.Answer == answer)
+            if (this.currentQuestion.CorrectAnswer == answer)
             {
                 this.MainGame.Player.Score += 100;
             }
@@ -54,7 +54,11 @@ namespace HuntTheWumpus.Source
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.FrameDraw(gameTime, spriteBatch);
-            this.MainGame.TextManager.DrawText(new Vector2(290, 100), this.currentQuestion == null ? "" : this.currentQuestion.QuestionString);
+            this.MainGame.TextManager.DrawText(new Vector2(290, 100), this.currentQuestion == null ? "" : this.currentQuestion.QuestionString, new Color(255, 212, 153));
+            for (int i = 0; i < 4; i++)
+            {
+                this.MainGame.TextManager.DrawText(new Vector2(290, 140 + i * 20), this.currentQuestion == null ? "" : (i + 1) + " : " + this.currentQuestion.QuestionAnswers[i], new Color(255, 212, 153));
+            }
         }
         public override void FrameUpdate(GameTime gameTime, ContentManager content)
         {

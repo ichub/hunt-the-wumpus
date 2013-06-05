@@ -60,7 +60,7 @@ namespace HuntTheWumpus.Source
         /// <param name="text">String to draw. </param>
         /// <param name="color"> Color of the string to draw. </param>
         /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
-        public void DrawText(Vector2 position, string text, Color color, bool openBatch)
+        public void DrawText(Vector2 position, string text, Color color, bool openBatch = false)
         {
             if (text == null)
                 return;

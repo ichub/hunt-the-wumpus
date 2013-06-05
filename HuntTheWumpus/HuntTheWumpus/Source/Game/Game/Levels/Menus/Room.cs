@@ -35,6 +35,7 @@ namespace HuntTheWumpus.Source
             this.background = background;
             this.RoomBounds = bounds;
             this.RoomType = type;
+            this.AdjacentRooms = new Room[6];
         }
 
         public void Initialize()

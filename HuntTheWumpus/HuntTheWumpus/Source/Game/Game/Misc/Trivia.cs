@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
+using System.Reflection;
 
 namespace HuntTheWumpus.Source
 {
@@ -30,19 +31,31 @@ namespace HuntTheWumpus.Source
 
         public void PopulateQuestions()
         {
-            this.questions.Add(new Question("What is 2 * 2", 0));
-            this.questions.Add(new Question("What is 3 * 3", 0));
-            this.questions.Add(new Question("What is love", 0));
-            this.questions.Add(new Question("baby don't hurt me", 0));
-            this.questions.Add(new Question("don't hurt me", 0));
-            this.questions.Add(new Question("no more", 0));
-            this.questions.Add(new Question("What is 3 * 3", 0));
-            this.questions.Add(new Question("What is 3 * 3", 0));
+            using (StreamReader triviaFile = new StreamReader(this.GetPathToTrivia()))
+            {
+                while (!triviaFile.EndOfStream)
+                {
+                    Question newQuestion = new Question();
+                    newQuestion.QuestionString = triviaFile.ReadLine();
+                    for (int i = 0; i < 4; i++)
+                    {
+                        newQuestion.QuestionAnswers[i] = triviaFile.ReadLine();
+                    }
+                    newQuestion.CorrectAnswer = Convert.ToInt32(triviaFile.ReadLine());
+                    triviaFile.ReadLine();
+                    this.questions.Add(newQuestion);                    
+                }
+            }
 
             foreach (Question item in this.questions)
             {
                 this.unaskedQuestions.Add(item);
             }
+        }
+
+        private string GetPathToTrivia()
+        {
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Content\\Text\\trivia.txt";
         }
 
         public void Reset()
@@ -74,18 +87,18 @@ namespace HuntTheWumpus.Source
 
     public class Question
     {
-        public string QuestionString { get; private set; }
-        public int Answer { get; private set; }
+        public string QuestionString { get; set; }
+        public string[] QuestionAnswers { get; set; }
+        public int CorrectAnswer { get; set; }
 
-        public Question(string question, int answer)
+        public Question()
         {
-            this.QuestionString = question;
-            this.Answer = answer;
+            this.QuestionAnswers = new string[4];
         }
 
         public bool IsCorrect(int answer)
         {
-            return answer == this.Answer;
+            return answer == this.CorrectAnswer;
         }
     }
 }
