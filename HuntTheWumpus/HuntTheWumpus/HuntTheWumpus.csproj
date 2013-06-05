@@ -96,6 +96,7 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\Gem.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Wumpus.cs" />
     <Compile Include="Source\Game\Game\Levels\GameOverLevel.cs" />
+    <Compile Include="Source\Game\Game\Levels\HUD.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\ArrowMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\HighScoreMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\StartLevel.cs" />

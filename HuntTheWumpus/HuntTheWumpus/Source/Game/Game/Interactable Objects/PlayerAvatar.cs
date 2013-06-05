@@ -92,8 +92,6 @@ namespace HuntTheWumpus.Source
                     if (this.MainGame.Player.HP <= 0)
                     {
                         this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
-                        this.MainGame.Player.HP = 3;
-                        this.MainGame.Player.Score = 0;
                     }
                 }
             }

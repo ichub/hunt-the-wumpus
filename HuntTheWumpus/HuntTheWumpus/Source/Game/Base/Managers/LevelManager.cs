@@ -21,6 +21,8 @@ namespace HuntTheWumpus.Source
         /// The game to which this level manager belongs.
         /// </summary>
         public MainGame MainGame { get; private set; }
+        public HUD Hud { get; private set; }
+        public bool Paused { get; set; }
 
         /// <summary>
         /// A black texture which covers the whole screen. Used to fade in 
@@ -214,7 +216,8 @@ namespace HuntTheWumpus.Source
         {
             if (this.CurrentLevel != null)
             {
-                this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
+                this.CurrentLevel.FrameDraw(this.ParentGame.GameTime, this.MainGame.SpriteBatch);
+                this.Hud.Draw();
             }
 
             this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
