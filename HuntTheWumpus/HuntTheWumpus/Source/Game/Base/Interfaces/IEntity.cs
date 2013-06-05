@@ -11,7 +11,8 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    public interface IEntity : ICollideable, IInitializable, IUpdateable, IDrawable, IMoveable
-    {
-    }
+    /// <summary>
+    /// Interface for entities that should be displayed in a level.
+    /// </summary>
+    public interface IEntity : ICollideable, IInitializable, IUpdateable, IDrawable, IMoveable { }
 }

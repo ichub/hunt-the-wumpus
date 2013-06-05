@@ -32,6 +32,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         bool ContentLoaded { get; set; }
 
+        /// <summary>
+        /// Whether or not the object is hidden. If it's hidden, it's not drawn.
+        /// </summary>
         bool IsHidden { get; set; }
 
         /// <summary>
