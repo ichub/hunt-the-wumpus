@@ -16,7 +16,9 @@ namespace HuntTheWumpus.Source
     {
         public Room[] Rooms { get; set; }
         public MainGame MainGame { get; set; }
-        public List<SuperBat> SuperBats { get; set; }
+
+        public List<SuperBat> SuperBats { get; private set; }
+        public Wumpus Wumpus { get; private set; }
 
         public const int NumberOfRooms = 30;
         public const int NumberOfConnections = 3;
@@ -27,12 +29,14 @@ namespace HuntTheWumpus.Source
         public Cave(MainGame mainGame)
         {
             this.MainGame = mainGame;
+
+            #region Initializing the Rooms
             this.Rooms = new Room[NumberOfRooms];
             this.Random = new Random(DateTime.Now.Millisecond);
             this.TakenRooms = new bool[Cave.NumberOfRooms];
             for (int i = 0; i < this.Rooms.Length; i++)
             {
-                this.Rooms[i] = RoomFactory.Create(this.MainGame, this, i);
+                this.Rooms[i] = RoomFactory.CreateRandomRoom(this.MainGame, this, i);
             }
 
             while (!Cave.AreAllRoomsAccessible(this.Rooms))
@@ -45,7 +49,7 @@ namespace HuntTheWumpus.Source
                     this.Rooms[i].AdjacentRooms = rooms;
                 }
             }
-
+            #endregion
             #region Super Bat Stuff
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
@@ -84,6 +88,17 @@ namespace HuntTheWumpus.Source
                     }
                 }
             }
+            #endregion
+            #region Wumpus stuff
+            int wumpusRoomIndex = this.Random.Next(30);
+            while (this.SuperBats.Any((x) => x.ParentRoomIndex == wumpusRoomIndex) || this.Rooms[wumpusRoomIndex].RoomType == RoomType.Pit)
+            {
+                wumpusRoomIndex = this.Random.Next(30);
+            }
+
+            this.Wumpus = new Wumpus(this.MainGame, this.MainGame.LevelManager.CurrentLevel);
+            this.Wumpus.RoomIndex = wumpusRoomIndex;
+
             #endregion
         }
 
