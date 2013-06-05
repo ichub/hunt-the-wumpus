@@ -68,7 +68,7 @@ namespace HuntTheWumpus.Source
 
             if (MainGame.InputManager.IsClicked(Keys.Up))
                 this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Up) { Position = position });
-            
+
             else if (MainGame.InputManager.IsClicked(Keys.Down))
                 this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Down) { Position = position });
 
@@ -115,7 +115,6 @@ namespace HuntTheWumpus.Source
             this.FireProjectile();
             this.Move();
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
-
             collidedWithEnemyLastFrame = collidedThisFrame;
             collidedThisFrame = false;
         }
@@ -123,6 +122,13 @@ namespace HuntTheWumpus.Source
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
+        }
+        private void UpdatePitRoom()
+        {
+            if (this.MainGame.LevelManager.CurrentLevel is Room && (this.MainGame.LevelManager.CurrentLevel as Room).RoomType == RoomType.Pit && this.MainGame.LevelManager.CurrentLevel.Initialized)
+            {
+                this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
+            }
         }
     }
 }

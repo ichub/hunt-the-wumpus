@@ -49,6 +49,8 @@ namespace HuntTheWumpus.Source
                     this.Rooms[i].AdjacentRooms = rooms;
                 }
             }
+
+            #region Super Bat Stuff
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
             Random rand = new Random();
@@ -67,6 +69,11 @@ namespace HuntTheWumpus.Source
                 }
             }
             //Finished------------------------------------------------------------>
+            #endregion
+            #region Pit Room Stuff
+            int pitRoom = this.Random.Next(Cave.NumberOfRooms);
+            this.Rooms[pitRoom] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
+            #endregion
         }
 
         public void UpdateSuperBats()
