@@ -153,6 +153,12 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Constructs a integer array with all the numbers set to some default number
+        /// </summary>
+        /// <param name="size">size of the array</param>
+        /// <param name="number">the default number</param>
+        /// <returns>an integer array with the specified default number</returns>
         public static int[] ChangeIndecesToNumber(int size, int number)
         {
             int[] array = new int[size];
@@ -163,6 +169,13 @@ namespace HuntTheWumpus.Source
             return array;
         }
 
+        /// <summary>
+        /// Provides an Generic IndexOf for arrays
+        /// </summary>
+        /// <typeparam name="T">Any type</typeparam>
+        /// <param name="array">The array of which to look into</param>
+        /// <param name="toFind">What we are trying to find</param>
+        /// <returns> -1 if not found or the index if found</returns>
         public static int IndexOf<T>(this T[] array, T toFind)
         {
             int index = 0;
