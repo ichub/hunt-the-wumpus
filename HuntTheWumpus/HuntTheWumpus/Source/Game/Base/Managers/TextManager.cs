@@ -16,10 +16,15 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class TextManager
     {
+        /// <summary>
+        /// The game to which the manager belongs.
+        /// </summary>
         public MainGame MainGame { get; private set; }
-        public SpriteFont CourierNew { get; private set; }
 
-        private SpriteBatch textBatch;
+        /// <summary>
+        /// The font which is used to display the text.
+        /// </summary>
+        public SpriteFont Font { get; private set; }
 
         /// <summary>
         /// Creates a new text manager.
@@ -28,8 +33,7 @@ namespace HuntTheWumpus.Source
         public TextManager(MainGame mainGame)
         {
             this.MainGame = mainGame;
-            this.CourierNew = mainGame.Content.Load<SpriteFont>("Fonts\\Courier New");
-            this.textBatch = mainGame.SpriteBatch;
+            this.Font = mainGame.Content.Load<SpriteFont>("Fonts\\Courier New");
         }
 
         /// <summary>
@@ -62,13 +66,25 @@ namespace HuntTheWumpus.Source
         /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
         public void DrawText(Vector2 position, string text, Color color, bool openBatch = false)
         {
-            if (text == null)
+            // returns if there is no text to be drawn.
+            if (text == null || text.Equals(String.Empty))
+            {
                 return;
+            }
+
+            // opens the batch if this text is drawn outside of the draw method.
             if (openBatch)
-                textBatch.Begin();
-            textBatch.DrawString(CourierNew, text, position, color);
+            {
+                this.MainGame.SpriteBatch.Begin();
+            }
+
+            this.MainGame.SpriteBatch.DrawString(Font, text, position, color);
+
+            // closes the batch if it was opened here.
             if (openBatch)
-                textBatch.End();
+            {
+                this.MainGame.SpriteBatch.End();
+            }
         }
     }
 }

@@ -21,8 +21,11 @@ namespace HuntTheWumpus.Source
         /// The game to which this level manager belongs.
         /// </summary>
         public MainGame MainGame { get; private set; }
+
+        /// <summary>
+        /// The hud, which is used to display stats, as well as health and events.
+        /// </summary>
         public HUD Hud { get; private set; }
-        public bool Paused { get; set; }
 
         /// <summary>
         /// A black texture which covers the whole screen. Used to fade in 
