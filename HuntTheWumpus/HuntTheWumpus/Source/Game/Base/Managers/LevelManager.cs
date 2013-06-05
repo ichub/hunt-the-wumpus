@@ -108,6 +108,7 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = parentGame;
             this.fadeSpeed = 20;
+            this.Hud = new HUD(this.MainGame);
 
             // initializes the big black fade box.
             this.levelFade = new Texture2D(parentGame.GraphicsDevice, parentGame.WindowWidth, parentGame.WindowHeight);
@@ -216,7 +217,7 @@ namespace HuntTheWumpus.Source
         {
             if (this.CurrentLevel != null)
             {
-                this.CurrentLevel.FrameDraw(this.ParentGame.GameTime, this.MainGame.SpriteBatch);
+                this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
                 this.Hud.Draw();
             }
 

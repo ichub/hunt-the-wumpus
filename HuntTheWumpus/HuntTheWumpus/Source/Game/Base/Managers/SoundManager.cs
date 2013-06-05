@@ -64,6 +64,9 @@ namespace HuntTheWumpus.Source
         }
     }
 
+    /// <summary>
+    /// Names of all the sounds that can be played by the game.
+    /// </summary>
     public enum Sound
     {
         ButtonClick,
