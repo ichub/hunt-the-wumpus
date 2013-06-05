@@ -112,6 +112,7 @@ namespace HuntTheWumpus.Source
 
         public override void Update(GameTime gameTime)
         {
+            this.UpdatePitRoom();
             this.FireProjectile();
             this.Move();
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
@@ -125,8 +126,9 @@ namespace HuntTheWumpus.Source
         }
         private void UpdatePitRoom()
         {
-            if (this.MainGame.LevelManager.CurrentLevel is Room && (this.MainGame.LevelManager.CurrentLevel as Room).RoomType == RoomType.Pit && this.MainGame.LevelManager.CurrentLevel.Initialized)
+            if (this.MainGame.LevelManager.CurrentLevel is Room && (this.MainGame.LevelManager.CurrentLevel as Room).RoomType == RoomType.Pit)
             {
+                this.MainGame.Player.HP = 0;
                 this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
             }
         }
