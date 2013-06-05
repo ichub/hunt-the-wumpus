@@ -108,6 +108,7 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\RingOfSpeed.cs" />
     <Compile Include="Source\Game\Game\Misc\Direction.cs" />
     <Compile Include="Source\Game\Game\Misc\DoGooder.cs" />
+    <Compile Include="Source\Game\Game\Misc\HighScore.cs" />
     <Compile Include="Source\Game\Game\Misc\Menu.cs" />
     <Compile Include="Source\Game\Game\Misc\RoomDirection.cs" />
     <Compile Include="Source\Game\Game\Misc\Teleporter.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Source\Game\Game\Misc\Team.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Enemy.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Projectile.cs" />
-    <Compile Include="Source\Game\Game\Levels\Menus\Room.cs" />
+    <Compile Include="Source\Game\Game\Levels\Room.cs" />
     <Compile Include="Source\Game\Game\Inventory\Inventory.cs" />
     <Compile Include="Source\Game\Game\Inventory\ItemList.cs" />
     <Compile Include="Source\Game\Game\Inventory\Item.cs" />

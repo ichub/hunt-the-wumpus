@@ -81,7 +81,7 @@ namespace HuntTheWumpus.Source
 
         public override void CollideWith(ICollideable gameObject, bool isColliding)
         {
-            collidedThisFrame = isColliding | collidedThisFrame;
+            collidedThisFrame = isColliding || collidedThisFrame;
 
             if (gameObject is Enemy && isColliding)
             {

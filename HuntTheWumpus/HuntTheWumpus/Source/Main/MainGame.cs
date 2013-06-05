@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using HuntTheWumpus.Source.Game.Game.Misc;
 
 namespace HuntTheWumpus.Source
 {
@@ -28,6 +29,7 @@ namespace HuntTheWumpus.Source
         public MiniMap MiniMap { get; private set; }
         public Trivia TriviaManager { get; private set; }
         public Random Random { get; private set; }
+        public HighScore HighScore { get; private set; }
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
@@ -72,7 +74,8 @@ namespace HuntTheWumpus.Source
             this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
-            this.Player = new PlayerStats();
+            this.Player = new PlayerStats("Sexy Beast");
+            this.HighScore = new HighScore();
             base.Initialize();
         }
 
@@ -131,6 +134,7 @@ namespace HuntTheWumpus.Source
             this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.Score, true);
             this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);
             this.TextManager.DrawText(new Vector2(0, 80), "gold : " + this.Player.Inventory.AmountOfGold().ToString(), true);
+            this.TextManager.DrawText(new Vector2(0, 100), "highscore : " + this.HighScore.GetHighScore().ToString(), true);
             base.Draw(gameTime);
         }
     }

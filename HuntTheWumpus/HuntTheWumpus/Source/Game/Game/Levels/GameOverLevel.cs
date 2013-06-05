@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using HuntTheWumpus.Source.Game.Game.Misc;
 
 namespace HuntTheWumpus.Source
 {
@@ -29,6 +30,11 @@ namespace HuntTheWumpus.Source
         public void Initialize()
         {
             this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") { Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) });
+
+            //Player Lost Game
+            SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score);
+            this.MainGame.HighScore.Add(score);
+            this.MainGame.Player.Reset();
         }
 
         public void OnLoad()
