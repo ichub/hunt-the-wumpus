@@ -20,6 +20,8 @@ namespace HuntTheWumpus.Source
         public GameObjectManager GameObjects { get; set; }
         public bool Initialized { get; set; }
 
+        private Texture2D background;
+
         public GameOverLevel(MainGame mainGame)
         {
             this.MainGame = mainGame;
@@ -30,6 +32,7 @@ namespace HuntTheWumpus.Source
         {
             this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") { Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) });
 
+            this.background = this.MainGame.Content.Load<Texture2D>("Textures\\gameover");
             //Player Lost Game
             SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score);
             this.MainGame.HighScore.Add(score);
@@ -58,6 +61,7 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(this.background, new Vector2(0), Color.White);
             this.GameObjects.FrameDraw();
         }
     }
