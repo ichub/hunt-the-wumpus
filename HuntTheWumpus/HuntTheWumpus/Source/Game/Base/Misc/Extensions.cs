@@ -16,6 +16,9 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// The game to which this class belongs.
+        /// </summary>
         private static MainGame mainGame;
 
         /// <summary>
