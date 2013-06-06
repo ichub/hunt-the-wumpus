@@ -122,8 +122,6 @@ namespace HuntTheWumpus.Source
             this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardspritesheet"), 7, 100, 15, 0.5f);
 
             this.Texture = this.playerBaseDownSpriteSheet;
-
-
         }
 
         public override void OnDamage()

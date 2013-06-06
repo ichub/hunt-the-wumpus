@@ -76,7 +76,7 @@ namespace HuntTheWumpus.Source
             this.DoGooder = new DoGooder(this);
             this.LevelManager = new LevelManager(this);
             this.LevelManager.CurrentLevel = new StartMenu(this);
-            this.MiniMap = new MiniMap(this, new Vector2(this.windowWidth - 200, 0));
+            this.MiniMap = new MiniMap(this, new Vector2(this.WindowWidth - 200, 0));
             
             this.Player = new PlayerStats("Sexy Beast");
             base.Initialize();
