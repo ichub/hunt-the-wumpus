@@ -78,7 +78,7 @@ namespace HuntTheWumpus.Source
         {
             switch (state)
             {
-                case GameButtonState.Hovored:
+                case GameButtonState.Hovered:
                     return "Textures\\Buttons\\" + Button.buttonResourceNames[name] + "_mouseover";
                 case GameButtonState.Default:
                     return "Textures\\Buttons\\" + Button.buttonResourceNames[name] + "_default";
@@ -92,7 +92,7 @@ namespace HuntTheWumpus.Source
         {
             this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Default)));
             this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Clicked)));
-            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Hovored)));
+            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Hovered)));
             this.Texture = this.notClickedTexture;
         }
 
@@ -158,7 +158,7 @@ namespace HuntTheWumpus.Source
 
     public enum GameButtonState
     {
-        Hovored,
+        Hovered,
         Default,
         Clicked,
     }
