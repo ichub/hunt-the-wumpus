@@ -218,6 +218,7 @@ namespace HuntTheWumpus.Source
         private static void LoadWalls(ContentManager content)
         {
             RoomFactory.Walls = new AnimatedTexture[6];
+
             RoomFactory.Walls[0] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\north"));
             RoomFactory.Walls[1] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\northeast"));
             RoomFactory.Walls[2] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\southeast"));

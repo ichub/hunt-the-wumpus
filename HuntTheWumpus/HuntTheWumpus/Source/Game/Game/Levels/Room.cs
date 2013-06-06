@@ -28,6 +28,7 @@ namespace HuntTheWumpus.Source
 
         private Texture2D background;
         private AnimatedTexture[] walls;
+        private bool wumpusDrawn = false;
 
         public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type, AnimatedTexture[] walls)
         {
@@ -73,11 +74,11 @@ namespace HuntTheWumpus.Source
             if (this.AdjacentRooms[1] != null)
                 this.walls[1].Draw(spriteBatch, new Vector2(0, 0), gameTime);
             if (this.AdjacentRooms[2] != null)
-                this.walls[2].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+                this.walls[2].Draw(spriteBatch, new Vector2(0, 0), gameTime);
             if (this.AdjacentRooms[3] != null)
-                this.walls[3].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+                this.walls[3].Draw(spriteBatch, new Vector2(0, 0), gameTime);
             if (this.AdjacentRooms[4] != null)
-                this.walls[4].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+                this.walls[4].Draw(spriteBatch, new Vector2(0, 0), gameTime);
             if (this.AdjacentRooms[5] != null)
                 this.walls[5].Draw(spriteBatch, new Vector2(0, 0), gameTime);
         }
@@ -106,6 +107,7 @@ namespace HuntTheWumpus.Source
 
         public void OnUnLoad()
         {
+            this.wumpusDrawn = false;
             this.Reset();
         }
 
@@ -117,8 +119,9 @@ namespace HuntTheWumpus.Source
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {
             //Checks if Wumpus inhabits this room
-            if (this.MainCave.Wumpus.RoomIndex == this.RoomIndex)
+            if (this.MainCave.Wumpus.RoomIndex == this.RoomIndex && !this.wumpusDrawn)
             {
+                this.wumpusDrawn = true;
                 Enemy newEnemy = new Wumpus(this.MainGame, this);
                 newEnemy.Position = this.MainGame.InputManager.MousePosition - new Vector2(50, 50);
                 this.GameObjects.Add(newEnemy);
