@@ -31,10 +31,10 @@ namespace HuntTheWumpus.Source
         public void Initialize()
         {
             this.GameObjects.Add(new Button(this.MainGame,
-                this, 
-                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") 
-                { 
-                    Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) 
+                this,
+                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton")
+                {
+                    Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0)
                 });
 
             this.background = this.MainGame.Content.Load<Texture2D>("Textures\\gameover");
@@ -42,6 +42,7 @@ namespace HuntTheWumpus.Source
             SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score);
             this.MainGame.HighScore.Add(score);
             this.MainGame.Player.Reset();
+            this.MainGame.MiniMap.Reset();
         }
 
         public void OnLoad()

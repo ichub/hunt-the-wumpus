@@ -38,7 +38,7 @@ namespace HuntTheWumpus.Source
             this.TopLeftPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
 
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
-            
+
             this.Shift = initialShift;
             this.InitCenterPoints();
             this.InitTopLeftPoints();
@@ -135,10 +135,14 @@ namespace HuntTheWumpus.Source
             }
         }
 
-
+        /// <summary>
+        /// Draws the minimap
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="content"></param>
         public void Draw(SpriteBatch spriteBatch, ContentManager content)
         {
-            if (this.Showing)
+            if (this.Showing && this.MainGame.LevelManager.CurrentLevel is Room)
             {
                 int index = 0;
                 foreach (Vector2 point in this.TopLeftPoints)
@@ -164,7 +168,9 @@ namespace HuntTheWumpus.Source
                 }
             }
         }
-
+        /// <summary>
+        /// Updates the minimap
+        /// </summary>
         public void Update()
         {
             if (this.MainGame.InputManager.IsClicked(Keys.M))
@@ -175,6 +181,11 @@ namespace HuntTheWumpus.Source
             {
                 this.Showing = false;
             }
+        }
+        public void Reset()
+        {
+            this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
+            this.Showing = false;
         }
     }
 }
