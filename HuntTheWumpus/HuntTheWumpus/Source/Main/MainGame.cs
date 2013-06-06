@@ -126,7 +126,7 @@ namespace HuntTheWumpus.Source
             GraphicsDevice.Clear(Color.CornflowerBlue);    // clears the screen
             this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);                  // begins drawing
             this.LevelManager.FrameDraw();                 // draws the level
-            this.MiniMap.Draw(this.SpriteBatch, this.Content);
+            this.MiniMap.Draw(this.SpriteBatch);
             this.SpriteBatch.End();                        // stops drawing
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.HP, true);

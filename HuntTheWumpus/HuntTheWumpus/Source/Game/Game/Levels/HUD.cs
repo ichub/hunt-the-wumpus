@@ -20,9 +20,12 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class HUD
     {
+
         public MainGame ParentGame { get; set; }
         public SpriteFont SpriteFont { get; set; }
         public Color DrawTextColor { get; set; }
+
+        public byte Transparency { get; set; }
 
         public Texture2D HudImage { get; private set; }
 
@@ -51,6 +54,8 @@ namespace HuntTheWumpus.Source
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.BatTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.PitTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
+
+            this.Transparency = 255 / 2;
         }
         /// <summary>
         /// Draws the complete HUD
@@ -65,7 +70,8 @@ namespace HuntTheWumpus.Source
             {
                 if (!(this.ParentGame.LevelManager.CurrentLevel is GameOverLevel || this.ParentGame.LevelManager.CurrentLevel is StartLevel) && this.ShouldDraw)
                 {
-                    this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), Color.White);
+                    Color tint = new Color(Color.White.R, Color.White.R, Color.White.R, this.Transparency);
+                    this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), tint);
                     this.DrawWarning(this.Warning);
                 }
             }
