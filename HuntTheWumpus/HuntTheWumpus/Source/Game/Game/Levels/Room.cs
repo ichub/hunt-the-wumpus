@@ -116,15 +116,13 @@ namespace HuntTheWumpus.Source
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {
-            // temporary debug feature begin
-            if (this.MainGame.InputManager.IsClicked(MouseButton.Left))
+            //Checks if Wumpus inhabits this room
+            if (this.MainCave.Wumpus.RoomIndex == this.RoomIndex)
             {
                 Enemy newEnemy = new Wumpus(this.MainGame, this);
                 newEnemy.Position = this.MainGame.InputManager.MousePosition - new Vector2(50, 50);
                 this.GameObjects.Add(newEnemy);
             }
-            // temporary debug deature end
-
             this.GameObjects.FrameUpdate();
         }
 

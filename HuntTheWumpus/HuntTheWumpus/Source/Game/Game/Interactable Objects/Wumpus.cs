@@ -11,8 +11,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Wumpus : Enemy
+    public class Wumpus : Enemy
     {
+        public int RoomIndex { get; set; }
+
         private AnimatedTexture facingLeft;
         private AnimatedTexture facingRight;
         private AnimatedTexture facingUp;

@@ -240,11 +240,13 @@ namespace HuntTheWumpus.Source
             if (null == currentRoom)
                 return;
 
-            //Have to add the wumpus: but since right now
-            //the wumpus is random i did not add it
-
             foreach (Room item in currentRoom.AdjacentRooms.Where((x) => x != null))
             {
+                if (this.GameCave.Wumpus.RoomIndex == item.RoomIndex)
+                {
+                    this.Hud.SwitchWarning(Warnings.Wumpus);
+                    return;
+                }
                 if (item.RoomType == RoomType.Pit)
                 {
                     this.Hud.SwitchWarning(Warnings.Pit);
@@ -259,6 +261,7 @@ namespace HuntTheWumpus.Source
                     }
                 }
             }
+            //No Warnings
             this.Hud.SwitchWarning(Warnings.None);
         }
     }

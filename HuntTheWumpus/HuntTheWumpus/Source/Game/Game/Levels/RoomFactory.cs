@@ -12,7 +12,6 @@ namespace HuntTheWumpus.Source
     {
         Flooded,
         Normal,
-        RockSlide,
         Shop,
         Pit
     }
@@ -24,7 +23,6 @@ namespace HuntTheWumpus.Source
     {
         private static Texture2D FloodedRoom;
         private static Texture2D NormalRoom;
-        private static Texture2D RockSlideRoom;
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
         private static AnimatedTexture[] Walls;
@@ -32,7 +30,6 @@ namespace HuntTheWumpus.Source
 
         private static List<Vector2> FloodedRoomBounds;
         private static List<Vector2> NormalRoomBounds;
-        private static List<Vector2> RockSlideRoomBounds;
         private static List<Vector2> ShopRoomBounds;
         private static List<Vector2> PitRoomBounds;
 
@@ -120,60 +117,6 @@ namespace HuntTheWumpus.Source
                 new Vector2(272, 22),
                 new Vector2(365, 101),
                 new Vector2(427, 5)
-            };
-            #endregion
-            #region Rock Slide Room Bounds
-            RoomFactory.RockSlideRoomBounds = new List<Vector2>()
-            {
-                new Vector2(213f,230f),
-                new Vector2(305f,243f),
-                new Vector2(373f,273f),
-                new Vector2(439f,333f),
-                new Vector2(508f,339f),
-                new Vector2(548f,384f),
-                new Vector2(552f,414f),
-                new Vector2(525f,434f),
-                new Vector2(496f,434f),
-                new Vector2(485f,470f),
-                new Vector2(440f,468f),
-                new Vector2(399f,496f),
-                new Vector2(260f,230f),
-                new Vector2(177f,545f),
-                new Vector2(51f,445f),
-                new Vector2(18f,383f),
-                new Vector2(20f,318f),
-                new Vector2(209f,163f),
-                new Vector2(178f,128f),
-                new Vector2(279f,28f),
-                new Vector2(350f,490f),
-                new Vector2(442f,0f),
-                new Vector2(553f,0f),
-                new Vector2(725f,95f),
-                new Vector2(760f,85f),
-                new Vector2(802f,173f),
-                new Vector2(873f,160f),
-                //
-                new Vector2(902f,193f),
-                new Vector2(895f,247f),
-                new Vector2(750f,386f),
-                new Vector2(698f,385f),
-                new Vector2(708f,433f),
-                new Vector2(802f,452f),
-                new Vector2(869f,449f),
-                new Vector2(934f,425f),
-                new Vector2(1008f,286f),
-                new Vector2(1010f,450f),
-                new Vector2(851f,598f),
-                new Vector2(893f,658f),
-                new Vector2(858f,696f),
-                new Vector2(816f,662f),
-                new Vector2(653f,767f),
-                new Vector2(386f,767f),
-                new Vector2(248f,643f),
-                new Vector2(202f,671f),
-                new Vector2(158f,628f),
-                new Vector2(199f,597f),
-                new Vector2(180f,531f)
             };
             #endregion
             #region Shop Room Bounds
@@ -266,7 +209,6 @@ namespace HuntTheWumpus.Source
         {
             RoomFactory.FloodedRoom = manager.Load<Texture2D>("Textures\\Cave\\flooded");
             RoomFactory.NormalRoom = manager.Load<Texture2D>("Textures\\Cave\\normal");
-            RoomFactory.RockSlideRoom = manager.Load<Texture2D>("Textures\\Cave\\rockslide");
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
             RoomFactory.PitRoom = manager.Load<Texture2D>("Textures\\Cave\\pit");
 
@@ -288,22 +230,17 @@ namespace HuntTheWumpus.Source
         /// Creates a random type of room with its specific bounds
         /// </summary>
         /// <returns></returns>
-        public static Room Create(MainGame mainGame, Cave cave, int index)
+        public static Room CreateRandomRoom(MainGame mainGame, Cave cave, int index)
         {
             double random = RoomFactory.Random.NextDouble();
 
             Tuple<Texture2D, List<Vector2>> tuple;
             RoomType type;
 
-            if (random < 0.4)
+            if (random < 0.5)
             {
                 tuple = GetRoomAndBound(RoomType.Normal);
                 type = RoomType.Normal;
-            }
-            else if (random < 0.6)
-            {
-                tuple = GetRoomAndBound(RoomType.RockSlide);
-                type = RoomType.RockSlide;
             }
             else if (random < 0.9)
             {
@@ -318,6 +255,14 @@ namespace HuntTheWumpus.Source
             Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
         }
+        /// <summary>
+        /// Create a specific type room
+        /// </summary>
+        /// <param name="mainGame">parameters for room</param>
+        /// <param name="cave">parameters for room</param>
+        /// <param name="type">type of room</param>
+        /// <param name="index">the rooms index</param>
+        /// <returns>the wanted room</returns>
         public static Room Create(MainGame mainGame, Cave cave, RoomType type, int index)
         {
             double random = RoomFactory.Random.NextDouble();
@@ -341,8 +286,6 @@ namespace HuntTheWumpus.Source
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.FloodedRoomBounds);
                 case RoomType.Normal:
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.NormalRoom, RoomFactory.NormalRoomBounds);
-                case RoomType.RockSlide:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.RockSlideRoom, RoomFactory.RockSlideRoomBounds);
                 case RoomType.Shop:
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.ShopRoom, RoomFactory.ShopRoomBounds);
                 case RoomType.Pit:
