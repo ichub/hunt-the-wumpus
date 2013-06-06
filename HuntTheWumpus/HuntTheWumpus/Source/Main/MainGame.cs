@@ -67,7 +67,7 @@ namespace HuntTheWumpus.Source
             this.TriviaManager = new Trivia(this);
             this.DoGooder = new DoGooder(this);
             this.Random = new Random();
-            this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
+            this.MiniMap = new MiniMap(this, new Vector2(this.WindowWidth - 200, 0f));
             this.LevelManager = new LevelManager(this);
             Extensions.Init(this);
             this.LevelManager.CurrentLevel = new StartLevel(this);
