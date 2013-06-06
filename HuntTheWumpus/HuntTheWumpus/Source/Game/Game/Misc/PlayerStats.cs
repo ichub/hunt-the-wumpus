@@ -45,6 +45,7 @@ namespace HuntTheWumpus.Source
         {
             this.Money -= sum;
         }
+
         public void Reset()
         {
             this.CurrentRoom = 0;

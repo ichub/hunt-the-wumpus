@@ -84,6 +84,7 @@ namespace HuntTheWumpus.Source
                 this.CurrentRoom = room;
             }
         }
+
         /// <summary>
         /// Hide Room In Cave
         /// </summary>
@@ -130,8 +131,10 @@ namespace HuntTheWumpus.Source
             foreach (Vector2 item in this.CenterPoints)
             {
                 this.TopLeftPoints.Add(
-                    new Vector2(item.X - halfX,
-                        item.Y + 2));
+                    new Vector2(
+                        item.X - halfX,
+                        item.Y + 2
+                        ));
             }
         }
 
@@ -142,6 +145,16 @@ namespace HuntTheWumpus.Source
         /// <param name="content"></param>
         public void Draw(SpriteBatch spriteBatch, ContentManager content)
         {
+            if (null == spriteBatch)
+            {
+                throw new ArgumentNullException("spriteBatch");
+            }
+
+            if (null == content)
+            {
+                throw new ArgumentNullException("content");
+            }
+
             if (this.Showing && this.MainGame.LevelManager.CurrentLevel is Room)
             {
                 int index = 0;
@@ -149,25 +162,35 @@ namespace HuntTheWumpus.Source
                 {
                     if (this.IndexesToShow[index])
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + this.Shift, Color.Red);
+                        spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), point + this.Shift, Color.Red);
                     }
                     else
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), point + this.Shift, Color.White);
+                        spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), point + this.Shift, Color.White);
                     }
                     index++;
                 }
+
                 //Draw Current room
-                spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, Color.Blue);
+                spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, Color.Blue);
+
                 //Draw connections of the current room
                 foreach (Room adjRoom in this.CurrentRoom.AdjacentRooms)
                 {
-                    if (adjRoom == null)
+                    if (null == adjRoom)
+                    {
                         continue;
-                    spriteBatch.Draw(content.Load<Texture2D>("Textures\\MiniMap\\minimapempty"), this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift, Color.Green);
+                    }
+
+                    spriteBatch.Draw(
+                        content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), 
+                        this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift, 
+                        Color.Green
+                        );
                 }
             }
         }
+
         /// <summary>
         /// Updates the minimap
         /// </summary>
@@ -177,11 +200,13 @@ namespace HuntTheWumpus.Source
             {
                 this.Showing = !this.Showing;
             }
+
             if (this.MainGame.LevelManager.CurrentLevel is GameOverLevel)
             {
                 this.Showing = false;
             }
         }
+
         public void Reset()
         {
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];

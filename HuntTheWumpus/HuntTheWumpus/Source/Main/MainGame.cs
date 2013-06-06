@@ -28,7 +28,7 @@ namespace HuntTheWumpus.Source
         public MiniMap MiniMap { get; private set; }
         public Trivia TriviaManager { get; private set; }
         public Random Random { get; private set; }
-        public HighScore HighScore { get; private set; }
+        public HighScores HighScore { get; private set; }
 
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
@@ -74,7 +74,7 @@ namespace HuntTheWumpus.Source
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
             this.Player = new PlayerStats("Sexy Beast");
-            this.HighScore = new HighScore(this);
+            this.HighScore = new HighScores();
             base.Initialize();
         }
 

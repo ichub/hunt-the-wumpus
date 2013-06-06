@@ -15,7 +15,7 @@ namespace HuntTheWumpus.Source
     public class Cave
     {
         public Room[] Rooms { get; set; }
-        public MainGame MainGame { get; set; }
+        public MainGame MainGame { get; private set; }
 
         public List<SuperBat> SuperBats { get; private set; }
         public Wumpus Wumpus { get; private set; }
@@ -27,6 +27,11 @@ namespace HuntTheWumpus.Source
 
         public Cave(MainGame mainGame)
         {
+            if(null == mainGame)
+            {
+                throw new ArgumentNullException("mainGame");
+            }
+
             this.MainGame = mainGame;
 
             #region Initializing the Rooms
@@ -51,11 +56,15 @@ namespace HuntTheWumpus.Source
             #region Super Bat Stuff
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
+
+            //TODO: move to this.MainGame.Random
+
             Random rand = new Random();
             //Spec says 2 SuperBats
             for (int i = 0; i < 2; i++)
             {
                 int randomRoom = rand.Next(Cave.NumberOfRooms);
+
                 if (this.SuperBats.Where((x) => x.ParentRoomIndex == randomRoom).Count() == 0)
                 {
                     this.SuperBats.Add(new SuperBat(this.MainGame, randomRoom));

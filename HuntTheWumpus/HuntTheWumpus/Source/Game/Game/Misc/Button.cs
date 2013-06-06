@@ -16,6 +16,8 @@ namespace HuntTheWumpus.Source
     /// </summary>
     class Button : IClickable, IUpdateable, IDrawable, IGameObject, IHoverable
     {
+        public static readonly Vector2 DefaultDimensions = new Vector2(1024, 768);
+
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
         public BoundingBox BoundingBox { get; set; }
@@ -33,9 +35,9 @@ namespace HuntTheWumpus.Source
         private AnimatedTexture clickedTexture;
         private AnimatedTexture notClickedTexture;
         private AnimatedTexture mousedOverTexture;
-        
+
         private string buttonName;
-        
+
         /// <summary>
         /// Creates a new button.
         /// </summary>
@@ -44,6 +46,26 @@ namespace HuntTheWumpus.Source
         /// <param name="onClick"> The action to take when this button is clicked on. </param>
         public Button(MainGame mainGame, ILevel parentLevel, Action onClick, string buttonName)
         {
+            if (null == mainGame)
+            {
+                throw new ArgumentNullException("mainGame");
+            }
+
+            if (null == parentLevel)
+            {
+                throw new ArgumentNullException("parentLevel");
+            }
+
+            if (null == onClick)
+            {
+                throw new ArgumentNullException("onClick");
+            }
+
+            if (null == buttonName)
+            {
+                throw new ArgumentNullException("buttonName");
+            }
+
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
             this.ObjectTeam = Team.Neutral;
@@ -61,7 +83,7 @@ namespace HuntTheWumpus.Source
 
         public void CenterOnScreen()
         {
-            this.Position = new Vector2(1024, 768) - this.Texture.Size;
+            this.Position = Button.DefaultDimensions - this.Texture.Size;
             this.Position /= 2;
             this.Position = Extensions.RoundVector(this.Position);
         }
@@ -84,7 +106,9 @@ namespace HuntTheWumpus.Source
         public void OnClickRelease()
         {
             this.OnClick.Invoke();
+
             this.Texture = this.notClickedTexture;
+
             this.MainGame.SoundManager.PlaySound(Sound.MenuChange);
         }
 

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class Teleporter : IDrawable, ICollideable, IInitializable, IUpdateable
+    public class Teleporter : IDrawable, ICollideable, IInitializable, IUpdateable
     {
         public MainGame MainGame { get; set; }
         public ILevel ParentLevel { get; set; }
