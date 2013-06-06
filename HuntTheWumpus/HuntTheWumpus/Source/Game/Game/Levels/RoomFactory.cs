@@ -27,6 +27,8 @@ namespace HuntTheWumpus.Source
         private static Texture2D RockSlideRoom;
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
+        private static AnimatedTexture[] Walls;
+
 
         private static List<Vector2> FloodedRoomBounds;
         private static List<Vector2> NormalRoomBounds;
@@ -267,6 +269,19 @@ namespace HuntTheWumpus.Source
             RoomFactory.RockSlideRoom = manager.Load<Texture2D>("Textures\\Cave\\rockslide");
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
             RoomFactory.PitRoom = manager.Load<Texture2D>("Textures\\Cave\\pit");
+
+            RoomFactory.LoadWalls(manager);
+        }
+
+        private static void LoadWalls(ContentManager content)
+        {
+            RoomFactory.Walls = new AnimatedTexture[6];
+            RoomFactory.Walls[0] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\north"));
+            RoomFactory.Walls[1] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\northeast"));
+            RoomFactory.Walls[2] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\southeast"));
+            RoomFactory.Walls[3] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\south"));
+            RoomFactory.Walls[4] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\southwest"));
+            RoomFactory.Walls[5] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\northwest"));
         }
 
         /// <summary>
@@ -300,7 +315,7 @@ namespace HuntTheWumpus.Source
                 tuple = GetRoomAndBound(RoomType.Shop);
                 type = RoomType.Shop;
             }
-            Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type);
+            Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
         }
         public static Room Create(MainGame mainGame, Cave cave, RoomType type, int index)
@@ -309,7 +324,7 @@ namespace HuntTheWumpus.Source
 
             Tuple<Texture2D, List<Vector2>> tuple = GetRoomAndBound(type);
 
-            Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type);
+            Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
         }
 

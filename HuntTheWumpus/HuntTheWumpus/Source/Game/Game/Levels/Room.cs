@@ -27,8 +27,9 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
 
         private Texture2D background;
+        private AnimatedTexture[] walls;
 
-        public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type)
+        public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type, AnimatedTexture[] walls)
         {
             this.MainGame = mainGame;
             this.MainCave = gameCave;
@@ -38,6 +39,7 @@ namespace HuntTheWumpus.Source
             this.RoomBounds = bounds;
             this.RoomType = type;
             this.AdjacentRooms = new Room[6];
+            this.walls = walls;
         }
 
         public void Initialize()
@@ -62,6 +64,22 @@ namespace HuntTheWumpus.Source
                 if (this.AdjacentRooms[5] != null)
                     this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[5]) { Position = new Vector2(151, 81) });
             }
+        }
+
+        private void DrawWalls(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            if (this.AdjacentRooms[0] != null)
+                this.walls[0].Draw(spriteBatch, new Vector2(0, 0), gameTime);
+            if (this.AdjacentRooms[1] != null)
+                this.walls[1].Draw(spriteBatch, new Vector2(0, 0), gameTime);
+            if (this.AdjacentRooms[2] != null)
+                this.walls[2].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+            if (this.AdjacentRooms[3] != null)
+                this.walls[3].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+            if (this.AdjacentRooms[4] != null)
+                this.walls[4].Draw(spriteBatch, new Vector2(0, 0), gameTime); 
+            if (this.AdjacentRooms[5] != null)
+                this.walls[5].Draw(spriteBatch, new Vector2(0, 0), gameTime);
         }
 
         public void OnLoad()
@@ -113,6 +131,7 @@ namespace HuntTheWumpus.Source
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.background, new Vector2(0), Color.White);
+            //this.DrawWalls(spriteBatch, gameTime);
             this.GameObjects.FrameDraw();
         }
     }
