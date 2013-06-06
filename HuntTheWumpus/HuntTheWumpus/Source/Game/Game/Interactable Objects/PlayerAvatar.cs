@@ -19,6 +19,11 @@ namespace HuntTheWumpus.Source
         private bool collidedThisFrame = false;
         private bool collidedWithEnemyLastFrame = false;
 
+        private AnimatedTexture playerBaseNotMoving;
+        private AnimatedTexture playerBaseLeftSpriteSheet;
+        private AnimatedTexture playerBaseRightSpriteSheet;
+        private AnimatedTexture playerBaseDownSpriteSheet;
+
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
             : base(mainGame, parentLevel)
         {
@@ -64,7 +69,7 @@ namespace HuntTheWumpus.Source
 
         public void FireProjectile()
         {
-            Vector2 position = this.Position + this.Texture.Size / 2;
+            Vector2 position = this.Position + this.Texture.Size * this.Texture.Scale / 2;
 
             if (MainGame.InputManager.IsClicked(Keys.Up))
                 this.ParentLevel.GameObjects.Add(new Projectile(this.MainGame, this.ParentLevel, Direction.Up) { Position = position });
@@ -105,11 +110,43 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\player"));
+            this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 0, 0.5f);
+            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 10, 0.5f);
+            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 10, 0.5f);
+            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 10, 0.5f);
+
+            this.Texture = this.playerBaseDownSpriteSheet;
+
+
+        }
+
+        private void ChoseTexture()
+        {
+            switch (Extensions.GetDirection(this.Velocity))
+            {
+                case Direction.Up:
+                    this.Texture = this.playerBaseDownSpriteSheet;
+                    break;
+                case Direction.Left:
+                    this.Texture = this.playerBaseLeftSpriteSheet;
+                    break;
+                case Direction.Right:
+                    this.Texture = this.playerBaseRightSpriteSheet;
+                    break;
+                case Direction.Down:
+                    this.Texture = this.playerBaseDownSpriteSheet;
+                    break;
+            }
+
+            if (this.Velocity.LengthSquared() < 0.5 * 0.5)
+            {
+                this.Texture = this.playerBaseNotMoving;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
+            this.ChoseTexture();
             this.UpdatePitRoom();
             this.FireProjectile();
             this.Move();
