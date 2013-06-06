@@ -15,8 +15,13 @@ namespace HuntTheWumpus.Source
     public class MiniMap
     {
         public const int DefaultRoomNumber = 30;
+
         public List<Vector2> TopLeftPoints { get; private set; }
+        public Texture2D EmptyMiniMapTexture { get; private set; }
+
         public MainGame MainGame { get; set; }
+
+        public byte Transparency { get; set; }
 
         public readonly float xSize = 44;
         public readonly float ySize = 36.5f;
@@ -42,6 +47,8 @@ namespace HuntTheWumpus.Source
             this.Shift = initialShift;
             this.InitCenterPoints();
             this.InitTopLeftPoints();
+
+            this.Transparency = 255 / 2;
         }
 
         public MiniMap(MainGame parentGame, Vector2 initialShift)
@@ -53,6 +60,8 @@ namespace HuntTheWumpus.Source
             }
 
             this.MainGame = parentGame;
+            this.EmptyMiniMapTexture = this.MainGame.Content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty);
+        
         }
 
         public MiniMap(int width, int height, Vector2 initialShift)
@@ -143,17 +152,13 @@ namespace HuntTheWumpus.Source
         /// </summary>
         /// <param name="spriteBatch"></param>
         /// <param name="content"></param>
-        public void Draw(SpriteBatch spriteBatch, ContentManager content)
+        public void Draw(SpriteBatch spriteBatch)
         {
             if (null == spriteBatch)
             {
                 throw new ArgumentNullException("spriteBatch");
             }
 
-            if (null == content)
-            {
-                throw new ArgumentNullException("content");
-            }
 
             if (this.Showing && this.MainGame.LevelManager.CurrentLevel is Room)
             {
@@ -162,17 +167,17 @@ namespace HuntTheWumpus.Source
                 {
                     if (this.IndexesToShow[index])
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), point + this.Shift, Color.Red);
+                        spriteBatch.Draw(this.EmptyMiniMapTexture, point + this.Shift, MiniMap.AddTransparency(Color.Red, this.Transparency));
                     }
                     else
                     {
-                        spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), point + this.Shift, Color.White);
+                        spriteBatch.Draw(this.EmptyMiniMapTexture, point + this.Shift, MiniMap.AddTransparency(Color.White, this.Transparency));
                     }
                     index++;
                 }
 
                 //Draw Current room
-                spriteBatch.Draw(content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, Color.Blue);
+                spriteBatch.Draw(this.EmptyMiniMapTexture, this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, MiniMap.AddTransparency(Color.Blue, this.Transparency));
 
                 //Draw connections of the current room
                 foreach (Room adjRoom in this.CurrentRoom.AdjacentRooms)
@@ -183,9 +188,9 @@ namespace HuntTheWumpus.Source
                     }
 
                     spriteBatch.Draw(
-                        content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty), 
-                        this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift, 
-                        Color.Green
+                        this.EmptyMiniMapTexture,
+                        this.TopLeftPoints[adjRoom.RoomIndex] + this.Shift,
+                         MiniMap.AddTransparency(Color.Green, this.Transparency)
                         );
                 }
             }
@@ -211,6 +216,10 @@ namespace HuntTheWumpus.Source
         {
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
             this.Showing = false;
+        }
+        private static Color AddTransparency(Color baseColor, byte transparency)
+        {
+            return new Color(baseColor.R, baseColor.G, baseColor.B, transparency);
         }
     }
 }
