@@ -51,7 +51,7 @@ namespace HuntTheWumpus.Source
 
             //TEMP DEBUG
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 this.Add(new SingleScore("DERP",this.mainGame.Random.Next(100, 500)));
             }
