@@ -98,10 +98,20 @@ namespace HuntTheWumpus.Source
 
         private void SpawnEnemies()
         {
-            int amount = 2;
-            for (int i = 0; i < amount; i++)
+            if (this.MainCave.RoomContainsWumpus(this.RoomIndex))
             {
-                this.GameObjects.Add(new Bat(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
+            }
+            else if (this.MainCave.RoomContainsSuperBat(this.RoomIndex))
+            {
+                this.GameObjects.Add(new SuperBatAvatar(this.MainGame, this));
+            }
+            else
+            {
+                int amount = 2;
+                for (int i = 0; i < amount; i++)
+                {
+                    this.GameObjects.Add(new Bat(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
+                }
             }
         }
 

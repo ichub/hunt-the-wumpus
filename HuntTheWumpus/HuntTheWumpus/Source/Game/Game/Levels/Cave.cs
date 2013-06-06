@@ -247,5 +247,16 @@ namespace HuntTheWumpus.Source
             }
             return rooms;
         }
+
+        public bool RoomContainsSuperBat(int index)
+        {
+            return this.SuperBats[0].ParentRoomIndex == index || 
+                this.SuperBats[1].ParentRoomIndex == index;
+        }
+
+        public bool RoomContainsWumpus(int index)
+        {
+            return this.Wumpus.RoomIndex == index;
+        }
     }
 }

@@ -46,6 +46,12 @@ namespace HuntTheWumpus.Source
             {
                 this.mainGame.LevelManager.CurrentLevel = this.mainGame.LevelManager.GameCave.Rooms[this.mainGame.LevelManager.GameCave.Wumpus.RoomIndex];
             }
+
+            // takes you to a superbat
+            if (this.mainGame.InputManager.IsClicked(Keys.B))
+            {
+                this.mainGame.LevelManager.CurrentLevel = this.mainGame.LevelManager.GameCave.Rooms[this.mainGame.LevelManager.GameCave.SuperBats[0].ParentRoomIndex];
+            }
         }
     }
 }
