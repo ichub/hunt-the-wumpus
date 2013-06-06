@@ -96,7 +96,7 @@ namespace HuntTheWumpus.Source
                 wumpusRoomIndex = this.Random.Next(30);
             }
 
-            this.Wumpus = new Wumpus(this.MainGame, this.MainGame.LevelManager.CurrentLevel);
+            this.Wumpus = new Wumpus(this.MainGame, null);
             this.Wumpus.RoomIndex = wumpusRoomIndex;
 
             #endregion

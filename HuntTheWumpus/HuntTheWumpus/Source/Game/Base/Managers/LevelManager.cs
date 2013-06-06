@@ -222,6 +222,7 @@ namespace HuntTheWumpus.Source
             if (this.CurrentLevel != null)
             {
                 this.CurrentLevel.FrameDraw(this.MainGame.GameTime, this.MainGame.SpriteBatch);
+                this.HandlePit();
                 this.HandleAnyWarnings();
                 this.Hud.DrawHud();
             }
@@ -263,6 +264,18 @@ namespace HuntTheWumpus.Source
             }
             //No Warnings
             this.Hud.SwitchWarning(Warnings.None);
+        }
+        /// <summary>
+        /// Handles anything that has to do with the pit
+        /// </summary>
+        public void HandlePit()
+        {
+            Room curRo = this.CurrentLevel as Room;
+            if (curRo != null && curRo.RoomType == RoomType.Pit)
+            {
+                this.MainGame.Player.Reset();
+                this.CurrentLevel = new GameOverLevel(this.MainGame);
+            }
         }
     }
 }
