@@ -43,5 +43,7 @@ namespace HuntTheWumpus.Source
         /// Used for determining whether or not the object is damaged.
         /// </summary>
         bool IsDamaged { get; set; }
+
+        void OnDamage();
     }
 }

@@ -30,6 +30,9 @@ namespace HuntTheWumpus.Source
         {
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(400, 400);
+            this.DamageLength = 250;
+            this.DamageTint = Color.Red;
+            this.CurrentTint = Color.White;
         }
 
         public void Move()
@@ -95,9 +98,10 @@ namespace HuntTheWumpus.Source
                 {
                     this.MainGame.Player.HP--;
                     this.MainGame.Player.Score -= 50;
+                    this.ParentLevel.GameObjects.Damage(this);
                     if (this.MainGame.Player.HP <= 0)
                     {
-                        this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
+                        this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
                     }
                 }
             }
@@ -120,6 +124,11 @@ namespace HuntTheWumpus.Source
             this.Texture = this.playerBaseDownSpriteSheet;
 
 
+        }
+
+        public override void OnDamage()
+        {
+            this.MainGame.SoundManager.PlaySound(Sound.Grunt);
         }
 
         private void ChoseTexture()
@@ -159,14 +168,15 @@ namespace HuntTheWumpus.Source
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            this.Texture.Draw(spriteBatch, this.Position, gameTime);
+            this.Texture.Draw(spriteBatch, this.Position, gameTime, this.CurrentTint);
         }
+
         private void UpdatePitRoom()
         {
             if (this.MainGame.LevelManager.CurrentLevel is Room && (this.MainGame.LevelManager.CurrentLevel as Room).RoomType == RoomType.Pit)
             {
                 this.MainGame.Player.HP = 0;
-                this.MainGame.LevelManager.CurrentLevel = new GameOverLevel(this.MainGame);
+                this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
             }
         }
     }

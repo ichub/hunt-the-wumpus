@@ -20,7 +20,7 @@ namespace HuntTheWumpus.Source
         public GameObjectManager GameObjects { get; set; }
         public bool Initialized { get; set; }
 
-        private Texture2D background;
+        protected Texture2D background;
         private ILevel cameFrom;
 
         public BaseMenu(MainGame mainGame, ILevel cameFrom)

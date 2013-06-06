@@ -274,7 +274,7 @@ namespace HuntTheWumpus.Source
             if (curRo != null && curRo.RoomType == RoomType.Pit)
             {
                 this.MainGame.Player.Reset();
-                this.CurrentLevel = new GameOverLevel(this.MainGame);
+                this.CurrentLevel = new GameOverMenu(this.MainGame);
             }
         }
     }

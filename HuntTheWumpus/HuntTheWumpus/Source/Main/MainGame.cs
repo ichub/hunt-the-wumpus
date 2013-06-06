@@ -35,6 +35,8 @@ namespace HuntTheWumpus.Source
         public int WindowWidth { get; private set; }
         public int WindowHeight { get; private set; }
 
+        public Vector2 ScreenDimensions { get; private set; }
+
         public MainGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -44,14 +46,14 @@ namespace HuntTheWumpus.Source
 
 
             // Game Options:
-            this.Graphics.PreferredBackBufferWidth = 1024;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;  // sets the width of the window to the screen width
-            this.Graphics.PreferredBackBufferHeight = 768;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // sets the height of the window to the screen height
+            this.Graphics.PreferredBackBufferWidth = 1024;
+            this.Graphics.PreferredBackBufferHeight = 768;
             this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
             this.IsMouseVisible = true;                    // allows to be drawn on the window
-            //this.Graphics.IsFullScreen = true;
 
             this.WindowWidth = this.Graphics.PreferredBackBufferWidth;
             this.WindowHeight = this.Graphics.PreferredBackBufferHeight;
+            this.ScreenDimensions = new Vector2(this.WindowWidth, this.WindowHeight);
         }
 
         /// <summary>
@@ -62,19 +64,21 @@ namespace HuntTheWumpus.Source
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            RoomFactory.InitFactory(this.Content);
-            this.TriviaManager = new Trivia(this);
-            this.DoGooder = new DoGooder(this);
             this.Random = new Random();
-            this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
-            this.LevelManager = new LevelManager(this);
-            Extensions.Init(this);
-            this.LevelManager.CurrentLevel = new StartLevel(this);
             this.InputManager = new InputManager();
             this.SoundManager = new SoundManager();
-            this.Player = new PlayerStats("Sexy Beast");
             this.HighScore = new HighScores();
+
+            Extensions.Init(this);
+            RoomFactory.InitFactory(this.Content);
+
+            this.TriviaManager = new Trivia(this);
+            this.DoGooder = new DoGooder(this);
+            this.LevelManager = new LevelManager(this);
+            this.LevelManager.CurrentLevel = new StartMenu(this);
+            this.MiniMap = new MiniMap(this, new Vector2(200f, 200f));
+            
+            this.Player = new PlayerStats("Sexy Beast");
             base.Initialize();
         }
 
@@ -84,20 +88,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             this.TextManager = new TextManager(this);
             this.SoundManager.LoadSounds(this.Content);
-            // TODO: use this.Content to load your game content here
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -109,12 +102,15 @@ namespace HuntTheWumpus.Source
         {
             // TODO: Add your update logic here
             this.GameTime = gameTime;
+
             this.InputManager.Update();
             this.LevelManager.FrameUpdate();
-            base.Update(gameTime);
+
             this.DoGooder.Update();
             this.MiniMap.Update();
             this.MiniMap.ShowRoom((this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room) : null));
+
+            base.Update(gameTime);
         }
 
         /// <summary>
@@ -123,17 +119,24 @@ namespace HuntTheWumpus.Source
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);    // clears the screen
-            this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);                  // begins drawing
-            this.LevelManager.FrameDraw();                 // draws the level
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            this.LevelManager.FrameDraw();
+
             this.MiniMap.Draw(this.SpriteBatch);
-            this.SpriteBatch.End();                        // stops drawing
+
+            this.SpriteBatch.End();
+
+            /*
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.HP, true);
             this.TextManager.DrawText(new Vector2(0, 40), "score: " + this.Player.Score, true);
             this.TextManager.DrawText(new Vector2(0, 60), "room : " + (this.LevelManager.CurrentLevel is Room ? (this.LevelManager.CurrentLevel as Room).RoomIndex : 0), true);
             this.TextManager.DrawText(new Vector2(0, 80), "gold : " + this.Player.Inventory.AmountOfGold().ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 100), "highscore : " + this.HighScore.GetHighScore().ToString(), true);
+             */
+
             base.Draw(gameTime);
         }
     }

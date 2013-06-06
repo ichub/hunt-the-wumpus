@@ -110,6 +110,10 @@ namespace HuntTheWumpus.Source
 
         }
 
+        public virtual void OnDamage()
+        {
+        }
+
         /// <summary>
         /// Loads the objects content.
         /// </summary>

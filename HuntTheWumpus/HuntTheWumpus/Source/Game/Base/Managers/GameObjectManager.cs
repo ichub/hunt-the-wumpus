@@ -327,17 +327,21 @@ namespace HuntTheWumpus.Source
         /// <param name="objectToDamage"></param>
         public void Damage(IDamagable objectToDamage)
         {
-            objectToDamage.IsDamaged = true;
-            objectToDamage.DamageTimer = new Timer(objectToDamage.DamageLength);
-            objectToDamage.CurrentTint = objectToDamage.DamageTint;
+            if (!objectToDamage.IsDamaged)
+            {
+                objectToDamage.IsDamaged = true;
+                objectToDamage.DamageTimer = new Timer(objectToDamage.DamageLength);
+                objectToDamage.CurrentTint = objectToDamage.DamageTint;
 
-            objectToDamage.DamageTimer.Elapsed += (a, b) =>
-                {
-                    objectToDamage.IsDamaged = false;
-                    objectToDamage.DamageTimer = null;
-                    objectToDamage.CurrentTint = Color.White;
-                };
-            objectToDamage.DamageTimer.Start();
+                objectToDamage.DamageTimer.Elapsed += (a, b) =>
+                    {
+                        objectToDamage.IsDamaged = false;
+                        objectToDamage.DamageTimer = null;
+                        objectToDamage.CurrentTint = Color.White;
+                    };
+                objectToDamage.DamageTimer.Start();
+                objectToDamage.OnDamage();
+            }
         }
 
         /// <summary>

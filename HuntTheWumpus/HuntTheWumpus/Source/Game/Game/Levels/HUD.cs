@@ -68,7 +68,7 @@ namespace HuntTheWumpus.Source
 
             if (this.ParentGame.LevelManager.CurrentLevel != null)
             {
-                if (!(this.ParentGame.LevelManager.CurrentLevel is GameOverLevel || this.ParentGame.LevelManager.CurrentLevel is StartLevel) && this.ShouldDraw)
+                if (!(this.ParentGame.LevelManager.CurrentLevel is GameOverMenu || this.ParentGame.LevelManager.CurrentLevel is StartMenu) && this.ShouldDraw)
                 {
                     Color tint = new Color(Color.White.R, Color.White.R, Color.White.R, this.Transparency);
                     this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), tint);

@@ -206,7 +206,7 @@ namespace HuntTheWumpus.Source
                 this.Showing = !this.Showing;
             }
 
-            if (this.MainGame.LevelManager.CurrentLevel is GameOverLevel)
+            if (this.MainGame.LevelManager.CurrentLevel is GameOverMenu)
             {
                 this.Showing = false;
             }

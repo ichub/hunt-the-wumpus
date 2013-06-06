@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Game over screen.
     /// </summary>
-    class GameOverLevel : ILevel
+    class GameOverMenu : ILevel
     {
         public MainGame MainGame { get; set; }
         public GameObjectManager GameObjects { get; set; }
@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
 
         private Texture2D background;
 
-        public GameOverLevel(MainGame mainGame)
+        public GameOverMenu(MainGame mainGame)
         {
             this.MainGame = mainGame;
             this.GameObjects = new GameObjectManager(mainGame);
@@ -32,7 +32,7 @@ namespace HuntTheWumpus.Source
         {
             this.GameObjects.Add(new Button(this.MainGame,
                 this,
-                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), ButtonName.Menu)
+                () => this.MainGame.LevelManager.CurrentLevel = new StartMenu(this.MainGame), ButtonName.Menu)
                 {
                     Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0)
                 });
@@ -47,20 +47,9 @@ namespace HuntTheWumpus.Source
             this.MainGame.LevelManager.GameCave.Reset();
         }
 
-        public void OnLoad()
-        {
-            return;
-        }
-
-        public void OnUnLoad()
-        {
-            return;
-        }
-
-        public void Reset()
-        {
-            return;
-        }
+        public void OnLoad() { }
+        public void OnUnLoad() { }
+        public void Reset() { }
 
         public void FrameUpdate(GameTime gameTime, ContentManager content)
         {

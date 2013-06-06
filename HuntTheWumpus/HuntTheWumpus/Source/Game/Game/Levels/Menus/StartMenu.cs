@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Main menu.
     /// </summary>
-    class StartLevel : ILevel
+    class StartMenu : ILevel
     {
         public MainGame MainGame { get; set; }
         public GameObjectManager GameObjects { get; set; }
@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
 
         private Texture2D background;
 
-        public StartLevel(MainGame mainGame)
+        public StartMenu(MainGame mainGame)
         {
             this.MainGame = mainGame;
             this.GameObjects = new GameObjectManager(mainGame);

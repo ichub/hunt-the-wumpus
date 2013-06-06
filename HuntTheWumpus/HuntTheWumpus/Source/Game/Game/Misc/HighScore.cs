@@ -19,13 +19,6 @@ namespace HuntTheWumpus.Source
 
         public SingleScore(string name, int score)
         {
-            if (null == name)
-            {
-                throw new ArgumentNullException("name");
-            }
-
-            Debug.Assert(score >= 0);
-
             this.Name = name;
             this.Score = score;
         }
