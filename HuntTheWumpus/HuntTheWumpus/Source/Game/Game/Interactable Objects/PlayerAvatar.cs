@@ -111,9 +111,9 @@ namespace HuntTheWumpus.Source
         public override void LoadContent(ContentManager content)
         {
             this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 0, 0.5f);
-            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 10, 0.5f);
-            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 10, 0.5f);
-            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 10, 0.5f);
+            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f);
+            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f);
+            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f);
 
             this.Texture = this.playerBaseDownSpriteSheet;
 
