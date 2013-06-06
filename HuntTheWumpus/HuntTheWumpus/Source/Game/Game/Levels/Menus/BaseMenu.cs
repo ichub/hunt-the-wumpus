@@ -40,19 +40,20 @@ namespace HuntTheWumpus.Source
 
         public virtual void OnLoad()
         {
-            this.GameObjects.Add(new Button(this.MainGame, 
-                this, 
+            this.GameObjects.Add(new Button(this.MainGame,
+                this,
                 () => { this.MainGame.LevelManager.CurrentLevel = cameFrom; },
-                "quit") 
-                { Position = new Vector2(512 - 100, 570) });
+                "quit") { Position = new Vector2(512 - 100, 570) });
         }
 
         public virtual void OnUnLoad()
         {
+            return;
         }
 
         public virtual void Reset()
         {
+            return;
         }
 
         public virtual void FrameUpdate(GameTime gameTime, ContentManager content)

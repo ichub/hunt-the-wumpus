@@ -78,7 +78,13 @@ namespace HuntTheWumpus.Source
         {
             this.Draw(spriteBatch, position, gameTime, Color.White);
         }
-
+        /// <summary>
+        /// Draws the texture.
+        /// </summary>
+        /// <param name="spriteBatch"> Spritebatch to draw it with. </param>
+        /// <param name="position"> The position to draw it at. </param>
+        /// <param name="gameTime"> The game time. </param>
+        /// <param name="tint"> The tint to apply. </param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, Color tint)
         {
             this.milisecondsSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;

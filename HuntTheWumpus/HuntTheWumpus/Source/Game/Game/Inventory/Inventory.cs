@@ -13,7 +13,16 @@ namespace HuntTheWumpus.Source
 {
     public class Inventory
     {
-        public List<InventorySlot> Slots { get; set; }
+        public InventorySlot this[int index]
+        {
+            get
+            {
+                return this.Slots[index];
+            }
+
+        }
+
+        private List<InventorySlot> Slots { get; set; }
 
         /// <summary>
         /// Creates a new inventory 

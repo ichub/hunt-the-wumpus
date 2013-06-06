@@ -36,7 +36,9 @@ namespace HuntTheWumpus.Source
         {
             this.CenterPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
             this.TopLeftPoints = new List<Vector2>(MiniMap.DefaultRoomNumber);
+
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
+            
             this.Shift = initialShift;
             this.InitCenterPoints();
             this.InitTopLeftPoints();

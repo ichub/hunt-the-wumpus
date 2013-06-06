@@ -15,6 +15,6 @@ namespace HuntTheWumpus.Source
     {
         Player,
         Enemy,
-        None
+        Neutral
     }
 }

@@ -43,7 +43,7 @@ namespace HuntTheWumpus.Source
 
         public void Pay(int sum)
         {
-            Money -= sum;
+            this.Money -= sum;
         }
         public void Reset()
         {

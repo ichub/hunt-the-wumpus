@@ -30,7 +30,6 @@ namespace HuntTheWumpus.Source
         public const string BatWarning = "Bats Nearby";
         public const string PitWarning = "I feel a draft";
 
-
         private readonly Vector2 WumpusTextPosition;
         private readonly Vector2 BatTextPosition;
         private readonly Vector2 PitTextPosition;
@@ -87,18 +86,22 @@ namespace HuntTheWumpus.Source
         /// <param name="warning">Type of warning</param>
         private void DrawWarning(Warnings warning)
         {
+            //Updates the class variable for the font.
             this.SpriteFont = this.ParentGame.TextManager.Font;
+
             switch (warning)
             {
                 case Warnings.Wumpus:
                     this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.WumpusWarning, this.WumpusTextPosition, this.DrawTextColor);
-                    break;
+                    return;
                 case Warnings.Bat:
                     this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.BatWarning, this.BatTextPosition, this.DrawTextColor);
-                    break;
+                    return;
                 case Warnings.Pit:
                     this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.PitWarning, this.PitTextPosition, this.DrawTextColor);
-                    break;
+                    return;
+                case Warnings.None:
+                    return;
             }
         }
     }

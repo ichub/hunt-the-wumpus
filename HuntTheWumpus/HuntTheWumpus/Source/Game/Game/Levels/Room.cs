@@ -67,6 +67,7 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        //TODO: Place correct walls
         private void DrawWalls(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (this.AdjacentRooms[0] != null)
@@ -85,13 +86,17 @@ namespace HuntTheWumpus.Source
 
         public void OnLoad()
         {
-            if (FirstSpawn && this.RoomType == RoomType.Pit)
+            if (Room.FirstSpawn && this.RoomType == RoomType.Pit)
             {
                 this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[Math.Min(Math.Abs(30 - this.RoomIndex + 5), Math.Abs(30 - this.RoomIndex - 5))];
-                FirstSpawn = false;
+                Room.FirstSpawn = false;
                 return;
             }
-            this.GameObjects.Add(new PlayerAvatar(this.MainGame, this) { Position = new Vector2(500, 200) });
+
+            this.GameObjects.Add(new PlayerAvatar(this.MainGame, this)
+            {
+                Position = new Vector2(500f, 200f)
+            });
             this.SpawnEnemies();
             this.PlaceTeleporters();
         }

@@ -16,6 +16,7 @@ namespace HuntTheWumpus.Source
     public class Trivia
     {
         private MainGame mainGame;
+
         private List<Question> questions;
         private List<Question> unaskedQuestions;
         private Stack<Question> askedQuestions;

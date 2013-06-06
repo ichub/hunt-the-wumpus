@@ -23,7 +23,6 @@ namespace HuntTheWumpus.Source
         public const int NumberOfRooms = 30;
         public const int NumberOfConnections = 3;
 
-        private Random Random;
         private bool[] TakenRooms;
 
         public Cave(MainGame mainGame)
@@ -32,7 +31,6 @@ namespace HuntTheWumpus.Source
 
             #region Initializing the Rooms
             this.Rooms = new Room[NumberOfRooms];
-            this.Random = new Random(DateTime.Now.Millisecond);
             this.TakenRooms = new bool[Cave.NumberOfRooms];
             for (int i = 0; i < this.Rooms.Length; i++)
             {
@@ -74,33 +72,21 @@ namespace HuntTheWumpus.Source
             //Pick Random Pit Room
             for (int i = 0; i < 2; i++)
             {
-                int pitRoom = this.Random.Next(Cave.NumberOfRooms);
+                int pitRoom = this.MainGame.Random.Next(Cave.NumberOfRooms);
                 while (this.Rooms[pitRoom].RoomType == RoomType.Pit)
                 {
-                    pitRoom = this.Random.Next(Cave.NumberOfRooms);
+                    pitRoom = this.MainGame.Random.Next(Cave.NumberOfRooms);
                 }
                 this.Rooms[pitRoom] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
 
-                foreach (var item in this.Rooms)
-                {
-                    if (item.AdjacentRooms == null)
-                        continue;
-                    //Make sure all the connection to the pit are there
-                    for (int j = 0; j < item.AdjacentRooms.Length; j++)
-                    {
-                        if (item.AdjacentRooms[j] != null && item.AdjacentRooms[j].RoomIndex == pitRoom)
-                        {
-                            item.AdjacentRooms[j] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
-                        }
-                    }
-                }
+                UpdateConnections(pitRoom);
             }
             #endregion
             #region Wumpus stuff
-            int wumpusRoomIndex = this.Random.Next(30);
+            int wumpusRoomIndex = this.MainGame.Random.Next(30);
             while (this.SuperBats.Any((x) => x.ParentRoomIndex == wumpusRoomIndex) || this.Rooms[wumpusRoomIndex].RoomType == RoomType.Pit)
             {
-                wumpusRoomIndex = this.Random.Next(30);
+                wumpusRoomIndex = this.MainGame.Random.Next(30);
             }
 
             this.Wumpus = new Wumpus(this.MainGame, null);
@@ -108,7 +94,30 @@ namespace HuntTheWumpus.Source
 
             #endregion
         }
-
+        
+        /// <summary>
+        /// Updates the connections of a room, when given a new type.
+        /// </summary>
+        /// <param name="pitRoom"></param>
+        private void UpdateConnections(int pitRoom)
+        {
+            foreach (var item in this.Rooms)
+            {
+                if (item.AdjacentRooms == null)
+                    continue;
+                //Make sure all the connection to the pit are there
+                for (int j = 0; j < item.AdjacentRooms.Length; j++)
+                {
+                    if (item.AdjacentRooms[j] != null && item.AdjacentRooms[j].RoomIndex == pitRoom)
+                    {
+                        item.AdjacentRooms[j] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Updates the superbats
+        /// </summary>
         public void UpdateSuperBats()
         {
             foreach (SuperBat bat in this.SuperBats)
@@ -247,13 +256,21 @@ namespace HuntTheWumpus.Source
             }
             return rooms;
         }
-
+        /// <summary>
+        /// Method for checking if room contains super bat
+        /// </summary>
+        /// <param name="index">index of room</param>
+        /// <returns>true if yes,false if not</returns>
         public bool RoomContainsSuperBat(int index)
         {
             return this.SuperBats[0].ParentRoomIndex == index || 
                 this.SuperBats[1].ParentRoomIndex == index;
         }
-
+        /// <summary>
+        /// Method for checking if room contains wumpus
+        /// </summary>
+        /// <param name="index">index of room</param>
+        /// <returns>true if yes,false if not</returns>
         public bool RoomContainsWumpus(int index)
         {
             return this.Wumpus.RoomIndex == index;

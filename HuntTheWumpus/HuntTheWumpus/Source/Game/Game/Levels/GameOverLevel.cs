@@ -30,7 +30,12 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this, () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") { Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) });
+            this.GameObjects.Add(new Button(this.MainGame,
+                this, 
+                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton") 
+                { 
+                    Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0) 
+                });
 
             this.background = this.MainGame.Content.Load<Texture2D>("Textures\\gameover");
             //Player Lost Game

@@ -38,7 +38,7 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(100, 100);
             this.BoundingBox = new BoundingBox();
-            this.ObjectTeam = Team.None;
+            this.ObjectTeam = Team.Neutral;
 
             this.RoomToTeleportTo = toTeleportTo;
         }

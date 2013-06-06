@@ -16,19 +16,22 @@ namespace HuntTheWumpus.Source
         public HighScoreMenu(MainGame parentGame, ILevel cameFrom)
             : base(parentGame, cameFrom) { }
 
+        public const int XPositionName = 290;
+        public const int XPositionScore = 690;
+
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.FrameDraw(gameTime, spriteBatch);
             var highScores = this.MainGame.HighScore.GetList();
-            this.MainGame.TextManager.DrawText(new Vector2(290, 140 - 20), "Names");
-            this.MainGame.TextManager.DrawText(new Vector2(690, 140 - 20), "Scores");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 140 - 20), "Names");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 140 - 20), "Scores");
 
             for (int i = highScores.Count - 1; i > highScores.Count - 10; i--)
             {
                 if (highScores.Count > 10 - i)
                 {
-                    this.MainGame.TextManager.DrawText(new Vector2(290, 140 + (10 - i) * 20), highScores[i].Name);
-                    this.MainGame.TextManager.DrawText(new Vector2(690, 140 + (10 - i) * 20), highScores[i].Score.ToString());
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 140 + (10 - i) * 20), highScores[i].Name);
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 140 + (10 - i) * 20), highScores[i].Score.ToString());
                 }
             }
         }

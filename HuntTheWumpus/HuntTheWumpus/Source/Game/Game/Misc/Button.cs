@@ -46,7 +46,7 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
-            this.ObjectTeam = Team.None;
+            this.ObjectTeam = Team.Neutral;
             this.OnClick = onClick;
             this.buttonName = buttonName;
         }

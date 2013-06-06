@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
-    class ItemList
+    public static class ItemList
     {
         public static List<Item> Items { get; set; }
 
@@ -55,7 +55,7 @@ namespace HuntTheWumpus.Source
 
         public static Item GetItem(string name)
         {
-            foreach (var item in ItemList.Items)
+            foreach (Item item in ItemList.Items)
             {
                 if (item.Name == name)
                     return item;
