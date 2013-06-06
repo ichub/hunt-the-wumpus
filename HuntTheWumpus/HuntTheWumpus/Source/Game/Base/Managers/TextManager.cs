@@ -86,5 +86,35 @@ namespace HuntTheWumpus.Source
                 this.MainGame.SpriteBatch.End();
             }
         }
+
+        /// <summary>
+        /// Draws the given text in a text block with word wrapping.
+        /// </summary>
+        /// <param name="position"> The top left corner of the word block. </param>
+        /// <param name="text"> The text to draw. </param>
+        /// <param name="maxWidth"> The width of the word block. </param>
+        /// <param name="color"> The color of the text. </param>
+        /// <returns> The bottom right corner of the word block. </returns>
+        public Vector2 DrawTextBlock(Vector2 position, string text, int maxWidth, Color color)
+        {
+            Vector2 cursor = position;
+            string[] words = text.Split(' ', '\n', '\t');
+            float stringHeight = this.Font.MeasureString("a").Y;
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                Vector2 wordSize = this.Font.MeasureString(words[i]);
+                if (wordSize.X + cursor.X > position.X + maxWidth)
+                {
+                    cursor.X = position.X;
+                    cursor.Y += stringHeight + 2;
+                }
+
+                this.MainGame.SpriteBatch.DrawString(this.Font, words[i], cursor, color);
+                cursor.X += wordSize.X + 20;
+            }
+
+            return cursor;
+        }
     }
 }

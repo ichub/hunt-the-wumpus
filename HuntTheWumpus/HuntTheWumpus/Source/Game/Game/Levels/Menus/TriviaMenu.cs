@@ -46,16 +46,17 @@ namespace HuntTheWumpus.Source
 
         public override void OnLoad()
         {
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(0); }, "1button") { Position = new Vector2(290, 100 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(1); }, "2button") { Position = new Vector2(520, 100 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(2); }, "3button") { Position = new Vector2(290, 225 + 200) });
-            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(3); }, "4button") { Position = new Vector2(520, 225 + 200) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(0); }, "1button") { Position = new Vector2(290, 100 + 250) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(1); }, "2button") { Position = new Vector2(520, 100 + 250) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(2); }, "3button") { Position = new Vector2(290, 200 + 250) });
+            this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(3); }, "4button") { Position = new Vector2(520, 200 + 250) });
             
             base.OnLoad();
         }
 
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            /*
             base.FrameDraw(gameTime, spriteBatch);
             this.MainGame.TextManager.DrawText(new Vector2(290, 100), 
                 this.currentQuestion == null ? "" : this.currentQuestion.QuestionString, new Color(255, 212, 153));
@@ -63,6 +64,24 @@ namespace HuntTheWumpus.Source
             for (int i = 0; i < TriviaMenu.AmountOfButtons; i++)
             {
                 this.MainGame.TextManager.DrawText(new Vector2(290, 140 + i * 20), this.currentQuestion == null ? "" : (i + 1) + " : " + this.currentQuestion.QuestionAnswers[i], new Color(255, 212, 153));
+            }
+             */
+
+            base.FrameDraw(gameTime, spriteBatch);
+
+            if (this.currentQuestion != null)
+            {
+                Vector2 questionDimensions = this.MainGame.TextManager.DrawTextBlock(new Vector2(290, 100),
+                    this.currentQuestion.QuestionString,
+                    450,
+                    new Color(255, 212, 153));
+
+                for (int i = 0; i < TriviaMenu.AmountOfButtons; i++)
+                {
+                    this.MainGame.TextManager.DrawText(new Vector2(290, questionDimensions.Y + 40 + i * 20),
+                        (i + 1) + " : " + this.currentQuestion.QuestionAnswers[i],
+                        new Color(255, 212, 153));
+                }
             }
         }
         public override void FrameUpdate(GameTime gameTime, ContentManager content)
