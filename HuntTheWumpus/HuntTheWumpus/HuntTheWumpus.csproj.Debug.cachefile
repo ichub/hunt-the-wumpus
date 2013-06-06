@@ -86,11 +86,6 @@ Content\Textures\Player\player basebackwardspritesheet.xnb
 Content\Textures\Player\player basebackwardw-chestspritesheet.xnb
 Content\Textures\Player\player basebackwardw-helmetspritesheet.xnb
 Content\Textures\Player\player upgradebackwardspritesheet.xnb
-Content\Textures\Cave\Cave_10.xnb
-Content\Textures\Cave\Cave_6.xnb
-Content\Textures\Cave\Cave_7.xnb
-Content\Textures\Cave\Cave_8.xnb
-Content\Textures\Cave\Cave_9.xnb
 Content\Textures\Buttons\Directional\n_default.xnb
 Content\Textures\Buttons\Directional\n_mouseclicked.xnb
 Content\Textures\Buttons\Directional\n_mouseover.xnb
@@ -109,4 +104,9 @@ Content\Textures\Buttons\Directional\se_mouseover.xnb
 Content\Textures\Buttons\Directional\sw_default.xnb
 Content\Textures\Buttons\Directional\sw_mouseclicked.xnb
 Content\Textures\Buttons\Directional\sw_mouseover.xnb
+Content\Textures\Cave\flooded skull.xnb
+Content\Textures\Cave\normalv1.xnb
+Content\Textures\Cave\Blood Room.xnb
+Content\Textures\Cave\normalv2.xnb
+Content\Textures\Cave\normalv3.xnb
 Content\Text\trivia.txt

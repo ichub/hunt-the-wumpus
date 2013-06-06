@@ -310,9 +310,9 @@ namespace HuntTheWumpus.Source
         public Room PickRandomStartRoom()
         {
             int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
-            while (!this.RoomContainsSuperBat(rand)
-                &&  this.RoomContainsWumpus(rand)
-                && !this.RoomIsPit(rand))
+            while (this.RoomContainsSuperBat(rand)
+                || this.RoomContainsWumpus(rand)
+                || this.RoomIsPit(rand))
             {
                 rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
             }

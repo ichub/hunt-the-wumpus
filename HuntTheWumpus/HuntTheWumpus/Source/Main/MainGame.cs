@@ -62,7 +62,6 @@ namespace HuntTheWumpus.Source
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             RoomFactory.InitFactory(this.Content);
             this.TriviaManager = new Trivia(this);
             this.DoGooder = new DoGooder(this);

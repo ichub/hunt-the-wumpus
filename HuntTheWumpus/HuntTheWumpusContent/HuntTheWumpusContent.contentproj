@@ -553,28 +553,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_10.png">
-      <Name>Cave_10</Name>
+    <Compile Include="Textures\Cave\flooded skull.png">
+      <Name>flooded skull</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_6.png">
-      <Name>Cave_6</Name>
+    <Compile Include="Textures\Cave\normalv1.png">
+      <Name>normalv1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_7.png">
-      <Name>Cave_7</Name>
+    <Compile Include="Textures\Cave\Blood Room.png">
+      <Name>Blood Room</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_8.png">
-      <Name>Cave_8</Name>
+    <Compile Include="Textures\Cave\normalv2.png">
+      <Name>normalv2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_9.png">
-      <Name>Cave_9</Name>
+    <Compile Include="Textures\Cave\normalv3.png">
+      <Name>normalv3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
