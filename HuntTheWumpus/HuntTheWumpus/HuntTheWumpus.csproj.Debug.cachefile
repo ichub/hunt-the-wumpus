@@ -4,37 +4,30 @@ Content\Textures\fireball_spritesheet.xnb
 Content\Textures\teleporter.xnb
 Content\Textures\MiniMap\minimapempty.xnb
 Content\Textures\MiniMap\MiniMapBackground.xnb
-Content\Textures\Items\Gold.xnb
 Content\Textures\Cave\normal.xnb
 Content\Textures\Cave\flooded.xnb
 Content\Textures\Cave\pit.xnb
 Content\Textures\Cave\rockslide.xnb
 Content\Textures\Enemies\Bat\bat_spritesheet.xnb
+Content\Textures\titlescreen.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
+Content\Textures\Buttons\startbutton_default.xnb
+Content\Textures\Buttons\startbutton_mouseclicked.xnb
+Content\Textures\Buttons\startbutton_mouseover.xnb
 Content\Textures\Enemies\Wumpus\wumpus_backspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_frontspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_leftspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_rightspritesheet.xnb
 Content\Textures\Enemies\Bat\superbat_spritesheet.xnb
-Content\Fonts\Courier New.xnb
-Content\Sounds\button.xnb
-Content\Sounds\item pickup.xnb
-Content\Sounds\menu change.xnb
-Content\Sounds\grunt.xnb
-Content\Textures\titlescreen.xnb
 Content\Textures\menu.xnb
-Content\Sounds\caveambience.xnb
-Content\Textures\Buttons\startbutton_default.xnb
-Content\Textures\Buttons\startbutton_mouseclicked.xnb
-Content\Textures\Buttons\startbutton_mouseover.xnb
+Content\Textures\Items\Gold.xnb
 Content\Textures\Buttons\1button_default.xnb
 Content\Textures\Buttons\1button_mouseclicked.xnb
 Content\Textures\Buttons\1button_mouseover.xnb
 Content\Textures\Buttons\2button_default.xnb
 Content\Textures\Buttons\2button_mouseclicked.xnb
 Content\Textures\Buttons\2button_mouseover.xnb
-Content\Textures\Buttons\3button_mouseclicked.xnb
 Content\Textures\Buttons\4button_default.xnb
 Content\Textures\Buttons\4button_mouseclicked.xnb
 Content\Textures\Buttons\4button_mouseover.xnb
@@ -44,6 +37,7 @@ Content\Textures\Buttons\highscore_mouseover.xnb
 Content\Textures\Buttons\quit_default.xnb
 Content\Textures\Buttons\quit_mouseclicked.xnb
 Content\Textures\Buttons\quit_mouseover.xnb
+Content\Textures\Buttons\3button_mouseclicked.xnb
 Content\Textures\Buttons\3button_mouseover.xnb
 Content\Textures\Buttons\3button_default.xnb
 Content\Textures\Buttons\menubutton_default.xnb
@@ -54,8 +48,14 @@ Content\Textures\gameover.xnb
 Content\Textures\HUDFULL.xnb
 Content\Textures\Walls\north.xnb
 Content\Textures\Walls\northeast.xnb
+Content\Textures\Walls\northwest.xnb
 Content\Textures\Walls\south.xnb
 Content\Textures\Walls\southeast.xnb
-Content\Textures\Walls\northwest.xnb
 Content\Textures\Walls\southwest.xnb
+Content\Fonts\Courier New.xnb
+Content\Sounds\button.xnb
+Content\Sounds\item pickup.xnb
+Content\Sounds\menu change.xnb
+Content\Sounds\grunt.xnb
+Content\Sounds\caveambience.xnb
 Content\Text\trivia.txt
