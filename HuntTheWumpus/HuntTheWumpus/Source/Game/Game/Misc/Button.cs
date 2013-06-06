@@ -36,7 +36,28 @@ namespace HuntTheWumpus.Source
         private AnimatedTexture notClickedTexture;
         private AnimatedTexture mousedOverTexture;
 
-        private string buttonName;
+        private ButtonName buttonName;
+
+        private static Dictionary<ButtonName, string> buttonResourceNames;
+
+        static Button()
+        {
+            buttonResourceNames = new Dictionary<ButtonName, string>();
+            buttonResourceNames.Add(ButtonName.ChoiceOne, "1button");
+            buttonResourceNames.Add(ButtonName.ChoiceTwo, "2button");
+            buttonResourceNames.Add(ButtonName.ChoiceThree, "3button");
+            buttonResourceNames.Add(ButtonName.ChoiceFour, "4button");
+            buttonResourceNames.Add(ButtonName.HighScore, "highscore");
+            buttonResourceNames.Add(ButtonName.Menu, "menubutton");
+            buttonResourceNames.Add(ButtonName.North, "n");
+            buttonResourceNames.Add(ButtonName.NorthEast, "ne");
+            buttonResourceNames.Add(ButtonName.NorthWest, "nw");
+            buttonResourceNames.Add(ButtonName.Quit, "quit");
+            buttonResourceNames.Add(ButtonName.South, "s");
+            buttonResourceNames.Add(ButtonName.SouthEast, "se");
+            buttonResourceNames.Add(ButtonName.SouthWest, "sw");
+            buttonResourceNames.Add(ButtonName.Start, "startbutton");
+        }
 
         /// <summary>
         /// Creates a new button.
@@ -44,40 +65,34 @@ namespace HuntTheWumpus.Source
         /// <param name="mainGame"> The game to which this button belongs. </param>
         /// <param name="parentLevel"> The level to which this button belongs. </param>
         /// <param name="onClick"> The action to take when this button is clicked on. </param>
-        public Button(MainGame mainGame, ILevel parentLevel, Action onClick, string buttonName)
+        public Button(MainGame mainGame, ILevel parentLevel, Action onClick, ButtonName name)
         {
-            if (null == mainGame)
-            {
-                throw new ArgumentNullException("mainGame");
-            }
-
-            if (null == parentLevel)
-            {
-                throw new ArgumentNullException("parentLevel");
-            }
-
-            if (null == onClick)
-            {
-                throw new ArgumentNullException("onClick");
-            }
-
-            if (null == buttonName)
-            {
-                throw new ArgumentNullException("buttonName");
-            }
-
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
             this.ObjectTeam = Team.Neutral;
             this.OnClick = onClick;
-            this.buttonName = buttonName;
+            this.buttonName = name;
+        }
+
+        private static string ButtonPathFromName(ButtonName name, GameButtonState state)
+        {
+            switch (state)
+            {
+                case GameButtonState.Hovored:
+                    return "Textures\\Buttons\\" + Button.buttonResourceNames[name] + "_mouseover";
+                case GameButtonState.Default:
+                    return "Textures\\Buttons\\" + Button.buttonResourceNames[name] + "_default";
+                case GameButtonState.Clicked:
+                    return "Textures\\Buttons\\" + Button.buttonResourceNames[name] + "_mouseclicked";
+            }
+            return null;
         }
 
         public void LoadContent(ContentManager content)
         {
-            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_default"));
-            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_mouseclicked"));
-            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Buttons\\" + this.buttonName + "_mouseover"));
+            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Default)));
+            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Clicked)));
+            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Hovored)));
             this.Texture = this.notClickedTexture;
         }
 
@@ -121,5 +136,30 @@ namespace HuntTheWumpus.Source
         {
             this.Texture = this.notClickedTexture;
         }
+    }
+
+    public enum ButtonName
+    {
+        ChoiceOne,
+        ChoiceTwo,
+        ChoiceThree,
+        ChoiceFour,
+        HighScore,
+        Start,
+        Menu,
+        Quit,
+        North,
+        NorthEast,
+        NorthWest,
+        South,
+        SouthEast,
+        SouthWest,
+    }
+
+    public enum GameButtonState
+    {
+        Hovored,
+        Default,
+        Clicked,
     }
 }

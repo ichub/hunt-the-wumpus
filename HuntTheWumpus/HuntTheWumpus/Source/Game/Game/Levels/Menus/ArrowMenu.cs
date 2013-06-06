@@ -24,37 +24,37 @@ namespace HuntTheWumpus.Source
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.North),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.North) { Position = new Vector2(0, 0) });
 
             this.GameObjects.Add(
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.NorthEast),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.NorthEast) { Position = new Vector2(0, 0) });
 
             this.GameObjects.Add(
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.SouthEast),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.SouthEast) { Position = new Vector2(0, 0) });
 
             this.GameObjects.Add(
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.South),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.South) { Position = new Vector2(0, 0) });
 
             this.GameObjects.Add(
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.SouthWest),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.SouthWest) { Position = new Vector2(0, 0) });
 
             this.GameObjects.Add(
                 new Button(this.MainGame,
                     this,
                     () => ShootArrow(RoomDirection.NorthWest),
-                    "1button") { Position = new Vector2(0, 0) });
+                    ButtonName.NorthWest) { Position = new Vector2(0, 0) });
         }
 
         public void ShootArrow(RoomDirection direction)

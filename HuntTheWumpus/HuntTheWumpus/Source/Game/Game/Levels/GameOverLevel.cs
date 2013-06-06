@@ -32,7 +32,7 @@ namespace HuntTheWumpus.Source
         {
             this.GameObjects.Add(new Button(this.MainGame,
                 this,
-                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), "menubutton")
+                () => this.MainGame.LevelManager.CurrentLevel = new StartLevel(this.MainGame), ButtonName.Menu)
                 {
                     Position = new Vector2(1024, 768) / 2 - new Vector2(100, 0)
                 });
