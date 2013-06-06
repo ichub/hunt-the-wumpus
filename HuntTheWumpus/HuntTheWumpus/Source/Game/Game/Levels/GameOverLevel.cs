@@ -38,11 +38,13 @@ namespace HuntTheWumpus.Source
                 });
 
             this.background = this.MainGame.Content.Load<Texture2D>("Textures\\gameover");
+           
             //Player Lost Game
             SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score);
             this.MainGame.HighScore.Add(score);
             this.MainGame.Player.Reset();
             this.MainGame.MiniMap.Reset();
+            this.MainGame.LevelManager.GameCave.Reset();
         }
 
         public void OnLoad()

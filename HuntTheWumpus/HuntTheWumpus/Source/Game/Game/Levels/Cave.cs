@@ -27,14 +27,22 @@ namespace HuntTheWumpus.Source
 
         public Cave(MainGame mainGame)
         {
-            if(null == mainGame)
+            if (null == mainGame)
             {
                 throw new ArgumentNullException("mainGame");
             }
 
             this.MainGame = mainGame;
 
-            #region Initializing the Rooms
+            RoomInit();
+            SuperBatInit();
+            PitInit();
+            WumpusInit();
+
+        }
+
+        private void RoomInit()
+        {
             this.Rooms = new Room[NumberOfRooms];
             this.TakenRooms = new bool[Cave.NumberOfRooms];
             for (int i = 0; i < this.Rooms.Length; i++)
@@ -52,8 +60,9 @@ namespace HuntTheWumpus.Source
                     this.Rooms[i].AdjacentRooms = rooms;
                 }
             }
-            #endregion
-            #region Super Bat Stuff
+        }
+        private void SuperBatInit()
+        {
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
 
@@ -63,7 +72,7 @@ namespace HuntTheWumpus.Source
             //Spec says 2 SuperBats
             for (int i = 0; i < 2; i++)
             {
-                int randomRoom = rand.Next(Cave.NumberOfRooms);
+                int randomRoom = this.MainGame.Random.Next(Cave.NumberOfRooms);
 
                 if (this.SuperBats.Where((x) => x.ParentRoomIndex == randomRoom).Count() == 0)
                 {
@@ -76,9 +85,20 @@ namespace HuntTheWumpus.Source
                 }
             }
             //Finished------------------------------------------------------------>
-            #endregion
-            #region Pit Room Stuff
-            //Pick Random Pit Room
+        }
+        private void WumpusInit()
+        {
+            int wumpusRoomIndex = this.MainGame.Random.Next(30);
+            while (this.SuperBats.Any((x) => x.ParentRoomIndex == wumpusRoomIndex) || this.Rooms[wumpusRoomIndex].RoomType == RoomType.Pit)
+            {
+                wumpusRoomIndex = this.MainGame.Random.Next(30);
+            }
+
+            this.Wumpus = new Wumpus(this.MainGame, null);
+            this.Wumpus.RoomIndex = wumpusRoomIndex;
+        }
+        private void PitInit()
+        {
             for (int i = 0; i < 2; i++)
             {
                 int pitRoom = this.MainGame.Random.Next(Cave.NumberOfRooms);
@@ -90,20 +110,8 @@ namespace HuntTheWumpus.Source
 
                 UpdateConnections(pitRoom);
             }
-            #endregion
-            #region Wumpus stuff
-            int wumpusRoomIndex = this.MainGame.Random.Next(30);
-            while (this.SuperBats.Any((x) => x.ParentRoomIndex == wumpusRoomIndex) || this.Rooms[wumpusRoomIndex].RoomType == RoomType.Pit)
-            {
-                wumpusRoomIndex = this.MainGame.Random.Next(30);
-            }
-
-            this.Wumpus = new Wumpus(this.MainGame, null);
-            this.Wumpus.RoomIndex = wumpusRoomIndex;
-
-            #endregion
         }
-        
+
         /// <summary>
         /// Updates the connections of a room, when given a new type.
         /// </summary>
@@ -272,7 +280,7 @@ namespace HuntTheWumpus.Source
         /// <returns>true if yes,false if not</returns>
         public bool RoomContainsSuperBat(int index)
         {
-            return this.SuperBats[0].ParentRoomIndex == index || 
+            return this.SuperBats[0].ParentRoomIndex == index ||
                 this.SuperBats[1].ParentRoomIndex == index;
         }
         /// <summary>
@@ -283,6 +291,14 @@ namespace HuntTheWumpus.Source
         public bool RoomContainsWumpus(int index)
         {
             return this.Wumpus.RoomIndex == index;
+        }
+
+        public void Reset()
+        {
+            RoomInit();
+            SuperBatInit();
+            PitInit();
+            WumpusInit();
         }
     }
 }
