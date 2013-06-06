@@ -293,12 +293,30 @@ namespace HuntTheWumpus.Source
             return this.Wumpus.RoomIndex == index;
         }
 
+        public bool RoomIsPit(int index)
+        {
+            return this.Rooms[index].RoomType == RoomType.Pit;
+        }
+        /// <summary>
+        /// Resets the Cave
+        /// </summary>
         public void Reset()
         {
             RoomInit();
             SuperBatInit();
             PitInit();
             WumpusInit();
+        }
+        public Room PickRandomStartRoom()
+        {
+            int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+            while (this.RoomContainsSuperBat(rand)
+                || this.RoomContainsWumpus(rand)
+                || this.RoomIsPit(rand))
+            {
+                rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+            }
+            return this.Rooms[rand];
         }
     }
 }
