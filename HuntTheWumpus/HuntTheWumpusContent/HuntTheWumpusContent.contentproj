@@ -376,7 +376,28 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Textures\Player\player basebackwardspritesheet.png">
+      <Name>player basebackwardspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Player\player basebackwardw-chestspritesheet.png">
+      <Name>player basebackwardw-chestspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Player\player basebackwardw-helmetspritesheet.png">
+      <Name>player basebackwardw-helmetspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Player\player upgradebackwardspritesheet.png">
+      <Name>player upgradebackwardspritesheet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Textures\Walls\north.png">
       <Name>north</Name>

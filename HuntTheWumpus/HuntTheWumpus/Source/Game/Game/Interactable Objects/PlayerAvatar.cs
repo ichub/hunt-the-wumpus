@@ -23,6 +23,7 @@ namespace HuntTheWumpus.Source
         private AnimatedTexture playerBaseLeftSpriteSheet;
         private AnimatedTexture playerBaseRightSpriteSheet;
         private AnimatedTexture playerBaseDownSpriteSheet;
+        private AnimatedTexture playerBaseBackSpriteSheet;
 
         public PlayerAvatar(MainGame mainGame, ILevel parentLevel)
             : base(mainGame, parentLevel)
@@ -114,6 +115,7 @@ namespace HuntTheWumpus.Source
             this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f);
             this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f);
             this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f);
+            this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardsspritesheet"), 7, 100, 15, 0.5f);
 
             this.Texture = this.playerBaseDownSpriteSheet;
 
@@ -125,7 +127,7 @@ namespace HuntTheWumpus.Source
             switch (Extensions.GetDirection(this.Velocity))
             {
                 case Direction.Up:
-                    this.Texture = this.playerBaseDownSpriteSheet;
+                    this.Texture = this.playerBaseBackSpriteSheet;
                     break;
                 case Direction.Left:
                     this.Texture = this.playerBaseLeftSpriteSheet;
