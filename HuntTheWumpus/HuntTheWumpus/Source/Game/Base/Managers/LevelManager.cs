@@ -278,7 +278,7 @@ namespace HuntTheWumpus.Source
             if (null == currentRoom)
                 return;
 
-            foreach (Room item in currentRoom.AdjacentRooms.Where((x) => x != null))
+            foreach (Room item in currentRoom.ConnectedRooms.Where((x) => x != null))
             {
                 if (this.GameCave.Wumpus.RoomIndex == item.RoomIndex)
                 {

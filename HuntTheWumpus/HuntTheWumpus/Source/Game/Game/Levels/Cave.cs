@@ -57,7 +57,7 @@ namespace HuntTheWumpus.Source
                 for (int i = 0; i < this.Rooms.Length; i++)
                 {
                     Room[] rooms = SetUpAdjacentRooms(i);
-                    this.Rooms[i].AdjacentRooms = rooms;
+                    this.Rooms[i].ConnectedRooms = rooms;
                 }
             }
         }
@@ -120,14 +120,14 @@ namespace HuntTheWumpus.Source
         {
             foreach (var item in this.Rooms)
             {
-                if (item.AdjacentRooms == null)
+                if (item.ConnectedRooms == null)
                     continue;
                 //Make sure all the connection to the pit are there
-                for (int j = 0; j < item.AdjacentRooms.Length; j++)
+                for (int j = 0; j < item.ConnectedRooms.Length; j++)
                 {
-                    if (item.AdjacentRooms[j] != null && item.AdjacentRooms[j].RoomIndex == pitRoom)
+                    if (item.ConnectedRooms[j] != null && item.ConnectedRooms[j].RoomIndex == pitRoom)
                     {
-                        item.AdjacentRooms[j] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
+                        item.ConnectedRooms[j] = RoomFactory.Create(this.MainGame, this, RoomType.Pit, pitRoom);
                     }
                 }
             }
@@ -186,6 +186,7 @@ namespace HuntTheWumpus.Source
                     adjacentRoomIndecies[2] = (roomIndex + 1) % 30;
                 }
             }
+            this.Rooms[roomIndex].AdjacentRooms = this.ConvertIndeciesToRooms(adjacentRoomIndecies);
 
             int[] randomlyChosenConnections = Cave.GetRelevantIndexes(this.TakenRooms, adjacentRoomIndecies);
             foreach (int item in randomlyChosenConnections)
@@ -224,9 +225,9 @@ namespace HuntTheWumpus.Source
             bool[] accessRooms = new bool[Cave.NumberOfRooms];
             foreach (Room item in rooms)
             {
-                if (item.AdjacentRooms != null)
+                if (item.ConnectedRooms != null)
                 {
-                    foreach (Room adjRoom in item.AdjacentRooms)
+                    foreach (Room adjRoom in item.ConnectedRooms)
                     {
                         if (adjRoom == null)
                             continue;
