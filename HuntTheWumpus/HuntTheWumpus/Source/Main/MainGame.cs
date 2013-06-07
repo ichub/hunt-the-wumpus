@@ -119,7 +119,7 @@ namespace HuntTheWumpus.Source
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            this.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             this.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             this.LevelManager.FrameDraw();
 

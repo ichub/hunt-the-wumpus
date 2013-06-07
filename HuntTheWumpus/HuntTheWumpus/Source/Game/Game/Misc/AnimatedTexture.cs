@@ -91,7 +91,7 @@ namespace HuntTheWumpus.Source
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, Color tint)
         {
             this.milisecondsSinceLastUpdate += gameTime.ElapsedGameTime.Milliseconds;
-            if (this.FPS != 0)
+            if (this.FPS != 0 && this.maxFrame != 0)
             if (this.milisecondsSinceLastUpdate > 1000.0 / this.FPS)
             {
                 this.currentFrame++;
