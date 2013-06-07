@@ -60,6 +60,11 @@ namespace HuntTheWumpus.Source
                 {
                     this.mainGame.LevelManager.CurrentLevel = new ArrowMenu(this.mainGame, this.mainGame.LevelManager.CurrentLevel);
                 }
+                if (this.mainGame.InputManager.IsClicked(Keys.K))
+                {
+                    this.mainGame.LevelManager.CurrentLevel = new WinMenu(this.mainGame);
+                    this.mainGame.LevelManager.Reset();
+                }
             }
         }
     }

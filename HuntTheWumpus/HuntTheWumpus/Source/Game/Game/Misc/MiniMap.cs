@@ -60,7 +60,7 @@ namespace HuntTheWumpus.Source
             }
 
             this.MainGame = parentGame;
-            this.EmptyMiniMapTexture = this.MainGame.Content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty);
+            this.EmptyMiniMapTexture = this.MainGame.Content.Load<Texture2D>("Textures\\MiniMap\\minimapempty");
 
         }
 

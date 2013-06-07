@@ -319,5 +319,14 @@ namespace HuntTheWumpus.Source
                 this.CurrentLevel = new GameOverMenu(this.MainGame);
             }
         }
+
+        public void Reset()
+        {
+            SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score, this.MainGame.Player.FromGold, this.MainGame.Player.FromTrivia, this.MainGame.Player.FromMisc);
+            this.MainGame.HighScore.Add(score);
+            this.MainGame.Player.Reset();
+            this.MainGame.MiniMap.Reset();
+            this.MainGame.LevelManager.GameCave.Reset();
+        }
     }
 }

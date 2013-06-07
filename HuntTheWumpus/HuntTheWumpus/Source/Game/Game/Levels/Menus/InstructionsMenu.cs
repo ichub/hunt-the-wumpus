@@ -31,7 +31,7 @@ namespace HuntTheWumpus.Source
             base.FrameDraw(gameTime, spriteBatch);
             this.MainGame.TextManager.DrawText(new Vector2(450, 140), "Instructions:", Color.Black);
             this.MainGame.TextManager.DrawTextBlock(new Vector2(290, 180),
-                "Press WASD to move around. Press the arrow keys to shoot. Press Q to go to trivia. Press U to go to arrow mode.",
+                "Press WASD to move around. Press the arrow keys to shoot. Press Q to go to trivia. Press U to go to arrow mode. Press M to open the map. Press H to to show the HUD.",
                 450,
                 Color.Black);
 

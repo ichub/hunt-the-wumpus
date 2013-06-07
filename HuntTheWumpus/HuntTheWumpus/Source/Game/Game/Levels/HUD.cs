@@ -58,6 +58,7 @@ namespace HuntTheWumpus.Source
         private Warnings Warning;
         private string Message;
         private Vector2 EmptyVector;
+
         /// <summary>
         /// Constructor that demands the MainGame
         /// </summary>
@@ -99,9 +100,9 @@ namespace HuntTheWumpus.Source
 
             if (this.ParentGame.LevelManager.CurrentLevel != null)
             {
-                if (this.ParentGame.LevelManager.CurrentLevel is Room
+                if ((this.ParentGame.LevelManager.CurrentLevel is Room
                     || this.ParentGame.LevelManager.CurrentLevel is TriviaMenu
-                    || this.ParentGame.LevelManager.CurrentLevel is ArrowMenu
+                    || this.ParentGame.LevelManager.CurrentLevel is ArrowMenu)
                     && this.ShouldDraw)
                 {
                     Color tint = new Color(Color.White.R, Color.White.G, Color.White.B, this.Transparency);
@@ -120,7 +121,10 @@ namespace HuntTheWumpus.Source
             }
 
         }
-
+        /// <summary>
+        /// Draws the arrows
+        /// </summary>
+        /// <param name="amountOfArrows">the amount of arrows</param>
         private void DrawArrows(int amountOfArrows)
         {
             this.ParentGame.SpriteBatch.Draw(

@@ -112,7 +112,6 @@
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\Gold.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\ItemObject.cs" />
     <Compile Include="Source\Game\Game\Interactable Objects\Pick Up Items\RingOfSpeed.cs" />
-    <Compile Include="Source\Game\Game\Misc\TextureResourceConstants.cs" />
     <Compile Include="Source\Game\Game\Misc\Direction.cs" />
     <Compile Include="Source\Game\Game\Misc\DoGooder.cs" />
     <Compile Include="Source\Game\Game\Misc\HighScore.cs" />
