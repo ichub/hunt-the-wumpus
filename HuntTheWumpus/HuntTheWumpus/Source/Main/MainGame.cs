@@ -127,6 +127,7 @@ namespace HuntTheWumpus.Source
 
             this.SpriteBatch.End();
 
+            #region text
             /*
             this.TextManager.DrawText(new Vector2(0, 0), "fps: " + (1000.0 / gameTime.ElapsedGameTime.Milliseconds).ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 20), "hp : " + this.Player.HP, true);
@@ -135,6 +136,7 @@ namespace HuntTheWumpus.Source
             this.TextManager.DrawText(new Vector2(0, 80), "gold : " + this.Player.Inventory.AmountOfGold().ToString(), true);
             this.TextManager.DrawText(new Vector2(0, 100), "highscore : " + this.HighScore.GetHighScore().ToString(), true);
              */
+            #endregion
 
             base.Draw(gameTime);
         }

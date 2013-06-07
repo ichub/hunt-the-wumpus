@@ -153,27 +153,43 @@ namespace HuntTheWumpus.Source
 
         }
         /// <summary>
+        /// Draws the Gold
+        /// </summary>
+        /// <param name="amountOfGold">amount of gold</param>
+        private void DrawGold(int amountOfGold)
+        {
+            this.ParentGame.SpriteBatch.Draw(
+           this.GoldImage,
+           new Vector2(this.ArrowTextPosition.X + WidthOfInventory, this.ArrowTextPosition.Y),
+           null,
+           Color.White,
+           0,
+           Helper.EmptyVector,
+           2f,
+           SpriteEffects.None,
+           0);
+
+            //Updates the class variable for the font.
+            this.Font = this.ParentGame.TextManager.Font;
+            this.ParentGame.SpriteBatch.DrawString(
+                this.Font,
+                amountOfGold.ToString(),
+                new Vector2(this.ArrowTextPosition.X + WidthOfInventory + 10, this.ArrowTextPosition.Y + 50),
+                this.DrawTextColor,
+                0,
+                this.EmptyVector,
+                Helper.CalculateScaleForDrawingText(amountOfGold.ToString().Length, 40),
+                SpriteEffects.None,
+                0);
+
+        }
+        /// <summary>
         /// Draws the relavent inventory into the HUD
         /// </summary>
         /// <param name="inventory">The inventory of the player</param>
         private void DrawInventory(Inventory inventory)
         {
-            if (inventory.AmountOfGems() > 0)
-            {
-                for (int i = 0; i < 9; i++)
-                {
-                    this.ParentGame.SpriteBatch.Draw(
-                       this.GemImage,
-                       new Vector2(440 + HUD.WidthOfInventory, this.ParentGame.WindowHeight - 115 + i * 10),
-                       null,
-                       Color.White,
-                       0,
-                       Helper.EmptyVector,
-                       0.25f,
-                       SpriteEffects.None,
-                       0);
-                }
-            }
+            this.DrawGold(this.ParentGame.Player.Gold);
             if (inventory.Contains("SpeedRing"))
             {
                 for (int i = 0; i < 9; i++)

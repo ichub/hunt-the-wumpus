@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
         public int CurrentRoom { get; set; }
         public int HP { get; set; }
         public int Armor { get; set; }
-        public int Money { get; set; }
+        public int Gold { get; set; }
         public int Score { get; private set; }
         public int FromTrivia { get; set; }
         public int FromGold { get; set; }
@@ -41,7 +41,7 @@ namespace HuntTheWumpus.Source
             this.CurrentRoom = 0;
             this.AmountOfArrows = 3;
             this.HP = 3;
-            this.Money = 100;
+            this.Gold = 0;
             this.Score = 0;
             this.CorrectAmountAnswered = 0;
             this.MaxSpeed = 5;
@@ -71,7 +71,7 @@ namespace HuntTheWumpus.Source
         {
             this.CurrentRoom = 0;
             this.HP = 3;
-            this.Money = 100;
+            this.Gold = 100;
             this.Score = 0;
             this.AmountOfArrows = 3;
             this.CorrectAmountAnswered = 0;
