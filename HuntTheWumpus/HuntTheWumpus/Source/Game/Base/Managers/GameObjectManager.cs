@@ -83,20 +83,23 @@ namespace HuntTheWumpus.Source
 
             foreach (IEntity item in this.GetObjectsByType<IEntity>())
             {
+                // Get the corners of the bounding box.
                 List<Vector2> corners = this.CreateCorners(item.BoundingBox);
 
+                // go thorugh the corners
                 for (int j = 1; j < corners.Count; j++)
                 {
                     Vector2 first = corners[j - 1];
                     Vector2 second = corners[j];
-
+                    // Check collisions with the room bounds
                     for (int i = 1; i < currentRoom.RoomBounds.Count; i++)
                     {
+                        // Skip Line if needed
                         if (currentRoom.RoomBounds[i - 1] == SkipBoundaryCheck)
                         {
                             continue;
                         }
-
+                        // Actual collision detection
                         if (this.DoLinesIntersect(first, second, currentRoom.RoomBounds[i - 1], currentRoom.RoomBounds[i]))
                         {
                             item.CollideWithLevelBounds();
@@ -116,15 +119,19 @@ namespace HuntTheWumpus.Source
         /// <returns> True if the lines intersect, false otherwise. </returns>
         private bool DoLinesIntersect(Vector2 first1, Vector2 first2, Vector2 second1, Vector2 second2)
         {
+            // get the slopes of the two lines
             float firstSlope = this.GetSlope(first1, first2);
             float secondSlope = this.GetSlope(second1, second2);
 
+            // Find intercepts
             float firstIntercept = this.GetIntercept(first1, firstSlope);
             float secondIntercept = this.GetIntercept(second1, secondSlope);
 
+            // solve system of linear equations
             float x = (secondIntercept - firstIntercept) / (firstSlope - secondSlope);
             float y = x * secondSlope + secondIntercept;
-
+            
+            // Check if intersection is between line bounds
             return (x < Math.Max(first1.X, first2.X)
                 && x > Math.Min(first1.X, first2.X)
                 && x < Math.Max(second1.X, second2.X)
@@ -139,6 +146,7 @@ namespace HuntTheWumpus.Source
         /// <returns> The slope. </returns>
         private float GetSlope(Vector2 first, Vector2 second)
         {
+            // assumes no vertical lines are passed to this method.
             return (second.Y - first.Y) / (second.X - first.X);
         }
 
@@ -150,6 +158,8 @@ namespace HuntTheWumpus.Source
         /// <returns></returns>
         private float GetIntercept(Vector2 vect, float slope)
         {
+            // y = mx + b
+            // b = y - mx
             return (vect.Y) - (vect.X * slope);
         }
 
@@ -197,7 +207,11 @@ namespace HuntTheWumpus.Source
                 if (item is IDrawable)
                 {
                     IDrawable drawableItem = item as IDrawable;
-                    item.BoundingBox = Helper.Box2D(item.Position, item.Position + drawableItem.Texture.Size * drawableItem.Texture.Scale);
+
+                    // sets the bounding box to be at the texture position, and 
+                    // with the size of the texture.
+                    item.BoundingBox = Helper.Box2D(item.Position, 
+                        item.Position + drawableItem.Texture.Size * drawableItem.Texture.Scale);
                 }
             }
         }
@@ -210,14 +224,17 @@ namespace HuntTheWumpus.Source
         {
             foreach (IHoverable item in this.GetObjectsByType<IHoverable>())
             {
+                // if mouse is in the bounding box
                 if (item.BoundingBox.Contains2D(this.parentGame.InputManager.MousePosition))
                 {
+                    // if the mouse wasn't over last frame
                     if (!item.IsMouseOver)
                     {
                         item.IsMouseOver = true;                 
                         item.OnHoverBegin();
                     }
                 }
+                // if the mouse is not in the bounding box.
                 else
                 {
                     item.IsMouseOver = false;              
@@ -267,6 +284,7 @@ namespace HuntTheWumpus.Source
         {
             foreach (IDrawable obj in this.GetObjectsByType<IDrawable>())
             {
+                // if the content is not loaded, loads it.
                 if (!obj.ContentLoaded)
                 {
                     obj.LoadContent(this.parentGame.Content);
@@ -282,6 +300,7 @@ namespace HuntTheWumpus.Source
         {
             foreach (IInitializable obj in this.GetObjectsByType<IInitializable>())
             {
+                // if the object is not initialized, initialize it.
                 if (!obj.Initialized)
                 {
                     obj.Initialize();
@@ -308,12 +327,15 @@ namespace HuntTheWumpus.Source
         {
             foreach (IClickable obj in this.GetObjectsByType<IClickable>())
             {
+                // if the bounding box contains the mouse, and the left mouse button is pressed.
                 if (obj.BoundingBox.Contains2D(this.parentGame.InputManager.MousePosition) &&
                     this.parentGame.InputManager.MouseState.LeftButton == ButtonState.Pressed)
                 {
                     obj.OnClickBegin(this.parentGame.InputManager.MousePosition);
                     obj.IsClicked = true;
                 }
+                // otherwise, if it's clicked, (mouse was pressed and is released now), 
+                // change the state of the clicked button.
                 else if (obj.IsClicked == true)
                 {
                     obj.OnClickRelease();
@@ -328,18 +350,23 @@ namespace HuntTheWumpus.Source
         /// <param name="objectToDamage"></param>
         public void Damage(IDamagable objectToDamage)
         {
+            // if it was not damaged in the last time interval
             if (!objectToDamage.IsDamaged)
             {
                 objectToDamage.IsDamaged = true;
                 objectToDamage.DamageTimer = new Timer(objectToDamage.DamageLength);
                 objectToDamage.CurrentTint = objectToDamage.DamageTint;
 
+                // function is added to the timer, which resets the damage state after
+                // the time interval is passed, and clears the the timer.
                 objectToDamage.DamageTimer.Elapsed += (a, b) =>
                     {
                         objectToDamage.IsDamaged = false;
                         objectToDamage.DamageTimer = null;
                         objectToDamage.CurrentTint = Color.White;
                     };
+
+                // starts the damage timer, and invokes the object's OnDamage method.
                 objectToDamage.DamageTimer.Start();
                 objectToDamage.OnDamage();
             }
@@ -353,10 +380,13 @@ namespace HuntTheWumpus.Source
         /// <returns> True if they are collided, false otherwise. </returns>
         private bool AreCollided(ICollideable first, ICollideable second)
         {
+            // if both objects have bounding boxes, and they intersect.
             if (first.BoundingBox != null && second.BoundingBox != null)
             {
                 return first.BoundingBox.Intersects(second.BoundingBox);
             }
+
+            // otherwise, return false.
             return false;
         }
 
@@ -367,10 +397,13 @@ namespace HuntTheWumpus.Source
         {
             List<ICollideable> collidable = GetObjectsByType<ICollideable>();
 
+            // invokes the CollideWith method of every pair of objects,
+            // and passes whether or not the two objects actually are colliding.
             for (int i = 0; i < collidable.Count; i++)
             {
                 for (int j = i + 1; j < collidable.Count; j++)
                 {
+                    // invokes the CollideWith method of
                     collidable[i].CollideWith(collidable[j], AreCollided(collidable[i], collidable[j]));
                     collidable[j].CollideWith(collidable[i], AreCollided(collidable[i], collidable[j]));
                 }
@@ -389,6 +422,7 @@ namespace HuntTheWumpus.Source
             this.UpdateHoverable();
             this.HandleCollisions();
             this.Update();
+            this.HandleBounds();
             this.UpdateBoundingBox();
             this.AddAndRemoveObjects();
         }
@@ -398,6 +432,7 @@ namespace HuntTheWumpus.Source
         /// </summary>
         private void Draw()
         {
+            // draws each not hidden object.
             foreach (IDrawable obj in this.GetObjectsByType<IDrawable>())
             {
                 if (obj.ContentLoaded && !obj.IsHidden)
@@ -413,7 +448,6 @@ namespace HuntTheWumpus.Source
         public void FrameDraw()
         {
             this.Draw();
-            this.HandleBounds();
         }
     }
 }

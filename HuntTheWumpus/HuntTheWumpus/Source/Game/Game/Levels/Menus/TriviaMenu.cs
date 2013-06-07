@@ -18,6 +18,7 @@ namespace HuntTheWumpus.Source
         private Question currentQuestion;
         private int amountAnsweredCorrectStreak;
         private int streakLength;
+        private Room roomCameFrom;
 
         public TriviaMenu(MainGame mainGame, ILevel cameFrom)
             : base(mainGame, cameFrom)
@@ -26,6 +27,7 @@ namespace HuntTheWumpus.Source
             this.cameFrom = cameFrom;
             this.amountAnsweredCorrectStreak = 0;
             this.streakLength = 3;
+            this.roomCameFrom = cameFrom as Room;
         }
 
         public TriviaMenu(MainGame mainGame)
@@ -38,6 +40,13 @@ namespace HuntTheWumpus.Source
 
             if (this.currentQuestion.CorrectAnswer == answer)
             {
+
+                if (this.MainGame.LevelManager.GameCave.RoomIsPit(this.roomCameFrom.RoomIndex))
+                {
+                    this.MainGame.Player.CurrentRoom = this.MainGame.LevelManager.GameCave.PickRandomStartRoom().RoomIndex;
+                    this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[this.MainGame.Player.CurrentRoom];
+                }
+
                 this.MainGame.Player.AddTriviaScore();
                 this.amountAnsweredCorrectStreak++;
                 this.MainGame.Player.Inventory.PickUp(ItemList.GetItem("Gold"));
@@ -47,11 +56,16 @@ namespace HuntTheWumpus.Source
                     this.amountAnsweredCorrectStreak %= this.streakLength;
                 }
             }
-            
+            else if (this.MainGame.LevelManager.GameCave.RoomIsPit(this.roomCameFrom.RoomIndex))
+            {
+                this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
+            }
+
             this.currentQuestion = this.MainGame.TriviaManager.RandomQuestion();
+
             if (this.currentQuestion == null)
                 this.MainGame.LevelManager.CurrentLevel = this.cameFrom;
-            
+
         }
 
         public override void OnLoad()
@@ -60,7 +74,6 @@ namespace HuntTheWumpus.Source
             this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(1); }, ButtonName.ChoiceTwo) { Position = new Vector2(520, 100 + 250) });
             this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(2); }, ButtonName.ChoiceThree) { Position = new Vector2(290, 200 + 250) });
             this.GameObjects.Add(new Button(this.MainGame, this, () => { CheckQuestion(3); }, ButtonName.ChoiceFour) { Position = new Vector2(520, 200 + 250) });
-            
             base.OnLoad();
         }
 
@@ -86,6 +99,10 @@ namespace HuntTheWumpus.Source
 
         public override void FrameUpdate(GameTime gameTime, ContentManager content)
         {
+            if (this.currentQuestion == null)
+            {
+                this.currentQuestion = this.MainGame.TriviaManager.RandomQuestion();
+            }
             base.FrameUpdate(gameTime, content);
         }
     }

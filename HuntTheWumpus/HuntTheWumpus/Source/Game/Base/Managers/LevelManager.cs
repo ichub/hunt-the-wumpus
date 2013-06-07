@@ -94,10 +94,13 @@ namespace HuntTheWumpus.Source
             }
             set
             {
+                // if it's not currently in the process of fading in or out of a level.
                 if (!this.isLevelChanging)
                 {
+                    // if there aren't any levels in the queue
                     if (this.nextLevels.Count == 0)
                     {
+                        // if the there is a current level.
                         if (this.currentLevel != null)
                         {
                             //Makes sure the specific level arent repeating
@@ -107,29 +110,36 @@ namespace HuntTheWumpus.Source
                                 return;
                             if (this.currentLevel is Room && value is Room && (this.currentLevel as Room).RoomIndex == (value as Room).RoomIndex)
                                 return;
-
+                            if (this.currentLevel is TriviaMenu && value is TriviaMenu)
+                                return;
+                            // starts the faiding process
                             this.StartFade(value);
                             this.isLevelChanging = true;
                         }
+                        // there is not a current level
                         else
                         {
                             this.currentLevel = value;
                             this.currentLevel.OnLoad();
                         }
                     }
+                    // there is a level in the queue.
                     else
                     {
                         this.DequeueLevels();
                     }
                 }
+                // the level is not currently changing
                 else
                 {
+                    // if there is not a level in the queue
                     if (this.nextLevels.Count == 0)
                     {
                         this.nextLevels.Enqueue(value);
                     }
                     else
                     {
+                        // if the level was not previously added
                         if (!this.nextLevels.Contains(value))
                         {
                             this.nextLevels.Enqueue(value);
@@ -164,16 +174,21 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void FrameUpdate()
         {
+            // if there is a level
             if (this.CurrentLevel != null)
             {
+                // if the level is not initialized, initialize it.
                 if (!this.CurrentLevel.Initialized)
                 {
                     this.CurrentLevel.Initialize();
                     this.CurrentLevel.Initialized = true;
                 }
+
+                // updates everything.
                 this.CurrentLevel.FrameUpdate(this.MainGame.GameTime, this.MainGame.Content);
                 this.GameCave.UpdateSuperBats();
             }
+            // dequeues the next level if the level state is not changing.
             this.DequeueLevels();
         }
 
@@ -197,12 +212,14 @@ namespace HuntTheWumpus.Source
         /// <param name="toFadeInto"> Level to fade into. </param>
         public void StartFade(ILevel toFadeInto)
         {
+            // stops the previous timer.
             if (this.fadeTimer != null)
             {
                 this.fadeTimer.Stop();
                 this.fadeCount = 0;
             }
 
+            // starts the timer
             this.fadeTimer = new Timer(LevelManager.fadeInterval);
             this.fadeTimer.Elapsed += this.FadeOut;
             this.fadeTimer.Start();
@@ -327,7 +344,7 @@ namespace HuntTheWumpus.Source
             Room curRo = this.CurrentLevel as Room;
             if (curRo != null && curRo.RoomType == RoomType.Pit)
             {
-                this.CurrentLevel = new GameOverMenu(this.MainGame);
+                this.CurrentLevel = new TriviaMenu(this.MainGame, this.currentLevel);
             }
         }
 

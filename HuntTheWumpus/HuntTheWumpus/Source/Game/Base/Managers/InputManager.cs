@@ -81,6 +81,7 @@ namespace HuntTheWumpus.Source
         /// <returns> True if it was clicked, false otherwise. </returns>
         public bool IsClicked(Keys key)
         {
+            // if the button is pressed right now, and not pressed last frame.
             return KeyboardState.IsKeyDown(key) && !LastKeyboardState.IsKeyDown(key);
         }
 
