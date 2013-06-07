@@ -4,29 +4,36 @@ Content\Textures\fireball_spritesheet.xnb
 Content\Textures\teleporter.xnb
 Content\Textures\MiniMap\minimapempty.xnb
 Content\Textures\MiniMap\MiniMapBackground.xnb
+Content\Textures\Items\Gold.xnb
 Content\Textures\Cave\normal.xnb
 Content\Textures\Cave\flooded.xnb
 Content\Textures\Cave\pit.xnb
 Content\Textures\Enemies\Bat\bat_spritesheet.xnb
-Content\Textures\titlescreen.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
-Content\Textures\Buttons\startbutton_default.xnb
-Content\Textures\Buttons\startbutton_mouseclicked.xnb
-Content\Textures\Buttons\startbutton_mouseover.xnb
 Content\Textures\Enemies\Wumpus\wumpus_backspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_frontspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_leftspritesheet.xnb
 Content\Textures\Enemies\Wumpus\wumpus_rightspritesheet.xnb
 Content\Textures\Enemies\Bat\superbat_spritesheet.xnb
+Content\Fonts\Courier New.xnb
+Content\Sounds\button.xnb
+Content\Sounds\item pickup.xnb
+Content\Sounds\menu change.xnb
+Content\Sounds\grunt.xnb
+Content\Textures\titlescreen.xnb
 Content\Textures\menu.xnb
-Content\Textures\Items\Gold.xnb
+Content\Sounds\caveambience.xnb
+Content\Textures\Buttons\startbutton_default.xnb
+Content\Textures\Buttons\startbutton_mouseclicked.xnb
+Content\Textures\Buttons\startbutton_mouseover.xnb
 Content\Textures\Buttons\1button_default.xnb
 Content\Textures\Buttons\1button_mouseclicked.xnb
 Content\Textures\Buttons\1button_mouseover.xnb
 Content\Textures\Buttons\2button_default.xnb
 Content\Textures\Buttons\2button_mouseclicked.xnb
 Content\Textures\Buttons\2button_mouseover.xnb
+Content\Textures\Buttons\3button_mouseclicked.xnb
 Content\Textures\Buttons\4button_default.xnb
 Content\Textures\Buttons\4button_mouseclicked.xnb
 Content\Textures\Buttons\4button_mouseover.xnb
@@ -36,7 +43,6 @@ Content\Textures\Buttons\highscore_mouseover.xnb
 Content\Textures\Buttons\quit_default.xnb
 Content\Textures\Buttons\quit_mouseclicked.xnb
 Content\Textures\Buttons\quit_mouseover.xnb
-Content\Textures\Buttons\3button_mouseclicked.xnb
 Content\Textures\Buttons\3button_mouseover.xnb
 Content\Textures\Buttons\3button_default.xnb
 Content\Textures\Buttons\menubutton_default.xnb
@@ -45,10 +51,6 @@ Content\Textures\Buttons\menubutton_mouseover.xnb
 Content\Textures\Items\Gem.xnb
 Content\Textures\gameover.xnb
 Content\Textures\HUDFULL.xnb
-Content\Textures\Player\player basebackwardspritesheet.xnb
-Content\Textures\Player\player basebackwardw-chestspritesheet.xnb
-Content\Textures\Player\player basebackwardw-helmetspritesheet.xnb
-Content\Textures\Player\player upgradebackwardspritesheet.xnb
 Content\Textures\Player\player base.xnb
 Content\Textures\Player\player baseleft.xnb
 Content\Textures\Player\player baseleftspritesheet.xnb
@@ -73,11 +75,19 @@ Content\Textures\Player\playerbasespritesheet.xnb
 Content\Textures\Player\playerbasew-chestspritesheet.xnb
 Content\Textures\Player\playerbasew-helmetspritesheet.xnb
 Content\Textures\Player\playerupgradedspritesheet.xnb
+Content\Textures\Player\player basebackwardspritesheet.xnb
+Content\Textures\Player\player basebackwardw-chestspritesheet.xnb
+Content\Textures\Player\player basebackwardw-helmetspritesheet.xnb
+Content\Textures\Player\player upgradebackwardspritesheet.xnb
+Content\Textures\youwinscreen.xnb
 Content\Textures\Cave\flooded skull.xnb
 Content\Textures\Cave\normalv1.xnb
-Content\Textures\Cave\Violent.xnb
 Content\Textures\Cave\normalv2.xnb
 Content\Textures\Cave\normalv3.xnb
+Content\Textures\Cave\Violent.xnb
+Content\Textures\Cave\normalv4.xnb
+Content\Textures\Cave\Violentv2.xnb
+Content\Textures\Cave\Violentv1.xnb
 Content\Textures\Buttons\n_default.xnb
 Content\Textures\Buttons\n_mouseclicked.xnb
 Content\Textures\Buttons\n_mouseover.xnb
@@ -96,16 +106,6 @@ Content\Textures\Buttons\se_mouseover.xnb
 Content\Textures\Buttons\sw_default.xnb
 Content\Textures\Buttons\sw_mouseclicked.xnb
 Content\Textures\Buttons\sw_mouseover.xnb
-Content\Textures\youwinscreen.xnb
-Content\Textures\Cave\normalv4.xnb
-Content\Textures\Cave\Violentv2.xnb
-Content\Textures\Cave\Violentv1.xnb
-Content\Fonts\Courier New.xnb
-Content\Sounds\button.xnb
-Content\Sounds\item pickup.xnb
-Content\Sounds\menu change.xnb
-Content\Sounds\grunt.xnb
-Content\Sounds\caveambience.xnb
 Content\Textures\Cave\Cave_14.xnb
 Content\Textures\Cave\Cave_15.xnb
 Content\Textures\Walls\n rock wallFULL.xnb
@@ -116,4 +116,5 @@ Content\Textures\Walls\se rock wallFULL.xnb
 Content\Textures\Walls\sw rock wallFULL.xnb
 Content\Textures\Cave\Cave_16.xnb
 Content\Textures\Cave\Cave_17.xnb
+Content\Textures\Cave\Cave_18.xnb
 Content\Text\trivia.txt

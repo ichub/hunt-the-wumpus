@@ -61,6 +61,7 @@ namespace HuntTheWumpus.Source
             base.OnDamage();
             if (this.HP % 10 == 0)
             {
+                this.Remove();
                 this.MainGame.LevelManager.GameCave.MoveWumpus();
             }
         }
