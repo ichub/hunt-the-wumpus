@@ -38,7 +38,7 @@ namespace HuntTheWumpus.Source
 
             if (this.currentQuestion.CorrectAnswer == answer)
             {
-                this.MainGame.Player.Score += 100;
+                this.MainGame.Player.AddTriviaScore();
                 this.amountAnsweredCorrectStreak++;
                 this.MainGame.Player.Inventory.PickUp(ItemList.GetItem("Gold"));
                 if (this.amountAnsweredCorrectStreak > this.streakLength)

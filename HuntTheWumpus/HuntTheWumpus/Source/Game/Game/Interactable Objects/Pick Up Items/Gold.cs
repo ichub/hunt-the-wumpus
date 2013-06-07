@@ -20,7 +20,7 @@ namespace HuntTheWumpus.Source
         public override void CollideWithPlayer(PlayerAvatar player)
         {
             base.CollideWithPlayer(player);
-            this.MainGame.Player.Score += 50;
+            this.MainGame.Player.AddGoldScore();
             this.MainGame.SoundManager.PlaySound(Sound.ItemPickup);
 
         }

@@ -19,7 +19,10 @@ namespace HuntTheWumpus.Source
         public int HP { get; set; }
         public int Armor { get; set; }
         public int Money { get; set; }
-        public int Score { get; set; }
+        public int Score { get; private set; }
+        public int FromTrivia { get; set; }
+        public int FromGold { get; set; }
+        public int FromMisc { get; set; }
         public int AmountOfArrows { get; set; }
         public int CorrectAmountAnswered { get; set; }
 
@@ -27,6 +30,10 @@ namespace HuntTheWumpus.Source
         public float SpeedDelta { get; set; }
 
         public Inventory Inventory { get; set; }
+
+        private const int TriviaWeight = 100;
+        private const int GoldWeight = 50;
+        private const int MiscWeight = 25;
 
         public PlayerStats(string name)
         {
@@ -42,14 +49,22 @@ namespace HuntTheWumpus.Source
             this.Inventory = new Inventory(20);
         }
 
-        public bool Pay(int sum)
+        public void AddTriviaScore()
         {
-            if (sum <= this.Money)
-            {
-                this.Money -= sum;
-                return true;
-            }
-            return false;
+            this.FromTrivia += PlayerStats.TriviaWeight;
+            this.Score += PlayerStats.TriviaWeight;
+        }
+
+        public void AddGoldScore()
+        {
+            this.FromGold += PlayerStats.GoldWeight;
+            this.Score += PlayerStats.GoldWeight;
+        }
+
+        public void AddMiscScore()
+        {
+            this.FromMisc += PlayerStats.MiscWeight;
+            this.Score += PlayerStats.MiscWeight;
         }
 
         public void Reset()

@@ -16,11 +16,17 @@ namespace HuntTheWumpus.Source
     {
         public readonly string Name;
         public readonly int Score;
+        public readonly int FromGold;
+        public readonly int FromTrivia;
+        public readonly int FromMisc;
 
-        public SingleScore(string name, int score)
+        public SingleScore(string name, int score, int fromGold, int fromTrivia, int fromMisc)
         {
             this.Name = name;
             this.Score = score;
+            this.FromGold = fromGold;
+            this.FromTrivia = fromTrivia;
+            this.FromMisc = fromMisc;
         }
 
         /// <summary>
@@ -39,7 +45,7 @@ namespace HuntTheWumpus.Source
         }
 
         //100 is the worst score possible
-        public static SingleScore Empty = new SingleScore(string.Empty, 100);
+        public static SingleScore Empty = new SingleScore(string.Empty, 100, 0, 0, 100);
 
         public bool Equals(SingleScore other)
         {

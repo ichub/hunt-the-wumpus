@@ -25,8 +25,12 @@ namespace HuntTheWumpus.Source
             var highScores = this.MainGame.HighScore.GetList();
             highScores.Reverse();
 
-            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 140 - 20), "Names");
-            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 140 - 20), "Scores");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 140 - 20), "Name");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 140 - 20), "Score");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 100, 140 - 20), "Gold");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 200, 140 - 20), "Trivia");
+            this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 300, 140 - 20), "Misc");
+
 
             for (int i = 0; i < 10; i++)
             {
@@ -35,6 +39,11 @@ namespace HuntTheWumpus.Source
                     this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName - 20, 160 + i * 20), i + 1);
                     this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 160 + i * 20), highScores[i].Name);
                     this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 160 + i * 20), highScores[i].Score.ToString());
+
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 100, 160 + i * 20), highScores[i].FromGold);
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 200, 160 + i * 20), highScores[i].FromTrivia);
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore - 300, 160 + i * 20), highScores[i].FromMisc);
+
                 }
             }
 

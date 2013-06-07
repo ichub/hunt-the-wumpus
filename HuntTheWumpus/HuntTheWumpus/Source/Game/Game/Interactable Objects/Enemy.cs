@@ -61,7 +61,7 @@ namespace HuntTheWumpus.Source
                             this.MainGame.SoundManager.PlaySound(Sound.Grunt);
                             if (this.HP < 0)
                             {
-                                this.MainGame.Player.Score += 10;
+                                this.MainGame.Player.AddMiscScore();
                                 this.Remove();
                                 OnDeath();
                             }

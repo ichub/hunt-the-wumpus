@@ -97,7 +97,6 @@ namespace HuntTheWumpus.Source
                 if (!collidedWithEnemyLastFrame)
                 {
                     this.MainGame.Player.HP--;
-                    this.MainGame.Player.Score -= 50;
                     this.ParentLevel.GameObjects.Damage(this);
                 }
             }
@@ -111,11 +110,11 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 0, 0.5f);
-            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f);
-            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f);
-            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f);
-            this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardspritesheet"), 7, 100, 15, 0.5f);
+            this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 0, 0.5f, 0);
+            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f, 0);
+            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f, 0);
+            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f, 0);
+            this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardspritesheet"), 7, 100, 15, 0.5f, 0);
 
             this.Texture = this.playerBaseDownSpriteSheet;
         }

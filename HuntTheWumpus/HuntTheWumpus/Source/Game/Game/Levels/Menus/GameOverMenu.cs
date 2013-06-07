@@ -42,7 +42,7 @@ namespace HuntTheWumpus.Source
             //Player Lost Game
             try
             {
-                SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score);
+                SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score, this.MainGame.Player.FromGold, this.MainGame.Player.FromTrivia, this.MainGame.Player.FromMisc);
                 this.MainGame.HighScore.Add(score);
                 this.MainGame.Player.Reset();
                 this.MainGame.MiniMap.Reset();

@@ -38,6 +38,8 @@ namespace HuntTheWumpus.Source
 
         public float Scale { get; set; }
 
+        public float Layer { get; set; }
+
         private int milisecondsSinceLastUpdate;
         private readonly int maxFrame;
         private int currentFrame;
@@ -50,7 +52,7 @@ namespace HuntTheWumpus.Source
         /// <param name="spriteWidth"> The width of each frame of this texture. </param>
         /// <param name="spriteHeight"> The height of each frame of this texture. </param>
         /// <param name="fps"> The amount of times per second the frame is updated.</param>
-        public AnimatedTexture(Texture2D spriteSheet, int amountOfFrames, int spriteWidth, int fps, float scale = 1)
+        public AnimatedTexture(Texture2D spriteSheet, int amountOfFrames, int spriteWidth, int fps, float scale = 1, float layer = 1)
         {
             this.Size = new Vector2(spriteWidth, spriteSheet.Height);
             this.Scale = scale;
@@ -101,7 +103,8 @@ namespace HuntTheWumpus.Source
                 0, 
                 Vector2.Zero, 
                 this.Scale, 
-                SpriteEffects.None, 0);
+                SpriteEffects.None, 
+                this.Layer);
         }
     }
 }
