@@ -78,7 +78,7 @@ namespace HuntTheWumpus.Source
                 this.MainGame.SpriteBatch.Begin();
             }
 
-            this.MainGame.SpriteBatch.DrawString(Font, text.ToString(), Helper.RoundVector(position), color, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            this.MainGame.SpriteBatch.DrawString(Font, text.ToString(), Helper.RoundVector(position), color, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             // closes the batch if it was opened here.
             if (openBatch)

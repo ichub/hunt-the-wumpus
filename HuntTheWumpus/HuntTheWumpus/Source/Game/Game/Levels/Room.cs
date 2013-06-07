@@ -172,8 +172,9 @@ namespace HuntTheWumpus.Source
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.background, Vector2.Zero, Color.White);
-            this.GameObjects.FrameDraw();
             this.DrawWalls(spriteBatch, gameTime);
+
+            this.GameObjects.FrameDraw();
         }
     }
 }
