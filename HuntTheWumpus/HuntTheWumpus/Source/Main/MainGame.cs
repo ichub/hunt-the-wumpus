@@ -24,7 +24,7 @@ namespace HuntTheWumpus.Source
         public SpriteBatch SpriteBatch { get; private set; }
         public DoGooder DoGooder { get; private set; }
         public GameTime GameTime { get; private set; }
-        public PlayerStats Player { get; private set; }
+        public PlayerStats Player { get; set; }
         public MiniMap MiniMap { get; private set; }
         public Trivia TriviaManager { get; private set; }
         public Random Random { get; private set; }

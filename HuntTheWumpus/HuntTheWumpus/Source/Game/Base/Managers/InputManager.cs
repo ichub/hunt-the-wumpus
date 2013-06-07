@@ -41,6 +41,8 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public Vector2 MousePosition { get; private set; }
 
+        public event KeyPressed KeyPressed;
+
         /// <summary>
         /// Updates all the instance variables to reflect the state of input
         /// devices during the current frame.
@@ -54,6 +56,18 @@ namespace HuntTheWumpus.Source
             this.KeyboardState = Keyboard.GetState();
 
             this.MousePosition = new Vector2(this.MouseState.X, this.MouseState.Y);
+
+            // invokes a clicked key event if a button is clicked
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                if (this.IsClicked(key))
+                {
+                    if (this.KeyPressed != null)
+                    {
+                        this.KeyPressed.Invoke(key);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -95,4 +109,6 @@ namespace HuntTheWumpus.Source
         Middle,
         Right,
     }
+
+    public delegate void KeyPressed(Keys pressedKey);
 }
