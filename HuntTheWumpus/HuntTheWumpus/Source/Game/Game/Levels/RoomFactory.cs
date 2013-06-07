@@ -209,6 +209,10 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Gets a random variation of a all the violent rooms
+        /// </summary>
+        /// <returns>A texture of the random violent room</returns>
         private static Texture2D GetRandomViolentRoom()
         {
             Random randGen = new Random(DateTime.Now.Millisecond);
@@ -227,7 +231,10 @@ namespace HuntTheWumpus.Source
                 return RoomFactory.ViolentRoomv2;
             }
         }
-
+        /// <summary>
+        /// Gets a random variation of a all the "Normal" rooms
+        /// </summary>
+        /// <returns>A texture of the random normal room</returns>
         private static Texture2D GetRandomNormalRoom()
         {
             Random randGen = new Random(DateTime.Now.Millisecond);
