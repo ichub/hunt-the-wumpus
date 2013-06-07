@@ -16,12 +16,16 @@ namespace HuntTheWumpus.Source
         public const int AmountOfButtons = 4;
 
         private Question currentQuestion;
+        private int amountAnsweredCorrectStreak;
+        private int streakLength;
 
         public TriviaMenu(MainGame mainGame, ILevel cameFrom)
             : base(mainGame, cameFrom)
         {
             this.currentQuestion = this.MainGame.TriviaManager.RandomQuestion();
             this.cameFrom = cameFrom;
+            this.amountAnsweredCorrectStreak = 0;
+            this.streakLength = 3;
         }
 
         public TriviaMenu(MainGame mainGame)
@@ -35,6 +39,12 @@ namespace HuntTheWumpus.Source
             if (this.currentQuestion.CorrectAnswer == answer)
             {
                 this.MainGame.Player.Score += 100;
+                this.amountAnsweredCorrectStreak++;
+                if (this.amountAnsweredCorrectStreak > this.streakLength)
+                {
+                    this.MainGame.Player.AmountOfArrows++;
+                    this.amountAnsweredCorrectStreak %= this.streakLength;
+                }
             }
             
             this.currentQuestion = this.MainGame.TriviaManager.RandomQuestion();
