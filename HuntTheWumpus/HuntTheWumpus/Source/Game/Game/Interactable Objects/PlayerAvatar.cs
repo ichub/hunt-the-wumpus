@@ -29,7 +29,7 @@ namespace HuntTheWumpus.Source
             : base(mainGame, parentLevel)
         {
             this.ObjectTeam = Team.Player;
-            this.Position = new Vector2(400, 400);
+            this.Position = new Vector2(400, 200);
             this.DamageLength = 250;
             this.DamageTint = Color.Red;
             this.CurrentTint = Color.White;

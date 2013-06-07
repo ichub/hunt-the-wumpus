@@ -59,7 +59,7 @@ namespace HuntTheWumpus.Source
                     new Vector2(760, 570),
                     new Vector2(450, 720),
                     new Vector2(154, 544),
-                    new Vector2(157, 704),
+                    new Vector2(90, 40),
                 };
         }
 
@@ -82,7 +82,7 @@ namespace HuntTheWumpus.Source
                 if (this.ConnectedRooms[4] != null)
                     this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[4]) { Position = new Vector2(134, 627) });
                 if (this.ConnectedRooms[5] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[5]) { Position = new Vector2(151, 81) });
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[5]) { Position = new Vector2(151, 100) });
             }
         }
 
@@ -99,7 +99,7 @@ namespace HuntTheWumpus.Source
                 this.walls[3].Draw(spriteBatch, this.wallPositions[3], gameTime);
             if (this.ConnectedRooms[4] == null)
                 this.walls[4].Draw(spriteBatch, this.wallPositions[4], gameTime);
-            if (this.ConnectedRooms[5] == null)
+            //if (this.ConnectedRooms[5] == null)
                 this.walls[5].Draw(spriteBatch, this.wallPositions[5], gameTime);
         }
 
@@ -115,7 +115,7 @@ namespace HuntTheWumpus.Source
 
             this.GameObjects.Add(new PlayerAvatar(this.MainGame, this)
             {
-                Position = new Vector2(500f, 200f)
+                Position = new Vector2(500f, 100)
             });
 
             this.SpawnEnemies();
@@ -173,8 +173,8 @@ namespace HuntTheWumpus.Source
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.background, Vector2.Zero, Color.White);
-            this.DrawWalls(spriteBatch, gameTime);
             this.GameObjects.FrameDraw();
+            this.DrawWalls(spriteBatch, gameTime);
         }
     }
 }

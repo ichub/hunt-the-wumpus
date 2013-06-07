@@ -43,7 +43,7 @@ namespace HuntTheWumpus.Source
         {
             if (name.Length > 0)
             {
-                this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.PickRandomStartRoom();
+                this.MainGame.LevelManager.CurrentLevel = new InstructionsMenu(this.MainGame);
             }
         }
 

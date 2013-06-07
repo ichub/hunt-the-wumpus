@@ -109,7 +109,10 @@ namespace HuntTheWumpus.Source
                 new Vector2(125, 603),
                 new Vector2(190, 496),
                 new Vector2(99, 369),
-                new Vector2(230, 216),
+
+                new Vector2(190, 193),
+                new Vector2(271, 35),
+
                 new Vector2(317, 79),
             };
             #endregion

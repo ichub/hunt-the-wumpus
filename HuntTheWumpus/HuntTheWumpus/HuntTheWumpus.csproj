@@ -100,6 +100,7 @@
     <Compile Include="Source\Game\Game\Levels\HUD.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\ArrowMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\HighScoreMenu.cs" />
+    <Compile Include="Source\Game\Game\Levels\Menus\InstructionsMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\NameMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\StartMenu.cs" />
     <Compile Include="Source\Game\Game\Levels\Menus\BaseMenu.cs" />
