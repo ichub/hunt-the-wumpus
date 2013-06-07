@@ -118,6 +118,7 @@ namespace HuntTheWumpus.Source
 
         public void KillWumpus()
         {
+            this.MainGame.LevelManager.GameCave.Wumpus.DoDamage();
         }
 
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)

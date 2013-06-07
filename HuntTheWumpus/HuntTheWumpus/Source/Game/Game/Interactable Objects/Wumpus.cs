@@ -68,5 +68,10 @@ namespace HuntTheWumpus.Source
         {
             base.Update(gameTime);
         }
+
+        public void DoDamage()
+        {
+            this.HP -= 10;
+        }
     }
 }
