@@ -38,6 +38,7 @@ namespace HuntTheWumpus.Source
         private AnimatedTexture[] walls;
         private Vector2[] wallPositions;
         private bool wumpusDrawn = false;
+        private bool hasBeenVisited = false;
 
         public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type, AnimatedTexture[] walls)
         {
@@ -116,8 +117,14 @@ namespace HuntTheWumpus.Source
             {
                 Position = new Vector2(500f, 200f)
             });
+
             this.SpawnEnemies();
             this.PlaceTeleporters();
+
+            if (!this.hasBeenVisited)
+            {
+                this.GameObjects.Add(new Gold(this.MainGame, this) { Position = new Vector2(1024, 768) / 2 });
+            }
         }
 
         private void SpawnEnemies()
