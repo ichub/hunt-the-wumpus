@@ -78,48 +78,44 @@ namespace HuntTheWumpus.Source
             switch (direction)
             {
                 case RoomDirection.North:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[0].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[0].RoomIndex);
                     break;
                 case RoomDirection.NorthEast:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[1].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[1].RoomIndex);
                     break;
                 case RoomDirection.SouthEast:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[2].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[2].RoomIndex);
                     break;
                 case RoomDirection.South:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[3].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[3].RoomIndex);
                     break;
                 case RoomDirection.SouthWest:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[4].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[4].RoomIndex);
                     break;
                 case RoomDirection.NorthWest:
-                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.AdjacentRooms[5].RoomIndex))
-                    {
-                        this.KillWumpus();
-                    }
+                        this.ShootArrow(previousRoom.AdjacentRooms[5].RoomIndex);
                     break;
             }
         }
 
-        public void KillWumpus()
+        public void ShootArrow(int RoomIndex)
         {
-            this.MainGame.LevelManager.GameCave.Wumpus.DoDamage();
+            bool atLeastOneArrow = false;
+            if (this.MainGame.Player.AmountOfArrows > 0)
+            {
+                atLeastOneArrow = true;
+                this.MainGame.Player.AmountOfArrows--;
+            }
+            if (this.MainGame.LevelManager.GameCave.RoomContainsWumpus(MainGame.LevelManager.GameCave.Wumpus.RoomIndex))
+            {
+                if (atLeastOneArrow)
+                {
+                    this.MainGame.LevelManager.GameCave.Wumpus.DoDamage();
+
+                }
+            }
         }
+
 
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {

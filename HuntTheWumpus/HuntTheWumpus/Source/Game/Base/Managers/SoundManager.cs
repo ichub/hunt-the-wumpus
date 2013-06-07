@@ -46,6 +46,7 @@ namespace HuntTheWumpus.Source
             this.Sounds.Add(Sound.Grunt, content.Load<SoundEffect>("Sounds\\grunt"));
             this.Sounds.Add(Sound.ItemPickup, content.Load<SoundEffect>("Sounds\\item pickup"));
             this.Sounds.Add(Sound.CaveAmbience, content.Load<SoundEffect>("Sounds\\caveambience"));
+            this.Sounds.Add(Sound.DeathScream, content.Load<SoundEffect>("Sounds\\DeathScream"));
 
             // playes the cave ambience
             this.ambience = this.Sounds[Sound.CaveAmbience].CreateInstance();
@@ -74,5 +75,6 @@ namespace HuntTheWumpus.Source
         Grunt,
         ItemPickup,
         CaveAmbience,
+        DeathScream,
     }
 }
