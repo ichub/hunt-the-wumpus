@@ -59,7 +59,33 @@ namespace HuntTheWumpus.Source
 
         public void ShootArrow(RoomDirection direction)
         {
-            // TODO: implement arrow shooting, need to check whether or not a wumpus is in the room;
+            Room previousRoom = this.cameFrom as Room;
+            switch (direction)
+            {
+                case RoomDirection.North:
+                    if (this.MainGame.LevelManager.GameCave.RoomContainsSuperBat(previousRoom.RoomIndex))
+                    {
+
+                    }
+                    break;
+                case RoomDirection.NorthEast:
+                    break;
+                case RoomDirection.SouthEast:
+                    break;
+                case RoomDirection.South:
+                    break;
+                case RoomDirection.SouthWest:
+                    break;
+                case RoomDirection.NorthWest:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void KillWumpus()
+        {
+            //this.MainGame.LevelManager.GameCave.Wumpus.RoomIndex
         }
     }
 }

@@ -66,6 +66,8 @@ namespace HuntTheWumpus.Source
         /// </summary>
         private ILevel currentLevel;
 
+        private Queue<ILevel> nextLevels;
+
         /// <summary>
         /// The level to load when the current level is completely faded out.
         /// </summary>
@@ -90,15 +92,36 @@ namespace HuntTheWumpus.Source
             {
                 if (!this.isLevelChanging)
                 {
-                    if (this.currentLevel != null)
+                    if (this.nextLevels.Count == 0)
                     {
-                        this.StartFade(value);
-                        this.isLevelChanging = true;
+                        if (this.currentLevel != null)
+                        {
+                            this.StartFade(value);
+                            this.isLevelChanging = true;
+                        }
+                        else
+                        {
+                            this.currentLevel = value;
+                            this.currentLevel.OnLoad();
+                        }
                     }
                     else
                     {
-                        this.currentLevel = value;
-                        this.currentLevel.OnLoad();
+                        this.DequeueLevels();
+                    }
+                }
+                else
+                {
+                    if (this.nextLevels.Count == 0)
+                    {
+                        this.nextLevels.Enqueue(value);
+                    }
+                    else
+                    {
+                        if (!this.nextLevels.Contains(value))
+                        {
+                            this.nextLevels.Enqueue(value);
+                        }
                     }
                 }
             }
@@ -111,8 +134,10 @@ namespace HuntTheWumpus.Source
         public LevelManager(MainGame parentGame)
         {
             this.MainGame = parentGame;
-            this.fadeSpeed = 20;
             this.Hud = new HUD(this.MainGame);
+
+            this.fadeSpeed = 20;
+            this.nextLevels = new Queue<ILevel>();
 
             // initializes the big black fade box.
             this.levelFade = new Texture2D(parentGame.GraphicsDevice, parentGame.WindowWidth, parentGame.WindowHeight);
@@ -136,6 +161,18 @@ namespace HuntTheWumpus.Source
                 }
                 this.CurrentLevel.FrameUpdate(this.MainGame.GameTime, this.MainGame.Content);
                 this.GameCave.UpdateSuperBats();
+            }
+            this.DequeueLevels();
+        }
+
+        private void DequeueLevels()
+        {
+            if (!this.isLevelChanging)
+            {
+                if (this.nextLevels.Count > 0)
+                {
+                    this.CurrentLevel = this.nextLevels.Dequeue();
+                }
             }
         }
 

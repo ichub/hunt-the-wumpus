@@ -16,7 +16,6 @@ namespace HuntTheWumpus.Source
         public const int AmountOfButtons = 4;
 
         private Question currentQuestion;
-        private ILevel cameFrom;
 
         public TriviaMenu(MainGame mainGame, ILevel cameFrom)
             : base(mainGame, cameFrom)
