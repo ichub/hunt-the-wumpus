@@ -132,6 +132,9 @@ namespace HuntTheWumpus.Source
                 }
             }
         }
+        /// <summary>
+        /// Initializes top left points of the hexagon
+        /// </summary>
         private void InitTopLeftPoints()
         {
             float halfX = xSize / 2;
@@ -211,12 +214,20 @@ namespace HuntTheWumpus.Source
                 this.Showing = !this.Showing;
             }
         }
-
+        /// <summary>
+        /// Resets the minimap
+        /// </summary>
         public void Reset()
         {
             this.IndexesToShow = new bool[MiniMap.DefaultRoomNumber];
             this.Showing = false;
         }
+        /// <summary>
+        /// Adds transparency to the base color.
+        /// </summary>
+        /// <param name="baseColor">The base color ot which i add the tranparency to</param>
+        /// <param name="transparency">a byte that represents the alpha or the transparency: 0- 255</param>
+        /// <returns>Color with specified basecolor and transparency</returns>
         private static Color AddTransparency(Color baseColor, byte transparency)
         {
             return new Color(baseColor.R, baseColor.G, baseColor.B, transparency);

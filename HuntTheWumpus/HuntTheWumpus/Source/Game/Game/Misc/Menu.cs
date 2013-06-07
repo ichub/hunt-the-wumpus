@@ -21,19 +21,30 @@ namespace HuntTheWumpus.Source
 
         public bool IsHidden { get; set; }
         public bool ContentLoaded { get; set; }
-
+        /// <summary>
+        /// Draws the menu
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             this.Texture.Draw(spriteBatch, this.Position, gameTime);
         }
-
+        /// <summary>
+        /// Loads the needed content
+        /// </summary>
+        /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\menu"));
         }
-
+        /// <summary>
+        /// Does nothing
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            return;
         }
     }
 }

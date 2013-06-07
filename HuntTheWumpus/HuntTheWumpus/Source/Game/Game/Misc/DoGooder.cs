@@ -22,7 +22,7 @@ namespace HuntTheWumpus.Source
 
         public void Update()
         {
-            if (!(this.mainGame.LevelManager.CurrentLevel is NameMenu))
+            if ((this.mainGame.LevelManager.CurrentLevel is Room))
             {
                 //Opens up the TriviaMenu
                 if (this.mainGame.InputManager.IsClicked(Keys.Q))
@@ -37,7 +37,7 @@ namespace HuntTheWumpus.Source
                 //Takes you to the pit
                 if (this.mainGame.InputManager.IsClicked(Keys.P))
                 {
-                    var pits = this.mainGame.LevelManager.GameCave.Rooms.Where((x) => x is Room && (x as Room).RoomType == RoomType.Pit);
+                    IEnumerable<Room> pits = this.mainGame.LevelManager.GameCave.Rooms.Where((x) => x is Room && (x as Room).RoomType == RoomType.Pit);
                     if (pits.Count() != 0)
                     {
                         this.mainGame.LevelManager.CurrentLevel = pits.ToArray()[0];

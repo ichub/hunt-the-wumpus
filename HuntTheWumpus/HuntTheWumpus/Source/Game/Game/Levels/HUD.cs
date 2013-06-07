@@ -34,6 +34,8 @@ namespace HuntTheWumpus.Source
         public Texture2D GemImage { get; private set; }
         public Texture2D SpeedRingImage { get; private set; }
 
+        public Texture2D ArrowImage { get; private set; }
+
         public const string WumpusWarning = "I Smell a Wumpus!";
         public const string BatWarning = "Super Bats Nearby";
         public const string PitWarning = "I Feel a Draft";
@@ -50,6 +52,7 @@ namespace HuntTheWumpus.Source
 
         private Vector2 BasicTextPosition { get; set; }
 
+        private Vector2 ArrowTextPosition { get; set; }
         private bool ShouldDraw = false;
 
         private Warnings Warning;
@@ -67,6 +70,7 @@ namespace HuntTheWumpus.Source
             this.GoldImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\Gold");
             this.GemImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\Gem");
             this.SpeedRingImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\SpeedRing");
+            this.ArrowImage = this.ParentGame.Content.Load<Texture2D>("Textures\\arrow");
 
             this.DrawTextColor = Color.Blue;
             this.Font = this.ParentGame.TextManager.Font;
@@ -80,6 +84,8 @@ namespace HuntTheWumpus.Source
             this.LifeTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 110);
             this.ScoreTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 55);
             this.BasicTextPosition = new Vector2(0, this.ParentGame.WindowHeight - 100);
+
+            this.ArrowTextPosition = new Vector2(450, this.ParentGame.WindowHeight - 100);
             this.Transparency = 255 / 2;
         }
         /// <summary>
@@ -93,7 +99,10 @@ namespace HuntTheWumpus.Source
 
             if (this.ParentGame.LevelManager.CurrentLevel != null)
             {
-                if (this.ParentGame.LevelManager.CurrentLevel is Room && this.ShouldDraw)
+                if (this.ParentGame.LevelManager.CurrentLevel is Room
+                    || this.ParentGame.LevelManager.CurrentLevel is TriviaMenu
+                    || this.ParentGame.LevelManager.CurrentLevel is ArrowMenu
+                    && this.ShouldDraw)
                 {
                     Color tint = new Color(Color.White.R, Color.White.G, Color.White.B, this.Transparency);
                     this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), tint);
@@ -106,8 +115,37 @@ namespace HuntTheWumpus.Source
                     this.DrawLife(this.ParentGame.Player.HP);
                     this.DrawScore(this.ParentGame.Player.Score);
                     this.DrawInventory(this.ParentGame.Player.Inventory);
+                    this.DrawArrows(this.ParentGame.Player.AmountOfArrows);
                 }
             }
+
+        }
+
+        private void DrawArrows(int amountOfArrows)
+        {
+            this.ParentGame.SpriteBatch.Draw(
+             this.ArrowImage,
+             new Vector2(this.ArrowTextPosition.X - 10, this.ArrowTextPosition.Y + 50),
+             null,
+             Color.White,
+             0,
+             Helper.EmptyVector,
+             1,
+             SpriteEffects.None,
+             0);
+
+            //Updates the class variable for the font.
+            this.Font = this.ParentGame.TextManager.Font;
+            this.ParentGame.SpriteBatch.DrawString(
+                this.Font,
+                amountOfArrows.ToString(),
+                this.ArrowTextPosition,
+                this.DrawTextColor,
+                0,
+                this.EmptyVector,
+                Helper.CalculateScaleForDrawingText(amountOfArrows.ToString().Length, 40),
+                SpriteEffects.None,
+                0);
 
         }
         /// <summary>
@@ -116,19 +154,6 @@ namespace HuntTheWumpus.Source
         /// <param name="inventory">The inventory of the player</param>
         private void DrawInventory(Inventory inventory)
         {
-            if (inventory.AmountOfGold() > 0)
-            {
-                this.ParentGame.SpriteBatch.Draw(
-                    this.GoldImage,
-                    new Vector2(440, this.ParentGame.WindowHeight - 115),
-                    null,
-                    Color.White,
-                    0,
-                    Helper.EmptyVector,
-                    4,
-                    SpriteEffects.None,
-                    0);
-            }
             if (inventory.AmountOfGems() > 0)
             {
                 for (int i = 0; i < 9; i++)
@@ -213,6 +238,10 @@ namespace HuntTheWumpus.Source
             this.Warning = warning;
 
         }
+        /// <summary>
+        /// Switches the warning into a string
+        /// </summary>
+        /// <param name="st">the warning</param>
         public void SwitchWarning(string st)
         {
             this.Message = st;

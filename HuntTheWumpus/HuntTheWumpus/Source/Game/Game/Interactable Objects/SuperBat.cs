@@ -35,9 +35,6 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
             {
                 if (this.ParentRoomIndex == currentRoom.RoomIndex)
                 {
-                    //Later on, run animation
-                    //of huge bat swooping in and grabing the player
-                    Debug.WriteLine("Met Super Bat");
                     int newRoom = this.RandomGenerator.Next(0, Cave.NumberOfRooms);
 
                     List<PlayerAvatar> avatars = this.MainGame.LevelManager.CurrentLevel.GameObjects.GetObjectsByType<PlayerAvatar>();
@@ -45,13 +42,20 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
                         return;
 
                     PlayerAvatar player = avatars[0];
-
-                    this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
-                    this.MainGame.MiniMap.ShowRoom(this.MainGame.LevelManager.GameCave.Rooms[newRoom]);
-                    this.MainGame.LevelManager.Hud.SwitchWarning("Met Super Bat");
-                    this.MainGame.LevelManager.GameCave.MoveSuperBats();
+                    ApplyChanges(newRoom);
                 }
             }
+        }
+        /// <summary>
+        /// Applys any changes associated with the player meeting thesuperbat
+        /// </summary>
+        /// <param name="newRoom">the room that the superbat should move to</param>
+        private void ApplyChanges(int newRoom)
+        {
+            this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
+            this.MainGame.MiniMap.ShowRoom(this.MainGame.LevelManager.GameCave.Rooms[newRoom]);
+            this.MainGame.LevelManager.Hud.SwitchWarning("Met Super Bat");
+            this.MainGame.LevelManager.GameCave.MoveSuperBats();
         }
     }
 }

@@ -144,10 +144,14 @@ namespace HuntTheWumpus.Source
             RoomFactory.ViolentRoom = manager.Load<Texture2D>("Textures\\Cave\\Violent");
             RoomFactory.ViolentRoomv1 = manager.Load<Texture2D>("Textures\\Cave\\Violentv1");
             RoomFactory.ViolentRoomv2 = manager.Load<Texture2D>("Textures\\Cave\\Violentv2");
+            RoomFactory.ViolentRoomv3 = manager.Load<Texture2D>("Textures\\Cave\\Violentv3");
 
             RoomFactory.LoadWalls(manager);
         }
-
+        /// <summary>
+        /// Loads up the walls from the content manager
+        /// </summary>
+        /// <param name="content">Content Manager</param>
         private static void LoadWalls(ContentManager content)
         {
             RoomFactory.Walls = new AnimatedTexture[6];

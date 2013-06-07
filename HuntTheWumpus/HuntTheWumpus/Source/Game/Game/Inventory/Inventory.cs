@@ -75,15 +75,37 @@ namespace HuntTheWumpus.Source
             }
             return -1;
         }
-
+        /// <summary>
+        /// Gets the amount of gold the player has.
+        /// </summary>
+        /// <returns>return the amount of gold</returns>
         public int AmountOfGold()
         {
-            return this.Slots[ItemIndex("Gold")].Amount;
+            int itemIndex = ItemIndex("Gold");
+            if (itemIndex > 0)
+            {
+                return this.Slots[itemIndex].Amount;
+            }
+            return 0;
         }
+        /// <summary>
+        /// Gets the amount of gems the player has.
+        /// </summary>
+        /// <returns>return the amount of gold</returns>
         public int AmountOfGems()
         {
-            return this.Slots[ItemIndex("Gem")].Amount;
+            int itemIndex = ItemIndex("Gem");
+            if (itemIndex > 0)
+            {
+                return this.Slots[itemIndex].Amount;
+            }
+            return 0;
         }
+        /// <summary>
+        /// Checks if item is in slot
+        /// </summary>
+        /// <param name="st">name of item</param>
+        /// <returns>true if yes,otherwise false</returns>
         public bool Contains(string st)
         {
             return this.Slots.Any((x) => x.HeldItem.Name == st);
