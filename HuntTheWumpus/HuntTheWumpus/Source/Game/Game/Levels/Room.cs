@@ -21,6 +21,14 @@ namespace HuntTheWumpus.Source
         public MainGame MainGame { get; set; }
         public Cave MainCave { get; set; }
         public GameObjectManager GameObjects { get; set; }
+        
+        /// <summary>
+        /// Rooms that this room can lead to
+        /// </summary>
+        public Room[] ConnectedRooms { get; set; }
+        /// <summary>
+        /// All rooms adjacent to this room
+        /// </summary>
         public Room[] AdjacentRooms { get; set; }
 
         public int RoomIndex { get; set; }
@@ -39,7 +47,7 @@ namespace HuntTheWumpus.Source
             this.background = background;
             this.RoomBounds = bounds;
             this.RoomType = type;
-            this.AdjacentRooms = new Room[6];
+            this.ConnectedRooms = new Room[6];
             this.walls = walls;
         }
 
@@ -50,37 +58,37 @@ namespace HuntTheWumpus.Source
 
         public void PlaceTeleporters()
         {
-            if (AdjacentRooms != null)
+            if (ConnectedRooms != null)
             {
-                if (this.AdjacentRooms[0] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[0]) { Position = new Vector2(420, -90) });
-                if (this.AdjacentRooms[1] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[1]) { Position = new Vector2(833, 170) });
-                if (this.AdjacentRooms[2] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[2]) { Position = new Vector2(815, 687) });
-                if (this.AdjacentRooms[3] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[3]) { Position = new Vector2(450, 763) });
-                if (this.AdjacentRooms[4] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[4]) { Position = new Vector2(134, 627) });
-                if (this.AdjacentRooms[5] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.AdjacentRooms[5]) { Position = new Vector2(151, 81) });
+                if (this.ConnectedRooms[0] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[0]) { Position = new Vector2(420, -90) });
+                if (this.ConnectedRooms[1] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[1]) { Position = new Vector2(833, 170) });
+                if (this.ConnectedRooms[2] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[2]) { Position = new Vector2(815, 687) });
+                if (this.ConnectedRooms[3] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[3]) { Position = new Vector2(450, 763) });
+                if (this.ConnectedRooms[4] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[4]) { Position = new Vector2(134, 627) });
+                if (this.ConnectedRooms[5] != null)
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[5]) { Position = new Vector2(151, 81) });
             }
         }
 
         //TODO: Place correct walls
         private void DrawWalls(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if (this.AdjacentRooms[0] != null)
+            if (this.ConnectedRooms[0] != null)
                 this.walls[0].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.AdjacentRooms[1] != null)
+            if (this.ConnectedRooms[1] != null)
                 this.walls[1].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.AdjacentRooms[2] != null)
+            if (this.ConnectedRooms[2] != null)
                 this.walls[2].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.AdjacentRooms[3] != null)
+            if (this.ConnectedRooms[3] != null)
                 this.walls[3].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.AdjacentRooms[4] != null)
+            if (this.ConnectedRooms[4] != null)
                 this.walls[4].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.AdjacentRooms[5] != null)
+            if (this.ConnectedRooms[5] != null)
                 this.walls[5].Draw(spriteBatch, new Vector2(0, 0), gameTime);
         }
 

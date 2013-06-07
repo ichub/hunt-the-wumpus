@@ -180,7 +180,7 @@ namespace HuntTheWumpus.Source
                 spriteBatch.Draw(this.EmptyMiniMapTexture, this.TopLeftPoints[this.CurrentRoom.RoomIndex] + this.Shift, MiniMap.AddTransparency(Color.Blue, this.Transparency));
 
                 //Draw connections of the current room
-                foreach (Room adjRoom in this.CurrentRoom.AdjacentRooms)
+                foreach (Room adjRoom in this.CurrentRoom.ConnectedRooms)
                 {
                     if (null == adjRoom)
                     {
