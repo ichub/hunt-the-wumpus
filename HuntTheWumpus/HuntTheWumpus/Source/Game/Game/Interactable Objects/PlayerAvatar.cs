@@ -126,6 +126,7 @@ namespace HuntTheWumpus.Source
             {
                 this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
             }
+            
             this.MainGame.SoundManager.PlaySound(Sound.Grunt);
         }
 
