@@ -66,9 +66,12 @@ namespace HuntTheWumpus.Source
 
         public override void CollideWithLevelBounds()
         {
-            this.Velocity = -this.Velocity * 2;
-            this.Velocity = Vector2.Zero;
-            this.Position = this.LastPosition;
+            if (!this.MainGame.InputManager.KeyboardState.IsKeyDown(Keys.LeftShift))
+            {
+                this.Velocity = -this.Velocity * 2;
+                this.Velocity = Vector2.Zero;
+                this.Position = this.LastPosition;
+            }
         }
 
         public void FireProjectile()
@@ -110,11 +113,11 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 0, 0.5f, 0);
-            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f, 0);
-            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f, 0);
-            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f, 0);
-            this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardspritesheet"), 7, 100, 15, 0.5f, 0);
+            this.playerBaseNotMoving = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player base"), 0, 100, 15, 0.5f, Helper.PlayerLayer);
+            this.playerBaseLeftSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baseleftspritesheet"), 7, 140, 15, 0.5f, Helper.PlayerLayer);
+            this.playerBaseRightSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player baserightspritesheet"), 7, 140, 15, 0.5f, Helper.PlayerLayer);
+            this.playerBaseDownSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\playerbasespritesheet"), 7, 100, 15, 0.5f, Helper.PlayerLayer);
+            this.playerBaseBackSpriteSheet = new AnimatedTexture(content.Load<Texture2D>("Textures\\Player\\player basebackwardspritesheet"), 7, 100, 15, 0.5f, Helper.PlayerLayer);
 
             this.Texture = this.playerBaseDownSpriteSheet;
         }

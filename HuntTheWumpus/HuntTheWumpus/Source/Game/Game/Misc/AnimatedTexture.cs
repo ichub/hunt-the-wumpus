@@ -61,14 +61,15 @@ namespace HuntTheWumpus.Source
             this.currentFrame = 0;
             this.maxFrame = amountOfFrames;
             this.milisecondsSinceLastUpdate = 0;
+            this.Layer = layer;
         }
 
         /// <summary>
         /// Creates a static texture.
         /// </summary>
         /// <param name="texture"> Texture to display. </param>
-        public AnimatedTexture(Texture2D texture)
-            : this(texture, 1, texture.Width, 0, 1) { }
+        public AnimatedTexture(Texture2D texture, float scale = 1, float layer = 1)
+            : this(texture, 1, texture.Width, 0, scale, layer) { }
 
         /// <summary>
         /// Draws the texture.

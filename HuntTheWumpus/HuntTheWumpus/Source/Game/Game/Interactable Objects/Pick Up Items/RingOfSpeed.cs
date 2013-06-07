@@ -28,7 +28,7 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\SpeedRing"), 7, 56, 20);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\SpeedRing"), 7, 56, 20, 1, Helper.ItemLayer);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gold"));
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gold"), 1, Helper.ItemLayer);
         }
     }
 }

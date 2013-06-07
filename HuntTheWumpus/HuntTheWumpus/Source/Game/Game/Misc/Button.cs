@@ -29,6 +29,7 @@ namespace HuntTheWumpus.Source
         public bool ContentLoaded { get; set; }
         public bool IsHidden { get; set; }
         public bool IsMouseOver { get; set; }
+        public float Layer { get; set; }
 
         public Action OnClick { get; set; }
 
@@ -90,9 +91,9 @@ namespace HuntTheWumpus.Source
 
         public void LoadContent(ContentManager content)
         {
-            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Default)));
-            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Clicked)));
-            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Hovered)));
+            this.notClickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Default)), 1, Helper.ButtonLayer);
+            this.clickedTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Clicked)), 1, Helper.ButtonLayer);
+            this.mousedOverTexture = new AnimatedTexture(content.Load<Texture2D>(Button.ButtonPathFromName(this.buttonName, GameButtonState.Hovered)), 1, Helper.ButtonLayer);
             this.Texture = this.notClickedTexture;
         }
 

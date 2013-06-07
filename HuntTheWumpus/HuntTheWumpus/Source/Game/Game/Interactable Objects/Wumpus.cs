@@ -33,10 +33,10 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.facingLeft = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_leftspritesheet"), 4, 677, 5, 0.5f);
-            this.facingRight = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_rightspritesheet"), 4, 677, 5, 0.5f);
-            this.facingUp = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_backspritesheet"), 4, 677, 5, 0.5f);
-            this.facingDown = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_frontspritesheet"), 4, 677, 5, 0.5f);
+            this.facingLeft = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_leftspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
+            this.facingRight = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_rightspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
+            this.facingUp = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_backspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
+            this.facingDown = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_frontspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
             this.Texture = this.facingDown;
         }
 

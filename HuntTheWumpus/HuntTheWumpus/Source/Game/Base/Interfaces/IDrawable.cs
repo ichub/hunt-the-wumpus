@@ -37,6 +37,8 @@ namespace HuntTheWumpus.Source
         /// </summary>
         bool IsHidden { get; set; }
 
+        float Layer { get; set; }
+
         /// <summary>
         /// Called at object creation to load content.
         /// </summary>

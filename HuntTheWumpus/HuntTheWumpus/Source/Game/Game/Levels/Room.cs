@@ -59,7 +59,7 @@ namespace HuntTheWumpus.Source
                     new Vector2(760, 570),
                     new Vector2(450, 720),
                     new Vector2(154, 544),
-                    new Vector2(90, 40),
+                    new Vector2(90, 0),
                 };
         }
 

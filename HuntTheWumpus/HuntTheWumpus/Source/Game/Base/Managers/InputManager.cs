@@ -41,6 +41,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public Vector2 MousePosition { get; private set; }
 
+        /// <summary>
+        /// Event which is fired every time a key is pressed.
+        /// </summary>
         public event KeyPressed KeyPressed;
 
         /// <summary>
@@ -110,5 +113,9 @@ namespace HuntTheWumpus.Source
         Right,
     }
 
+    /// <summary>
+    /// Method signature for event handlers for the key pressed event.
+    /// </summary>
+    /// <param name="pressedKey"> The key which is pressed. </param>
     public delegate void KeyPressed(Keys pressedKey);
 }

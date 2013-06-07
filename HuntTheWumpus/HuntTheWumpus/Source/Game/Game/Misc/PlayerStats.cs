@@ -35,6 +35,10 @@ namespace HuntTheWumpus.Source
         private const int GoldWeight = 50;
         private const int MiscWeight = 25;
 
+        /// <summary>
+        /// Initializes the PlayerStatsclass
+        /// </summary>
+        /// <param name="name">name of the player</param>
         public PlayerStats(string name)
         {
             this.Name = name;
@@ -49,24 +53,36 @@ namespace HuntTheWumpus.Source
             this.Inventory = new Inventory(20);
         }
 
+        /// <summary>
+        /// Adds trivia weight to the score.
+        /// </summary>
         public void AddTriviaScore()
         {
             this.FromTrivia += PlayerStats.TriviaWeight;
             this.Score += PlayerStats.TriviaWeight;
         }
 
+        /// <summary>
+        /// Adds gold score to the gamescore
+        /// </summary>
         public void AddGoldScore()
         {
             this.FromGold += PlayerStats.GoldWeight;
             this.Score += PlayerStats.GoldWeight;
         }
-
+        
+        /// <summary>
+        /// Adds to the score: misc stuff
+        /// </summary>
         public void AddMiscScore()
         {
             this.FromMisc += PlayerStats.MiscWeight;
             this.Score += PlayerStats.MiscWeight;
         }
-
+        
+        /// <summary>
+        /// Reset the player stats
+        /// </summary>
         public void Reset()
         {
             this.CurrentRoom = 0;

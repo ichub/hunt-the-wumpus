@@ -18,7 +18,7 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Bat\\superbat_spritesheet"), 4, 300, 10);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Bat\\superbat_spritesheet"), 4, 300, 10, 1, Helper.EnemyLayer);
         }
     }
 }

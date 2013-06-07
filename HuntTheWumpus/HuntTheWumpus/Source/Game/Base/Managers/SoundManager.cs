@@ -61,7 +61,9 @@ namespace HuntTheWumpus.Source
         public void PlaySound(Sound name)
         {
             if (this.Sounds.ContainsKey(name))
+            {
                 this.Sounds[name].Play();
+            }
         }
     }
 

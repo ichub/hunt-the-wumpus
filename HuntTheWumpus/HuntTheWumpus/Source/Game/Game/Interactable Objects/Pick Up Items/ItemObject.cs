@@ -27,6 +27,7 @@ namespace HuntTheWumpus.Source
         public bool Initialized { get; set; }
         public bool IsHidden { get; set; }
         public float SpeedDampening { get; set; }
+        public float Layer { get; set; }
 
         private Vector2 velocity;
 
@@ -68,7 +69,7 @@ namespace HuntTheWumpus.Source
 
         public virtual void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name));
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\" + this.RepresentedItem.Name), 1, Helper.ItemLayer);
         }
 
         public virtual void Update(GameTime gameTime)

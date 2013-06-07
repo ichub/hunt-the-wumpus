@@ -19,6 +19,7 @@ namespace HuntTheWumpus.Source
         public Vector2 Position { get; set; }
         public Team ObjectTeam { get; set; }
 
+        public float Layer { get; set; }
         public bool IsHidden { get; set; }
         public bool ContentLoaded { get; set; }
         /// <summary>
@@ -36,7 +37,7 @@ namespace HuntTheWumpus.Source
         /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\menu"));
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\menu"),1, Helper.BackLayer);
         }
         /// <summary>
         /// Does nothing

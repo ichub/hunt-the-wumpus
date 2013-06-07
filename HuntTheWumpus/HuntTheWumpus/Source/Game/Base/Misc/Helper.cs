@@ -17,6 +17,12 @@ namespace HuntTheWumpus.Source
     public static class Helper
     {
         public const int FontSize = 24;
+        public const float PlayerLayer = 0.1f;
+        public const float WallLayer = 0.2f;
+        public const float EnemyLayer = 0.15f;
+        public const float ItemLayer = 0.16f;
+        public const float ButtonLayer = 0.1f;
+        public const float BackLayer = 1f;
 
         /// <summary>
         /// The game to which this class belongs.

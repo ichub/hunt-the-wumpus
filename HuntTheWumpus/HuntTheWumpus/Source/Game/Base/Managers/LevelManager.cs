@@ -66,6 +66,10 @@ namespace HuntTheWumpus.Source
         /// </summary>
         private ILevel currentLevel;
 
+        /// <summary>
+        /// A queue for holding levels which are to be changed to 
+        /// after the changing level is changed.
+        /// </summary>
         private Queue<ILevel> nextLevels;
 
         /// <summary>
@@ -173,6 +177,9 @@ namespace HuntTheWumpus.Source
             this.DequeueLevels();
         }
 
+        /// <summary>
+        /// Dequeues level so that the next level is set.
+        /// </summary>
         private void DequeueLevels()
         {
             if (!this.isLevelChanging)
@@ -274,6 +281,7 @@ namespace HuntTheWumpus.Source
 
             this.MainGame.SpriteBatch.Draw(this.levelFade, Vector2.Zero, new Color(255, 255, 255, (int)this.fadeCount));
         }
+
         /// <summary>
         /// Handles the warnings: such as 
         /// The Wumpus
@@ -310,6 +318,7 @@ namespace HuntTheWumpus.Source
             //No Warnings
             this.Hud.SwitchWarning(Warnings.None);
         }
+
         /// <summary>
         /// Handles anything that has to do with the pit
         /// </summary>
@@ -322,12 +331,22 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Resets the game, reseting the player score, etc.
+        /// </summary>
         public void Reset()
         {
-            SingleScore score = new SingleScore(this.MainGame.Player.Name, this.MainGame.Player.Score, this.MainGame.Player.FromGold, this.MainGame.Player.FromTrivia, this.MainGame.Player.FromMisc);
+            SingleScore score = new SingleScore(this.MainGame.Player.Name, 
+                this.MainGame.Player.Score, 
+                this.MainGame.Player.FromGold, 
+                this.MainGame.Player.FromTrivia, 
+                this.MainGame.Player.FromMisc);
+
             this.MainGame.HighScore.Add(score);
+
             this.MainGame.Player.Reset();
             this.MainGame.MiniMap.Reset();
+
             this.MainGame.LevelManager.GameCave.Reset();
         }
     }

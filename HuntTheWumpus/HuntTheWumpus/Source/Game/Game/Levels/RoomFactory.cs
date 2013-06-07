@@ -161,12 +161,12 @@ namespace HuntTheWumpus.Source
         {
             RoomFactory.Walls = new AnimatedTexture[6];
 
-            RoomFactory.Walls[0] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\n rock wallFULL"));
-            RoomFactory.Walls[1] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\ne rock wallFULL"));
-            RoomFactory.Walls[2] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\se rock wallFULL"));
-            RoomFactory.Walls[3] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\s rock wallFULL"));
-            RoomFactory.Walls[4] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\sw rock wallFULL"));
-            RoomFactory.Walls[5] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\nw rock wallFULL"));
+            RoomFactory.Walls[0] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\n rock wallFULL"), 1, Helper.WallLayer);
+            RoomFactory.Walls[1] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\ne rock wallFULL"), 1, Helper.WallLayer);
+            RoomFactory.Walls[2] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\se rock wallFULL"), 1, Helper.WallLayer);
+            RoomFactory.Walls[3] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\s rock wallFULL"), 1, Helper.WallLayer);
+            RoomFactory.Walls[4] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\sw rock wallFULL"), 1, Helper.WallLayer);
+            RoomFactory.Walls[5] = new AnimatedTexture(content.Load<Texture2D>("Textures\\Walls\\nw rock wallFULL"), 1, Helper.WallLayer);
         }
 
         /// <summary>

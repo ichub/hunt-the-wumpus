@@ -21,6 +21,7 @@ namespace HuntTheWumpus.Source
         public BoundingBox BoundingBox { get; set; }
         public Team ObjectTeam { get; set; }
 
+        public float Layer { get; set; }
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
         public bool IsHidden { get; set; }

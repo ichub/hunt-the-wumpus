@@ -25,7 +25,7 @@ namespace HuntTheWumpus.Source
 
         public override void LoadContent(ContentManager content)
         {
-            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gem"), 9, 60, 10, 0.5f);
+            this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\Items\\Gem"), 9, 60, 10, 0.5f, Helper.ItemLayer);
         }
     }
 }

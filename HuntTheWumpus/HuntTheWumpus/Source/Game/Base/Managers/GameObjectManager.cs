@@ -69,6 +69,7 @@ namespace HuntTheWumpus.Source
                 item.LastPosition = item.Position;
             }
         }
+
         /// <summary>
         /// Checks and handles collisions with the border of the room
         /// </summary>

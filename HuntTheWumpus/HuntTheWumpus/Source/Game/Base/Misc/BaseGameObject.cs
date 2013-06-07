@@ -31,6 +31,7 @@ namespace HuntTheWumpus.Source
 
         public float SpeedDampening { get; set; }
         public float SpeedModifier { get; set; }
+        public float Layer { get; set; }
         public bool ContentLoaded { get; set; }
         public bool Initialized { get; set; }
         public bool IsHidden { get; set; }
@@ -51,13 +52,14 @@ namespace HuntTheWumpus.Source
         {
             this.MainGame = mainGame;
             this.ParentLevel = parentLevel;
+
             this.ParentRoom = parentLevel as Room;
             this.ObjectTeam = Team.Enemy;
-            this.Position = new Vector2(300, 300);
             this.BoundingBox = new BoundingBox();
+
             this.CurrentTint = Color.White;
-            this.DamageLength = 259;
             this.DamageTint = Color.Red;
+            this.DamageLength = 259;
             this.SpeedDampening = 1.1f;
             this.SpeedModifier = 1;
         }
@@ -97,30 +99,23 @@ namespace HuntTheWumpus.Source
         /// </summary>
         /// <param name="gameObject"> The object with which to collide. </param>
         /// <param name="isCollided"> Whether or not the two objects are actually colliding. </param>
-        public virtual void CollideWith(ICollideable gameObject, bool isCollided)
-        {
-            
-        }
+        public virtual void CollideWith(ICollideable gameObject, bool isCollided) { }
 
         /// <summary>
         /// Initializes the object.
         /// </summary>
-        public virtual void Initialize()
-        {
+        public virtual void Initialize() { }
 
-        }
-
-        public virtual void OnDamage()
-        {
-        }
+        /// <summary>
+        /// Method which is called when the object is damaged.
+        /// </summary>
+        public virtual void OnDamage() { }
 
         /// <summary>
         /// Loads the objects content.
         /// </summary>
         /// <param name="content"> The content manager used to load content. </param>
-        public virtual void LoadContent(ContentManager content)
-        {
-        }
+        public virtual void LoadContent(ContentManager content) { }
 
         /// <summary>
         /// Default update method for all game objects.
