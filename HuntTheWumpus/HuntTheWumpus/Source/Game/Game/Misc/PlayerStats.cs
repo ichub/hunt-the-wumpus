@@ -41,9 +41,14 @@ namespace HuntTheWumpus.Source
             this.Inventory = new Inventory(20);
         }
 
-        public void Pay(int sum)
+        public bool Pay(int sum)
         {
-            this.Money -= sum;
+            if (sum <= this.Money)
+            {
+                this.Money -= sum;
+                return true;
+            }
+            return false;
         }
 
         public void Reset()

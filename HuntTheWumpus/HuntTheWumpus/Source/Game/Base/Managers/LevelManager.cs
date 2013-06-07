@@ -96,6 +96,12 @@ namespace HuntTheWumpus.Source
                     {
                         if (this.currentLevel != null)
                         {
+                            //Makes sure the specific level arent repeating
+                            if (this.currentLevel is GameOverMenu && value is GameOverMenu)
+                                return;
+                            if (this.currentLevel is HighScoreMenu && value is HighScoreMenu)
+                                return;
+
                             this.StartFade(value);
                             this.isLevelChanging = true;
                         }

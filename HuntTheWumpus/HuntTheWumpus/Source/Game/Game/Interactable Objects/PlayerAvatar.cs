@@ -99,10 +99,6 @@ namespace HuntTheWumpus.Source
                     this.MainGame.Player.HP--;
                     this.MainGame.Player.Score -= 50;
                     this.ParentLevel.GameObjects.Damage(this);
-                    if (this.MainGame.Player.HP <= 0)
-                    {
-                        this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
-                    }
                 }
             }
 
@@ -156,7 +152,6 @@ namespace HuntTheWumpus.Source
         public override void Update(GameTime gameTime)
         {
             this.ChoseTexture();
-            this.UpdatePitRoom();
             this.FireProjectile();
             this.Move();
             this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
@@ -169,13 +164,5 @@ namespace HuntTheWumpus.Source
             this.Texture.Draw(spriteBatch, this.Position, gameTime, this.CurrentTint);
         }
 
-        private void UpdatePitRoom()
-        {
-            if (this.MainGame.LevelManager.CurrentLevel is Room && (this.MainGame.LevelManager.CurrentLevel as Room).RoomType == RoomType.Pit)
-            {
-                this.MainGame.Player.HP = 0;
-                this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
-            }
-        }
     }
 }
