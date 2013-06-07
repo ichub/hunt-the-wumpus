@@ -69,9 +69,6 @@ namespace HuntTheWumpus.Source
             //Initalize Super Bats
             this.SuperBats = new List<SuperBat>(3);
 
-            //TODO: move to this.MainGame.Random
-
-            Random rand = new Random();
             //Spec says 2 SuperBats
             for (int i = 0; i < 2; i++)
             {

@@ -86,7 +86,6 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        //TODO: Place correct walls
         private void DrawWalls(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (this.ConnectedRooms[0] == null)

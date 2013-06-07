@@ -24,7 +24,7 @@ namespace HuntTheWumpus.Source
         public SpriteBatch SpriteBatch { get; private set; }
         public DoGooder DoGooder { get; private set; }
         public GameTime GameTime { get; private set; }
-        public PlayerStats Player { get; set; }
+        public PlayerStats Player { get; private set; }
         public MiniMap MiniMap { get; private set; }
         public Trivia TriviaManager { get; private set; }
         public Random Random { get; private set; }
@@ -41,15 +41,14 @@ namespace HuntTheWumpus.Source
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
             this.ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             this.ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
 
-            // Game Options:
             this.Graphics.PreferredBackBufferWidth = 1024;
             this.Graphics.PreferredBackBufferHeight = 768;
-            this.Graphics.PreferMultiSampling = false;      // enables anti-aliasing
-            this.IsMouseVisible = true;                    // allows to be drawn on the window
+            this.IsMouseVisible = true;
 
             this.WindowWidth = this.Graphics.PreferredBackBufferWidth;
             this.WindowHeight = this.Graphics.PreferredBackBufferHeight;
@@ -76,6 +75,7 @@ namespace HuntTheWumpus.Source
             this.DoGooder = new DoGooder(this);
             this.MiniMap = new MiniMap(this, new Vector2(this.WindowWidth - 200, 0));
             this.Player = new PlayerStats("Sexy Beast");
+
             base.Initialize();
         }
 
@@ -100,7 +100,6 @@ namespace HuntTheWumpus.Source
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
             this.GameTime = gameTime;
 
             this.InputManager.Update();
