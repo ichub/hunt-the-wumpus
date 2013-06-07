@@ -201,7 +201,6 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void Update()
         {
-
             if (!(this.MainGame.LevelManager.CurrentLevel is Room))
             {
                 this.Showing = false;
@@ -211,7 +210,6 @@ namespace HuntTheWumpus.Source
             {
                 this.Showing = !this.Showing;
             }
-
         }
 
         public void Reset()

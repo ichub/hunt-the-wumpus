@@ -319,5 +319,18 @@ namespace HuntTheWumpus.Source
             }
             return this.Rooms[rand];
         }
+
+        public void MoveSuperBats()
+        {
+            foreach (SuperBat item in this.SuperBats)
+            {
+                int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+                while (this.MainGame.Player.CurrentRoom == rand || this.RoomContainsWumpus(rand) || this.RoomContainsSuperBat(rand))
+                {
+                    rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+                }
+                item.ParentRoomIndex = rand;
+            }
+        }
     }
 }

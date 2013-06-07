@@ -50,12 +50,7 @@ namespace HuntTheWumpus.Source.Game.Derived.Wumpus_Objects
                     this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[newRoom];
                     this.MainGame.MiniMap.ShowRoom(this.MainGame.LevelManager.GameCave.Rooms[newRoom]);
                     
-                    int newRandomRom = this.RandomGenerator.Next(0, Cave.NumberOfRooms);
-                    while (newRandomRom == newRoom)
-                    {
-                        newRandomRom = this.RandomGenerator.Next(0, Cave.NumberOfRooms);
-                    }
-                    this.ParentRoomIndex = newRoom;
+                    this.MainGame.LevelManager.GameCave.MoveSuperBats();
                 }
             }
         }
