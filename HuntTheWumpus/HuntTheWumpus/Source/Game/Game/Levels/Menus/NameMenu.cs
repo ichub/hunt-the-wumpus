@@ -35,15 +35,13 @@ namespace HuntTheWumpus.Source
         public override void OnUnLoad()
         {
             this.MainGame.InputManager.KeyPressed -= this.OnKeyPress;
+            this.MainGame.Player.Name = this.name;
             base.OnUnLoad();
         }
 
         private void OnButtonClick()
         {
             this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.PickRandomStartRoom();
-            
-            //Create new player with this.name here
-            //adasdasdasdasd
         }
 
         private void OnKeyPress(Keys key)
