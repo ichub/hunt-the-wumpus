@@ -556,8 +556,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Blood Room.png">
-      <Name>Blood Room</Name>
+    <Compile Include="Textures\Cave\Violent.png">
+      <Name>Violent</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -672,18 +672,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_11.png">
-      <Name>Cave_11</Name>
+    <Compile Include="Textures\Cave\normalv4.png">
+      <Name>normalv4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_12.png">
-      <Name>Cave_12</Name>
+    <Compile Include="Textures\Cave\Violentv2.png">
+      <Name>Violentv2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_13.png">
-      <Name>Cave_13</Name>
+    <Compile Include="Textures\Cave\Violentv1.png">
+      <Name>Violentv1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
