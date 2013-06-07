@@ -54,7 +54,10 @@ namespace HuntTheWumpus.Source
             }
         }
 
-        public void OnLoad() { }
+        public void OnLoad()
+        {
+            this.MainGame.SoundManager.PlaySound(Sound.DeathScream);
+        }
         public void OnUnLoad() { }
         public void Reset() { }
 
