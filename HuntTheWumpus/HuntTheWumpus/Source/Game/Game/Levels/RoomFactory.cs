@@ -26,6 +26,7 @@ namespace HuntTheWumpus.Source
         private static Texture2D ViolentRoom;
         private static Texture2D ViolentRoomv1;
         private static Texture2D ViolentRoomv2;
+        private static Texture2D ViolentRoomv3;
 
         private static Texture2D FloodedRoom;
         private static Texture2D FloodedSkullRoom;
@@ -35,6 +36,11 @@ namespace HuntTheWumpus.Source
         private static Texture2D Normalv2Room;
         private static Texture2D Normalv3Room;
         private static Texture2D Normalv4Room;
+        private static Texture2D Normalv5Room;
+        private static Texture2D Normalv6Room;
+        private static Texture2D Normalv7Room;
+        private static Texture2D Normalv8Room;
+        private static Texture2D Normalv9Room;
 
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
@@ -123,6 +129,11 @@ namespace HuntTheWumpus.Source
             RoomFactory.Normalv2Room = manager.Load<Texture2D>("Textures\\Cave\\normalv2");
             RoomFactory.Normalv3Room = manager.Load<Texture2D>("Textures\\Cave\\normalv3");
             RoomFactory.Normalv4Room = manager.Load<Texture2D>("Textures\\Cave\\normalv4");
+            RoomFactory.Normalv5Room = manager.Load<Texture2D>("Textures\\Cave\\normalv5");
+            RoomFactory.Normalv6Room = manager.Load<Texture2D>("Textures\\Cave\\normalv6");
+            RoomFactory.Normalv7Room = manager.Load<Texture2D>("Textures\\Cave\\normalv7");
+            RoomFactory.Normalv8Room = manager.Load<Texture2D>("Textures\\Cave\\normalv8");
+            RoomFactory.Normalv9Room = manager.Load<Texture2D>("Textures\\Cave\\normalv9");
 
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
             RoomFactory.PitRoom = manager.Load<Texture2D>("Textures\\Cave\\pit");
@@ -238,17 +249,21 @@ namespace HuntTheWumpus.Source
             Random randGen = new Random(DateTime.Now.Millisecond);
             double rand = randGen.NextDouble();
 
-            if (rand < 0.33)
+            if (rand < 0.25)
             {
                 return RoomFactory.ViolentRoom;
             }
-            else if (rand < 0.66)
+            else if (rand < 0.5)
             {
                 return RoomFactory.ViolentRoomv1;
             }
-            else
+            else if (rand < 0.75)
             {
                 return RoomFactory.ViolentRoomv2;
+            }
+            else
+            {
+                return RoomFactory.ViolentRoomv3;
             }
         }
         /// <summary>
@@ -260,25 +275,45 @@ namespace HuntTheWumpus.Source
             Random randGen = new Random(DateTime.Now.Millisecond);
             double rand = randGen.NextDouble();
 
-            if (rand < 0.20)
+            if (rand < 0.10)
             {
                 return RoomFactory.NormalRoom;
             }
-            else if (rand < 0.40)
+            else if (rand < 0.20)
             {
                 return RoomFactory.Normalv1Room;
             }
-            else if (rand < 0.60)
+            else if (rand < 0.30)
             {
                 return RoomFactory.Normalv2Room;
             }
-            else if (rand < 0.80)
+            else if (rand < 0.40)
             {
                 return RoomFactory.Normalv3Room;
             }
-            else
+            else if (rand < 0.50)
             {
                 return RoomFactory.Normalv4Room;
+            }
+            else if (rand < 0.60)
+            {
+                return RoomFactory.Normalv5Room;
+            }
+            else if (rand < 0.70)
+            {
+                return RoomFactory.Normalv6Room;
+            }
+            else if (rand < 0.80)
+            {
+                return RoomFactory.Normalv7Room;
+            }
+            else if (rand < 0.90)
+            {
+                return RoomFactory.Normalv8Room;
+            }
+            else
+            {
+                return RoomFactory.Normalv9Room;
             }
         }
     }

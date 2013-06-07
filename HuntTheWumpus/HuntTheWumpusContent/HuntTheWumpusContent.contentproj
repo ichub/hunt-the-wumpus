@@ -657,13 +657,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_14.png">
-      <Name>Cave_14</Name>
+    <Compile Include="Textures\Cave\normalv5.png">
+      <Name>normalv5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_15.png">
-      <Name>Cave_15</Name>
+    <Compile Include="Textures\Cave\normalv6.png">
+      <Name>normalv6</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -701,27 +701,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_16.png">
-      <Name>Cave_16</Name>
+    <Compile Include="Textures\Cave\normalv7.png">
+      <Name>normalv7</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Cave\Cave_17.png">
-      <Name>Cave_17</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_18.png">
-      <Name>Cave_18</Name>
+    <Compile Include="Textures\Cave\normalv8.png">
+      <Name>normalv8</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\Cave_19.png">
-      <Name>Cave_19</Name>
+    <Compile Include="Textures\Cave\normalv9.png">
+      <Name>normalv9</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Cave\violentv3.png">
+      <Name>violentv3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

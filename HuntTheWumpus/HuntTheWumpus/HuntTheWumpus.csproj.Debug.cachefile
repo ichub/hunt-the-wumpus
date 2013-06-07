@@ -106,16 +106,16 @@ Content\Sounds\item pickup.xnb
 Content\Sounds\menu change.xnb
 Content\Sounds\grunt.xnb
 Content\Sounds\caveambience.xnb
-Content\Textures\Cave\Cave_14.xnb
-Content\Textures\Cave\Cave_15.xnb
 Content\Textures\Walls\n rock wallFULL.xnb
 Content\Textures\Walls\ne rock wallFULL.xnb
 Content\Textures\Walls\nw rock wallFULL.xnb
 Content\Textures\Walls\s rock wallFULL.xnb
 Content\Textures\Walls\se rock wallFULL.xnb
 Content\Textures\Walls\sw rock wallFULL.xnb
-Content\Textures\Cave\Cave_16.xnb
-Content\Textures\Cave\Cave_17.xnb
-Content\Textures\Cave\Cave_18.xnb
-Content\Textures\Cave\Cave_19.xnb
+Content\Textures\Cave\normalv5.xnb
+Content\Textures\Cave\normalv6.xnb
+Content\Textures\Cave\normalv7.xnb
+Content\Textures\Cave\normalv8.xnb
+Content\Textures\Cave\normalv9.xnb
+Content\Textures\Cave\violentv3.xnb
 Content\Text\trivia.txt
