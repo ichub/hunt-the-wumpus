@@ -228,3 +228,178 @@ IR
 IN
 MG
 0
+
+What is the capital of England?
+Seoul
+Manhattan
+Bracknell
+London
+4
+
+What is the capital of Australia?
+Canberra
+Kanes
+Honduras
+Stilicho
+1
+
+What is the capital of England?
+Carleton
+Ottawa
+London
+Nepean
+2
+
+What is the capital of Germany?
+Berlin
+Potsdam
+Kliestow
+Freienwalde
+1
+
+What is the capital of Peru?
+Bogota
+Bolivia
+Victoria
+Lima
+4
+
+How many countries are there?
+108
+137
+184
+196
+4
+
+Which country holds the greatest oil reserves in the world?
+United States
+China
+Saudi Arabia
+Pakistan
+3
+
+Which country produces the most coal?
+India
+United States
+China
+Russia
+3
+
+Which of the following is the closest to the age of the universe in billions of years?
+4.4
+7.9
+13.8
+17.6
+3
+
+How many planets does our solar system have?
+6
+7
+8
+9
+3
+
+What planet has the largest volcano?
+Earth
+Venus
+Jupiter
+Mars
+4
+
+In what year was the Declaration of Independence signed?
+1776
+1781
+1887
+1941
+1
+
+How many pieces of wood make up a violin?
+2
+17
+31
+70
+4
+
+Where was the fortune cookie invented?
+China
+America
+Russia
+Canada
+2
+
+Which animal is known to kill more people than plane crashes?
+Bears
+Donkeys
+Dogs
+Deer
+2
+
+The number of bricks in the Empire State Building is closest to which of the following?
+1 million
+10 million
+50 million
+100 million
+2
+
+How long is a kangaroo baby when it is born?
+1 inch
+6 inch
+1 foot
+2 feet
+1
+
+What are the dots over the letters "i" and "j" called?
+jargons
+simptons
+apostles
+tittles
+4
+
+What prevents autodigestion of the stomach?
+Mucus
+Membranes
+T-cells
+Vitamin A
+1
+
+When a burning cigarette is inhaled, what is the temperature, in celsius, at its tip?
+200
+300
+500
+700
+4
+
+Back in the 1600's, what was used in thermometers, instead of mercury?
+Water
+Brandy
+Gasoline
+Hydrochloric acid
+2
+
+Which of the following are not found in casinos in Las Vegas?
+clocks
+brandy
+computers
+phones
+1
+
+How many steps would you have to take before you reach the first level of the Eiffel Tower?
+100
+200
+300
+400
+3
+
+What material is the primary ingredient in paper money?
+bark
+cotton
+linen fibers
+fabric
+2
+
+Who was the last president of the USSR?
+Mikhail Gorbachev
+Boris Yeltsin
+Vladmir Putin
+Dmitry Medvedev
+1
