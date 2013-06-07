@@ -58,6 +58,11 @@ namespace HuntTheWumpus.Source
                 && this.Score == other.Score);
         }
 
+        /// <summary>
+        /// overrides basic equals
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (!(obj is SingleScore))

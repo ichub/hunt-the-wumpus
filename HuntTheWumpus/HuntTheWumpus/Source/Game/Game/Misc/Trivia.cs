@@ -30,6 +30,10 @@ namespace HuntTheWumpus.Source
             this.PopulateQuestions();
         }
 
+        /// <summary>
+        /// Reads and populates the question 
+        /// from a specified text.
+        /// </summary>
         public void PopulateQuestions()
         {
             using (StreamReader triviaFile = new StreamReader(this.GetPathToTrivia()))
@@ -44,7 +48,7 @@ namespace HuntTheWumpus.Source
                     }
                     newQuestion.CorrectAnswer = Convert.ToInt32(triviaFile.ReadLine());
                     triviaFile.ReadLine();
-                    this.questions.Add(newQuestion);                    
+                    this.questions.Add(newQuestion);
                 }
             }
 
@@ -54,11 +58,18 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Gets the path fromtrivia
+        /// </summary>
+        /// <returns>path to trivia</returns>
         private string GetPathToTrivia()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Content\\Text\\trivia.txt";
         }
 
+        /// <summary>
+        /// resets the Trivia class
+        /// </summary>
         public void Reset()
         {
             while (askedQuestions.Any())
@@ -67,12 +78,20 @@ namespace HuntTheWumpus.Source
             }
         }
 
+        /// <summary>
+        /// Updates the state of the question
+        /// </summary>
+        /// <param name="index"></param>
         private void UpdateQuestionState(int index)
         {
             this.askedQuestions.Push(this.unaskedQuestions[index]);
             this.unaskedQuestions.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Generates random questions
+        /// </summary>
+        /// <returns></returns>
         public Question RandomQuestion()
         {
             if (this.unaskedQuestions.Count == 0)
@@ -86,6 +105,9 @@ namespace HuntTheWumpus.Source
         }
     }
 
+    /// <summary>
+    /// class that represents a single question
+    /// </summary>
     public class Question
     {
         public string QuestionString { get; set; }
@@ -97,6 +119,11 @@ namespace HuntTheWumpus.Source
             this.QuestionAnswers = new string[4];
         }
 
+        /// <summary>
+        /// checks if answer is correct
+        /// </summary>
+        /// <param name="answer">index of answer 0-3 inclusive</param>
+        /// <returns>true if correct,false if otherwise</returns>
         public bool IsCorrect(int answer)
         {
             return answer == this.CorrectAnswer;

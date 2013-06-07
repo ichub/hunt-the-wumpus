@@ -13,6 +13,11 @@ namespace HuntTheWumpus.Source
 {
     public class Inventory
     {
+        /// <summary>
+        /// Indexer to access the slots
+        /// </summary>
+        /// <param name="index">the index</param>
+        /// <returns>an Inventory Slot</returns>
         public InventorySlot this[int index]
         {
 

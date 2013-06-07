@@ -138,7 +138,9 @@ namespace HuntTheWumpus.Source
             this.Texture = this.notClickedTexture;
         }
     }
-
+    /// <summary>
+    /// Different types of buttons
+    /// </summary>
     public enum ButtonName
     {
         ChoiceOne,

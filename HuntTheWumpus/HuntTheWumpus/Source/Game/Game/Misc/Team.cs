@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Enumerates team possibilities
+    /// </summary>
     public enum Team
     {
         Player,

@@ -308,6 +308,14 @@ namespace HuntTheWumpus.Source
             PitInit();
             WumpusInit();
         }
+        /// <summary>
+        /// Picks a random room that fits
+        /// the criteria for the start room
+        /// no pit
+        /// no wumpus
+        /// no superbat
+        /// </summary>
+        /// <returns>random room that fits criteria</returns>
         public Room PickRandomStartRoom()
         {
             int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
@@ -320,6 +328,9 @@ namespace HuntTheWumpus.Source
             return this.Rooms[rand];
         }
 
+        /// <summary>
+        /// randomly moves superbats
+        /// </summary>
         public void MoveSuperBats()
         {
             foreach (SuperBat item in this.SuperBats)
@@ -332,7 +343,9 @@ namespace HuntTheWumpus.Source
                 item.ParentRoomIndex = rand;
             }
         }
-
+        /// <summary>
+        /// Randomly moves Wumpus
+        /// </summary>
         public void MoveWumpus()
         {
             int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);

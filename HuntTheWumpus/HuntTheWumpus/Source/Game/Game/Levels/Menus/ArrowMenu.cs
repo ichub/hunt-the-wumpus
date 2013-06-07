@@ -20,6 +20,7 @@ namespace HuntTheWumpus.Source
             : base(mainGame, cameFrom)
         {
             this.buttonPositionShift = new Vector2(0, 200);
+            //initilizes position of the buttons.
             this.buttonPositions = new Vector2[] 
             { 
                 new Vector2(285, 140), 
@@ -72,6 +73,10 @@ namespace HuntTheWumpus.Source
                     ButtonName.NorthWest) { Position = this.buttonPositions[5] + buttonPositionShift });
         }
 
+        /// <summary>
+        /// Allows you to shoot an arrow 
+        /// </summary>
+        /// <param name="direction">The direction the arrow will go</param>
         public void ShootArrow(RoomDirection direction)
         {
             Room previousRoom = this.cameFrom as Room;
@@ -97,7 +102,10 @@ namespace HuntTheWumpus.Source
                     break;
             }
         }
-
+        /// <summary>
+        /// Allows you to shoot an arrow 
+        /// </summary>
+        /// <param name="RoomIndex">The index of the room where the arrow will go</param>
         public void ShootArrow(int RoomIndex)
         {
             bool atLeastOneArrow = false;
@@ -116,7 +124,11 @@ namespace HuntTheWumpus.Source
             }
         }
 
-
+        /// <summary>
+        /// Draws the current frame of the wumpus 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.FrameDraw(gameTime, spriteBatch);

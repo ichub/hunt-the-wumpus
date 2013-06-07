@@ -11,15 +11,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// provides a class for hotkeys
+    /// </summary>
     public class DoGooder
     {
         private MainGame mainGame;
 
+        /// <summary>
+        /// Needs the maingame
+        /// </summary>
+        /// <param name="mainGame"></param>
         public DoGooder(MainGame mainGame)
         {
             this.mainGame = mainGame;
         }
 
+        /// <summary>
+        /// provides a method to update and check the hotkeys
+        /// </summary>
         public void Update()
         {
             if ((this.mainGame.LevelManager.CurrentLevel is Room))

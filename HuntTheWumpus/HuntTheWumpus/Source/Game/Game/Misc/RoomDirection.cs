@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace HuntTheWumpus.Source
 {
+    /// <summary>
+    /// Direction of the arrow: more complex than normal "Direction"
+    /// </summary>
     public enum RoomDirection
     {
         North,

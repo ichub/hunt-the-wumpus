@@ -31,6 +31,10 @@ namespace HuntTheWumpus.Source
             this.LastPosition = new Vector2(this.MainGame.WindowWidth / 2, this.MainGame.WindowHeight / 2);
         }
 
+        /// <summary>
+        /// Loads all the directional spritesheets.
+        /// </summary>
+        /// <param name="content"> The content manager with which to load the content. </param>
         public override void LoadContent(ContentManager content)
         {
             this.facingLeft = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_leftspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
@@ -39,7 +43,9 @@ namespace HuntTheWumpus.Source
             this.facingDown = new AnimatedTexture(content.Load<Texture2D>("Textures\\Enemies\\Wumpus\\wumpus_frontspritesheet"), 4, 677, 5, 0.5f, Helper.EnemyLayer);
             this.Texture = this.facingDown;
         }
-
+        /// <summary>
+        /// Provides the Texture
+        /// </summary>
         private void ChoseTexture()
         {
             switch (Helper.GetDirection(this.Velocity))
@@ -58,6 +64,9 @@ namespace HuntTheWumpus.Source
                     break;
             }
         }
+        /// <summary>
+        /// is called when Wumpus is damaged
+        /// </summary>
         public override void OnDamage()
         {
             base.OnDamage();
@@ -67,11 +76,17 @@ namespace HuntTheWumpus.Source
                 this.MainGame.LevelManager.GameCave.MoveWumpus();
             }
         }
+        /// <summary>
+        /// Updates the wumpus
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
         }
-
+        /// <summary>
+        /// Does damage to the Wumpus
+        /// </summary>
         public void DoDamage()
         {
             this.HP -= 10;
