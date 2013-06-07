@@ -122,6 +122,10 @@ namespace HuntTheWumpus.Source
 
         public override void OnDamage()
         {
+            if (this.MainGame.Player.HP <= 0)
+            {
+                this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
+            }
             this.MainGame.SoundManager.PlaySound(Sound.Grunt);
         }
 
