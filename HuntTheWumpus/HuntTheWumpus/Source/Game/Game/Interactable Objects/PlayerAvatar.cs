@@ -106,7 +106,7 @@ namespace HuntTheWumpus.Source
 
         public override void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = Helper.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public override void LoadContent(ContentManager content)
@@ -122,12 +122,16 @@ namespace HuntTheWumpus.Source
 
         public override void OnDamage()
         {
+            if (this.MainGame.Player.HP <= 0)
+            {
+                this.MainGame.LevelManager.CurrentLevel = new GameOverMenu(this.MainGame);
+            }
             this.MainGame.SoundManager.PlaySound(Sound.Grunt);
         }
 
         private void ChoseTexture()
         {
-            switch (Extensions.GetDirection(this.Velocity))
+            switch (Helper.GetDirection(this.Velocity))
             {
                 case Direction.Up:
                     this.Texture = this.playerBaseBackSpriteSheet;
@@ -154,7 +158,7 @@ namespace HuntTheWumpus.Source
             this.ChoseTexture();
             this.FireProjectile();
             this.Move();
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = Helper.Box2D(this.Position, this.Position + this.Texture.Size);
             collidedWithEnemyLastFrame = collidedThisFrame;
             collidedThisFrame = false;
         }

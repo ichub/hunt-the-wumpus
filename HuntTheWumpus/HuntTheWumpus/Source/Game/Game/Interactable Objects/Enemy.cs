@@ -27,7 +27,7 @@ namespace HuntTheWumpus.Source
             this.randomMovement = new Timer(100);
             this.randomMovement.Elapsed += (a, b) =>
                 {
-                    this.Velocity += Extensions.RandomVector(2);
+                    this.Velocity += Helper.RandomVector(2);
                 };
 
             this.randomMovement.Start();
@@ -81,7 +81,7 @@ namespace HuntTheWumpus.Source
 
         private void SpawnSpecial()
         {
-            if (Extensions.RandomBool(1.0 / 2))
+            if (Helper.RandomBool(1.0 / 2))
                 this.ParentLevel.GameObjects.Add(new RingOfSpeed(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale / 2 });
         }
 

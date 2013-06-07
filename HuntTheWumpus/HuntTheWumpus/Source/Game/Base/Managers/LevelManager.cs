@@ -147,7 +147,7 @@ namespace HuntTheWumpus.Source
 
             // initializes the big black fade box.
             this.levelFade = new Texture2D(parentGame.GraphicsDevice, parentGame.WindowWidth, parentGame.WindowHeight);
-            Extensions.FillTexture(levelFade, Color.Black);
+            Helper.FillTexture(levelFade, Color.Black);
 
             // initializes the game cave.
             this.GameCave = new Cave(this.MainGame);

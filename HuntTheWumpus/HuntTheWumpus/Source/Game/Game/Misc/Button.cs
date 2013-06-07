@@ -100,7 +100,7 @@ namespace HuntTheWumpus.Source
         {
             this.Position = Button.DefaultDimensions - this.Texture.Size;
             this.Position /= 2;
-            this.Position = Extensions.RoundVector(this.Position);
+            this.Position = Helper.RoundVector(this.Position);
         }
 
         public void Update(GameTime gameTime)
