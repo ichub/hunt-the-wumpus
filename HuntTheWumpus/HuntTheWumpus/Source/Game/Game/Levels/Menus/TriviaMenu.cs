@@ -33,6 +33,7 @@ namespace HuntTheWumpus.Source
         public TriviaMenu(MainGame mainGame)
             : this(mainGame, mainGame.LevelManager.GameCave.Rooms[0]) { }
 
+
         private void CheckQuestion(int answer)
         {
             if (this.currentQuestion == null)

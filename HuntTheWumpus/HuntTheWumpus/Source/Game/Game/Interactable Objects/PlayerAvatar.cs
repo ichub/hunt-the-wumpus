@@ -16,7 +16,14 @@ namespace HuntTheWumpus.Source
     /// </summary>
     class PlayerAvatar : BaseGameObject
     {
+        /// <summary>
+        /// Did the player collide with an enemy during this frame. Used to take damage.
+        /// </summary>
         private bool collidedThisFrame = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private bool collidedWithEnemyLastFrame = false;
 
         private AnimatedTexture playerBaseNotMoving;
