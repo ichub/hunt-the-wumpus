@@ -101,19 +101,26 @@ namespace HuntTheWumpus.Source
             string[] words = text.Split(' ', '\n', '\t');
             float stringHeight = this.Font.MeasureString("a").Y;
 
+            // loops through each word.
             for (int i = 0; i < words.Length; i++)
             {
                 Vector2 wordSize = this.Font.MeasureString(words[i]);
+
+                // if the word overlaps the max width, then move cursor down a line.
                 if (wordSize.X + cursor.X > position.X + maxWidth)
                 {
                     cursor.X = position.X;
                     cursor.Y += stringHeight + 2;
                 }
 
+                // draws the word.
                 this.MainGame.SpriteBatch.DrawString(this.Font, words[i], cursor, color);
+
+                // moves the cursor to the end of the word, and an extra space.
                 cursor.X += wordSize.X + 20;
             }
 
+            // the ending position of the cursor.
             return cursor;
         }
     }

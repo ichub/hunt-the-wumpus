@@ -75,7 +75,7 @@ namespace HuntTheWumpus.Source
 
             this.DrawTextColor = Color.Blue;
             this.Font = this.ParentGame.TextManager.Font;
-            this.EmptyVector = Helper.EmptyVector;
+            this.EmptyVector = Vector2.Zero;
             this.Scale = 2;
             this.Message = null;
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
@@ -133,7 +133,7 @@ namespace HuntTheWumpus.Source
              null,
              Color.White,
              0,
-             Helper.EmptyVector,
+             Vector2.Zero,
              1,
              SpriteEffects.None,
              0);
@@ -164,7 +164,7 @@ namespace HuntTheWumpus.Source
            null,
            Color.White,
            0,
-           Helper.EmptyVector,
+           Vector2.Zero,
            2f,
            SpriteEffects.None,
            0);
@@ -200,7 +200,7 @@ namespace HuntTheWumpus.Source
                        null,
                        Color.White,
                        0,
-                       Helper.EmptyVector,
+                       Vector2.Zero,
                        0.30f,
                        SpriteEffects.None,
                        0);

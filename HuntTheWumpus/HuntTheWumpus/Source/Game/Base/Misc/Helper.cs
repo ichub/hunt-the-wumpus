@@ -114,18 +114,6 @@ namespace HuntTheWumpus.Source
         }
 
         /// <summary>
-        /// Empty Vector
-        /// </summary>
-        /// <returns>Vector(0,0)</returns>
-        public static Vector2 EmptyVector
-        {
-            get
-            {
-                return new Vector2(0, 0);
-            }
-        }
-
-        /// <summary>
         /// Returns a boolean that is true a given percent of the time.
         /// </summary>
         /// <param name="probability"> The percentage amount that this returns true. </param>

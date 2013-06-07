@@ -44,6 +44,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         bool IsDamaged { get; set; }
 
+        /// <summary>
+        /// Method that is called when the object is damaged.
+        /// </summary>
         void OnDamage();
     }
 }

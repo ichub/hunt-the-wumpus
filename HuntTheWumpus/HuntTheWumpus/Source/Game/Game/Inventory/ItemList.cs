@@ -25,24 +25,6 @@ namespace HuntTheWumpus.Source
             AddItem("Gold", 0);
             AddItem("SpeedRing", 1000); //lets player move faster
             AddItem("Gem", 0);
-            /* stuff we wanted to add
-            AddItem("Bow", 0); //hopefully the purpose is clear enough
-            AddItem("Arrow", 10); //charges for bow
-            AddItem("StandardHelmet", 100); //armor
-            AddItem("StandardChest", 330); //armor
-            AddItem("StandardLegs", 250); //armor
-            AddItem("RefinedHelmet", 1000); //armor
-            AddItem("RefinedChest", 2000); //armor
-            AddItem("RefinedLegs", 1500); //amor
-            AddItem("HasteRing", 1500); //allows to deal more damage
-            AddItem("InstilledRing", 2000); //when mobs hurt you, have a chance to not take damage
-            AddItem("UpgradedSpeed Ring", 1000); //upgraded
-            AddItem("UpgradedHaste Ring", 1500); //upgraded
-            AddItem("UpgradedInstilled Ring", 2000); //upgraded
-            AddItem("UltimateSpeedRing", 1000); //upgraded
-            AddItem("UltimateHasteRing", 1500); //upgraded
-            AddItem("UltimateInstilledRing", 2000); //upgraded
-             */
         }
 
         /// <summary>

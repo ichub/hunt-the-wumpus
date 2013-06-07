@@ -37,6 +37,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         bool IsHidden { get; set; }
 
+        /// <summary>
+        /// The layer on which the texture is drawn.
+        /// </summary>
         float Layer { get; set; }
 
         /// <summary>
