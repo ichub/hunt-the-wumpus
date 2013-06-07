@@ -15,6 +15,8 @@ namespace HuntTheWumpus.Source
     {
         public int RoomIndex { get; set; }
 
+        public const int WumpusStartHealth = 100;
+
         private AnimatedTexture facingLeft;
         private AnimatedTexture facingRight;
         private AnimatedTexture facingUp;
@@ -53,7 +55,10 @@ namespace HuntTheWumpus.Source
                     break;
             }
         }
-
+        public override void OnDamage()
+        {
+            base.OnDamage();
+        }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
