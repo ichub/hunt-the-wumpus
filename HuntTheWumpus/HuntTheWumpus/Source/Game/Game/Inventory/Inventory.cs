@@ -80,10 +80,13 @@ namespace HuntTheWumpus.Source
         {
             return this.Slots[ItemIndex("Gold")].Amount;
         }
-
         public int AmountOfGems()
         {
             return this.Slots[ItemIndex("Gem")].Amount;
+        }
+        public bool Contains(string st)
+        {
+            return this.Slots.Any((x) => x.HeldItem.Name == st);
         }
     }
 }

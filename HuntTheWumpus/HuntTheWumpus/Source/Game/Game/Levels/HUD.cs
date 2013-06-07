@@ -30,11 +30,16 @@ namespace HuntTheWumpus.Source
 
         public Texture2D HudImage { get; private set; }
 
+        public Texture2D GoldImage { get; private set; }
+        public Texture2D GemImage { get; private set; }
+        public Texture2D SpeedRingImage { get; private set; }
+
         public const string WumpusWarning = "I Smell a Wumpus!";
         public const string BatWarning = "Super Bats Nearby";
         public const string PitWarning = "I Feel a Draft";
 
         public const int WidthOfFirstWindow = 391;
+        public const int WidthOfInventory = 552 - 424;
 
         private Vector2 WumpusTextPosition { get; set; }
         private Vector2 BatTextPosition { get; set; }
@@ -57,10 +62,15 @@ namespace HuntTheWumpus.Source
         public HUD(MainGame parent)
         {
             this.ParentGame = parent;
+
             this.HudImage = this.ParentGame.Content.Load<Texture2D>("Textures\\HUDFULL");
+            this.GoldImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\Gold");
+            this.GemImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\Gem");
+            this.SpeedRingImage = this.ParentGame.Content.Load<Texture2D>("Textures\\Items\\SpeedRing");
+
             this.DrawTextColor = Color.Blue;
             this.Font = this.ParentGame.TextManager.Font;
-            this.EmptyVector = Helper.EmptyVector();
+            this.EmptyVector = Helper.EmptyVector;
             this.Scale = 2;
             this.Message = null;
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
@@ -106,10 +116,49 @@ namespace HuntTheWumpus.Source
         /// <param name="inventory">The inventory of the player</param>
         private void DrawInventory(Inventory inventory)
         {
-            for (int i = 0; i < inventory.Length; i++)
+            if (inventory.AmountOfGold() > 0)
             {
-                if (inventory[i] is Gold)
+                this.ParentGame.SpriteBatch.Draw(
+                    this.GoldImage,
+                    new Vector2(440, this.ParentGame.WindowHeight - 115),
+                    null,
+                    Color.White,
+                    0,
+                    Helper.EmptyVector,
+                    4,
+                    SpriteEffects.None,
+                    0);
+            }
+            if (inventory.AmountOfGems() > 0)
+            {
+                for (int i = 0; i < 9; i++)
                 {
+                    this.ParentGame.SpriteBatch.Draw(
+                       this.GemImage,
+                       new Vector2(440 + HUD.WidthOfInventory, this.ParentGame.WindowHeight - 115 + i * 10),
+                       null,
+                       Color.White,
+                       0,
+                       Helper.EmptyVector,
+                       0.25f,
+                       SpriteEffects.None,
+                       0);
+                }
+            }
+            if (inventory.Contains("SpeedRing"))
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    this.ParentGame.SpriteBatch.Draw(
+                       this.SpeedRingImage,
+                       new Vector2(470 + HUD.WidthOfInventory * 2, this.ParentGame.WindowHeight - 115 + i * 10),
+                       null,
+                       Color.White,
+                       0,
+                       Helper.EmptyVector,
+                       0.30f,
+                       SpriteEffects.None,
+                       0);
                 }
             }
         }

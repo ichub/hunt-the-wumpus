@@ -111,9 +111,12 @@ namespace HuntTheWumpus.Source
         /// Empty Vector
         /// </summary>
         /// <returns>Vector(0,0)</returns>
-        public static Vector2 EmptyVector()
+        public static Vector2 EmptyVector
         {
-            return new Vector2(0, 0);
+            get
+            {
+                return new Vector2(0, 0);
+            }
         }
 
         /// <summary>
@@ -206,19 +209,6 @@ namespace HuntTheWumpus.Source
         public static float CalculateScaleForDrawingText(int numberOfChar, int width)
         {
             return (float)width / (float)numberOfChar / Helper.FontSize;
-        }
-        /// <summary>
-        /// Calculates the position of a rectangle to be put in the middle of another rectangle
-        /// </summary>
-        /// <returns>The position using Vector 2</returns>
-        public static Vector2 CalculatePositionOfObject(Vector2 sizeOfFirst, Vector2 sizeOfSecond)
-        {
-            if (sizeOfFirst.X > sizeOfSecond.X
-                || sizeOfFirst.Y > sizeOfSecond.Y)
-            {
-                return Helper.EmptyVector();
-            }
-            return Helper.EmptyVector();
         }
     }
 }
