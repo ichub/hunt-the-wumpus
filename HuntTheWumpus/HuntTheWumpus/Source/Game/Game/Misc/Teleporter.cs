@@ -51,6 +51,7 @@ namespace HuntTheWumpus.Source
                     collidedThisFrame = isColliding | collidedThisFrame;
                     if (!collidedLastFrame)
                         MainGame.LevelManager.CurrentLevel = RoomToTeleportTo;
+                    this.ParentLevel.GameObjects.Remove(this);
                 }
 
         }

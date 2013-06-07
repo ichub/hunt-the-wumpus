@@ -40,6 +40,7 @@ namespace HuntTheWumpus.Source
             {
                 this.MainGame.Player.Score += 100;
                 this.amountAnsweredCorrectStreak++;
+                this.MainGame.Player.Inventory.PickUp(ItemList.GetItem("Gold"));
                 if (this.amountAnsweredCorrectStreak > this.streakLength)
                 {
                     this.MainGame.Player.AmountOfArrows++;

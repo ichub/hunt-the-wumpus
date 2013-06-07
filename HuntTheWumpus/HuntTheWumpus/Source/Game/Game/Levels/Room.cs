@@ -65,7 +65,6 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.PlaceTeleporters();
         }
 
         public void PlaceTeleporters()
@@ -106,6 +105,7 @@ namespace HuntTheWumpus.Source
 
         public void OnLoad()
         {
+            this.PlaceTeleporters();
             if (Room.FirstSpawn && this.RoomType == RoomType.Pit)
             {
                 this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.Rooms[Math.Min(Math.Abs(30 - this.RoomIndex + 5), Math.Abs(30 - this.RoomIndex - 5))];
