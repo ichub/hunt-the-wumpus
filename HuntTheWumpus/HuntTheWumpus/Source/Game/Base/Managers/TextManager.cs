@@ -52,9 +52,9 @@ namespace HuntTheWumpus.Source
         /// </summary>
         /// <param name="position"> Tope left corner of the string to draw. </param>
         /// <param name="text"> String to draw. </param>
-        public void DrawText(Vector2 position, string text)
+        public void DrawText(Vector2 position, object text)
         {
-            this.DrawText(position, text, false);
+            this.DrawText(position, text.ToString(), false);
         }
 
         /// <summary>
@@ -64,10 +64,10 @@ namespace HuntTheWumpus.Source
         /// <param name="text">String to draw. </param>
         /// <param name="color"> Color of the string to draw. </param>
         /// <param name="openBatch"> Whether or not to open the spritebatch for drawing. </param>
-        public void DrawText(Vector2 position, string text, Color color, bool openBatch = false)
+        public void DrawText(Vector2 position, object text, Color color, bool openBatch = false)
         {
             // returns if there is no text to be drawn.
-            if (text == null || text.Equals(String.Empty))
+            if (text == null || text.ToString().Length < 1)
             {
                 return;
             }
@@ -78,7 +78,7 @@ namespace HuntTheWumpus.Source
                 this.MainGame.SpriteBatch.Begin();
             }
 
-            this.MainGame.SpriteBatch.DrawString(Font, text, position, color);
+            this.MainGame.SpriteBatch.DrawString(Font, text.ToString(), position, color);
 
             // closes the batch if it was opened here.
             if (openBatch)

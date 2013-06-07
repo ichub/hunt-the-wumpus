@@ -32,6 +32,7 @@ namespace HuntTheWumpus.Source
             {
                 if (highScores.Count > i)
                 {
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName - 20, 160 + i * 20), i + 1);
                     this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 160 + i * 20), highScores[i].Name);
                     this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 160 + i * 20), highScores[i].Score.ToString());
                 }
