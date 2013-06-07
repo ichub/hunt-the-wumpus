@@ -15,13 +15,20 @@ namespace HuntTheWumpus.Source
     {
         public InventorySlot this[int index]
         {
+
             get
             {
                 return this.Slots[index];
             }
 
         }
-
+        public int Length
+        {
+            get
+            {
+                return this.Slots.Count;
+            }
+        }
         private List<InventorySlot> Slots { get; set; }
 
         /// <summary>

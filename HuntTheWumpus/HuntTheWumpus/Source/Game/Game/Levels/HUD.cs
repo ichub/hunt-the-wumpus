@@ -34,6 +34,8 @@ namespace HuntTheWumpus.Source
         public const string BatWarning = "Super Bats Nearby";
         public const string PitWarning = "I Feel a Draft";
 
+        public const int WidthOfFirstWindow = 391;
+
         private Vector2 WumpusTextPosition { get; set; }
         private Vector2 BatTextPosition { get; set; }
         private Vector2 PitTextPosition { get; set; }
@@ -41,10 +43,12 @@ namespace HuntTheWumpus.Source
         private Vector2 LifeTextPosition { get; set; }
         private Vector2 ScoreTextPosition { get; set; }
 
+        private Vector2 BasicTextPosition { get; set; }
+
         private bool ShouldDraw = false;
 
         private Warnings Warning;
-
+        private string Message;
         private Vector2 EmptyVector;
         /// <summary>
         /// Constructor that demands the MainGame
@@ -58,14 +62,14 @@ namespace HuntTheWumpus.Source
             this.Font = this.ParentGame.TextManager.Font;
             this.EmptyVector = Helper.EmptyVector();
             this.Scale = 2;
-
+            this.Message = null;
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.BatTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.PitTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
 
             this.LifeTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 110);
             this.ScoreTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 55);
-
+            this.BasicTextPosition = new Vector2(0, this.ParentGame.WindowHeight - 100);
             this.Transparency = 255 / 2;
         }
         /// <summary>
@@ -84,7 +88,10 @@ namespace HuntTheWumpus.Source
                     Color tint = new Color(Color.White.R, Color.White.G, Color.White.B, this.Transparency);
                     this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), tint);
 
-                    this.DrawWarning(this.Warning);
+                    if (this.Message == null)
+                        this.DrawWarning(this.Warning);
+                    else
+                        this.DrawWarning(this.Message);
                     this.DrawLife(this.ParentGame.Player.HP);
                     this.DrawScore(this.ParentGame.Player.Score);
                 }
@@ -135,9 +142,35 @@ namespace HuntTheWumpus.Source
         /// <param name="warning">Type of warning</param>
         public void SwitchWarning(Warnings warning)
         {
+            if (warning != Warnings.None)
+            {
+                this.Message = null;
+            }
             this.Warning = warning;
-        }
 
+        }
+        public void SwitchWarning(string st)
+        {
+            this.Message = st;
+        }
+        /// <summary>
+        /// Generic Method to show any string
+        /// </summary>
+        /// <param name="toShow">string to show</param>
+        public void DrawWarning(string toShow)
+        {
+            this.Font = this.ParentGame.TextManager.Font;
+            this.ParentGame.SpriteBatch.DrawString(
+                this.Font,
+                toShow,
+                this.PitTextPosition,
+                this.DrawTextColor,
+                0,
+                this.EmptyVector,
+                Helper.CalculateScaleForDrawingText(toShow.ToString().Length, HUD.WidthOfFirstWindow),
+                SpriteEffects.None,
+                0);
+        }
         /// <summary>
         /// Draws the specified Warning
         /// </summary>
