@@ -15,7 +15,7 @@ namespace HuntTheWumpus.Source
         Shop,
         Pit,
         FloodedSkull,
-        BloodRoom
+        Violent
     }
 
     /// <summary>
@@ -23,7 +23,9 @@ namespace HuntTheWumpus.Source
     /// </summary>
     static class RoomFactory
     {
-        private static Texture2D BloodSkullRoom;
+        private static Texture2D ViolentRoom;
+        private static Texture2D ViolentRoomv1;
+        private static Texture2D ViolentRoomv2;
 
         private static Texture2D FloodedRoom;
         private static Texture2D FloodedSkullRoom;
@@ -32,6 +34,7 @@ namespace HuntTheWumpus.Source
         private static Texture2D Normalv1Room;
         private static Texture2D Normalv2Room;
         private static Texture2D Normalv3Room;
+        private static Texture2D Normalv4Room;
 
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
@@ -96,14 +99,17 @@ namespace HuntTheWumpus.Source
             RoomFactory.FloodedSkullRoom = manager.Load<Texture2D>("Textures\\Cave\\flooded skull");
 
             RoomFactory.NormalRoom = manager.Load<Texture2D>("Textures\\Cave\\normal");
-
             RoomFactory.Normalv1Room = manager.Load<Texture2D>("Textures\\Cave\\normalv1");
             RoomFactory.Normalv2Room = manager.Load<Texture2D>("Textures\\Cave\\normalv2");
             RoomFactory.Normalv3Room = manager.Load<Texture2D>("Textures\\Cave\\normalv3");
+            RoomFactory.Normalv4Room = manager.Load<Texture2D>("Textures\\Cave\\normalv4");
 
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
             RoomFactory.PitRoom = manager.Load<Texture2D>("Textures\\Cave\\pit");
-            RoomFactory.BloodSkullRoom = manager.Load<Texture2D>("Textures\\Cave\\Blood Room");
+
+            RoomFactory.ViolentRoom = manager.Load<Texture2D>("Textures\\Cave\\Violent");
+            RoomFactory.ViolentRoomv1 = manager.Load<Texture2D>("Textures\\Cave\\Violentv1");
+            RoomFactory.ViolentRoomv2 = manager.Load<Texture2D>("Textures\\Cave\\Violentv2");
 
             RoomFactory.LoadWalls(manager);
         }
@@ -153,8 +159,8 @@ namespace HuntTheWumpus.Source
             }
             else
             {
-                tuple = GetRoomAndBound(RoomType.BloodRoom);
-                type = RoomType.BloodRoom;
+                tuple = GetRoomAndBound(RoomType.Violent);
+                type = RoomType.Violent;
             }
             Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
@@ -196,10 +202,29 @@ namespace HuntTheWumpus.Source
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.PitRoom, RoomFactory.BaseBounds);
                 case RoomType.FloodedSkull:
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.BaseBounds);
-                case RoomType.BloodRoom:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.BloodSkullRoom, RoomFactory.BaseBounds);
+                case RoomType.Violent:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.GetRandomViolentRoom(), RoomFactory.BaseBounds);
                 default:
                     return null;
+            }
+        }
+
+        private static Texture2D GetRandomViolentRoom()
+        {
+            Random randGen = new Random(DateTime.Now.Millisecond);
+            double rand = randGen.NextDouble();
+
+            if (rand < 0.33)
+            {
+                return RoomFactory.ViolentRoom;
+            }
+            else if (rand < 0.66)
+            {
+                return RoomFactory.ViolentRoomv1;
+            }
+            else
+            {
+                return RoomFactory.ViolentRoomv2;
             }
         }
 
@@ -207,21 +232,26 @@ namespace HuntTheWumpus.Source
         {
             Random randGen = new Random(DateTime.Now.Millisecond);
             double rand = randGen.NextDouble();
-            if (rand < 0.25)
+
+            if (rand < 0.20)
             {
                 return RoomFactory.NormalRoom;
             }
-            else if (rand < 0.5)
+            else if (rand < 0.40)
             {
                 return RoomFactory.Normalv1Room;
             }
-            else if (rand < 0.75)
+            else if (rand < 0.60)
             {
                 return RoomFactory.Normalv2Room;
             }
-            else
+            else if (rand < 0.80)
             {
                 return RoomFactory.Normalv3Room;
+            }
+            else
+            {
+                return RoomFactory.Normalv4Room;
             }
         }
     }
