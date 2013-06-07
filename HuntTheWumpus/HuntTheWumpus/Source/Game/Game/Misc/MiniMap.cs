@@ -61,7 +61,7 @@ namespace HuntTheWumpus.Source
 
             this.MainGame = parentGame;
             this.EmptyMiniMapTexture = this.MainGame.Content.Load<Texture2D>(TextureResourceConstants.MiniMapEmpty);
-        
+
         }
 
         public MiniMap(int width, int height, Vector2 initialShift)
@@ -201,15 +201,17 @@ namespace HuntTheWumpus.Source
         /// </summary>
         public void Update()
         {
-            if (this.MainGame.InputManager.IsClicked(Keys.M))
+
+            if (!(this.MainGame.LevelManager.CurrentLevel is Room))
+            {
+                this.Showing = false;
+            }
+
+            if (this.MainGame.InputManager.IsClicked(Keys.M) && this.MainGame.LevelManager.CurrentLevel is Room)
             {
                 this.Showing = !this.Showing;
             }
 
-            if (this.MainGame.LevelManager.CurrentLevel is GameOverMenu)
-            {
-                this.Showing = false;
-            }
         }
 
         public void Reset()
