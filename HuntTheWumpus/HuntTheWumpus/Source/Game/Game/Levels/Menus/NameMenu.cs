@@ -14,7 +14,7 @@ namespace HuntTheWumpus.Source
     class NameMenu : BaseMenu
     {
         private string name;
-        private const int maxNameLength = 10;
+        private const int maxNameLength = 6;
 
         public NameMenu(MainGame mainGame)
             : base(mainGame)
@@ -62,6 +62,10 @@ namespace HuntTheWumpus.Source
                 {
                     this.name = this.name.Substring(0, this.name.Length - 1);
                 }
+            }
+            if (key == Keys.Enter)
+            {
+                OnButtonClick();
             }
         }
 

@@ -60,6 +60,7 @@ namespace HuntTheWumpus.Source
         {
             this.FromTrivia += PlayerStats.TriviaWeight;
             this.Score += PlayerStats.TriviaWeight;
+            this.Gold++;
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace HuntTheWumpus.Source
             this.FromGold += PlayerStats.GoldWeight;
             this.Score += PlayerStats.GoldWeight;
         }
-        
+
         /// <summary>
         /// Adds to the score: misc stuff
         /// </summary>
@@ -79,7 +80,7 @@ namespace HuntTheWumpus.Source
             this.FromMisc += PlayerStats.MiscWeight;
             this.Score += PlayerStats.MiscWeight;
         }
-        
+
         /// <summary>
         /// Reset the player stats
         /// </summary>
