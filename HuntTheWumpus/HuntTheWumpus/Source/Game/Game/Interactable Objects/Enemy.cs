@@ -14,9 +14,10 @@ namespace HuntTheWumpus.Source
 {
     public abstract class Enemy : BaseGameObject
     {
-        private int hp = 3;
         private bool isColliding = false;
         private Timer randomMovement;
+
+        protected int HP = 3;
 
         public Enemy(MainGame mainGame, ILevel parentLevel)
             : base(mainGame, parentLevel)
@@ -54,11 +55,11 @@ namespace HuntTheWumpus.Source
                     {
                         if (!this.isColliding)
                         {
-                            this.hp--;
+                            this.HP--;
                             this.ParentLevel.GameObjects.Damage(this);
 
                             this.MainGame.SoundManager.PlaySound(Sound.Grunt);
-                            if (this.hp < 0)
+                            if (this.HP < 0)
                             {
                                 this.MainGame.Player.Score += 10;
                                 this.Remove();
@@ -75,7 +76,7 @@ namespace HuntTheWumpus.Source
         {
             for (int i = 0; i < amount; i++)
             {
-                this.ParentLevel.GameObjects.Add(new Gem(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale/ 2 });
+                this.ParentLevel.GameObjects.Add(new Gem(this.MainGame, this.ParentLevel) { Position = this.Position + this.Texture.Size * this.Texture.Scale / 2 });
             }
         }
 

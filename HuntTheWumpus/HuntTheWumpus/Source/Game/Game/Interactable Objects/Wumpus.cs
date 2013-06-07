@@ -26,6 +26,7 @@ namespace HuntTheWumpus.Source
             : base(mainGame, parentLevel)
         {
             this.ObjectTeam = Team.Enemy;
+            this.HP = Wumpus.WumpusStartHealth;
         }
 
         public override void LoadContent(ContentManager content)
@@ -58,6 +59,10 @@ namespace HuntTheWumpus.Source
         public override void OnDamage()
         {
             base.OnDamage();
+            if (this.HP % 10 == 0)
+            {
+                this.MainGame.LevelManager.GameCave.MoveWumpus();
+            }
         }
         public override void Update(GameTime gameTime)
         {

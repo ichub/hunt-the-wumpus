@@ -23,6 +23,8 @@ namespace HuntTheWumpus.Source
         public const int NumberOfRooms = 30;
         public const int NumberOfConnections = 3;
 
+        public GameObjectManager ObjectManager { get; private set; }
+
         private bool[] TakenRooms;
 
         public Cave(MainGame mainGame)
@@ -39,6 +41,7 @@ namespace HuntTheWumpus.Source
             PitInit();
             WumpusInit();
 
+            this.ObjectManager = new GameObjectManager(this.MainGame);
         }
 
         private void RoomInit()
@@ -331,6 +334,17 @@ namespace HuntTheWumpus.Source
                 }
                 item.ParentRoomIndex = rand;
             }
+        }
+
+        public void MoveWumpus()
+        {
+            int rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+            while (this.RoomContainsSuperBat(rand) || this.RoomContainsWumpus(rand) || this.RoomIsPit(rand))
+            {
+                rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
+            }
+            this.ObjectManager.Remove(this.Wumpus);
+            this.Wumpus.ParentLevel = this.Rooms[rand];
         }
     }
 }
