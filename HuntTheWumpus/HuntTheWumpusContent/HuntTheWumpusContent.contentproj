@@ -573,92 +573,92 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Buttons\Directional\n_default.png">
+    <Compile Include="Textures\Buttons\n_default.png">
       <Name>n_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\n_mouseclicked.png">
+    <Compile Include="Textures\Buttons\n_mouseclicked.png">
       <Name>n_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\n_mouseover.png">
+    <Compile Include="Textures\Buttons\n_mouseover.png">
       <Name>n_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\ne_default.png">
+    <Compile Include="Textures\Buttons\ne_default.png">
       <Name>ne_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\ne_mouseclicked.png">
+    <Compile Include="Textures\Buttons\ne_mouseclicked.png">
       <Name>ne_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\ne_mouseover.png">
+    <Compile Include="Textures\Buttons\ne_mouseover.png">
       <Name>ne_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\nw_default.png">
+    <Compile Include="Textures\Buttons\nw_default.png">
       <Name>nw_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\nw_mouseclicked.png">
+    <Compile Include="Textures\Buttons\nw_mouseclicked.png">
       <Name>nw_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\nw_mouseover.png">
+    <Compile Include="Textures\Buttons\nw_mouseover.png">
       <Name>nw_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\s_default.png">
+    <Compile Include="Textures\Buttons\s_default.png">
       <Name>s_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\s_mouseclicked.png">
+    <Compile Include="Textures\Buttons\s_mouseclicked.png">
       <Name>s_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\s_mouseover.png">
+    <Compile Include="Textures\Buttons\s_mouseover.png">
       <Name>s_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\se_default.png">
+    <Compile Include="Textures\Buttons\se_default.png">
       <Name>se_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\se_mouseclicked.png">
+    <Compile Include="Textures\Buttons\se_mouseclicked.png">
       <Name>se_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\se_mouseover.png">
+    <Compile Include="Textures\Buttons\se_mouseover.png">
       <Name>se_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\sw_default.png">
+    <Compile Include="Textures\Buttons\sw_default.png">
       <Name>sw_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\sw_mouseclicked.png">
+    <Compile Include="Textures\Buttons\sw_mouseclicked.png">
       <Name>sw_mouseclicked</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\Buttons\Directional\sw_mouseover.png">
+    <Compile Include="Textures\Buttons\sw_mouseover.png">
       <Name>sw_mouseover</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -687,6 +687,9 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Textures\Buttons\Directional\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 

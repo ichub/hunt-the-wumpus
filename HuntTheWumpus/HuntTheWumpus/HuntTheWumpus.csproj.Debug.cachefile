@@ -85,24 +85,6 @@ Content\Textures\Player\player basebackwardspritesheet.xnb
 Content\Textures\Player\player basebackwardw-chestspritesheet.xnb
 Content\Textures\Player\player basebackwardw-helmetspritesheet.xnb
 Content\Textures\Player\player upgradebackwardspritesheet.xnb
-Content\Textures\Buttons\Directional\n_default.xnb
-Content\Textures\Buttons\Directional\n_mouseclicked.xnb
-Content\Textures\Buttons\Directional\n_mouseover.xnb
-Content\Textures\Buttons\Directional\ne_default.xnb
-Content\Textures\Buttons\Directional\ne_mouseclicked.xnb
-Content\Textures\Buttons\Directional\ne_mouseover.xnb
-Content\Textures\Buttons\Directional\nw_default.xnb
-Content\Textures\Buttons\Directional\nw_mouseclicked.xnb
-Content\Textures\Buttons\Directional\nw_mouseover.xnb
-Content\Textures\Buttons\Directional\s_default.xnb
-Content\Textures\Buttons\Directional\s_mouseclicked.xnb
-Content\Textures\Buttons\Directional\s_mouseover.xnb
-Content\Textures\Buttons\Directional\se_default.xnb
-Content\Textures\Buttons\Directional\se_mouseclicked.xnb
-Content\Textures\Buttons\Directional\se_mouseover.xnb
-Content\Textures\Buttons\Directional\sw_default.xnb
-Content\Textures\Buttons\Directional\sw_mouseclicked.xnb
-Content\Textures\Buttons\Directional\sw_mouseover.xnb
 Content\Textures\youwinscreen.xnb
 Content\Textures\Cave\flooded skull.xnb
 Content\Textures\Cave\normalv1.xnb
@@ -112,4 +94,22 @@ Content\Textures\Cave\Violent.xnb
 Content\Textures\Cave\normalv4.xnb
 Content\Textures\Cave\Violentv2.xnb
 Content\Textures\Cave\Violentv1.xnb
+Content\Textures\Buttons\n_default.xnb
+Content\Textures\Buttons\n_mouseclicked.xnb
+Content\Textures\Buttons\n_mouseover.xnb
+Content\Textures\Buttons\ne_default.xnb
+Content\Textures\Buttons\ne_mouseclicked.xnb
+Content\Textures\Buttons\ne_mouseover.xnb
+Content\Textures\Buttons\nw_default.xnb
+Content\Textures\Buttons\nw_mouseclicked.xnb
+Content\Textures\Buttons\nw_mouseover.xnb
+Content\Textures\Buttons\s_default.xnb
+Content\Textures\Buttons\s_mouseclicked.xnb
+Content\Textures\Buttons\s_mouseover.xnb
+Content\Textures\Buttons\se_default.xnb
+Content\Textures\Buttons\se_mouseclicked.xnb
+Content\Textures\Buttons\se_mouseover.xnb
+Content\Textures\Buttons\sw_default.xnb
+Content\Textures\Buttons\sw_mouseclicked.xnb
+Content\Textures\Buttons\sw_mouseover.xnb
 Content\Text\trivia.txt

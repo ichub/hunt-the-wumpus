@@ -54,6 +54,12 @@ namespace HuntTheWumpus.Source
                 {
                     this.mainGame.LevelManager.CurrentLevel = this.mainGame.LevelManager.GameCave.Rooms[this.mainGame.LevelManager.GameCave.SuperBats[0].ParentRoomIndex];
                 }
+
+                // takes you to the arrow level
+                if (this.mainGame.InputManager.IsClicked(Keys.U))
+                {
+                    this.mainGame.LevelManager.CurrentLevel = new ArrowMenu(this.mainGame, this.mainGame.LevelManager.CurrentLevel);
+                }
             }
         }
     }
