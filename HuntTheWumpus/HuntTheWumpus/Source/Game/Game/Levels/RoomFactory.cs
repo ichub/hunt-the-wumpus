@@ -15,7 +15,8 @@ namespace HuntTheWumpus.Source
         Shop,
         Pit,
         FloodedSkull,
-        Violent
+        Violent,
+        Special
     }
 
     /// <summary>
@@ -44,6 +45,8 @@ namespace HuntTheWumpus.Source
 
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
+
+        private static Texture2D SpecialRoom;
 
         private static List<Vector2> BaseBounds;
 
@@ -146,6 +149,8 @@ namespace HuntTheWumpus.Source
             RoomFactory.ViolentRoomv2 = manager.Load<Texture2D>("Textures\\Cave\\Violentv2");
             RoomFactory.ViolentRoomv3 = manager.Load<Texture2D>("Textures\\Cave\\Violentv3");
 
+            RoomFactory.SpecialRoom = manager.Load<Texture2D>("Textures\\Cave\\Special");
+
             RoomFactory.LoadWalls(manager);
         }
         /// <summary>
@@ -175,31 +180,37 @@ namespace HuntTheWumpus.Source
             Tuple<Texture2D, List<Vector2>> tuple;
             RoomType type;
 
-            if (random < 0.3)
+            if (random < 0.4)
             {
                 tuple = new Tuple<Texture2D, List<Vector2>>(RoomFactory.GetRandomNormalRoom(), RoomFactory.BaseBounds);
                 type = RoomType.Normal;
             }
-            else if (random < 0.4)
+            else if (random < 0.5)
             {
                 tuple = GetRoomAndBound(RoomType.Flooded);
                 type = RoomType.Flooded;
             }
-            else if (random < 0.8)
+            else if (random < 0.6)
             {
                 tuple = GetRoomAndBound(RoomType.Shop);
                 type = RoomType.Shop;
             }
-            else if (random < 0.9)
+            else if (random < 0.8)
             {
                 tuple = GetRoomAndBound(RoomType.FloodedSkull);
                 type = RoomType.FloodedSkull;
             }
-            else
+            else if (random < 0.9)
             {
                 tuple = GetRoomAndBound(RoomType.Violent);
                 type = RoomType.Violent;
             }
+            else
+            {
+                tuple = GetRoomAndBound(RoomType.Special);
+                type = RoomType.Special;
+            }
+
             Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
         }
@@ -242,6 +253,8 @@ namespace HuntTheWumpus.Source
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.BaseBounds);
                 case RoomType.Violent:
                     return new Tuple<Texture2D, List<Vector2>>(RoomFactory.GetRandomViolentRoom(), RoomFactory.BaseBounds);
+                case RoomType.Special:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.SpecialRoom, RoomFactory.BaseBounds);
                 default:
                     return null;
             }
