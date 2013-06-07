@@ -43,7 +43,7 @@ namespace HuntTheWumpus.Source
             this.GameObjects.Add(new Button(this.MainGame,
                 this,
                 () => { this.MainGame.LevelManager.CurrentLevel = cameFrom; },
-                ButtonName.Quit) { Position = new Vector2(512 - 100, 570) });
+                ButtonName.Menu) { Position = new Vector2(512 - 100, 570) });
         }
 
         public virtual void OnUnLoad()
