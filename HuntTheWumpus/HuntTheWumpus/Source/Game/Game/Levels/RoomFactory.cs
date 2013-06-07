@@ -13,7 +13,9 @@ namespace HuntTheWumpus.Source
         Flooded,
         Normal,
         Shop,
-        Pit
+        Pit,
+        FloodedSkull,
+        BloodRoom
     }
 
     /// <summary>
@@ -21,28 +23,30 @@ namespace HuntTheWumpus.Source
     /// </summary>
     static class RoomFactory
     {
+        private static Texture2D BloodSkullRoom;
+
         private static Texture2D FloodedRoom;
+        private static Texture2D FloodedSkullRoom;
+
         private static Texture2D NormalRoom;
+        private static Texture2D Normalv1Room;
+        private static Texture2D Normalv2Room;
+        private static Texture2D Normalv3Room;
+
         private static Texture2D ShopRoom;
         private static Texture2D PitRoom;
+
+        private static List<Vector2> BaseBounds;
+
         private static AnimatedTexture[] Walls;
-
-
-        private static List<Vector2> FloodedRoomBounds;
-        private static List<Vector2> NormalRoomBounds;
-        private static List<Vector2> ShopRoomBounds;
-        private static List<Vector2> PitRoomBounds;
-
-        private static Random Random;
 
         /// <summary>
         /// Initiates the boundaries 
         /// </summary>
         static RoomFactory()
         {
-
-            #region Normal Room Bounds
-            RoomFactory.NormalRoomBounds = new List<Vector2>()
+            #region Base Bounds
+            RoomFactory.BaseBounds = new List<Vector2>()
             {
                 new Vector2(432, 0),
                 new Vector2(542, 0),
@@ -80,125 +84,6 @@ namespace HuntTheWumpus.Source
                 new Vector2(427, 5)
             };
             #endregion
-            #region Flooded Room Bounds
-            RoomFactory.FloodedRoomBounds = new List<Vector2>()
-            {
-                 new Vector2(432, 0),
-                new Vector2(542, 0),
-                new Vector2(583, 62),
-                new Vector2(646, 104),
-                new Vector2(721, 169),
-                new Vector2(789, 182),
-                new Vector2(834, 136),
-                new Vector2(936, 133),
-                new Vector2(940, 144),
-                new Vector2(990, 211),
-                new Vector2(900, 250),
-                new Vector2(853, 296),
-                new Vector2(924, 336),
-                new Vector2(948, 410),
-                new Vector2(915, 496),
-                new Vector2(826, 533),
-                new Vector2(904, 595),
-                new Vector2(930, 678),
-                new Vector2(873, 736),
-                new Vector2(772, 703),
-                new Vector2(760, 645),
-                new Vector2(578, 764),
-                new Vector2(456, 768),
-                new Vector2(310, 639),
-                new Vector2(223, 710),
-                new Vector2(113, 689),
-                new Vector2(123, 592),
-                new Vector2(223, 519),
-                new Vector2(100, 363),
-                new Vector2(298, 199),
-                new Vector2(157, 121),
-                new Vector2(272, 22),
-                new Vector2(365, 101),
-                new Vector2(427, 5)
-            };
-            #endregion
-            #region Shop Room Bounds
-            RoomFactory.ShopRoomBounds = new List<Vector2>()
-            {
-                new Vector2(432, 0),
-                new Vector2(542, 0),
-                new Vector2(583, 62),
-                new Vector2(646, 104),
-                new Vector2(721, 169),
-                new Vector2(789, 182),
-                new Vector2(834, 136),
-                new Vector2(936, 133),
-                new Vector2(940, 144),
-                new Vector2(990, 211),
-                new Vector2(900, 250),
-                new Vector2(853, 296),
-                new Vector2(924, 336),
-                new Vector2(948, 410),
-                new Vector2(915, 496),
-                new Vector2(826, 533),
-                new Vector2(904, 595),
-                new Vector2(930, 678),
-                new Vector2(873, 736),
-                new Vector2(772, 703),
-                new Vector2(760, 645),
-                new Vector2(578, 764),
-                new Vector2(456, 768),
-                new Vector2(310, 639),
-                new Vector2(223, 710),
-                new Vector2(113, 689),
-                new Vector2(123, 592),
-                new Vector2(223, 519),
-                new Vector2(100, 363),
-                new Vector2(298, 199),
-                new Vector2(157, 121),
-                new Vector2(272, 22),
-                new Vector2(365, 101),
-                new Vector2(427, 5),
-            };
-            #endregion
-            #region Pit Room Bounds
-            RoomFactory.PitRoomBounds = new List<Vector2>()
-            {
-                new Vector2(432, 0),
-                new Vector2(542, 0),
-                new Vector2(583, 62),
-                new Vector2(646, 104),
-                new Vector2(721, 169),
-                new Vector2(789, 182),
-                new Vector2(834, 136),
-                new Vector2(936, 133),
-                new Vector2(940, 144),
-                new Vector2(990, 211),
-                new Vector2(900, 250),
-                new Vector2(853, 296),
-                new Vector2(924, 336),
-                new Vector2(948, 410),
-                new Vector2(915, 496),
-                new Vector2(826, 533),
-                new Vector2(904, 595),
-                new Vector2(930, 678),
-                new Vector2(873, 736),
-                new Vector2(772, 703),
-                new Vector2(760, 645),
-                new Vector2(578, 764),
-                new Vector2(456, 768),
-                new Vector2(310, 639),
-                new Vector2(223, 710),
-                new Vector2(113, 689),
-                new Vector2(123, 592),
-                new Vector2(223, 519),
-                new Vector2(100, 363),
-                new Vector2(298, 199),
-                new Vector2(157, 121),
-                new Vector2(272, 22),
-                new Vector2(365, 101),
-                new Vector2(427, 5)
-            };
-            #endregion
-
-            RoomFactory.Random = new Random();
         }
 
         /// <summary>
@@ -208,9 +93,17 @@ namespace HuntTheWumpus.Source
         public static void InitFactory(ContentManager manager)
         {
             RoomFactory.FloodedRoom = manager.Load<Texture2D>("Textures\\Cave\\flooded");
+            RoomFactory.FloodedSkullRoom = manager.Load<Texture2D>("Textures\\Cave\\flooded skull");
+
             RoomFactory.NormalRoom = manager.Load<Texture2D>("Textures\\Cave\\normal");
+
+            RoomFactory.Normalv1Room = manager.Load<Texture2D>("Textures\\Cave\\normalv1");
+            RoomFactory.Normalv2Room = manager.Load<Texture2D>("Textures\\Cave\\normalv2");
+            RoomFactory.Normalv3Room = manager.Load<Texture2D>("Textures\\Cave\\normalv3");
+
             RoomFactory.ShopRoom = manager.Load<Texture2D>("Textures\\Cave\\shop");
             RoomFactory.PitRoom = manager.Load<Texture2D>("Textures\\Cave\\pit");
+            RoomFactory.BloodSkullRoom = manager.Load<Texture2D>("Textures\\Cave\\Blood Room");
 
             RoomFactory.LoadWalls(manager);
         }
@@ -233,25 +126,35 @@ namespace HuntTheWumpus.Source
         /// <returns></returns>
         public static Room CreateRandomRoom(MainGame mainGame, Cave cave, int index)
         {
-            double random = RoomFactory.Random.NextDouble();
+            double random = mainGame.Random.NextDouble();
 
             Tuple<Texture2D, List<Vector2>> tuple;
             RoomType type;
 
-            if (random < 0.5)
+            if (random < 0.3)
             {
-                tuple = GetRoomAndBound(RoomType.Normal);
+                tuple = new Tuple<Texture2D, List<Vector2>>(RoomFactory.GetRandomNormalRoom(), RoomFactory.BaseBounds);
                 type = RoomType.Normal;
             }
-            else if (random < 0.9)
+            else if (random < 0.4)
             {
                 tuple = GetRoomAndBound(RoomType.Flooded);
                 type = RoomType.Flooded;
             }
-            else
+            else if (random < 0.8)
             {
                 tuple = GetRoomAndBound(RoomType.Shop);
                 type = RoomType.Shop;
+            }
+            else if (random < 0.9)
+            {
+                tuple = GetRoomAndBound(RoomType.FloodedSkull);
+                type = RoomType.FloodedSkull;
+            }
+            else
+            {
+                tuple = GetRoomAndBound(RoomType.BloodRoom);
+                type = RoomType.BloodRoom;
             }
             Room room = new Room(mainGame, cave, index, tuple.Item1, tuple.Item2, type, Walls);
             return room;
@@ -266,7 +169,7 @@ namespace HuntTheWumpus.Source
         /// <returns>the wanted room</returns>
         public static Room Create(MainGame mainGame, Cave cave, RoomType type, int index)
         {
-            double random = RoomFactory.Random.NextDouble();
+            double random = mainGame.Random.NextDouble();
 
             Tuple<Texture2D, List<Vector2>> tuple = GetRoomAndBound(type);
 
@@ -284,15 +187,41 @@ namespace HuntTheWumpus.Source
             switch (type)
             {
                 case RoomType.Flooded:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.FloodedRoomBounds);
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.BaseBounds);
                 case RoomType.Normal:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.NormalRoom, RoomFactory.NormalRoomBounds);
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.GetRandomNormalRoom(), RoomFactory.BaseBounds);
                 case RoomType.Shop:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.ShopRoom, RoomFactory.ShopRoomBounds);
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.ShopRoom, RoomFactory.BaseBounds);
                 case RoomType.Pit:
-                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.PitRoom, RoomFactory.PitRoomBounds);
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.PitRoom, RoomFactory.BaseBounds);
+                case RoomType.FloodedSkull:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.FloodedRoom, RoomFactory.BaseBounds);
+                case RoomType.BloodRoom:
+                    return new Tuple<Texture2D, List<Vector2>>(RoomFactory.BloodSkullRoom, RoomFactory.BaseBounds);
                 default:
                     return null;
+            }
+        }
+
+        private static Texture2D GetRandomNormalRoom()
+        {
+            Random randGen = new Random(DateTime.Now.Millisecond);
+            double rand = randGen.NextDouble();
+            if (rand < 0.25)
+            {
+                return RoomFactory.NormalRoom;
+            }
+            else if (rand < 0.5)
+            {
+                return RoomFactory.Normalv1Room;
+            }
+            else if (rand < 0.75)
+            {
+                return RoomFactory.Normalv2Room;
+            }
+            else
+            {
+                return RoomFactory.Normalv3Room;
             }
         }
     }

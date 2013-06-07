@@ -125,13 +125,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Cave\rockslide.png">
-      <Name>rockslide</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Textures\Enemies\Bat\bat_spritesheet.png">
       <Name>bat_spritesheet</Name>
       <Importer>TextureImporter</Importer>
