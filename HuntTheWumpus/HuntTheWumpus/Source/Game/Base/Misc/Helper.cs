@@ -16,7 +16,7 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public static class Helper
     {
-        public const int FontSize = 14;
+        public const int FontSize = 24;
 
         /// <summary>
         /// The game to which this class belongs.

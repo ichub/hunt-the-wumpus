@@ -36,6 +36,7 @@ namespace HuntTheWumpus.Source
 
         private Texture2D background;
         private AnimatedTexture[] walls;
+        private Vector2[] wallPositions;
         private bool wumpusDrawn = false;
 
         public Room(MainGame mainGame, Cave gameCave, int index, Texture2D background, List<Vector2> bounds, RoomType type, AnimatedTexture[] walls)
@@ -49,6 +50,16 @@ namespace HuntTheWumpus.Source
             this.RoomType = type;
             this.ConnectedRooms = new Room[6];
             this.walls = walls;
+
+            this.wallPositions = new Vector2[] 
+                {
+                    new Vector2(445, 0),
+                    new Vector2(782, 170),
+                    new Vector2(760, 570),
+                    new Vector2(450, 720),
+                    new Vector2(154, 544),
+                    new Vector2(157, 704),
+                };
         }
 
         public void Initialize()
@@ -78,18 +89,18 @@ namespace HuntTheWumpus.Source
         //TODO: Place correct walls
         private void DrawWalls(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            if (this.ConnectedRooms[0] != null)
-                this.walls[0].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.ConnectedRooms[1] != null)
-                this.walls[1].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.ConnectedRooms[2] != null)
-                this.walls[2].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.ConnectedRooms[3] != null)
-                this.walls[3].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.ConnectedRooms[4] != null)
-                this.walls[4].Draw(spriteBatch, new Vector2(0, 0), gameTime);
-            if (this.ConnectedRooms[5] != null)
-                this.walls[5].Draw(spriteBatch, new Vector2(0, 0), gameTime);
+            if (this.ConnectedRooms[0] == null)
+                this.walls[0].Draw(spriteBatch, this.wallPositions[0], gameTime);
+            if (this.ConnectedRooms[1] == null)
+                this.walls[1].Draw(spriteBatch, this.wallPositions[1], gameTime);
+            if (this.ConnectedRooms[2] == null)
+                this.walls[2].Draw(spriteBatch, this.wallPositions[2], gameTime);
+            if (this.ConnectedRooms[3] == null)
+                this.walls[3].Draw(spriteBatch, this.wallPositions[3], gameTime);
+            if (this.ConnectedRooms[4] == null)
+                this.walls[4].Draw(spriteBatch, this.wallPositions[4], gameTime);
+            if (this.ConnectedRooms[5] == null)
+                this.walls[5].Draw(spriteBatch, this.wallPositions[5], gameTime);
         }
 
         public void OnLoad()
@@ -154,8 +165,8 @@ namespace HuntTheWumpus.Source
 
         public void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.background, new Vector2(0), Color.White);
-            //this.DrawWalls(spriteBatch, gameTime);
+            spriteBatch.Draw(this.background, Vector2.Zero, Color.White);
+            this.DrawWalls(spriteBatch, gameTime);
             this.GameObjects.FrameDraw();
         }
     }

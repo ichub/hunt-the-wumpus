@@ -48,7 +48,7 @@ namespace HuntTheWumpus.Source
             // Game Options:
             this.Graphics.PreferredBackBufferWidth = 1024;
             this.Graphics.PreferredBackBufferHeight = 768;
-            this.Graphics.PreferMultiSampling = true;      // enables anti-aliasing
+            this.Graphics.PreferMultiSampling = false;      // enables anti-aliasing
             this.IsMouseVisible = true;                    // allows to be drawn on the window
 
             this.WindowWidth = this.Graphics.PreferredBackBufferWidth;
@@ -120,8 +120,8 @@ namespace HuntTheWumpus.Source
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             this.SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            this.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             this.LevelManager.FrameDraw();
 
             this.MiniMap.Draw(this.SpriteBatch);

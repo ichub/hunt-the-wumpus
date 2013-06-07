@@ -26,7 +26,7 @@ namespace HuntTheWumpus.Source
         {
             this.GameObjects.Add(new Button(this.MainGame,
                 this,
-                () => this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.PickRandomStartRoom(),
+                () => OnButtonClick(),
                 ButtonName.Start) { Position = new Vector2(512 - 100, 570) });
 
             this.MainGame.InputManager.KeyPressed += this.OnKeyPress;
@@ -81,7 +81,13 @@ namespace HuntTheWumpus.Source
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.FrameDraw(gameTime, spriteBatch);
-            this.MainGame.TextManager.DrawText(new Vector2(290, 140), "Name: " + this.name, Color.Black);
+
+            Vector2 blockEnd = this.MainGame.TextManager.DrawTextBlock(new Vector2(290, 140),
+                String.Format("Enter your name! It can between 1 and {0} characters long, and contain only letters.", NameMenu.maxNameLength),
+                400,
+                Color.Black);
+
+            this.MainGame.TextManager.DrawText(new Vector2(290, blockEnd.Y + 40), "Name: " + this.name, Color.Black);
         }
     }
 }

@@ -124,6 +124,10 @@ namespace HuntTheWumpus.Source
         public override void FrameDraw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.FrameDraw(gameTime, spriteBatch);
+            this.MainGame.TextManager.DrawTextBlock(new Vector2(290, 140),
+                "Shoot the wumpus with the arrow, and damage him by 10 points! If the wumpus reaches 0, you win!",
+                400, 
+                Color.Black);
         }
     }
 }
