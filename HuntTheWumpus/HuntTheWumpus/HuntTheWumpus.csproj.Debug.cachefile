@@ -8,7 +8,6 @@ Content\Textures\Items\Gold.xnb
 Content\Textures\Cave\normal.xnb
 Content\Textures\Cave\flooded.xnb
 Content\Textures\Cave\pit.xnb
-Content\Textures\Cave\rockslide.xnb
 Content\Textures\Enemies\Bat\bat_spritesheet.xnb
 Content\Textures\Cave\shop.xnb
 Content\Textures\Items\SpeedRing.xnb
@@ -110,4 +109,7 @@ Content\Textures\Cave\normalv1.xnb
 Content\Textures\Cave\Blood Room.xnb
 Content\Textures\Cave\normalv2.xnb
 Content\Textures\Cave\normalv3.xnb
+Content\Textures\Cave\Cave_11.xnb
+Content\Textures\Cave\Cave_12.xnb
+Content\Textures\Cave\Cave_13.xnb
 Content\Text\trivia.txt
