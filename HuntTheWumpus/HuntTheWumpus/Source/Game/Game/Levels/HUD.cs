@@ -20,9 +20,10 @@ namespace HuntTheWumpus.Source
     /// </summary>
     public class HUD
     {
+        public float Scale { get; set; }
 
         public MainGame ParentGame { get; set; }
-        public SpriteFont SpriteFont { get; set; }
+        public SpriteFont Font { get; set; }
         public Color DrawTextColor { get; set; }
 
         public byte Transparency { get; set; }
@@ -30,17 +31,20 @@ namespace HuntTheWumpus.Source
         public Texture2D HudImage { get; private set; }
 
         public const string WumpusWarning = "I Smell a Wumpus!";
-        public const string BatWarning = "Bats Nearby";
-        public const string PitWarning = "I feel a draft";
+        public const string BatWarning = "Super Bats Nearby";
+        public const string PitWarning = "I Feel a Draft";
 
-        private readonly Vector2 WumpusTextPosition;
-        private readonly Vector2 BatTextPosition;
-        private readonly Vector2 PitTextPosition;
+        private Vector2 WumpusTextPosition { get; set; }
+        private Vector2 BatTextPosition { get; set; }
+        private Vector2 PitTextPosition { get; set; }
+
+        private Vector2 LifeTextPosition { get; set; }
 
         private bool ShouldDraw = false;
 
         private Warnings Warning;
 
+        private Vector2 EmptyVector;
         /// <summary>
         /// Constructor that demands the MainGame
         /// </summary>
@@ -50,11 +54,15 @@ namespace HuntTheWumpus.Source
             this.ParentGame = parent;
             this.HudImage = this.ParentGame.Content.Load<Texture2D>("Textures\\HUDFULL");
             this.DrawTextColor = Color.Blue;
+            this.Font = this.ParentGame.TextManager.Font;
+            this.EmptyVector = Extensions.EmptyVector();
+            this.Scale = 2;
 
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.BatTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.PitTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
 
+            this.LifeTextPosition = new Vector2(this.ParentGame.WindowWidth - 70, this.ParentGame.WindowHeight - 110);
             this.Transparency = 255 / 2;
         }
         /// <summary>
@@ -70,12 +78,30 @@ namespace HuntTheWumpus.Source
             {
                 if (!(this.ParentGame.LevelManager.CurrentLevel is GameOverMenu || this.ParentGame.LevelManager.CurrentLevel is StartMenu) && this.ShouldDraw)
                 {
-                    Color tint = new Color(Color.White.R, Color.White.R, Color.White.R, this.Transparency);
+                    Color tint = new Color(Color.White.R, Color.White.G, Color.White.B, this.Transparency);
                     this.ParentGame.SpriteBatch.Draw(this.HudImage, new Vector2(0, this.ParentGame.WindowHeight - this.HudImage.Height), tint);
+
                     this.DrawWarning(this.Warning);
+                    this.DrawLife(this.ParentGame.Player.HP);
                 }
             }
 
+        }
+
+        private void DrawLife(int hp)
+        {
+            //Updates the class variable for the font.
+            this.Font = this.ParentGame.TextManager.Font;
+            this.ParentGame.SpriteBatch.DrawString(
+                this.Font,
+                hp.ToString(),
+                this.LifeTextPosition,
+                this.DrawTextColor,
+                0,
+                this.EmptyVector,
+                this.Scale,
+                SpriteEffects.None,
+                0);
         }
         /// <summary>
         /// Swith the current type of Warning
@@ -93,20 +119,22 @@ namespace HuntTheWumpus.Source
         private void DrawWarning(Warnings warning)
         {
             //Updates the class variable for the font.
-            this.SpriteFont = this.ParentGame.TextManager.Font;
+            this.Font = this.ParentGame.TextManager.Font;
 
             switch (warning)
             {
                 case Warnings.Wumpus:
-                    this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.WumpusWarning, this.WumpusTextPosition, this.DrawTextColor);
+                    this.ParentGame.SpriteBatch.DrawString(this.Font, HUD.WumpusWarning, this.WumpusTextPosition, this.DrawTextColor);
                     return;
                 case Warnings.Bat:
-                    this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.BatWarning, this.BatTextPosition, this.DrawTextColor);
+                    this.ParentGame.SpriteBatch.DrawString(this.Font, HUD.BatWarning, this.BatTextPosition, this.DrawTextColor);
                     return;
                 case Warnings.Pit:
-                    this.ParentGame.SpriteBatch.DrawString(this.SpriteFont, HUD.PitWarning, this.PitTextPosition, this.DrawTextColor);
+                    this.ParentGame.SpriteBatch.DrawString(this.Font, HUD.PitWarning, this.PitTextPosition, this.DrawTextColor);
                     return;
                 case Warnings.None:
+                    //No Warning
+                    //So nothing happens
                     return;
             }
         }

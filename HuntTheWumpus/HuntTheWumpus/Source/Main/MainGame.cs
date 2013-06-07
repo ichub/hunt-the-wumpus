@@ -74,11 +74,9 @@ namespace HuntTheWumpus.Source
 
             this.TriviaManager = new Trivia(this);
             this.DoGooder = new DoGooder(this);
-            this.LevelManager = new LevelManager(this);
-            this.LevelManager.CurrentLevel = new StartMenu(this);
             this.MiniMap = new MiniMap(this, new Vector2(this.WindowWidth - 200, 0));
-            
             this.Player = new PlayerStats("Sexy Beast");
+
             base.Initialize();
         }
 
@@ -91,6 +89,9 @@ namespace HuntTheWumpus.Source
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             this.TextManager = new TextManager(this);
             this.SoundManager.LoadSounds(this.Content);
+            this.LevelManager = new LevelManager(this);
+            this.LevelManager.CurrentLevel = new StartMenu(this);
+
         }
 
         /// <summary>
