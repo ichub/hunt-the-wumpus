@@ -101,6 +101,8 @@ namespace HuntTheWumpus.Source
                                 return;
                             if (this.currentLevel is HighScoreMenu && value is HighScoreMenu)
                                 return;
+                            if (this.currentLevel is Room && value is Room && (this.currentLevel as Room).RoomIndex == (value as Room).RoomIndex)
+                                return;
 
                             this.StartFade(value);
                             this.isLevelChanging = true;
