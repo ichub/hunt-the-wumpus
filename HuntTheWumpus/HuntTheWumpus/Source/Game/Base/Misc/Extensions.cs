@@ -14,8 +14,10 @@ namespace HuntTheWumpus.Source
     /// <summary>
     /// Class for extension methods and helper methods.
     /// </summary>
-    public static class Extensions
+    public static class Helper
     {
+        public const int FontSize = 14;
+
         /// <summary>
         /// The game to which this class belongs.
         /// </summary>
@@ -104,7 +106,7 @@ namespace HuntTheWumpus.Source
             double randomLength = mainGame.Random.NextDouble() * (maxLength - minLength) + minLength;
             return RandomVector((float)randomLength);
         }
-        
+
         /// <summary>
         /// Empty Vector
         /// </summary>
@@ -195,6 +197,15 @@ namespace HuntTheWumpus.Source
                 index++;
             }
             return -1;
+        }
+
+        /// <summary>
+        /// Calculated the scale that needs to be applied to the main font
+        /// </summary>
+        /// <returns></returns>
+        public static float CalculateScaleForDrawingText(int numberOfChar, int width)
+        {
+            return (float)width / (float)numberOfChar / Helper.FontSize;
         }
     }
 }

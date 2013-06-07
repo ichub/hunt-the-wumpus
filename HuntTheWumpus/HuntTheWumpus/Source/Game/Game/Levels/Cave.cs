@@ -247,7 +247,7 @@ namespace HuntTheWumpus.Source
         /// <returns></returns>
         public static int[] GetRelevantIndexes(bool[] takenRooms, int[] possibleRooms)
         {
-            int[] rooms = Extensions.ChangeIndecesToNumber(possibleRooms.Length, -1);
+            int[] rooms = Helper.ChangeIndecesToNumber(possibleRooms.Length, -1);
             Random rand = new Random(DateTime.Now.Millisecond);
 
             int index = 0;

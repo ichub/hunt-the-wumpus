@@ -69,7 +69,7 @@ namespace HuntTheWumpus.Source
             this.SoundManager = new SoundManager();
             this.HighScore = new HighScores();
 
-            Extensions.Init(this);
+            Helper.Init(this);
             RoomFactory.InitFactory(this.Content);
 
             this.TriviaManager = new Trivia(this);

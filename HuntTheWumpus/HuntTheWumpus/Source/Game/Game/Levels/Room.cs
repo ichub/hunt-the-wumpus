@@ -123,7 +123,7 @@ namespace HuntTheWumpus.Source
                 int amount = 2;
                 for (int i = 0; i < amount; i++)
                 {
-                    this.GameObjects.Add(new Bat(this.MainGame, this) { Position = new Vector2(400, 400) + Extensions.RandomVector(100) });
+                    this.GameObjects.Add(new Bat(this.MainGame, this) { Position = new Vector2(400, 400) + Helper.RandomVector(100) });
                 }
             }
         }

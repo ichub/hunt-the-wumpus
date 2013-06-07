@@ -39,6 +39,7 @@ namespace HuntTheWumpus.Source
         private Vector2 PitTextPosition { get; set; }
 
         private Vector2 LifeTextPosition { get; set; }
+        private Vector2 ScoreTextPosition { get; set; }
 
         private bool ShouldDraw = false;
 
@@ -55,14 +56,16 @@ namespace HuntTheWumpus.Source
             this.HudImage = this.ParentGame.Content.Load<Texture2D>("Textures\\HUDFULL");
             this.DrawTextColor = Color.Blue;
             this.Font = this.ParentGame.TextManager.Font;
-            this.EmptyVector = Extensions.EmptyVector();
+            this.EmptyVector = Helper.EmptyVector();
             this.Scale = 2;
 
             this.WumpusTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.BatTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
             this.PitTextPosition = new Vector2(35, this.ParentGame.WindowHeight - 35);
 
-            this.LifeTextPosition = new Vector2(this.ParentGame.WindowWidth - 70, this.ParentGame.WindowHeight - 110);
+            this.LifeTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 110);
+            this.ScoreTextPosition = new Vector2(this.ParentGame.WindowWidth - 80, this.ParentGame.WindowHeight - 55);
+
             this.Transparency = 255 / 2;
         }
         /// <summary>
@@ -83,11 +86,34 @@ namespace HuntTheWumpus.Source
 
                     this.DrawWarning(this.Warning);
                     this.DrawLife(this.ParentGame.Player.HP);
+                    this.DrawScore(this.ParentGame.Player.Score);
                 }
             }
 
         }
-
+        /// <summary>
+        /// Draws the score on the HUD
+        /// </summary>
+        /// <param name="score">players score</param>
+        private void DrawScore(int score)
+        {
+            //Updates the class variable for the font.
+            this.Font = this.ParentGame.TextManager.Font;
+            this.ParentGame.SpriteBatch.DrawString(
+                this.Font,
+                score.ToString(),
+                this.ScoreTextPosition,
+                this.DrawTextColor,
+                0,
+                this.EmptyVector,
+                Helper.CalculateScaleForDrawingText(score.ToString().Length, 80),
+                SpriteEffects.None,
+                0);
+        }
+        /// <summary>
+        /// Draws the hp or life of the player
+        /// </summary>
+        /// <param name="hp">life of the player</param>
         private void DrawLife(int hp)
         {
             //Updates the class variable for the font.

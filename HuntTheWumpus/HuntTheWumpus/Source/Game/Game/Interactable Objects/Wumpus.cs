@@ -37,7 +37,7 @@ namespace HuntTheWumpus.Source
 
         private void ChoseTexture()
         {
-            switch (Extensions.GetDirection(this.Velocity))
+            switch (Helper.GetDirection(this.Velocity))
             {
                 case Direction.Up:
                     this.Texture = this.facingUp;

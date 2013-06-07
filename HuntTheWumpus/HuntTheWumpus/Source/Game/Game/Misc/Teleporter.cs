@@ -67,13 +67,13 @@ namespace HuntTheWumpus.Source
 
         public void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = Helper.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void LoadContent(ContentManager content)
         {
             this.Texture = new AnimatedTexture(content.Load<Texture2D>("Textures\\teleporter"));
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = Helper.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

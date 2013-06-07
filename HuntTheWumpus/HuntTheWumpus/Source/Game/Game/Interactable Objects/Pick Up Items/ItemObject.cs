@@ -37,7 +37,7 @@ namespace HuntTheWumpus.Source
             this.ObjectTeam = Team.Player;
             this.Position = new Vector2(40, 40);
             this.RepresentedItem = ItemList.GetItem(item);
-            this.velocity = Extensions.RandomVector(1, 4);
+            this.velocity = Helper.RandomVector(1, 4);
         }
 
         public virtual void CollideWith(ICollideable gameObject, bool isColliding)
@@ -63,7 +63,7 @@ namespace HuntTheWumpus.Source
 
         public virtual void Initialize()
         {
-            this.BoundingBox = Extensions.Box2D(this.Position, this.Position + this.Texture.Size);
+            this.BoundingBox = Helper.Box2D(this.Position, this.Position + this.Texture.Size);
         }
 
         public virtual void LoadContent(ContentManager content)
