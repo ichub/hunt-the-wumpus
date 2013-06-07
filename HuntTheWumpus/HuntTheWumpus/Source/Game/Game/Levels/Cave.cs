@@ -343,8 +343,7 @@ namespace HuntTheWumpus.Source
             {
                 rand = this.MainGame.Random.Next(Cave.NumberOfRooms);
             }
-            this.ObjectManager.Remove(this.Wumpus);
-            this.Wumpus.ParentLevel = this.Rooms[rand];
+            this.Wumpus.RoomIndex = rand;
         }
     }
 }
