@@ -30,8 +30,11 @@ namespace HuntTheWumpus.Source
 
             for (int i = 0; i < 10; i++)
             {
-                this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 160 + i * 20), highScores[i].Name);
-                this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 160 + i * 20), highScores[i].Score.ToString());
+                if (highScores.Count > i)
+                {
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionName, 160 + i * 20), highScores[i].Name);
+                    this.MainGame.TextManager.DrawText(new Vector2(HighScoreMenu.XPositionScore, 160 + i * 20), highScores[i].Score.ToString());
+                }
             }
 
             highScores.Reverse();

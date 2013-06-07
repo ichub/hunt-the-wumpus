@@ -66,18 +66,6 @@ namespace HuntTheWumpus.Source
     {
         private readonly List<SingleScore> Scores = new List<SingleScore>();
 
-        public HighScores()
-        {
-            //TEMP DEBUG. REMOVE
-
-            for (int i = 0; i < 20; i++)
-            {
-                this.Add(new SingleScore("DERP", new Random().Next(100, 500)));
-            }
-
-            //TEMP DEBUG END
-        }
-
         public void Add(SingleScore score)
         {
             this.Scores.Add(score);

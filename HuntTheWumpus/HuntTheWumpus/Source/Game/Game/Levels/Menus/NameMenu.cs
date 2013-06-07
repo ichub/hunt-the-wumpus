@@ -41,7 +41,10 @@ namespace HuntTheWumpus.Source
 
         private void OnButtonClick()
         {
-            this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.PickRandomStartRoom();
+            if (name.Length > 0)
+            {
+                this.MainGame.LevelManager.CurrentLevel = this.MainGame.LevelManager.GameCave.PickRandomStartRoom();
+            }
         }
 
         private void OnKeyPress(Keys key)
