@@ -51,6 +51,7 @@ namespace HuntTheWumpus.Source
             #region Base Bounds
             RoomFactory.BaseBounds = new List<Vector2>()
             {
+                /*
                 new Vector2(432, 0),
                 new Vector2(542, 0),
                 new Vector2(583, 62),
@@ -85,6 +86,25 @@ namespace HuntTheWumpus.Source
                 new Vector2(272, 22),
                 new Vector2(365, 101),
                 new Vector2(427, 5)
+                 */
+
+                new Vector2(437, 63),
+                new Vector2(555, 70),
+                new Vector2(882, 171),
+                new Vector2(957, 399),
+
+                new Vector2(882, 648),
+                new Vector2(788, 713),
+
+                new Vector2(601, 752),
+                new Vector2(427, 751),
+
+                new Vector2(218, 680),
+                new Vector2(125, 603),
+                new Vector2(190, 496),
+                new Vector2(99, 369),
+                new Vector2(230, 216),
+                new Vector2(317, 79),
             };
             #endregion
         }

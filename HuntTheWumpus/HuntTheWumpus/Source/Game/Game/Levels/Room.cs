@@ -77,7 +77,7 @@ namespace HuntTheWumpus.Source
                 if (this.ConnectedRooms[1] != null)
                     this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[1]) { Position = new Vector2(833, 170) });
                 if (this.ConnectedRooms[2] != null)
-                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[2]) { Position = new Vector2(815, 687) });
+                    this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[2]) { Position = new Vector2(833, 644) });
                 if (this.ConnectedRooms[3] != null)
                     this.GameObjects.Add(new Teleporter(this.MainGame, this, this.ConnectedRooms[3]) { Position = new Vector2(450, 763) });
                 if (this.ConnectedRooms[4] != null)
