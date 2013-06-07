@@ -27,6 +27,8 @@ namespace HuntTheWumpus.Source
         {
             this.ObjectTeam = Team.Enemy;
             this.HP = Wumpus.WumpusStartHealth;
+            this.Position = new Vector2(this.MainGame.WindowWidth / 2, this.MainGame.WindowHeight / 2);
+            this.LastPosition = new Vector2(this.MainGame.WindowWidth / 2, this.MainGame.WindowHeight / 2);
         }
 
         public override void LoadContent(ContentManager content)

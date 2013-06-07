@@ -92,11 +92,26 @@ namespace HuntTheWumpus.Source
                         this.DrawWarning(this.Warning);
                     else
                         this.DrawWarning(this.Message);
+
                     this.DrawLife(this.ParentGame.Player.HP);
                     this.DrawScore(this.ParentGame.Player.Score);
+                    this.DrawInventory(this.ParentGame.Player.Inventory);
                 }
             }
 
+        }
+        /// <summary>
+        /// Draws the relavent inventory into the HUD
+        /// </summary>
+        /// <param name="inventory">The inventory of the player</param>
+        private void DrawInventory(Inventory inventory)
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] is Gold)
+                {
+                }
+            }
         }
         /// <summary>
         /// Draws the score on the HUD
